@@ -90,7 +90,6 @@ const Search: React.FC<SearchProps> = ({
   const [keyword, setKeyword] = useState('')
   const [stickerList, setStickerList] = useState([])
   const baseURL = 'https://messenger.stipop.io/v1/search'
-  const logo = require('../../svgs/logo.svg')
 
   useEffect(() => {
     let query = `?userId=${userId}&q=${keyword}`
