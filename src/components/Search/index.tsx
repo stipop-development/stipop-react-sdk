@@ -3,8 +3,8 @@ import axios from 'axios'
 import styled from 'styled-components'
 
 import { SearchProps } from './index.types'
-import logo from '../../svgs/logo.svg'
-import searchIcon from '../../svgs/search-icon.svg'
+import Logo from '../../svgs/logo.svg'
+import SearchIcon from '../../svgs/search-icon.svg'
 
 const SearchWrapper = styled.div`
   width: 360px;
@@ -46,10 +46,6 @@ const InputHolder = styled.div`
   box-sizing: border-box;
   font-size: 10px;
   color: #d5d5d5;
-
-  .search-icon {
-    width: 15px;
-  }
 
   div {
     display: flex;
@@ -125,10 +121,10 @@ const Search: React.FC<SearchProps> = ({
       <SearchForm>
         <SearchInput type="text" onChange={e => setKeyword(e.target.value)} />
         <InputHolder>
-          <img src={searchIcon} alt="" className="search-icon" />
+          <SearchIcon />
           <div>
             <span>POWERED BY</span>
-            <img src={logo} alt="" className="logo" />
+            <Logo />
           </div>
         </InputHolder>
       </SearchForm>
