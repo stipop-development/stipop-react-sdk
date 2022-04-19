@@ -29,6 +29,14 @@ export default {
     typescript({ useTsconfigDeclarationDir: true }),
     postcss(),
     svg(),
-    nodePolyfills(),
+    nodePolyfills({
+      process: true,
+      http: true,
+      https: true,
+      url: true,
+      stream: true,
+      assert: true,
+      zlib: true,
+    }),
   ],
 }
