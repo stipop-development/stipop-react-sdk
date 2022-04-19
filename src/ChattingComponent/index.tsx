@@ -6,17 +6,29 @@ import { ChattingProps } from './index.types'
 const ChattingComponent: React.FC<ChattingProps> = ({
   width,
   height,
-  stickerClick,
+  sticker,
 }) => {
   const [chatList, setChatList] = useState([])
 
+  useEffect(() => {
+    if (sticker) {
+      setChatList(chatList.concat(sticker))
+    }
+  }, [sticker])
+
   return (
-    <ChattingWrapper width={width} heigh={height}>
+    <ChattingWrapper width={width} heigh={height} sticker={sticker}>
       <ChatList>
         {chatList.map(chat => (
           <ChatWrapper>
             <span>Guest</span>
-            <Chat>{chat}</Chat>
+            <Chat>
+              {chat.startsWidth('https://img.stipop.io') ? (
+                <img src={chat} alt="" />
+              ) : (
+                chat
+              )}
+            </Chat>
           </ChatWrapper>
         ))}
       </ChatList>
@@ -31,7 +43,6 @@ const ChattingComponent: React.FC<ChattingProps> = ({
               e.target.value = ''
             }
           }}
-          sitckerClick={sticker => setChatList(chatList.concat(sticker))}
         />
       </ChattingFrom>
     </ChattingWrapper>
