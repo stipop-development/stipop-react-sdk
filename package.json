@@ -42,7 +42,6 @@
     "rollup": "^2.70.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-svg": "^2.0.0",
     "rollup-plugin-typescript2": "^0.31.2",
     "sass-loader": "^12.6.0",
     "styled-components": "^5.3.5",

@@ -54,13 +54,9 @@ const SearchComponent: React.FC<SearchProps> = ({
         <SearchInput type="text" onChange={e => setKeyword(e.target.value)} />
         <InputHolder>
           <Icon type="SEARCH" />
-          {/* <SearchIcon /> */}
-          {/* <img src={searchIcon} alt="" className="search-icon" /> */}
           <div>
             <span>POWERED BY</span>
             <Icon type="LOGO" />
-            {/* <Logo /> */}
-            {/* <img src={logo} alt="" /> */}
           </div>
         </InputHolder>
       </SearchForm>
