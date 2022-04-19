@@ -1,4 +1,4 @@
-export interface SearchProps {
+export interface ChattingProps {
     width?: number;
     height?: number;
 }

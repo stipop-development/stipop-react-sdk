@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
-const ChattingComponent = () => {
+import { ChattingProps } from './index.types'
+
+const ChattingComponent: React.FC<ChattingProps> = ({ width, height }) => {
   const [chatList, setChatList] = useState([])
 
   return (
-    <ChattingWrapper>
+    <ChattingWrapper width={width} heigh={height}>
       <ChatList>
         {chatList.map(chat => (
           <ChatWrapper>
@@ -34,8 +36,8 @@ const ChattingComponent = () => {
 export default ChattingComponent
 
 const ChattingWrapper = styled.div`
-  width: 80vw;
-  height: 90vh;
+  width: ${props => (props.width ? `${props.width}px` : '80vw')};
+  height: ${props => (props.height ? `${props.height}px` : '90vh')};
   background-color: #f8f6fe;
   position: relative;
   padding: 10px;
@@ -64,6 +66,7 @@ const Chat = styled.div`
   border-radius: 10px;
   display: inline-block;
   padding: 5px 10px;
+  word-break: break-all;
 `
 const ChattingFrom = styled.div`
   width: 100%;
