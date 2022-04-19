@@ -23,7 +23,7 @@ const ChattingComponent: React.FC<ChattingProps> = ({
           <ChatWrapper>
             <span>Guest</span>
             <Chat>
-              {chat.startsWidth('https://img.stipop.io') ? (
+              {chat.startsWith('https://img.stipop.io') ? (
                 <img src={chat} alt="" />
               ) : (
                 chat

@@ -4405,7 +4405,7 @@ var ChattingComponent = function (_a) {
     return (React__default["default"].createElement(ChattingWrapper, { width: width, heigh: height, sticker: sticker },
         React__default["default"].createElement(ChatList, null, chatList.map(function (chat) { return (React__default["default"].createElement(ChatWrapper, null,
             React__default["default"].createElement("span", null, "Guest"),
-            React__default["default"].createElement(Chat, null, chat.startsWidth('https://img.stipop.io') ? (React__default["default"].createElement("img", { src: chat, alt: "" })) : (chat)))); })),
+            React__default["default"].createElement(Chat, null, chat.startsWith('https://img.stipop.io') ? (React__default["default"].createElement("img", { src: chat, alt: "" })) : (chat)))); })),
         React__default["default"].createElement(ChattingFrom, null,
             React__default["default"].createElement(ChattingInput, { placeholder: "Type Message", onKeyPress: function (e) {
                     if (e.key === 'Enter') {
