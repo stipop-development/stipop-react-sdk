@@ -4,8 +4,7 @@ import styled from 'styled-components'
 
 import { SearchProps } from './index.types'
 
-import Logo from '../svgs/logo.svg'
-import SearchIcon from '../svgs/search-icon.svg'
+import Icon from '../Icon/index'
 
 const SearchComponent: React.FC<SearchProps> = ({
   apikey,
@@ -54,11 +53,13 @@ const SearchComponent: React.FC<SearchProps> = ({
       <SearchForm>
         <SearchInput type="text" onChange={e => setKeyword(e.target.value)} />
         <InputHolder>
-          <SearchIcon />
+          <Icon type="SEARCH" />
+          {/* <SearchIcon /> */}
           {/* <img src={searchIcon} alt="" className="search-icon" /> */}
           <div>
             <span>POWERED BY</span>
-            <Logo />
+            <Icon type="LOGO" />
+            {/* <Logo /> */}
             {/* <img src={logo} alt="" /> */}
           </div>
         </InputHolder>
