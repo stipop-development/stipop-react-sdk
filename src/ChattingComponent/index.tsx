@@ -16,15 +16,24 @@ const ChattingComponent: React.FC<ChattingProps> = ({
     }
   }, [sticker])
 
+  useEffect(() => {
+    const chat = document.querySelector('.chat-list')
+    chat.scrollTop = chat.scrollHeight
+  }, [chatList])
+
   return (
     <ChattingWrapper width={width} heigh={height} sticker={sticker}>
-      <ChatList>
+      <ChatList className="chat-list">
         {chatList.map(chat => (
           <ChatWrapper>
             <span>Guest</span>
             <Chat>
               {chat.startsWith('https://img.stipop.io') ? (
-                <img src={chat} alt="" />
+                <img
+                  src={chat}
+                  alt=""
+                  style={{ width: '70px', height: '70px' }}
+                />
               ) : (
                 chat
               )}
@@ -62,6 +71,8 @@ const ChatList = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  height: calc(100% - 80px);
+  overflow-y: auto;
 `
 const ChatWrapper = styled.div`
   margin: 5px 0;

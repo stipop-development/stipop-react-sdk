@@ -4376,10 +4376,14 @@ var ChattingComponent = function (_a) {
             setChatList(chatList.concat(sticker));
         }
     }, [sticker]);
+    useEffect(function () {
+        var chat = document.querySelector('.chat-list');
+        chat.scrollTop = chat.scrollHeight;
+    }, [chatList]);
     return (React__default.createElement(ChattingWrapper, { width: width, heigh: height, sticker: sticker },
-        React__default.createElement(ChatList, null, chatList.map(function (chat) { return (React__default.createElement(ChatWrapper, null,
+        React__default.createElement(ChatList, { className: "chat-list" }, chatList.map(function (chat) { return (React__default.createElement(ChatWrapper, null,
             React__default.createElement("span", null, "Guest"),
-            React__default.createElement(Chat, null, chat.startsWith('https://img.stipop.io') ? (React__default.createElement("img", { src: chat, alt: "" })) : (chat)))); })),
+            React__default.createElement(Chat, null, chat.startsWith('https://img.stipop.io') ? (React__default.createElement("img", { src: chat, alt: "", style: { width: '70px', height: '70px' } })) : (chat)))); })),
         React__default.createElement(ChattingFrom, null,
             React__default.createElement(ChattingInput, { placeholder: "Type Message", onKeyPress: function (e) {
                     if (e.key === 'Enter') {
@@ -4391,7 +4395,7 @@ var ChattingComponent = function (_a) {
                 } }))));
 };
 var ChattingWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: #f8f6fe;\n  position: relative;\n  padding: 10px;\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: #f8f6fe;\n  position: relative;\n  padding: 10px;\n"])), function (props) { return (props.width ? "".concat(props.width, "px") : '80vw'); }, function (props) { return (props.height ? "".concat(props.height, "px") : '90vh'); });
-var ChatList = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n"], ["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n"])));
+var ChatList = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  height: calc(100% - 80px);\n  overflow-y: auto;\n"], ["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  height: calc(100% - 80px);\n  overflow-y: auto;\n"])));
 var ChatWrapper = styled.div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  margin: 5px 0;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  padding-right: 5px;\n\n  span {\n    font-size: 12px;\n    color: #696969;\n    padding-right: 5px;\n    margin-bottom: 2px;\n  }\n"], ["\n  margin: 5px 0;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  padding-right: 5px;\n\n  span {\n    font-size: 12px;\n    color: #696969;\n    padding-right: 5px;\n    margin-bottom: 2px;\n  }\n"])));
 var Chat = styled.div(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  background-color: #fff;\n  border-radius: 10px;\n  display: inline-block;\n  padding: 5px 10px;\n  word-break: break-all;\n"], ["\n  background-color: #fff;\n  border-radius: 10px;\n  display: inline-block;\n  padding: 5px 10px;\n  word-break: break-all;\n"])));
 var ChattingFrom = styled.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  width: 100%;\n  height: 80px;\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n"], ["\n  width: 100%;\n  height: 80px;\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n"])));
