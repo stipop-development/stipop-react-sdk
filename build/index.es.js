@@ -4192,14 +4192,15 @@ var PropTypes = propTypes.exports;
 var Type = {
     LOGO: 'LOGO',
     SEARCH: 'SEARCH',
+    SMILE: 'SMILE'
 };
 
 var _path$1;
 
-function _extends$1() { _extends$1 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$1.apply(this, arguments); }
+function _extends$2() { _extends$2 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$2.apply(this, arguments); }
 
 var SvgLogo = function SvgLogo(props) {
-  return /*#__PURE__*/React.createElement("svg", _extends$1({
+  return /*#__PURE__*/React.createElement("svg", _extends$2({
     width: 47,
     height: 17,
     xmlns: "http://www.w3.org/2000/svg"
@@ -4211,10 +4212,10 @@ var SvgLogo = function SvgLogo(props) {
 
 var _path;
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends$1() { _extends$1 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$1.apply(this, arguments); }
 
 var SvgSearchIcon = function SvgSearchIcon(props) {
-  return /*#__PURE__*/React.createElement("svg", _extends({
+  return /*#__PURE__*/React.createElement("svg", _extends$1({
     width: 15,
     height: 15,
     viewBox: "0 0 18 18",
@@ -4226,12 +4227,50 @@ var SvgSearchIcon = function SvgSearchIcon(props) {
   })));
 };
 
+var _g;
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+var SvgSmile = function SvgSmile(props) {
+  return /*#__PURE__*/React.createElement("svg", _extends({
+    width: 18,
+    height: 18,
+    xmlns: "http://www.w3.org/2000/svg"
+  }, props), _g || (_g = /*#__PURE__*/React.createElement("g", {
+    transform: "translate(1 1)",
+    stroke: "#FF4500",
+    fill: "none",
+    fillRule: "evenodd"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M4.128 10.002s1.173 2.347 3.902 2.343c2.729-.005 3.771-2.325 3.771-2.325",
+    strokeLinecap: "round"
+  }), /*#__PURE__*/React.createElement("circle", {
+    strokeWidth: 0.5,
+    fill: "#FF4500",
+    cx: 10.343,
+    cy: 5.957,
+    r: 1
+  }), /*#__PURE__*/React.createElement("circle", {
+    strokeWidth: 0.5,
+    fill: "#FF4500",
+    cx: 5.495,
+    cy: 5.957,
+    r: 1
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: 8,
+    cy: 8,
+    r: 8
+  }))));
+};
+
 function changeTypeToIconComponent(type) {
     switch (type) {
         case Type.LOGO:
             return React__default.createElement(SvgLogo, null);
         case Type.SEARCH:
             return React__default.createElement(SvgSearchIcon, null);
+        case Type.SMILE:
+            return React__default.createElement(SvgSmile, null);
         default:
             return 'icon';
     }
@@ -4242,16 +4281,18 @@ function changeTypeToIconClassName(type) {
             return 'stipop-icon-logo';
         case Type.SEARCH:
             return 'stipop-icon-search';
+        case Type.SMILE:
+            return 'stipop-icon-smile';
         default:
             return 'stipop-icon-unknown';
     }
 }
 function Icon(_a) {
-    var className = _a.className, type = _a.type, children = _a.children;
+    var className = _a.className, type = _a.type, onClick = _a.onClick, children = _a.children;
     return (React__default.createElement("div", { className: __spreadArray(__spreadArray([], (Array.isArray(className) ? className : [className]), true), [
             'stipop-icon',
             changeTypeToIconClassName(type),
-        ], false).join(' ') }, children || changeTypeToIconComponent(type)));
+        ], false).join(' '), onClick: onClick }, children || changeTypeToIconComponent(type)));
 }
 Icon.propTypes = {
     className: PropTypes.oneOfType([
@@ -4262,15 +4303,17 @@ Icon.propTypes = {
         PropTypes.oneOf(Object.keys(Type)),
         PropTypes.string,
     ]).isRequired,
+    onClick: PropTypes.func,
     children: PropTypes.element,
 };
 Icon.defaultProps = {
     className: '',
+    onClick: function () { },
     children: null,
 };
 
 var SearchComponent = function (_a) {
-    var apikey = _a.apikey, userId = _a.userId, lang = _a.lang, pageNumber = _a.pageNumber, limit = _a.limit;
+    var apikey = _a.apikey, userId = _a.userId, lang = _a.lang, pageNumber = _a.pageNumber, limit = _a.limit, width = _a.width, height = _a.height, stickerClick = _a.stickerClick;
     var _b = useState(''), keyword = _b[0], setKeyword = _b[1];
     var _c = useState([]), stickerList = _c[0], setStickerList = _c[1];
     var baseUrl = 'https://messenger.stipop.io/v1/search';
@@ -4304,7 +4347,7 @@ var SearchComponent = function (_a) {
             setStickerList([]);
         }
     }, [keyword, lang, pageNumber, limit]);
-    return (React__default.createElement(SearchWrapper, null,
+    return (React__default.createElement(SearchWrapper, { width: width, height: height },
         React__default.createElement(SearchForm, null,
             React__default.createElement(SearchInput, { type: "text", onChange: function (e) { return setKeyword(e.target.value); } }),
             React__default.createElement(InputHolder, null,
@@ -4314,17 +4357,15 @@ var SearchComponent = function (_a) {
                     React__default.createElement(Icon, { type: "LOGO" })))),
         React__default.createElement(StickerWrapper, null, stickerList.length > 0 &&
             stickerList.map(function (sticker, index) {
-                return (React__default.createElement(StickerImg, { src: sticker, alt: "", key: index, onClick: function () {
-                        console.log(sticker);
-                    } }));
+                return (React__default.createElement(StickerImg, { src: sticker, key: index, onClick: function () { return stickerClick(sticker); } }));
             }))));
 };
-var SearchWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: 360px;\n  height: 300px;\n  background-color: #fff;\n  border: 1px solid lightgray;\n  border-radius: 10px;\n  display: flex;\n  position: relative;\n"], ["\n  width: 360px;\n  height: 300px;\n  background-color: #fff;\n  border: 1px solid lightgray;\n  border-radius: 10px;\n  display: flex;\n  position: relative;\n"])));
+var SearchWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: #fff;\n  border: 1px solid lightgray;\n  border-radius: 10px;\n  display: flex;\n  position: relative;\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: #fff;\n  border: 1px solid lightgray;\n  border-radius: 10px;\n  display: flex;\n  position: relative;\n"])), function (props) { return (props.width ? "".concat(props.width, "px") : '360px'); }, function (props) { return (props.height ? "".concat(props.height, "px") : '300px'); });
 var SearchForm = styled.form(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  width: 100%;\n  height: 10%;\n  max-height: 40px;\n  position: absolute;\n  top: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n"], ["\n  width: 100%;\n  height: 10%;\n  max-height: 40px;\n  position: absolute;\n  top: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n"])));
 var SearchInput = styled.input(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  width: 90%;\n  height: 100%;\n  border: 2px solid lightgray;\n  border-radius: 50px;\n  padding: 0 35% 0 10%;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n"], ["\n  width: 90%;\n  height: 100%;\n  border: 2px solid lightgray;\n  border-radius: 50px;\n  padding: 0 35% 0 10%;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n"])));
 var InputHolder = styled.div(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  width: 90%;\n  height: 100%;\n  padding: 0 4%;\n  position: absolute;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"], ["\n  width: 90%;\n  height: 100%;\n  padding: 0 4%;\n  position: absolute;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"])));
 var StickerWrapper = styled.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  width: 90%;\n  height: 75%;\n  position: absolute;\n  top: 20%;\n  left: 50%;\n  transform: translateX(-50%);\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n"], ["\n  width: 90%;\n  height: 75%;\n  position: absolute;\n  top: 20%;\n  left: 50%;\n  transform: translateX(-50%);\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n"])));
-var StickerImg = styled.img(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  width: 60%;\n  height: auto;\n"], ["\n  width: 60%;\n  height: auto;\n"])));
+var StickerImg = styled.img(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  width: 60%;\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"], ["\n  width: 60%;\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"])));
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
 
 export { SearchComponent };
