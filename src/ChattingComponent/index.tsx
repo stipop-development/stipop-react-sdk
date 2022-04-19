@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 const ChattingComponent = () => {
   const [chatList, setChatList] = useState([])
-  const [chat, setChat] = useState('')
 
   return (
     <ChattingWrapper>
@@ -18,14 +17,12 @@ const ChattingComponent = () => {
       <ChattingFrom>
         <ChattingInput
           placeholder="Type Message"
-          onChange={e => setChat(e.target.value)}
           onKeyPress={e => {
             if (e.key === 'Enter') {
               if (e.target.value.length > 0) {
                 setChatList(chatList.concat(e.target.value))
               }
               e.target.value = ''
-              setChat('')
             }
           }}
         />

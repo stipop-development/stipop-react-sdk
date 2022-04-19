@@ -12,6 +12,7 @@ export const Search = () => (
     lang={'en'}
     pageNumber={1}
     limit={30}
+    stickerClick={sticker => console.log(sticker)}
   />
 )
 
@@ -24,5 +25,6 @@ export const CustomSearch = () => (
     limit={30}
     width={720}
     height={600}
+    stickerClick={sticker => console.log(sticker)}
   />
 )
