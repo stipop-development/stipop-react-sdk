@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from 'rollup-plugin-typescript2'
 import postcss from 'rollup-plugin-postcss'
 import svg from 'rollup-plugin-svg'
+import nodePolyfills from 'rollup-plugin-node-polyfills'
 
 const packageJson = require('./package.json')
 
@@ -28,5 +29,6 @@ export default {
     typescript({ useTsconfigDeclarationDir: true }),
     postcss(),
     svg(),
+    nodePolyfills(),
   ],
 }

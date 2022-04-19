@@ -1,4 +1,6 @@
 import r$2, { useRef, useDebugValue, useContext, createElement, useState, useEffect } from 'react';
+import process from 'process';
+import { Buffer } from 'buffer';
 import require$$1 from 'http';
 import require$$2 from 'https';
 import require$$0 from 'url';
@@ -2853,15 +2855,6 @@ reactIs_production_min$1.typeOf=y$2;
 
 var reactIs_development$1 = {};
 
-/** @license React v17.0.2
- * react-is.development.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 if (process.env.NODE_ENV !== "production") {
   (function() {
 
@@ -3783,17 +3776,6 @@ reactIs_production_min.isMemo=function(a){return z$1(a)===r};reactIs_production_
 reactIs_production_min.isValidElementType=function(a){return "string"===typeof a||"function"===typeof a||a===e||a===m||a===g$1||a===f||a===p||a===q$1||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k$1||a.$$typeof===n||a.$$typeof===w$1||a.$$typeof===x$1||a.$$typeof===y$1||a.$$typeof===v$1)};reactIs_production_min.typeOf=z$1;
 
 var reactIs_development = {};
-
-/** @license React v16.13.1
- * react-is.development.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
 
 if (process.env.NODE_ENV !== "production") {
   (function() {
