@@ -3,8 +3,86 @@ import axios from 'axios'
 import styled from 'styled-components'
 
 import { SearchProps } from './index.types'
-import logo from '../../svgs/logo.svg'
-import searchIcon from '../../svgs/search-icon.svg'
+
+import logo from '../svgs/logo.svg'
+import searchIcon from '../svgs/search-icon.svg'
+
+const SearchComponent: React.FC<SearchProps> = ({
+  apikey,
+  userId,
+  lang,
+  pageNumber,
+  limit,
+}) => {
+  const [keyword, setKeyword] = useState('')
+  const [stickerList, setStickerList] = useState([])
+  const baseUrl = 'https://messenger.stipop.io/v1/search'
+
+  useEffect(() => {
+    let query = `?userId=${userId}&q=${keyword}`
+    if (lang) {
+      query += `&lang=${lang}`
+    }
+    if (pageNumber) {
+      query += `&pageNumber=${pageNumber}`
+    }
+    if (limit) {
+      query += `&limit=${limit}`
+    }
+    if (keyword) {
+      axios
+        .get(`${baseUrl}${query}`, {
+          headers: {
+            apikey: apikey,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(({ data }) => {
+          setStickerList(
+            data.body.stickerList
+              ? data.body.stickerList.map(sticker => sticker.stickerImg)
+              : []
+          )
+        })
+    } else {
+      setStickerList([])
+    }
+  }, [keyword, lang, pageNumber, limit])
+
+  return (
+    <SearchWrapper>
+      <SearchForm>
+        <SearchInput type="text" onChange={e => setKeyword(e.target.value)} />
+        <InputHolder>
+          {/* <SearchIcon /> */}
+          <img src={searchIcon} alt="" className="search-icon" />
+          <div>
+            <span>POWERED BY</span>
+            {/* <Logo /> */}
+            <img src={logo} alt="" />
+          </div>
+        </InputHolder>
+      </SearchForm>
+      <StickerWrapper>
+        {stickerList.length > 0 &&
+          stickerList.map((sticker, index) => {
+            return (
+              <StickerImg
+                src={sticker}
+                alt=""
+                key={index}
+                onClick={() => {
+                  console.log(sticker)
+                }}
+              />
+            )
+          })}
+      </StickerWrapper>
+    </SearchWrapper>
+  )
+}
+
+export default SearchComponent
 
 const SearchWrapper = styled.div`
   width: 360px;
@@ -47,6 +125,10 @@ const InputHolder = styled.div`
   font-size: 10px;
   color: #d5d5d5;
 
+  .search-icon {
+    width: 15px;
+  }
+
   div {
     display: flex;
     align-items: center;
@@ -75,78 +157,3 @@ const StickerImg = styled.img`
   width: 60%;
   height: auto;
 `
-
-const Search: React.FC<SearchProps> = ({
-  apikey,
-  userId,
-  lang,
-  pageNumber,
-  limit,
-}) => {
-  const [keyword, setKeyword] = useState('')
-  const [stickerList, setStickerList] = useState([])
-  const baseURL = 'https://messenger.stipop.io/v1/search'
-
-  useEffect(() => {
-    let query = `?userId=${userId}&q=${keyword}`
-    if (lang) {
-      query += `&lang=${lang}`
-    }
-    if (pageNumber) {
-      query += `&pageNumber=${pageNumber}`
-    }
-    if (limit) {
-      query += `&limit=${limit}`
-    }
-    if (keyword) {
-      axios
-        .get(`${baseURL}${query}`, {
-          headers: {
-            apikey: apikey,
-            'Content-Type': 'application/json',
-          },
-        })
-        .then(({ data }) => {
-          setStickerList(
-            data.body.stickerList
-              ? data.body.stickerList.map(sticker => sticker.stickerImg)
-              : []
-          )
-        })
-    }
-  }, [keyword, lang, pageNumber, limit])
-
-  return (
-    <SearchWrapper>
-      <SearchForm>
-        <SearchInput type="text" onChange={e => setKeyword(e.target.value)} />
-        <InputHolder>
-          {/* <SearchIcon /> */}
-          <img src={searchIcon} alt="" />
-          <div>
-            <span>POWERED BY</span>
-            {/* <Logo /> */}
-            <img src={logo} alt="" />
-          </div>
-        </InputHolder>
-      </SearchForm>
-      <StickerWrapper>
-        {stickerList.length > 0 &&
-          stickerList.map((sticker, index) => {
-            return (
-              <StickerImg
-                src={sticker}
-                alt=""
-                key={index}
-                onClick={() => {
-                  console.log(sticker)
-                }}
-              />
-            )
-          })}
-      </StickerWrapper>
-    </SearchWrapper>
-  )
-}
-
-export default Search

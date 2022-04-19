@@ -2,6 +2,7 @@ const path = require('path')
 
 module.exports = {
   stories: ['../src/**/*.stories.tsx'],
+  // Add any Storybook addons you want here: https://storybook.js.org/addons/
   addons: [],
   webpackFinal: async config => {
     config.module.rules.push({
@@ -17,17 +18,6 @@ module.exports = {
         presets: [['react-app', { flow: false, typescript: true }]],
       },
     })
-
-    const fileLoaderRule = config.module.rules.find(
-      rule => !Array.isArray(rule.test) && rule.test.test('.svg')
-    )
-    fileLoaderRule.exclude = /\.svg$/
-
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    })
-
     config.resolve.extensions.push('.ts', '.tsx')
 
     return config
