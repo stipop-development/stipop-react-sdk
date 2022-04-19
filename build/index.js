@@ -4395,12 +4395,17 @@ var StickerImg = styled.img(templateObject_6$1 || (templateObject_6$1 = __makeTe
 var templateObject_1$1, templateObject_2$1, templateObject_3$1, templateObject_4$1, templateObject_5$1, templateObject_6$1;
 
 var ChattingComponent = function (_a) {
-    var width = _a.width, height = _a.height;
+    var width = _a.width, height = _a.height, sticker = _a.sticker;
     var _b = React.useState([]), chatList = _b[0], setChatList = _b[1];
-    return (React__default["default"].createElement(ChattingWrapper, { width: width, heigh: height },
+    React.useEffect(function () {
+        if (sticker) {
+            setChatList(chatList.concat(sticker));
+        }
+    }, [sticker]);
+    return (React__default["default"].createElement(ChattingWrapper, { width: width, heigh: height, sticker: sticker },
         React__default["default"].createElement(ChatList, null, chatList.map(function (chat) { return (React__default["default"].createElement(ChatWrapper, null,
             React__default["default"].createElement("span", null, "Guest"),
-            React__default["default"].createElement(Chat, null, chat))); })),
+            React__default["default"].createElement(Chat, null, chat.startsWidth('https://img.stipop.io') ? (React__default["default"].createElement("img", { src: chat, alt: "" })) : (chat)))); })),
         React__default["default"].createElement(ChattingFrom, null,
             React__default["default"].createElement(ChattingInput, { placeholder: "Type Message", onKeyPress: function (e) {
                     if (e.key === 'Enter') {
