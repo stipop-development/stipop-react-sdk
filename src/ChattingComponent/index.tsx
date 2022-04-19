@@ -3,7 +3,11 @@ import styled from 'styled-components'
 
 import { ChattingProps } from './index.types'
 
-const ChattingComponent: React.FC<ChattingProps> = ({ width, height }) => {
+const ChattingComponent: React.FC<ChattingProps> = ({
+  width,
+  height,
+  stickerClick,
+}) => {
   const [chatList, setChatList] = useState([])
 
   return (
@@ -27,6 +31,7 @@ const ChattingComponent: React.FC<ChattingProps> = ({ width, height }) => {
               e.target.value = ''
             }
           }}
+          sitckerClick={sticker => setChatList(chatList.concat(sticker))}
         />
       </ChattingFrom>
     </ChattingWrapper>
