@@ -12,6 +12,9 @@ const SearchComponent: React.FC<SearchProps> = ({
   lang,
   pageNumber,
   limit,
+  width,
+  height,
+  stickerClick,
 }) => {
   const [keyword, setKeyword] = useState('')
   const [stickerList, setStickerList] = useState([])
@@ -49,7 +52,7 @@ const SearchComponent: React.FC<SearchProps> = ({
   }, [keyword, lang, pageNumber, limit])
 
   return (
-    <SearchWrapper>
+    <SearchWrapper width={width} height={height}>
       <SearchForm>
         <SearchInput type="text" onChange={e => setKeyword(e.target.value)} />
         <InputHolder>
@@ -66,11 +69,8 @@ const SearchComponent: React.FC<SearchProps> = ({
             return (
               <StickerImg
                 src={sticker}
-                alt=""
                 key={index}
-                onClick={() => {
-                  console.log(sticker)
-                }}
+                onClick={() => stickerClick(sticker)}
               />
             )
           })}
@@ -82,8 +82,8 @@ const SearchComponent: React.FC<SearchProps> = ({
 export default SearchComponent
 
 const SearchWrapper = styled.div`
-  width: 360px;
-  height: 300px;
+  width: ${props => (props.width ? `${props.width}px` : '360px')};
+  height: ${props => (props.height ? `${props.height}px` : '300px')};
   background-color: #fff;
   border: 1px solid lightgray;
   border-radius: 10px;
@@ -153,4 +153,7 @@ const StickerWrapper = styled.div`
 const StickerImg = styled.img`
   width: 60%;
   height: auto;
+  &:hover {
+    cursor: pointer;
+  }
 `

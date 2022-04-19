@@ -5,6 +5,7 @@ import Type from './index.types'
 
 import LogoIcon from '../svgs/logo.svg'
 import SearchIcon from '../svgs/search-icon.svg'
+import SmileIcon from '../svgs/smile.svg'
 
 function changeTypeToIconComponent(type) {
   switch (type) {
@@ -12,6 +13,8 @@ function changeTypeToIconComponent(type) {
       return <LogoIcon />
     case Type.SEARCH:
       return <SearchIcon />
+    case Type.SMILE:
+      return <SmileIcon />
     default:
       return 'icon'
   }
@@ -23,12 +26,14 @@ export function changeTypeToIconClassName(type) {
       return 'stipop-icon-logo'
     case Type.SEARCH:
       return 'stipop-icon-search'
+    case Type.SMILE:
+      return 'stipop-icon-smile'
     default:
       return 'stipop-icon-unknown'
   }
 }
 
-export default function Icon({ className, type, children }) {
+export default function Icon({ className, type, onClick, children }) {
   return (
     <div
       className={[
@@ -36,6 +41,7 @@ export default function Icon({ className, type, children }) {
         'stipop-icon',
         changeTypeToIconClassName(type),
       ].join(' ')}
+      onClick={onClick}
     >
       {children || changeTypeToIconComponent(type)}
     </div>
@@ -51,11 +57,13 @@ Icon.propTypes = {
     PropTypes.oneOf(Object.keys(Type)),
     PropTypes.string,
   ]).isRequired,
+  onClick: PropTypes.func,
   children: PropTypes.element,
 }
 
 Icon.defaultProps = {
   className: '',
+  onClick: () => {},
   children: null,
 }
 
