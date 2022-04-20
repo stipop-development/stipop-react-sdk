@@ -4339,26 +4339,26 @@ Icon.defaultProps = {
 };
 
 var SearchComponent = function (_a) {
-    var apikey = _a.apikey, userId = _a.userId, lang = _a.lang, pageNumber = _a.pageNumber, limit = _a.limit, width = _a.width, height = _a.height, stickerClick = _a.stickerClick;
+    var params = _a.params, size = _a.size, backgroundColor = _a.backgroundColor, column = _a.column, border = _a.border, input = _a.input, stickerClick = _a.stickerClick;
     var _b = React.useState(''), keyword = _b[0], setKeyword = _b[1];
     var _c = React.useState([]), stickerList = _c[0], setStickerList = _c[1];
     var baseUrl = 'https://messenger.stipop.io/v1/search';
     React.useEffect(function () {
-        var query = "?userId=".concat(userId, "&q=").concat(keyword);
-        if (lang) {
-            query += "&lang=".concat(lang);
+        var query = "?userId=".concat(params.userId, "&q=").concat(keyword);
+        if (params.lang) {
+            query += "&lang=".concat(params.lang);
         }
-        if (pageNumber) {
-            query += "&pageNumber=".concat(pageNumber);
+        if (params.pageNumber) {
+            query += "&pageNumber=".concat(params.pageNumber);
         }
-        if (limit) {
-            query += "&limit=".concat(limit);
+        if (params.limit) {
+            query += "&limit=".concat(params.limit);
         }
         if (keyword) {
             axios
                 .get("".concat(baseUrl).concat(query), {
                 headers: {
-                    apikey: apikey,
+                    apikey: params.apikey,
                     'Content-Type': 'application/json',
                 },
             })
@@ -4372,25 +4372,61 @@ var SearchComponent = function (_a) {
         else {
             setStickerList([]);
         }
-    }, [keyword, lang, pageNumber, limit]);
-    return (React__default["default"].createElement(SearchWrapper, { width: width, height: height },
+    }, [keyword, params.lang, params.pageNumber, params.limit]);
+    return (React__default["default"].createElement(SearchWrapper, { size: size, backgroundColor: backgroundColor, border: border },
         React__default["default"].createElement(SearchForm, null,
-            React__default["default"].createElement(SearchInput, { type: "text", onChange: function (e) { return setKeyword(e.target.value); }, placeholder: "Search sticker..." }),
-            React__default["default"].createElement(InputHolder, null,
+            React__default["default"].createElement(SearchInput, { type: "text", onChange: function (e) { return setKeyword(e.target.value); }, placeholder: "Search sticker...", input: input }),
+            React__default["default"].createElement(InputHolder, { input: input },
                 React__default["default"].createElement(Icon, { type: "SEARCH" }),
                 React__default["default"].createElement("div", null,
                     React__default["default"].createElement("span", null, "POWERED BY"),
                     React__default["default"].createElement(Icon, { type: "LOGO" })))),
-        React__default["default"].createElement(StickerWrapper, null, stickerList.length > 0 &&
+        React__default["default"].createElement(StickerWrapper, { column: column }, stickerList.length > 0 &&
             stickerList.map(function (sticker, index) {
                 return (React__default["default"].createElement(StickerImg, { src: sticker, key: index, onClick: function () { return stickerClick(sticker); } }));
             }))));
 };
-var SearchWrapper = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: #fff;\n  border: 1px solid lightgray;\n  border-radius: 10px;\n  display: flex;\n  position: relative;\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: #fff;\n  border: 1px solid lightgray;\n  border-radius: 10px;\n  display: flex;\n  position: relative;\n"])), function (props) { return (props.width ? "".concat(props.width, "px") : '360px'); }, function (props) { return (props.height ? "".concat(props.height, "px") : '300px'); });
-var SearchForm = styled.form(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  width: 100%;\n  height: 10%;\n  max-height: 40px;\n  position: absolute;\n  top: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n"], ["\n  width: 100%;\n  height: 10%;\n  max-height: 40px;\n  position: absolute;\n  top: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n"])));
-var SearchInput = styled.input(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  width: 90%;\n  height: 100%;\n  border: 2px solid lightgray;\n  border-radius: 50px;\n  padding: 0 35% 0 10%;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n"], ["\n  width: 90%;\n  height: 100%;\n  border: 2px solid lightgray;\n  border-radius: 50px;\n  padding: 0 35% 0 10%;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n"])));
-var InputHolder = styled.div(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  width: 90%;\n  height: 100%;\n  padding: 0 4%;\n  position: absolute;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"], ["\n  width: 90%;\n  height: 100%;\n  padding: 0 4%;\n  position: absolute;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"])));
-var StickerWrapper = styled.div(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  width: 90%;\n  height: 75%;\n  position: absolute;\n  top: 20%;\n  left: 50%;\n  transform: translateX(-50%);\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n"], ["\n  width: 90%;\n  height: 75%;\n  position: absolute;\n  top: 20%;\n  left: 50%;\n  transform: translateX(-50%);\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n"])));
+var SearchWrapper = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  min-width: 360px;\n  min-height: 300px;\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: min(1%, 20px);\n  box-sizing: border-box;\n"], ["\n  width: ", ";\n  height: ", ";\n  min-width: 360px;\n  min-height: 300px;\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: min(1%, 20px);\n  box-sizing: border-box;\n"])), function (props) {
+    return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
+}, function (props) {
+    return props.size && props.size.height ? "".concat(props.size.height, "px") : '300px';
+}, function (props) {
+    return props.backgroundColor ? props.backgroundColor : '#fff';
+}, function (props) {
+    return props.border && props.border.border
+        ? props.border.border
+        : '1px solid lightgray';
+}, function (props) {
+    return props.border && (props.border.radius || props.border.radius == 0)
+        ? "".concat(props.border.radius, "px")
+        : '10px';
+});
+var SearchForm = styled.div(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"], ["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"])));
+var SearchInput = styled.input(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  width: calc(100% - 20px);\n  height: 32px;\n  border: ", ";\n  border-radius: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"], ["\n  width: calc(100% - 20px);\n  height: 32px;\n  border: ", ";\n  border-radius: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"])), function (props) {
+    return props.input && props.input.border
+        ? props.input.border
+        : '2px solid lightgray';
+}, function (props) {
+    return props.input && (props.input.radius || props.input.radius == 0)
+        ? "".concat(props.input.radius, "px")
+        : '50px';
+}, function (props) {
+    return props.input && props.input.border
+        ? "".concat(Number(props.input.border.slice(0, 1)) + 1).concat(props.input.border.slice(1))
+        : '3px solid lightgray';
+});
+var InputHolder = styled.div(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  width: calc(100% - 20px);\n  height: 32px;\n  padding: 0 20px 0 12px;\n  border-radius: ", ";\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n  background-color: ", ";\n  position: absolute;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"], ["\n  width: calc(100% - 20px);\n  height: 32px;\n  padding: 0 20px 0 12px;\n  border-radius: ", ";\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n  background-color: ", ";\n  position: absolute;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"])), function (props) {
+    return props.input && (props.input.radius || props.input.radius == 0)
+        ? "".concat(props.input.radius, "px")
+        : '50px';
+}, function (props) {
+    return props.input && props.input.backgroundColor
+        ? props.input.backgroundColor
+        : '#fff';
+});
+var StickerWrapper = styled.div(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  /* border: 1px solid black; */\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n"], ["\n  /* border: 1px solid black; */\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n"])), function (props) {
+    return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
+});
 var StickerImg = styled.img(templateObject_6$1 || (templateObject_6$1 = __makeTemplateObject(["\n  width: 60%;\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"], ["\n  width: 60%;\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"])));
 var templateObject_1$1, templateObject_2$1, templateObject_3$1, templateObject_4$1, templateObject_5$1, templateObject_6$1;
 

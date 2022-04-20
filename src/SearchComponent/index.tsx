@@ -7,13 +7,12 @@ import { SearchProps } from './index.types'
 import Icon from '../Icon/index'
 
 const SearchComponent: React.FC<SearchProps> = ({
-  apikey,
-  userId,
-  lang,
-  pageNumber,
-  limit,
-  width,
-  height,
+  params,
+  size,
+  backgroundColor,
+  column,
+  border,
+  input,
   stickerClick,
 }) => {
   const [keyword, setKeyword] = useState('')
@@ -21,21 +20,21 @@ const SearchComponent: React.FC<SearchProps> = ({
   const baseUrl = 'https://messenger.stipop.io/v1/search'
 
   useEffect(() => {
-    let query = `?userId=${userId}&q=${keyword}`
-    if (lang) {
-      query += `&lang=${lang}`
+    let query = `?userId=${params.userId}&q=${keyword}`
+    if (params.lang) {
+      query += `&lang=${params.lang}`
     }
-    if (pageNumber) {
-      query += `&pageNumber=${pageNumber}`
+    if (params.pageNumber) {
+      query += `&pageNumber=${params.pageNumber}`
     }
-    if (limit) {
-      query += `&limit=${limit}`
+    if (params.limit) {
+      query += `&limit=${params.limit}`
     }
     if (keyword) {
       axios
         .get(`${baseUrl}${query}`, {
           headers: {
-            apikey: apikey,
+            apikey: params.apikey,
             'Content-Type': 'application/json',
           },
         })
@@ -49,17 +48,22 @@ const SearchComponent: React.FC<SearchProps> = ({
     } else {
       setStickerList([])
     }
-  }, [keyword, lang, pageNumber, limit])
+  }, [keyword, params.lang, params.pageNumber, params.limit])
 
   return (
-    <SearchWrapper width={width} height={height}>
+    <SearchWrapper
+      size={size}
+      backgroundColor={backgroundColor}
+      border={border}
+    >
       <SearchForm>
         <SearchInput
           type="text"
           onChange={e => setKeyword(e.target.value)}
           placeholder="Search sticker..."
+          input={input}
         />
-        <InputHolder>
+        <InputHolder input={input}>
           <Icon type="SEARCH" />
           <div>
             <span>POWERED BY</span>
@@ -67,7 +71,7 @@ const SearchComponent: React.FC<SearchProps> = ({
           </div>
         </InputHolder>
       </SearchForm>
-      <StickerWrapper>
+      <StickerWrapper column={column}>
         {stickerList.length > 0 &&
           stickerList.map((sticker, index) => {
             return (
@@ -86,50 +90,90 @@ const SearchComponent: React.FC<SearchProps> = ({
 export default SearchComponent
 
 const SearchWrapper = styled.div`
-  width: ${props => (props.width ? `${props.width}px` : '360px')};
-  height: ${props => (props.height ? `${props.height}px` : '300px')};
-  background-color: #fff;
-  border: 1px solid lightgray;
-  border-radius: 10px;
+  width: ${props =>
+    props.size && props.size.width ? `${props.size.width}px` : '360px'};
+  height: ${props =>
+    props.size && props.size.height ? `${props.size.height}px` : '300px'};
+  min-width: 360px;
+  min-height: 300px;
+  background-color: ${props =>
+    props.backgroundColor ? props.backgroundColor : '#fff'};
+  border: ${props =>
+    props.border && props.border.border
+      ? props.border.border
+      : '1px solid lightgray'};
+  border-radius: ${props =>
+    props.border && (props.border.radius || props.border.radius == 0)
+      ? `${props.border.radius}px`
+      : '10px'};
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
   position: relative;
+  padding: min(1%, 20px);
+  box-sizing: border-box;
 `
-const SearchForm = styled.form`
+const SearchForm = styled.div`
   width: 100%;
-  height: 10%;
-  max-height: 40px;
-  position: absolute;
-  top: 10px;
+  height: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10px;
 `
 const SearchInput = styled.input`
-  width: 90%;
-  height: 100%;
-  border: 2px solid lightgray;
-  border-radius: 50px;
-  padding: 0 35% 0 10%;
+  width: calc(100% - 20px);
+  height: 32px;
+  border: ${props =>
+    props.input && props.input.border
+      ? props.input.border
+      : '2px solid lightgray'};
+  border-radius: ${props =>
+    props.input && (props.input.radius || props.input.radius == 0)
+      ? `${props.input.radius}px`
+      : '50px'};
+  padding: 0 140px 0 35px;
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0);
   z-index: 1;
+  position: absolute;
 
   &::placeholder {
     font-size: 13px;
     color: lightgray;
   }
+
+  &:focus {
+    outline: none;
+    border: ${props =>
+      props.input && props.input.border
+        ? `${
+            Number(props.input.border.slice(0, 1)) + 1
+          }${props.input.border.slice(1)}`
+        : '3px solid lightgray'};
+    box-sizing: border-box;
+  }
 `
 const InputHolder = styled.div`
-  width: 90%;
-  height: 100%;
-  padding: 0 4%;
-  position: absolute;
+  width: calc(100% - 20px);
+  height: 32px;
+  padding: 0 20px 0 12px;
+  border-radius: ${props =>
+    props.input && (props.input.radius || props.input.radius == 0)
+      ? `${props.input.radius}px`
+      : '50px'};
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
   font-size: 10px;
   color: #d5d5d5;
+  background-color: ${props =>
+    props.input && props.input.backgroundColor
+      ? props.input.backgroundColor
+      : '#fff'};
+  position: absolute;
 
   .search-icon {
     width: 15px;
@@ -146,18 +190,17 @@ const InputHolder = styled.div`
   }
 `
 const StickerWrapper = styled.div`
-  width: 90%;
-  height: 75%;
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
+  /* border: 1px solid black; */
+  width: 100%;
+  height: 90%;
   overflow-y: auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: ${props =>
+    props.column ? `repeat(${props.column}, 1fr)` : 'repeat(4, 1fr)'};
   grid-template-rows: auto;
   row-gap: 8%;
   justify-items: center;
+  box-sizing: border-box;
 `
 const StickerImg = styled.img`
   width: 60%;
