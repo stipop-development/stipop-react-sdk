@@ -4380,7 +4380,7 @@ var ChattingComponent = function (_a) {
         var chat = document.querySelector('.chat-list');
         chat.scrollTop = chat.scrollHeight;
     }, [chatList]);
-    return (React__default.createElement(ChattingWrapper, { width: width, heigh: height, sticker: sticker },
+    return (React__default.createElement(ChattingWrapper, { width: width, height: height, sticker: sticker },
         React__default.createElement(ChatList, { className: "chat-list" }, chatList.map(function (chat) { return (React__default.createElement(ChatWrapper, null,
             React__default.createElement("span", null, "Guest"),
             React__default.createElement(Chat, { sticker: chat.startsWith('https://img.stipop.io') ? true : false }, chat.startsWith('https://img.stipop.io') ? (React__default.createElement("img", { src: chat, alt: "" })) : (chat)))); })),

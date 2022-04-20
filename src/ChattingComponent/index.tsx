@@ -22,7 +22,7 @@ const ChattingComponent: React.FC<ChattingProps> = ({
   }, [chatList])
 
   return (
-    <ChattingWrapper width={width} heigh={height} sticker={sticker}>
+    <ChattingWrapper width={width} height={height} sticker={sticker}>
       <ChatList className="chat-list">
         {chatList.map(chat => (
           <ChatWrapper>
