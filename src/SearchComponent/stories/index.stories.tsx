@@ -30,11 +30,17 @@ export const CustomSearch = () => (
     size={{
       width: 500,
       height: 600,
+      imgSize: 80,
     }}
     backgroundColor="skyblue"
     column={5}
     border={{ border: '1px solid red', radius: 0 }}
-    input={{ border: '2px solid blue', radius: 0, backgroundColor: 'yellow' }}
+    input={{
+      border: '2px solid blue',
+      radius: 0,
+      backgroundColor: 'black',
+      color: 'white',
+    }}
     stickerClick={sticker => console.log(sticker)}
   />
 )

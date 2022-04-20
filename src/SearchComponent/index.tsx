@@ -13,6 +13,7 @@ const SearchComponent: React.FC<SearchProps> = ({
   column,
   border,
   input,
+  scroll,
   stickerClick,
 }) => {
   const [keyword, setKeyword] = useState('')
@@ -71,7 +72,7 @@ const SearchComponent: React.FC<SearchProps> = ({
           </div>
         </InputHolder>
       </SearchForm>
-      <StickerWrapper column={column}>
+      <StickerWrapper column={column} scroll={scroll}>
         {stickerList.length > 0 &&
           stickerList.map((sticker, index) => {
             return (
@@ -79,6 +80,7 @@ const SearchComponent: React.FC<SearchProps> = ({
                 src={sticker}
                 key={index}
                 onClick={() => stickerClick(sticker)}
+                size={size}
               />
             )
           })}
@@ -133,6 +135,8 @@ const SearchInput = styled.input`
     props.input && (props.input.radius || props.input.radius == 0)
       ? `${props.input.radius}px`
       : '50px'};
+  color: ${props =>
+    props.input && props.input.color ? props.input.color : 'black'};
   padding: 0 140px 0 35px;
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0);
@@ -201,9 +205,16 @@ const StickerWrapper = styled.div`
   row-gap: 8%;
   justify-items: center;
   box-sizing: border-box;
+  -ms-overflow-style: ${props => (props.scroll === false ? 'none' : '')};
+  scrollbar-width: ${props => (props.scroll === false ? 'none' : '')};
+
+  &::-webkit-scrollbar {
+    display: ${props => (props.scroll === false ? 'none' : '')};
+  }
 `
 const StickerImg = styled.img`
-  width: 60%;
+  width: ${props =>
+    props.size && props.size.imgSize ? `${props.size.imgSize}%` : '60%'};
   height: auto;
   &:hover {
     cursor: pointer;

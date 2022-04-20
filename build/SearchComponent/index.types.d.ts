@@ -5,6 +5,7 @@ export interface SearchProps {
     column?: number;
     border?: Border;
     input?: Input;
+    scroll?: boolean;
     stickerClick?: Function;
 }
 interface Params {
@@ -17,6 +18,7 @@ interface Params {
 interface Size {
     width?: number;
     height?: number;
+    imgSize?: number;
 }
 interface Border {
     border?: string;
@@ -26,5 +28,6 @@ interface Input {
     border?: string;
     radius?: number;
     backgroundColor?: string;
+    color?: string;
 }
 export {};
