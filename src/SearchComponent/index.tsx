@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
-// import Stipop from 'stipop-js-sdk'
+import Stipop from 'stipop-js-sdk'
 
 import { SearchProps } from './index.types'
 
@@ -20,8 +20,8 @@ const SearchComponent: React.FC<SearchProps> = ({
   const [keyword, setKeyword] = useState(params.default ? params.default : 'hi')
   const [stickerList, setStickerList] = useState([])
   // const baseUrl = 'https://messenger.stipop.io/v1/search'
-  const Stipop = require('stipop-js-sdk')
-  const client = new Stipop(params.apikey, 'v1')
+  // const Stipop = require('stipop-js-sdk')
+  const client = new (Stipop as any)(params.apikey, 'v1')
 
   // useEffect(() => {
   //   let query = `?userId=${params.userId}&q=${keyword}`
