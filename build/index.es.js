@@ -4375,7 +4375,7 @@ var ChattingComponent = function (_a) {
         if (sticker) {
             setChatList(chatList.concat(sticker));
         }
-    }, []);
+    }, [sticker, chatList]);
     useEffect(function () {
         var chat = document.querySelector('.chat-list');
         chat.scrollTop = chat.scrollHeight;

@@ -14,7 +14,7 @@ const ChattingComponent: React.FC<ChattingProps> = ({
     if (sticker) {
       setChatList(chatList.concat(sticker))
     }
-  }, [])
+  }, [sticker, chatList])
 
   useEffect(() => {
     const chat = document.querySelector('.chat-list')
