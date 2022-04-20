@@ -14,6 +14,7 @@ interface Params {
     lang?: string;
     pageNumber?: number;
     limit?: number;
+    default?: string;
 }
 interface Size {
     width?: number;
@@ -29,5 +30,7 @@ interface Input {
     radius?: number;
     backgroundColor?: string;
     color?: string;
+    width?: number;
+    height?: number;
 }
 export {};

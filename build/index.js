@@ -4340,7 +4340,7 @@ Icon.defaultProps = {
 
 var SearchComponent = function (_a) {
     var params = _a.params, size = _a.size, backgroundColor = _a.backgroundColor, column = _a.column, border = _a.border, input = _a.input, scroll = _a.scroll, stickerClick = _a.stickerClick;
-    var _b = React.useState(''), keyword = _b[0], setKeyword = _b[1];
+    var _b = React.useState(params.default ? params.default : 'hi'), keyword = _b[0], setKeyword = _b[1];
     var _c = React.useState([]), stickerList = _c[0], setStickerList = _c[1];
     var baseUrl = 'https://messenger.stipop.io/v1/search';
     React.useEffect(function () {
@@ -4370,7 +4370,7 @@ var SearchComponent = function (_a) {
             });
         }
         else {
-            setStickerList([]);
+            setKeyword(params.default);
         }
     }, [keyword, params.lang, params.pageNumber, params.limit]);
     return (React__default["default"].createElement(SearchWrapper, { size: size, backgroundColor: backgroundColor, border: border },
@@ -4402,7 +4402,13 @@ var SearchWrapper = styled.div(templateObject_1$1 || (templateObject_1$1 = __mak
         : '10px';
 });
 var SearchForm = styled.div(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"], ["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"])));
-var SearchInput = styled.input(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  width: calc(100% - 20px);\n  height: 32px;\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"], ["\n  width: calc(100% - 20px);\n  height: 32px;\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"])), function (props) {
+var SearchInput = styled.input(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"])), function (props) {
+    return props.input && props.input.width
+        ? "".concat(props.input.width, "%")
+        : 'calc(100% - 20px)';
+}, function (props) {
+    return props.input && props.input.height ? "".concat(props.input.height, "px") : '32px';
+}, function (props) {
     return props.input && props.input.border
         ? props.input.border
         : '2px solid lightgray';
@@ -4417,7 +4423,13 @@ var SearchInput = styled.input(templateObject_3$1 || (templateObject_3$1 = __mak
         ? "".concat(Number(props.input.border.slice(0, 1)) + 1).concat(props.input.border.slice(1))
         : '3px solid lightgray';
 });
-var InputHolder = styled.div(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  width: calc(100% - 20px);\n  height: 32px;\n  padding: 0 20px 0 12px;\n  border-radius: ", ";\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n  background-color: ", ";\n  position: absolute;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"], ["\n  width: calc(100% - 20px);\n  height: 32px;\n  padding: 0 20px 0 12px;\n  border-radius: ", ";\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n  background-color: ", ";\n  position: absolute;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"])), function (props) {
+var InputHolder = styled.div(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  padding: 0 20px 0 12px;\n  border-radius: ", ";\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n  background-color: ", ";\n  position: absolute;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"], ["\n  width: ", ";\n  height: ", ";\n  padding: 0 20px 0 12px;\n  border-radius: ", ";\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n  background-color: ", ";\n  position: absolute;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"])), function (props) {
+    return props.input && props.input.width
+        ? "".concat(props.input.width, "%")
+        : 'calc(100% - 20px)';
+}, function (props) {
+    return props.input && props.input.height ? "".concat(props.input.height, "px") : '32px';
+}, function (props) {
     return props.input && (props.input.radius || props.input.radius == 0)
         ? "".concat(props.input.radius, "px")
         : '50px';

@@ -15,6 +15,7 @@ interface Params {
   lang?: string
   pageNumber?: number
   limit?: number
+  default?: string
 }
 
 interface Size {
@@ -33,4 +34,6 @@ interface Input {
   radius?: number
   backgroundColor?: string
   color?: string
+  width?: number
+  height?: number
 }

@@ -16,7 +16,7 @@ const SearchComponent: React.FC<SearchProps> = ({
   scroll,
   stickerClick,
 }) => {
-  const [keyword, setKeyword] = useState('')
+  const [keyword, setKeyword] = useState(params.default ? params.default : 'hi')
   const [stickerList, setStickerList] = useState([])
   const baseUrl = 'https://messenger.stipop.io/v1/search'
 
@@ -47,7 +47,7 @@ const SearchComponent: React.FC<SearchProps> = ({
           )
         })
     } else {
-      setStickerList([])
+      setKeyword(params.default)
     }
   }, [keyword, params.lang, params.pageNumber, params.limit])
 
@@ -125,8 +125,12 @@ const SearchForm = styled.div`
   margin-bottom: 10px;
 `
 const SearchInput = styled.input`
-  width: calc(100% - 20px);
-  height: 32px;
+  width: ${props =>
+    props.input && props.input.width
+      ? `${props.input.width}%`
+      : 'calc(100% - 20px)'};
+  height: ${props =>
+    props.input && props.input.height ? `${props.input.height}px` : '32px'};
   border: ${props =>
     props.input && props.input.border
       ? props.input.border
@@ -160,8 +164,12 @@ const SearchInput = styled.input`
   }
 `
 const InputHolder = styled.div`
-  width: calc(100% - 20px);
-  height: 32px;
+  width: ${props =>
+    props.input && props.input.width
+      ? `${props.input.width}%`
+      : 'calc(100% - 20px)'};
+  height: ${props =>
+    props.input && props.input.height ? `${props.input.height}px` : '32px'};
   padding: 0 20px 0 12px;
   border-radius: ${props =>
     props.input && (props.input.radius || props.input.radius == 0)
