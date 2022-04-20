@@ -54,7 +54,11 @@ const SearchComponent: React.FC<SearchProps> = ({
   return (
     <SearchWrapper width={width} height={height}>
       <SearchForm>
-        <SearchInput type="text" onChange={e => setKeyword(e.target.value)} />
+        <SearchInput
+          type="text"
+          onChange={e => setKeyword(e.target.value)}
+          placeholder="Search sticker..."
+        />
         <InputHolder>
           <Icon type="SEARCH" />
           <div>
@@ -109,6 +113,11 @@ const SearchInput = styled.input`
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0);
   z-index: 1;
+
+  &::placeholder {
+    font-size: 13px;
+    color: lightgray;
+  }
 `
 const InputHolder = styled.div`
   width: 90%;
