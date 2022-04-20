@@ -14,7 +14,7 @@ const ChattingComponent: React.FC<ChattingProps> = ({
     if (sticker) {
       setChatList(chatList.concat(sticker))
     }
-  }, [sticker])
+  })
 
   useEffect(() => {
     const chat = document.querySelector('.chat-list')
@@ -27,13 +27,11 @@ const ChattingComponent: React.FC<ChattingProps> = ({
         {chatList.map(chat => (
           <ChatWrapper>
             <span>Guest</span>
-            <Chat>
+            <Chat
+              sticker={chat.startsWith('https://img.stipop.io') ? true : false}
+            >
               {chat.startsWith('https://img.stipop.io') ? (
-                <img
-                  src={chat}
-                  alt=""
-                  style={{ width: '70px', height: '70px' }}
-                />
+                <img src={chat} alt="" />
               ) : (
                 chat
               )}
@@ -65,13 +63,17 @@ const ChattingWrapper = styled.div`
   height: ${props => (props.height ? `${props.height}px` : '90vh')};
   background-color: #f8f6fe;
   position: relative;
-  padding: 10px;
+  padding: 1%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `
 const ChatList = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  height: calc(100% - 80px);
+  height: calc(100% - 60px);
   overflow-y: auto;
 `
 const ChatWrapper = styled.div`
@@ -89,25 +91,27 @@ const ChatWrapper = styled.div`
   }
 `
 const Chat = styled.div`
-  background-color: #fff;
+  background-color: ${props => (props.sticker ? '' : '#fff')};
   border-radius: 10px;
   display: inline-block;
   padding: 5px 10px;
   word-break: break-all;
+  font-size: 14px;
+
+  img {
+    width: 80px;
+    height: 80px;
+  }
 `
 const ChattingFrom = styled.div`
   width: 100%;
-  height: 80px;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 `
 const ChattingInput = styled.input`
-  width: 95%;
+  width: 100%;
   height: 40px;
   border-radius: 5px;
   border: 1px solid lightgray;
