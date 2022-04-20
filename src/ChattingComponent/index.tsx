@@ -63,7 +63,7 @@ const ChattingWrapper = styled.div`
   height: ${props => (props.height ? `${props.height}px` : '90vh')};
   background-color: #f8f6fe;
   position: relative;
-  padding: 1%;
+  padding: 15px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
