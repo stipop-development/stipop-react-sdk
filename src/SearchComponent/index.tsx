@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
+// import Stipop from 'stipop-js-sdk'
 
 import { SearchProps } from './index.types'
 
@@ -18,34 +19,61 @@ const SearchComponent: React.FC<SearchProps> = ({
 }) => {
   const [keyword, setKeyword] = useState(params.default ? params.default : 'hi')
   const [stickerList, setStickerList] = useState([])
-  const baseUrl = 'https://messenger.stipop.io/v1/search'
+  // const baseUrl = 'https://messenger.stipop.io/v1/search'
+  const Stipop = require('stipop-js-sdk')
+  const client = new Stipop(params.apikey, 'v1')
+
+  // useEffect(() => {
+  //   let query = `?userId=${params.userId}&q=${keyword}`
+  //   if (params.lang) {
+  //     query += `&lang=${params.lang}`
+  //   }
+  //   if (params.pageNumber) {
+  //     query += `&pageNumber=${params.pageNumber}`
+  //   }
+  //   if (params.limit) {
+  //     query += `&limit=${params.limit}`
+  //   }
+  //   if (keyword) {
+  //     axios
+  //       .get(`${baseUrl}${query}`, {
+  //         headers: {
+  //           apikey: params.apikey,
+  //           'Content-Type': 'application/json',
+  //         },
+  //       })
+  //       .then(({ data }) => {
+  //         setStickerList(
+  //           data.body.stickerList
+  //             ? data.body.stickerList.map(sticker => sticker.stickerImg)
+  //             : []
+  //         )
+  //       })
+  //   } else {
+  //     setKeyword(params.default)
+  //   }
+  // }, [keyword, params.lang, params.pageNumber, params.limit])
 
   useEffect(() => {
-    let query = `?userId=${params.userId}&q=${keyword}`
-    if (params.lang) {
-      query += `&lang=${params.lang}`
+    const searchParams = {
+      userId: params.userId,
+      q: keyword,
+      lang: params.lang,
+      pageNumber: params.pageNumber,
+      limit: params.limit,
     }
-    if (params.pageNumber) {
-      query += `&pageNumber=${params.pageNumber}`
-    }
-    if (params.limit) {
-      query += `&limit=${params.limit}`
-    }
+
     if (keyword) {
-      axios
-        .get(`${baseUrl}${query}`, {
-          headers: {
-            apikey: params.apikey,
-            'Content-Type': 'application/json',
-          },
-        })
-        .then(({ data }) => {
-          setStickerList(
-            data.body.stickerList
-              ? data.body.stickerList.map(sticker => sticker.stickerImg)
-              : []
-          )
-        })
+      const data = client.getSearch(searchParams)
+
+      data.then(({ body }) => {
+        console.log(body)
+        setStickerList(
+          body && body.stickerList
+            ? body.stickerList.map(sticker => sticker.stickerImg)
+            : []
+        )
+      })
     } else {
       setKeyword(params.default)
     }
