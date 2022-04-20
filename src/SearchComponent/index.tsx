@@ -111,7 +111,7 @@ const SearchWrapper = styled.div`
   align-items: center;
   justify-content: space-around;
   position: relative;
-  padding: min(1%, 20px);
+  padding: 15px 20px 20px 20px;
   box-sizing: border-box;
 `
 const SearchForm = styled.div`
