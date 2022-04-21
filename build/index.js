@@ -3452,6 +3452,7 @@ var SearchComponent = function (_a) {
     //   }
     // }, [keyword, params.lang, params.pageNumber, params.limit])
     React.useEffect(function () {
+        console.log(keyword);
         var searchParams = {
             userId: params.userId,
             q: keyword,
@@ -3470,7 +3471,7 @@ var SearchComponent = function (_a) {
             });
         }
         else {
-            setKeyword(params.default);
+            setKeyword(params.default ? params.default : 'hi');
         }
     }, [keyword, params.lang, params.pageNumber, params.limit]);
     return (React__default["default"].createElement(SearchWrapper, { size: size, backgroundColor: backgroundColor, border: border },
@@ -3481,10 +3482,9 @@ var SearchComponent = function (_a) {
                 React__default["default"].createElement("div", null,
                     React__default["default"].createElement("span", null, "POWERED BY"),
                     React__default["default"].createElement(Icon, { type: "LOGO" })))),
-        React__default["default"].createElement(StickerWrapper, { column: column, scroll: scroll }, stickerList.length > 0 &&
-            stickerList.map(function (sticker, index) {
-                return (React__default["default"].createElement(StickerImg, { src: sticker, key: index, onClick: function () { return stickerClick(sticker); }, size: size }));
-            }))));
+        stickerList.length > 0 ? (React__default["default"].createElement(StickerWrapper, { column: column, scroll: scroll }, stickerList.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { src: sticker, key: index, onClick: function () { return stickerClick(sticker); }, size: size })); }))) : (React__default["default"].createElement(NoSticker, null,
+            React__default["default"].createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker" }),
+            React__default["default"].createElement("span", { className: "no-sticker-text" }, "No Stickers to show")))));
 };
 var SearchWrapper = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  min-width: 360px;\n  min-height: 300px;\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"], ["\n  width: ", ";\n  height: ", ";\n  min-width: 360px;\n  min-height: 300px;\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
@@ -3538,13 +3538,14 @@ var InputHolder = styled.div(templateObject_4$1 || (templateObject_4$1 = __makeT
         ? props.input.backgroundColor
         : '#fff';
 });
-var StickerWrapper = styled.div(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  /* border: 1px solid black; */\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  /* border: 1px solid black; */\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) {
+var StickerWrapper = styled.div(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) {
     return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
 }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); });
-var StickerImg = styled.img(templateObject_6$1 || (templateObject_6$1 = __makeTemplateObject(["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"], ["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"])), function (props) {
+var NoSticker = styled.div(templateObject_6$1 || (templateObject_6$1 = __makeTemplateObject(["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"], ["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"])));
+var StickerImg = styled.img(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"], ["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"])), function (props) {
     return props.size && props.size.imgSize ? "".concat(props.size.imgSize, "%") : '60%';
 });
-var templateObject_1$1, templateObject_2$1, templateObject_3$1, templateObject_4$1, templateObject_5$1, templateObject_6$1;
+var templateObject_1$1, templateObject_2$1, templateObject_3$1, templateObject_4$1, templateObject_5$1, templateObject_6$1, templateObject_7;
 
 var ChattingComponent = function (_a) {
     var width = _a.width, height = _a.height, sticker = _a.sticker;

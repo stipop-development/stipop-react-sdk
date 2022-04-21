@@ -55,6 +55,7 @@ const SearchComponent: React.FC<SearchProps> = ({
   // }, [keyword, params.lang, params.pageNumber, params.limit])
 
   useEffect(() => {
+    console.log(keyword)
     const searchParams = {
       userId: params.userId,
       q: keyword,
@@ -75,7 +76,7 @@ const SearchComponent: React.FC<SearchProps> = ({
         )
       })
     } else {
-      setKeyword(params.default)
+      setKeyword(params.default ? params.default : 'hi')
     }
   }, [keyword, params.lang, params.pageNumber, params.limit])
 
@@ -100,19 +101,26 @@ const SearchComponent: React.FC<SearchProps> = ({
           </div>
         </InputHolder>
       </SearchForm>
-      <StickerWrapper column={column} scroll={scroll}>
-        {stickerList.length > 0 &&
-          stickerList.map((sticker, index) => {
-            return (
-              <StickerImg
-                src={sticker}
-                key={index}
-                onClick={() => stickerClick(sticker)}
-                size={size}
-              />
-            )
-          })}
-      </StickerWrapper>
+      {stickerList.length > 0 ? (
+        <StickerWrapper column={column} scroll={scroll}>
+          {stickerList.map((sticker, index) => (
+            <StickerImg
+              src={sticker}
+              key={index}
+              onClick={() => stickerClick(sticker)}
+              size={size}
+            />
+          ))}
+        </StickerWrapper>
+      ) : (
+        <NoSticker>
+          <img
+            src="https://img.stipop.io/image/sdk/no-sticker.png"
+            className="no-sticker"
+          ></img>
+          <span className="no-sticker-text">No Stickers to show</span>
+        </NoSticker>
+      )}
     </SearchWrapper>
   )
 }
@@ -230,7 +238,6 @@ const InputHolder = styled.div`
   }
 `
 const StickerWrapper = styled.div`
-  /* border: 1px solid black; */
   width: 100%;
   height: 90%;
   overflow-y: auto;
@@ -246,6 +253,22 @@ const StickerWrapper = styled.div`
 
   &::-webkit-scrollbar {
     display: ${props => (props.scroll === false ? 'none' : '')};
+  }
+`
+const NoSticker = styled.div`
+  width: 100%;
+  height: 90%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .no-sticker {
+    width: 40%;
+  }
+  .no-sticker-text {
+    font-size: 14px;
+    color: #5f5f5f;
   }
 `
 const StickerImg = styled.img`
