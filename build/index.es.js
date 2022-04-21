@@ -3458,7 +3458,7 @@ var SearchComponent = function (_a) {
                     React__default.createElement(Icon, { type: "LOGO" })))),
         stickerList.length > 0 ? (React__default.createElement(StickerWrapper, { column: column, scroll: scroll }, stickerList.map(function (sticker, index) { return (React__default.createElement(StickerImg, { src: sticker, key: index, onClick: function () { return stickerClick(sticker); }, size: size })); }))) : (React__default.createElement(NoSticker, null,
             React__default.createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker" }),
-            React__default.createElement("span", { className: "no-sticker-text" }, "No Stickers to show")))));
+            React__default.createElement("span", { className: "no-sticker-text" }, "No Stickers to Show")))));
 };
 var SearchWrapper = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  min-width: 360px;\n  min-height: 300px;\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"], ["\n  width: ", ";\n  height: ", ";\n  min-width: 360px;\n  min-height: 300px;\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';

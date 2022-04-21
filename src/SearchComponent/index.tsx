@@ -118,7 +118,7 @@ const SearchComponent: React.FC<SearchProps> = ({
             src="https://img.stipop.io/image/sdk/no-sticker.png"
             className="no-sticker"
           ></img>
-          <span className="no-sticker-text">No Stickers to show</span>
+          <span className="no-sticker-text">No Stickers to Show</span>
         </NoSticker>
       )}
     </SearchWrapper>
