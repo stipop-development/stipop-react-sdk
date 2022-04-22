@@ -6,6 +6,8 @@ import Type from './index.types'
 import LogoIcon from '../svgs/logo.svg'
 import SearchIcon from '../svgs/search-icon.svg'
 import SmileIcon from '../svgs/smile.svg'
+import StoreIcon from '../svgs/store.svg'
+import TimeIcon from '../svgs/time.svg'
 
 function changeTypeToIconComponent(type) {
   switch (type) {
@@ -15,6 +17,10 @@ function changeTypeToIconComponent(type) {
       return <SearchIcon />
     case Type.SMILE:
       return <SmileIcon />
+    case Type.STORE:
+      return <StoreIcon />
+    case Type.TIME:
+      return <TimeIcon />
     default:
       return 'icon'
   }
@@ -28,6 +34,10 @@ export function changeTypeToIconClassName(type) {
       return 'stipop-icon-search'
     case Type.SMILE:
       return 'stipop-icon-smile'
+    case Type.STORE:
+      return 'stipop-icon-store'
+    case Type.TIME:
+      return 'stipop-icon-time'
     default:
       return 'stipop-icon-unknown'
   }

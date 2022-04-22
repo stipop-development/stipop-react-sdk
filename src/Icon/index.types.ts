@@ -1,5 +1,7 @@
 export default {
   LOGO: 'LOGO',
   SEARCH: 'SEARCH',
-  SMILE: 'SMILE'
+  SMILE: 'SMILE',
+  TIME: 'TIME',
+  STORE: 'STORE',
 }

@@ -3294,51 +3294,53 @@ var PropTypes = propTypes.exports;
 var Type = {
     LOGO: 'LOGO',
     SEARCH: 'SEARCH',
-    SMILE: 'SMILE'
+    SMILE: 'SMILE',
+    TIME: 'TIME',
+    STORE: 'STORE',
 };
 
-var _path$1;
+var _path$2;
 
-function _extends$2() { _extends$2 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$2.apply(this, arguments); }
+function _extends$4() { _extends$4 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$4.apply(this, arguments); }
 
 var SvgLogo = function SvgLogo(props) {
-  return /*#__PURE__*/React__namespace.createElement("svg", _extends$2({
+  return /*#__PURE__*/React__namespace.createElement("svg", _extends$4({
     width: 47,
     height: 17,
     xmlns: "http://www.w3.org/2000/svg"
-  }, props), _path$1 || (_path$1 = /*#__PURE__*/React__namespace.createElement("path", {
+  }, props), _path$2 || (_path$2 = /*#__PURE__*/React__namespace.createElement("path", {
     d: "M6.594 8.275c-.505-.437-1.322-.774-2.49-1.011a10.98 10.98 0 0 1-1.225-.337c-.311-.14-.447-.258-.506-.337-.078-.1-.116-.238-.116-.417 0-.139.038-.337.35-.515.272-.139.642-.218 1.089-.218.39 0 .72.04.992.139s.525.257.759.475c.253.238.544.357.856.357a.92.92 0 0 0 .564-.178c.214-.179.33-.397.33-.635a.944.944 0 0 0-.252-.634c-.331-.416-.779-.734-1.343-.971-.544-.238-1.186-.337-1.887-.337a4.86 4.86 0 0 0-1.614.277c-.525.198-.934.476-1.265.872-.33.397-.505.873-.505 1.448 0 1.387 1.05 2.28 3.132 2.696.739.138 1.264.317 1.556.515.272.178.389.397.389.654 0 .278-.117.476-.39.635-.291.178-.719.277-1.264.277a3.03 3.03 0 0 1-1.186-.238c-.35-.178-.623-.357-.798-.575-.408-.396-.875-.456-1.381-.079a.946.946 0 0 0-.389.773c0 .238.078.456.253.635.37.376.895.693 1.537.911a6.312 6.312 0 0 0 2.042.337c.72 0 1.362-.118 1.887-.356.525-.238.953-.575 1.226-1.011.272-.437.428-.912.428-1.428 0-.694-.273-1.268-.779-1.724m6.984 2.822a.81.81 0 0 0-.647-.28h-.547a.859.859 0 0 1-.708-.359c-.202-.26-.303-.559-.303-.938V5.786h1.173c.283 0 .506-.08.688-.24a.814.814 0 0 0 .283-.619.868.868 0 0 0-.283-.659c-.182-.16-.405-.24-.688-.24h-1.173V1.913c0-.28-.101-.519-.283-.719a.997.997 0 0 0-.728-.28c-.284 0-.526.1-.729.28a.971.971 0 0 0-.283.72V4.01h-.546c-.283 0-.506.08-.688.24a.838.838 0 0 0-.283.658c0 .24.101.46.283.62.182.16.405.239.688.239h.546V9.5c0 .619.142 1.178.385 1.677.263.5.627.899 1.092 1.178.465.3.991.44 1.557.44h.284c.323 0 .606-.1.809-.28a.914.914 0 0 0 .343-.719c.02-.26-.06-.5-.242-.699m2.098-7.441a.91.91 0 0 0-.657.28c-.183.18-.274.44-.274.74v7.099c0 .28.091.54.256.72.182.2.401.3.657.3a.87.87 0 0 0 .675-.3c.164-.2.255-.44.255-.72v-7.1c0-.3-.091-.54-.255-.74-.146-.18-.384-.28-.657-.28M15.436 0c-.316 0-.594.11-.817.332a1.108 1.108 0 0 0-.335.81c0 .314.112.59.335.811.223.221.501.332.817.332.316 0 .595-.11.818-.332.223-.221.334-.497.334-.81 0-.314-.111-.59-.334-.811A1.127 1.127 0 0 0 15.436 0m9.322 8.23a2.804 2.804 0 0 1-1.305 2.397 2.574 2.574 0 0 1-1.345.357c-.502 0-.944-.12-1.346-.357a2.505 2.505 0 0 1-.943-.99 2.976 2.976 0 0 1-.342-1.406c0-.515.12-1.01.342-1.426.22-.416.542-.753.943-.99a2.574 2.574 0 0 1 1.346-.357c.502 0 .943.119 1.345.356.401.238.723.575.943.99.241.417.362.912.362 1.427m-.301-3.981a4.754 4.754 0 0 0-2.35-.594c-.863 0-1.646.198-2.328.594-.703.396-1.245.95-1.667 1.644-.401.693-.602 1.485-.602 2.337v7.209c0 .297.1.535.3.733.202.178.443.277.724.277.3 0 .542-.099.743-.277.18-.179.28-.436.28-.733v-3.763c.322.297.683.535 1.065.733a4.296 4.296 0 0 0 1.807.396c.803 0 1.546-.198 2.188-.594.663-.397 1.165-.951 1.546-1.644a5.029 5.029 0 0 0 .562-2.337c0-.852-.2-1.644-.602-2.337a4.397 4.397 0 0 0-1.666-1.644m20.555 4c0 .515-.12.99-.361 1.407a2.815 2.815 0 0 1-.944.99 2.574 2.574 0 0 1-1.345.356c-.502 0-.944-.118-1.345-.356a2.505 2.505 0 0 1-.944-.99 2.976 2.976 0 0 1-.341-1.407c0-.515.12-1.01.341-1.426.221-.415.542-.752.944-.99a2.574 2.574 0 0 1 1.345-.356c.502 0 .944.118 1.345.356.402.238.723.575.944.99.26.416.361.911.361 1.426m1.386-2.337A4.596 4.596 0 0 0 44.73 4.25a4.755 4.755 0 0 0-2.349-.594c-.863 0-1.646.198-2.329.594-.703.396-1.245.95-1.666 1.644-.402.693-.603 1.485-.603 2.337v7.209c0 .297.1.535.301.733.201.178.442.277.723.277.301 0 .542-.099.743-.277.18-.179.281-.436.281-.733v-3.763a4.83 4.83 0 0 0 1.064.733 4.295 4.295 0 0 0 1.807.396c.803 0 1.546-.198 2.189-.594a4.386 4.386 0 0 0 1.546-1.644A5.03 5.03 0 0 0 47 8.23c0-.832-.2-1.624-.602-2.318m-14.143 5.06c-1.53 0-2.77-1.23-2.77-2.747s1.24-2.747 2.77-2.747 2.77 1.23 2.77 2.747-1.24 2.747-2.77 2.747m0-7.316c-2.545 0-4.608 2.045-4.608 4.569s2.063 4.57 4.608 4.57c2.545 0 4.608-2.046 4.608-4.57 0-2.524-2.063-4.57-4.608-4.57",
     fill: "#D5D5D5"
   })));
 };
 
-var _path;
+var _path$1;
 
-function _extends$1() { _extends$1 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$1.apply(this, arguments); }
+function _extends$3() { _extends$3 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$3.apply(this, arguments); }
 
 var SvgSearchIcon = function SvgSearchIcon(props) {
-  return /*#__PURE__*/React__namespace.createElement("svg", _extends$1({
+  return /*#__PURE__*/React__namespace.createElement("svg", _extends$3({
     width: 15,
     height: 15,
     viewBox: "0 0 18 18",
     xmlns: "http://www.w3.org/2000/svg"
-  }, props), _path || (_path = /*#__PURE__*/React__namespace.createElement("path", {
+  }, props), _path$1 || (_path$1 = /*#__PURE__*/React__namespace.createElement("path", {
     d: "M7.307 0a7.307 7.307 0 0 1 5.772 11.788L18 16.708 16.708 18l-4.92-4.92A7.307 7.307 0 1 1 7.308 0zm0 1.827a5.48 5.48 0 1 0 0 10.96 5.48 5.48 0 0 0 0-10.96z",
     fill: "#414141",
     fillRule: "evenodd"
   })));
 };
 
-var _g;
+var _g$1;
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends$2() { _extends$2 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$2.apply(this, arguments); }
 
 var SvgSmile = function SvgSmile(props) {
-  return /*#__PURE__*/React__namespace.createElement("svg", _extends({
+  return /*#__PURE__*/React__namespace.createElement("svg", _extends$2({
     width: 18,
     height: 18,
     xmlns: "http://www.w3.org/2000/svg"
-  }, props), _g || (_g = /*#__PURE__*/React__namespace.createElement("g", {
+  }, props), _g$1 || (_g$1 = /*#__PURE__*/React__namespace.createElement("g", {
     transform: "translate(1 1)",
     stroke: "#FF4500",
     fill: "none",
@@ -3365,6 +3367,46 @@ var SvgSmile = function SvgSmile(props) {
   }))));
 };
 
+var _path;
+
+function _extends$1() { _extends$1 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$1.apply(this, arguments); }
+
+var SvgStore = function SvgStore(props) {
+  return /*#__PURE__*/React__namespace.createElement("svg", _extends$1({
+    width: 24,
+    height: 18,
+    xmlns: "http://www.w3.org/2000/svg"
+  }, props), _path || (_path = /*#__PURE__*/React__namespace.createElement("path", {
+    d: "M10.65.292a1.01 1.01 0 0 1 0 1.42l-3.275 3.29h9.124l-3.276-3.29a1.01 1.01 0 0 1 0-1.42.992.992 0 0 1 1.407 0l4.682 4.71h3.567a1 1 0 0 1 0 2h-.165L21.17 15.54A2.99 2.99 0 0 1 18.235 18H5.639a2.99 2.99 0 0 1-2.935-2.46L1.16 7.002H.995a.999.999 0 0 1-.995-1 1 1 0 0 1 .995-1h3.567L9.244.292a.992.992 0 0 1 1.407 0zM3.16 7.06l1.483 8.02c.085.46.5.803.98.803H18.25a.996.996 0 0 0 .98-.804l1.484-8.02H3.16zm3.98 2.13a.986.986 0 0 1 1.132.82l.492 2.96a.987.987 0 0 1-.808 1.135.986.986 0 0 1-1.131-.819l-.492-2.96A.987.987 0 0 1 7.14 9.19zm9.593 0a.987.987 0 0 1 .808 1.136l-.492 2.96a.986.986 0 0 1-1.132.82.987.987 0 0 1-.807-1.136l.492-2.96a.986.986 0 0 1 1.131-.82zm-4.796-.013c.581 0 1.053.445 1.053.989v2.964c0 .544-.472.989-1.053.989-.582 0-1.053-.445-1.053-.989v-2.964c0-.544.471-.989 1.053-.989z",
+    fill: "#C1C1C1",
+    fillRule: "evenodd"
+  })));
+};
+
+var _g;
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+var SvgTime = function SvgTime(props) {
+  return /*#__PURE__*/React__namespace.createElement("svg", _extends({
+    width: 20,
+    height: 20,
+    xmlns: "http://www.w3.org/2000/svg"
+  }, props), _g || (_g = /*#__PURE__*/React__namespace.createElement("g", {
+    stroke: "#C1C1C1",
+    strokeWidth: 2,
+    fill: "none",
+    fillRule: "evenodd"
+  }, /*#__PURE__*/React__namespace.createElement("circle", {
+    cx: 10,
+    cy: 10,
+    r: 9
+  }), /*#__PURE__*/React__namespace.createElement("path", {
+    strokeLinecap: "round",
+    d: "m13 13-3-2.25M10 6v4.5"
+  }))));
+};
+
 function changeTypeToIconComponent(type) {
     switch (type) {
         case Type.LOGO:
@@ -3373,6 +3415,10 @@ function changeTypeToIconComponent(type) {
             return React__default["default"].createElement(SvgSearchIcon, null);
         case Type.SMILE:
             return React__default["default"].createElement(SvgSmile, null);
+        case Type.STORE:
+            return React__default["default"].createElement(SvgStore, null);
+        case Type.TIME:
+            return React__default["default"].createElement(SvgTime, null);
         default:
             return 'icon';
     }
@@ -3385,6 +3431,10 @@ function changeTypeToIconClassName(type) {
             return 'stipop-icon-search';
         case Type.SMILE:
             return 'stipop-icon-smile';
+        case Type.STORE:
+            return 'stipop-icon-store';
+        case Type.TIME:
+            return 'stipop-icon-time';
         default:
             return 'stipop-icon-unknown';
     }
@@ -3482,11 +3532,11 @@ var SearchComponent = function (_a) {
                 React__default["default"].createElement("div", null,
                     React__default["default"].createElement("span", null, "POWERED BY"),
                     React__default["default"].createElement(Icon, { type: "LOGO" })))),
-        stickerList.length > 0 ? (React__default["default"].createElement(StickerWrapper, { column: column, scroll: scroll }, stickerList.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { src: sticker, key: index, onClick: function () { return stickerClick(sticker); }, size: size })); }))) : (React__default["default"].createElement(NoSticker, null,
+        stickerList.length > 0 ? (React__default["default"].createElement(StickerWrapper$1, { column: column, scroll: scroll }, stickerList.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg$1, { src: sticker, key: index, onClick: function () { return stickerClick(sticker); }, size: size })); }))) : (React__default["default"].createElement(NoSticker, null,
             React__default["default"].createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker" }),
             React__default["default"].createElement("span", { className: "no-sticker-text" }, "No Stickers to Show")))));
 };
-var SearchWrapper = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  min-width: 360px;\n  min-height: 300px;\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"], ["\n  width: ", ";\n  height: ", ";\n  min-width: 360px;\n  min-height: 300px;\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"])), function (props) {
+var SearchWrapper = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  min-width: 360px;\n  min-height: 300px;\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"], ["\n  width: ", ";\n  height: ", ";\n  min-width: 360px;\n  min-height: 300px;\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
 }, function (props) {
     return props.size && props.size.height ? "".concat(props.size.height, "px") : '300px';
@@ -3501,8 +3551,8 @@ var SearchWrapper = styled.div(templateObject_1$1 || (templateObject_1$1 = __mak
         ? "".concat(props.border.radius, "px")
         : '10px';
 });
-var SearchForm = styled.div(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"], ["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"])));
-var SearchInput = styled.input(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"])), function (props) {
+var SearchForm = styled.div(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"], ["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"])));
+var SearchInput = styled.input(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"])), function (props) {
     return props.input && props.input.width
         ? "".concat(props.input.width, "%")
         : 'calc(100% - 20px)';
@@ -3523,7 +3573,7 @@ var SearchInput = styled.input(templateObject_3$1 || (templateObject_3$1 = __mak
         ? "".concat(Number(props.input.border.slice(0, 1)) + 1).concat(props.input.border.slice(1))
         : '3px solid lightgray';
 });
-var InputHolder = styled.div(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  padding: 0 20px 0 12px;\n  border-radius: ", ";\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n  background-color: ", ";\n  position: absolute;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"], ["\n  width: ", ";\n  height: ", ";\n  padding: 0 20px 0 12px;\n  border-radius: ", ";\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n  background-color: ", ";\n  position: absolute;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"])), function (props) {
+var InputHolder = styled.div(templateObject_4$2 || (templateObject_4$2 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  padding: 0 20px 0 12px;\n  border-radius: ", ";\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n  background-color: ", ";\n  position: absolute;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"], ["\n  width: ", ";\n  height: ", ";\n  padding: 0 20px 0 12px;\n  border-radius: ", ";\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n  background-color: ", ";\n  position: absolute;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"])), function (props) {
     return props.input && props.input.width
         ? "".concat(props.input.width, "%")
         : 'calc(100% - 20px)';
@@ -3538,14 +3588,14 @@ var InputHolder = styled.div(templateObject_4$1 || (templateObject_4$1 = __makeT
         ? props.input.backgroundColor
         : '#fff';
 });
-var StickerWrapper = styled.div(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) {
+var StickerWrapper$1 = styled.div(templateObject_5$2 || (templateObject_5$2 = __makeTemplateObject(["\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) {
     return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
 }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); });
-var NoSticker = styled.div(templateObject_6$1 || (templateObject_6$1 = __makeTemplateObject(["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"], ["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"])));
-var StickerImg = styled.img(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"], ["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"])), function (props) {
+var NoSticker = styled.div(templateObject_6$2 || (templateObject_6$2 = __makeTemplateObject(["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"], ["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"])));
+var StickerImg$1 = styled.img(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"], ["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"])), function (props) {
     return props.size && props.size.imgSize ? "".concat(props.size.imgSize, "%") : '60%';
 });
-var templateObject_1$1, templateObject_2$1, templateObject_3$1, templateObject_4$1, templateObject_5$1, templateObject_6$1, templateObject_7;
+var templateObject_1$2, templateObject_2$2, templateObject_3$2, templateObject_4$2, templateObject_5$2, templateObject_6$2, templateObject_7;
 
 var ChattingComponent = function (_a) {
     var width = _a.width, height = _a.height, sticker = _a.sticker;
@@ -3573,15 +3623,110 @@ var ChattingComponent = function (_a) {
                     }
                 } }))));
 };
-var ChattingWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: #f8f6fe;\n  position: relative;\n  padding: 15px;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: #f8f6fe;\n  position: relative;\n  padding: 15px;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n"])), function (props) { return (props.width ? "".concat(props.width, "px") : '80vw'); }, function (props) { return (props.height ? "".concat(props.height, "px") : '90vh'); });
-var ChatList = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  height: calc(100% - 60px);\n  overflow-y: auto;\n"], ["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  height: calc(100% - 60px);\n  overflow-y: auto;\n"])));
-var ChatWrapper = styled.div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  margin: 5px 0;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  padding-right: 5px;\n\n  span {\n    font-size: 12px;\n    color: #696969;\n    padding-right: 5px;\n    margin-bottom: 2px;\n  }\n"], ["\n  margin: 5px 0;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  padding-right: 5px;\n\n  span {\n    font-size: 12px;\n    color: #696969;\n    padding-right: 5px;\n    margin-bottom: 2px;\n  }\n"])));
-var Chat = styled.div(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  background-color: ", ";\n  border-radius: 10px;\n  display: inline-block;\n  padding: 5px 10px;\n  word-break: break-all;\n  font-size: 14px;\n\n  img {\n    width: 80px;\n    height: 80px;\n  }\n"], ["\n  background-color: ", ";\n  border-radius: 10px;\n  display: inline-block;\n  padding: 5px 10px;\n  word-break: break-all;\n  font-size: 14px;\n\n  img {\n    width: 80px;\n    height: 80px;\n  }\n"])), function (props) { return (props.sticker ? '' : '#fff'); });
-var ChattingFrom = styled.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  box-sizing: border-box;\n"], ["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  box-sizing: border-box;\n"])));
-var ChattingInput = styled.input(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"], ["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"])));
+var ChattingWrapper = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: #f8f6fe;\n  position: relative;\n  padding: 15px;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: #f8f6fe;\n  position: relative;\n  padding: 15px;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n"])), function (props) { return (props.width ? "".concat(props.width, "px") : '80vw'); }, function (props) { return (props.height ? "".concat(props.height, "px") : '90vh'); });
+var ChatList = styled.div(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  height: calc(100% - 60px);\n  overflow-y: auto;\n"], ["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  height: calc(100% - 60px);\n  overflow-y: auto;\n"])));
+var ChatWrapper = styled.div(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  margin: 5px 0;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  padding-right: 5px;\n\n  span {\n    font-size: 12px;\n    color: #696969;\n    padding-right: 5px;\n    margin-bottom: 2px;\n  }\n"], ["\n  margin: 5px 0;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  padding-right: 5px;\n\n  span {\n    font-size: 12px;\n    color: #696969;\n    padding-right: 5px;\n    margin-bottom: 2px;\n  }\n"])));
+var Chat = styled.div(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  background-color: ", ";\n  border-radius: 10px;\n  display: inline-block;\n  padding: 5px 10px;\n  word-break: break-all;\n  font-size: 14px;\n\n  img {\n    width: 80px;\n    height: 80px;\n  }\n"], ["\n  background-color: ", ";\n  border-radius: 10px;\n  display: inline-block;\n  padding: 5px 10px;\n  word-break: break-all;\n  font-size: 14px;\n\n  img {\n    width: 80px;\n    height: 80px;\n  }\n"])), function (props) { return (props.sticker ? '' : '#fff'); });
+var ChattingFrom = styled.div(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  box-sizing: border-box;\n"], ["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  box-sizing: border-box;\n"])));
+var ChattingInput = styled.input(templateObject_6$1 || (templateObject_6$1 = __makeTemplateObject(["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"], ["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"])));
+var templateObject_1$1, templateObject_2$1, templateObject_3$1, templateObject_4$1, templateObject_5$1, templateObject_6$1;
+
+var PickerComponent = function (_a) {
+    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, stickerClick = _a.stickerClick;
+    var _b = React.useState([]), myStickers = _b[0], setMyStickers = _b[1];
+    var _c = React.useState([]), stickers = _c[0], setStickers = _c[1];
+    var _d = React.useState(null), showPackage = _d[0], setShowPackage = _d[1];
+    var client = new Stipop$1(params.apikey, 'v1');
+    React.useEffect(function () {
+        var storeParams = {
+            userId: params.userId,
+        };
+        var data = client.mySticker(storeParams);
+        data.then(function (_a) {
+            var body = _a.body;
+            setMyStickers(body && body.packageList ? body.packageList : []);
+        });
+    }, []);
+    var clickPackage = function (packageId) {
+        var packageParams = {
+            userId: params.userId,
+            packId: packageId,
+        };
+        var data = client.getPackInfo(packageParams);
+        data.then(function (_a) {
+            var body = _a.body;
+            setStickers(body && body.package && body.package.stickers
+                ? body.package.stickers.map(function (sticker) { return sticker.stickerImg; })
+                : []);
+        });
+    };
+    return (React__default["default"].createElement(StoreWrapper, { size: size, border: border },
+        React__default["default"].createElement(StoreMenu, { backgroundColor: backgroundColor, border: border, menu: menu },
+            React__default["default"].createElement(Icon, { type: "TIME" }),
+            React__default["default"].createElement(Icon, { type: "STORE" }),
+            myStickers.length > 0 ? (myStickers.map(function (pack, index) { return (React__default["default"].createElement(PackageImgWrapper, { menu: menu, key: index, onClick: function () {
+                    clickPackage(pack.packageId);
+                    setShowPackage(index);
+                }, show: showPackage === index },
+                React__default["default"].createElement(PackageImg, { src: pack.packageImg }))); })) : (React__default["default"].createElement("div", null))),
+        stickers && (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { src: sticker, alt: "", key: index, onClick: function () { return stickerClick(sticker); } })); })))));
+};
+var StoreWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n"])), function (props) {
+    return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
+}, function (props) {
+    return props.size && props.size.height ? "".concat(props.size.height, "px") : '300px';
+}, function (props) {
+    return props.border && props.border.border
+        ? props.border.border
+        : '1px solid lightgray';
+}, function (props) {
+    return props.border && (props.border.radius || props.border.radius == 0)
+        ? "".concat(props.border.radius, "px")
+        : '10px';
+});
+var StoreMenu = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  height: 45px;\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n  }\n"], ["\n  height: 45px;\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n  }\n"])), function (props) {
+    return props.menu && props.menu.bottomLine
+        ? props.menu.bottomLine
+        : '1px solid lightgray';
+}, function (props) {
+    return props.menu && props.menu.backgroundColor
+        ? props.menu.backgroundColor
+        : '#fff';
+}, function (props) {
+    return props.border && (props.border.radius || props.border.radius == 0)
+        ? "".concat(props.border.radius, "px")
+        : '10px';
+}, function (props) {
+    return props.border && (props.border.radius || props.border.radius == 0)
+        ? "".concat(props.border.radius, "px")
+        : '10px';
+});
+var PackageImgWrapper = styled.div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  height: 100%;\n  padding: 0 10px;\n  display: flex;\n  align-items: center;\n  border-bottom: ", ";\n"], ["\n  height: 100%;\n  padding: 0 10px;\n  display: flex;\n  align-items: center;\n  border-bottom: ", ";\n"])), function (props) {
+    return props.show
+        ? props.menu && props.menu.selectedLine
+            ? props.menu.selectedLine
+            : '2px solid black'
+        : '';
+});
+var PackageImg = styled.img(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  height: 65%;\n"], ["\n  height: 65%;\n"])));
+var StickerWrapper = styled.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: grid;\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: grid;\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) {
+    return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
+}, function (props) {
+    return props.backgroundColor ? props.backgroundColor : '#fff';
+}, function (props) {
+    return props.border && (props.border.radius || props.border.radius == 0)
+        ? "".concat(props.border.radius, "px")
+        : '10px';
+}, function (props) {
+    return props.border && (props.border.radius || props.border.radius == 0)
+        ? "".concat(props.border.radius, "px")
+        : '10px';
+}, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); });
+var StickerImg = styled.img(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  width: 70%;\n"], ["\n  width: 70%;\n"])));
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
 
 exports.ChattingComponent = ChattingComponent;
 exports.Icon = Icon;
+exports.PickerComponent = PickerComponent;
 exports.SearchComponent = SearchComponent;
 //# sourceMappingURL=index.js.map

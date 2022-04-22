@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import PropTypes from 'prop-types';
-export declare function changeTypeToIconClassName(type: any): "stipop-icon-logo" | "stipop-icon-search" | "stipop-icon-smile" | "stipop-icon-unknown";
+export declare function changeTypeToIconClassName(type: any): "stipop-icon-logo" | "stipop-icon-search" | "stipop-icon-smile" | "stipop-icon-store" | "stipop-icon-time" | "stipop-icon-unknown";
 declare function Icon({ className, type, onClick, children }: {
     className: any;
     type: any;
@@ -25,4 +25,6 @@ export declare const IconTypes: {
     LOGO: string;
     SEARCH: string;
     SMILE: string;
+    TIME: string;
+    STORE: string;
 };

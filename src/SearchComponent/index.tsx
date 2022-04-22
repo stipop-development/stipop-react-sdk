@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 import styled from 'styled-components'
 import Stipop from 'stipop-js-sdk'
 
