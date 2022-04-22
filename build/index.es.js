@@ -3609,7 +3609,7 @@ var PickerComponent = function (_a) {
     var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, stickerClick = _a.stickerClick;
     var _b = useState([]), myStickers = _b[0], setMyStickers = _b[1];
     var _c = useState([]), stickers = _c[0], setStickers = _c[1];
-    var _d = useState(null), showPackage = _d[0], setShowPackage = _d[1];
+    var _d = useState(0), showPackage = _d[0], setShowPackage = _d[1];
     var client = new Stipop$1(params.apikey, 'v1');
     useEffect(function () {
         var storeParams = {
@@ -3619,6 +3619,17 @@ var PickerComponent = function (_a) {
         data.then(function (_a) {
             var body = _a.body;
             setMyStickers(body && body.packageList ? body.packageList : []);
+            var packageParams = {
+                userId: params.userId,
+                packId: body.packageList[0].packageId,
+            };
+            var packageData = client.getPackInfo(packageParams);
+            packageData.then(function (_a) {
+                var body = _a.body;
+                setStickers(body && body.package && body.package.stickers
+                    ? body.package.stickers.map(function (sticker) { return sticker.stickerImg; })
+                    : []);
+            });
         });
     }, []);
     var clickPackage = function (packageId) {

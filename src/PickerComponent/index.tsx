@@ -18,7 +18,7 @@ const PickerComponent: React.FC<StoreProps> = ({
 }) => {
   const [myStickers, setMyStickers] = useState([])
   const [stickers, setStickers] = useState([])
-  const [showPackage, setShowPackage] = useState(null)
+  const [showPackage, setShowPackage] = useState(0)
   const client = new (Stipop as any)(params.apikey, 'v1')
 
   useEffect(() => {
@@ -29,6 +29,19 @@ const PickerComponent: React.FC<StoreProps> = ({
 
     data.then(({ body }) => {
       setMyStickers(body && body.packageList ? body.packageList : [])
+      const packageParams = {
+        userId: params.userId,
+        packId: body.packageList[0].packageId,
+      }
+
+      const packageData = client.getPackInfo(packageParams)
+      packageData.then(({ body }) => {
+        setStickers(
+          body && body.package && body.package.stickers
+            ? body.package.stickers.map(sticker => sticker.stickerImg)
+            : []
+        )
+      })
     })
   }, [])
 
