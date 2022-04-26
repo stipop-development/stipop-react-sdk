@@ -3652,11 +3652,11 @@ var SearchComponent = function (_a) {
                 React__default["default"].createElement("div", null,
                     React__default["default"].createElement("span", null, "POWERED BY"),
                     React__default["default"].createElement(Icon, { type: "LOGO" })))),
-        stickerList.length > 0 ? (React__default["default"].createElement(StickerWrapper$1, { column: column, scroll: scroll }, stickerList.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg$1, { src: sticker, key: index, onClick: function () { return stickerClick(sticker); }, size: size })); }))) : (React__default["default"].createElement(NoSticker, null,
+        stickerList.length > 0 ? (React__default["default"].createElement(StickerWrapper$2, { column: column, scroll: scroll }, stickerList.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg$1, { src: sticker, key: index, onClick: function () { return stickerClick(sticker); }, size: size })); }))) : (React__default["default"].createElement(NoSticker, null,
             React__default["default"].createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker" }),
             React__default["default"].createElement("span", { className: "no-sticker-text" }, "No Stickers to Show")))));
 };
-var SearchWrapper = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"])), function (props) {
+var SearchWrapper = styled.div(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
 }, function (props) {
     return props.size && props.size.height ? "".concat(props.size.height, "px") : '300px';
@@ -3671,8 +3671,8 @@ var SearchWrapper = styled.div(templateObject_1$2 || (templateObject_1$2 = __mak
         ? "".concat(props.border.radius, "px")
         : '10px';
 });
-var SearchForm = styled.div(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"], ["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"])));
-var SearchInput = styled.input(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"])), function (props) {
+var SearchForm = styled.div(templateObject_2$3 || (templateObject_2$3 = __makeTemplateObject(["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"], ["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"])));
+var SearchInput = styled.input(templateObject_3$3 || (templateObject_3$3 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"])), function (props) {
     return props.input && props.input.width
         ? "".concat(props.input.width, "%")
         : 'calc(100% - 20px)';
@@ -3693,7 +3693,7 @@ var SearchInput = styled.input(templateObject_3$2 || (templateObject_3$2 = __mak
         ? "".concat(Number(props.input.border.slice(0, 1)) + 1).concat(props.input.border.slice(1))
         : '3px solid lightgray';
 });
-var InputHolder = styled.div(templateObject_4$2 || (templateObject_4$2 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  padding: 0 20px 0 12px;\n  border-radius: ", ";\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n  background-color: ", ";\n  position: absolute;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"], ["\n  width: ", ";\n  height: ", ";\n  padding: 0 20px 0 12px;\n  border-radius: ", ";\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n  background-color: ", ";\n  position: absolute;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"])), function (props) {
+var InputHolder = styled.div(templateObject_4$3 || (templateObject_4$3 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  padding: 0 20px 0 12px;\n  border-radius: ", ";\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n  background-color: ", ";\n  position: absolute;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"], ["\n  width: ", ";\n  height: ", ";\n  padding: 0 20px 0 12px;\n  border-radius: ", ";\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  font-size: 10px;\n  color: #d5d5d5;\n  background-color: ", ";\n  position: absolute;\n\n  .search-icon {\n    width: 15px;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n\n    span {\n      margin-top: 2px;\n      margin-right: 3px;\n    }\n  }\n"])), function (props) {
     return props.input && props.input.width
         ? "".concat(props.input.width, "%")
         : 'calc(100% - 20px)';
@@ -3708,14 +3708,14 @@ var InputHolder = styled.div(templateObject_4$2 || (templateObject_4$2 = __makeT
         ? props.input.backgroundColor
         : '#fff';
 });
-var StickerWrapper$1 = styled.div(templateObject_5$2 || (templateObject_5$2 = __makeTemplateObject(["\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) {
+var StickerWrapper$2 = styled.div(templateObject_5$3 || (templateObject_5$3 = __makeTemplateObject(["\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) {
     return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
 }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); });
-var NoSticker = styled.div(templateObject_6$2 || (templateObject_6$2 = __makeTemplateObject(["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"], ["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"])));
-var StickerImg$1 = styled.img(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"], ["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"])), function (props) {
+var NoSticker = styled.div(templateObject_6$3 || (templateObject_6$3 = __makeTemplateObject(["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"], ["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"])));
+var StickerImg$1 = styled.img(templateObject_7$1 || (templateObject_7$1 = __makeTemplateObject(["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"], ["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"])), function (props) {
     return props.size && props.size.imgSize ? "".concat(props.size.imgSize, "%") : '60%';
 });
-var templateObject_1$2, templateObject_2$2, templateObject_3$2, templateObject_4$2, templateObject_5$2, templateObject_6$2, templateObject_7;
+var templateObject_1$3, templateObject_2$3, templateObject_3$3, templateObject_4$3, templateObject_5$3, templateObject_6$3, templateObject_7$1;
 
 var ChattingComponent = function (_a) {
     var width = _a.width, height = _a.height, sticker = _a.sticker;
@@ -3743,13 +3743,13 @@ var ChattingComponent = function (_a) {
                     }
                 } }))));
 };
-var ChattingWrapper = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: #f8f6fe;\n  position: relative;\n  padding: 15px;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: #f8f6fe;\n  position: relative;\n  padding: 15px;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n"])), function (props) { return (props.width ? "".concat(props.width, "px") : '80vw'); }, function (props) { return (props.height ? "".concat(props.height, "px") : '90vh'); });
-var ChatList = styled.div(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  height: calc(100% - 60px);\n  overflow-y: auto;\n"], ["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  height: calc(100% - 60px);\n  overflow-y: auto;\n"])));
-var ChatWrapper = styled.div(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  margin: 5px 0;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  padding-right: 5px;\n\n  span {\n    font-size: 12px;\n    color: #696969;\n    padding-right: 5px;\n    margin-bottom: 2px;\n  }\n"], ["\n  margin: 5px 0;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  padding-right: 5px;\n\n  span {\n    font-size: 12px;\n    color: #696969;\n    padding-right: 5px;\n    margin-bottom: 2px;\n  }\n"])));
-var Chat = styled.div(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  background-color: ", ";\n  border-radius: 10px;\n  display: inline-block;\n  padding: 5px 10px;\n  word-break: break-all;\n  font-size: 14px;\n\n  img {\n    width: 80px;\n    height: 80px;\n  }\n"], ["\n  background-color: ", ";\n  border-radius: 10px;\n  display: inline-block;\n  padding: 5px 10px;\n  word-break: break-all;\n  font-size: 14px;\n\n  img {\n    width: 80px;\n    height: 80px;\n  }\n"])), function (props) { return (props.sticker ? '' : '#fff'); });
-var ChattingFrom = styled.div(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  box-sizing: border-box;\n"], ["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  box-sizing: border-box;\n"])));
-var ChattingInput = styled.input(templateObject_6$1 || (templateObject_6$1 = __makeTemplateObject(["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"], ["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"])));
-var templateObject_1$1, templateObject_2$1, templateObject_3$1, templateObject_4$1, templateObject_5$1, templateObject_6$1;
+var ChattingWrapper = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: #f8f6fe;\n  position: relative;\n  padding: 15px;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: #f8f6fe;\n  position: relative;\n  padding: 15px;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n"])), function (props) { return (props.width ? "".concat(props.width, "px") : '80vw'); }, function (props) { return (props.height ? "".concat(props.height, "px") : '90vh'); });
+var ChatList = styled.div(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  height: calc(100% - 60px);\n  overflow-y: auto;\n"], ["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  height: calc(100% - 60px);\n  overflow-y: auto;\n"])));
+var ChatWrapper = styled.div(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n  margin: 5px 0;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  padding-right: 5px;\n\n  span {\n    font-size: 12px;\n    color: #696969;\n    padding-right: 5px;\n    margin-bottom: 2px;\n  }\n"], ["\n  margin: 5px 0;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  padding-right: 5px;\n\n  span {\n    font-size: 12px;\n    color: #696969;\n    padding-right: 5px;\n    margin-bottom: 2px;\n  }\n"])));
+var Chat = styled.div(templateObject_4$2 || (templateObject_4$2 = __makeTemplateObject(["\n  background-color: ", ";\n  border-radius: 10px;\n  display: inline-block;\n  padding: 5px 10px;\n  word-break: break-all;\n  font-size: 14px;\n\n  img {\n    width: 80px;\n    height: 80px;\n  }\n"], ["\n  background-color: ", ";\n  border-radius: 10px;\n  display: inline-block;\n  padding: 5px 10px;\n  word-break: break-all;\n  font-size: 14px;\n\n  img {\n    width: 80px;\n    height: 80px;\n  }\n"])), function (props) { return (props.sticker ? '' : '#fff'); });
+var ChattingFrom = styled.div(templateObject_5$2 || (templateObject_5$2 = __makeTemplateObject(["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  box-sizing: border-box;\n"], ["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  box-sizing: border-box;\n"])));
+var ChattingInput = styled.input(templateObject_6$2 || (templateObject_6$2 = __makeTemplateObject(["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"], ["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"])));
+var templateObject_1$2, templateObject_2$2, templateObject_3$2, templateObject_4$2, templateObject_5$2, templateObject_6$2;
 
 var PickerComponent = function (_a) {
     var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, stickerClick = _a.stickerClick, storeClick = _a.storeClick;
@@ -3791,7 +3791,7 @@ var PickerComponent = function (_a) {
                 : []);
         });
     };
-    return (React__default["default"].createElement(StoreWrapper, { size: size, border: border },
+    return (React__default["default"].createElement(StoreWrapper$1, { size: size, border: border },
         React__default["default"].createElement(StoreMenu, { backgroundColor: backgroundColor, border: border, menu: menu },
             React__default["default"].createElement(Icon, { type: "TIME" }),
             React__default["default"].createElement(Icon, { type: "STORE", onClick: function () { return storeClick(true); } }),
@@ -3802,9 +3802,9 @@ var PickerComponent = function (_a) {
                     }, show: showPackage === index },
                     React__default["default"].createElement(PackageImg, { src: pack.packageImg })));
             })) : (React__default["default"].createElement("div", null))),
-        stickers && (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { src: sticker, alt: "", key: index, onClick: function () { return stickerClick(sticker); } })); })))));
+        stickers && (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { src: sticker, alt: "", key: index, onClick: function () { return stickerClick(sticker); } })); })))));
 };
-var StoreWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n"])), function (props) {
+var StoreWrapper$1 = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
 }, function (props) {
     return props.size && props.size.height ? "".concat(props.size.height, "px") : '300px';
@@ -3817,7 +3817,7 @@ var StoreWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemp
         ? "".concat(props.border.radius, "px")
         : '10px';
 });
-var StoreMenu = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  height: 45px;\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  padding: 0 10px;\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    cursor: pointer;\n  }\n"], ["\n  height: 45px;\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  padding: 0 10px;\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    cursor: pointer;\n  }\n"])), function (props) {
+var StoreMenu = styled.div(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  height: 45px;\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  padding: 0 10px;\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    cursor: pointer;\n  }\n"], ["\n  height: 45px;\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  padding: 0 10px;\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    cursor: pointer;\n  }\n"])), function (props) {
     return props.menu && props.menu.bottomLine
         ? props.menu.bottomLine
         : '1px solid lightgray';
@@ -3834,15 +3834,15 @@ var StoreMenu = styled.div(templateObject_2 || (templateObject_2 = __makeTemplat
         ? "".concat(props.border.radius, "px")
         : '10px';
 });
-var PackageImgWrapper = styled.div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  height: 100%;\n  padding: 0 10px;\n  display: flex;\n  align-items: center;\n  border-bottom: ", ";\n"], ["\n  height: 100%;\n  padding: 0 10px;\n  display: flex;\n  align-items: center;\n  border-bottom: ", ";\n"])), function (props) {
+var PackageImgWrapper = styled.div(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  height: 100%;\n  padding: 0 10px;\n  display: flex;\n  align-items: center;\n  border-bottom: ", ";\n"], ["\n  height: 100%;\n  padding: 0 10px;\n  display: flex;\n  align-items: center;\n  border-bottom: ", ";\n"])), function (props) {
     return props.show
         ? props.menu && props.menu.selectedLine
             ? props.menu.selectedLine
             : '2px solid black'
         : '';
 });
-var PackageImg = styled.img(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  height: 65%;\n  cursor: pointer;\n"], ["\n  height: 65%;\n  cursor: pointer;\n"])));
-var StickerWrapper = styled.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: grid;\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: grid;\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) {
+var PackageImg = styled.img(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  height: 65%;\n  cursor: pointer;\n"], ["\n  height: 65%;\n  cursor: pointer;\n"])));
+var StickerWrapper$1 = styled.div(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: grid;\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: grid;\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) {
     return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
 }, function (props) {
     return props.backgroundColor ? props.backgroundColor : '#fff';
@@ -3855,11 +3855,238 @@ var StickerWrapper = styled.div(templateObject_5 || (templateObject_5 = __makeTe
         ? "".concat(props.border.radius, "px")
         : '10px';
 }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); });
-var StickerImg = styled.img(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  width: 70%;\n  cursor: pointer;\n"], ["\n  width: 70%;\n  cursor: pointer;\n"])));
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
+var StickerImg = styled.img(templateObject_6$1 || (templateObject_6$1 = __makeTemplateObject(["\n  width: 70%;\n  cursor: pointer;\n"], ["\n  width: 70%;\n  cursor: pointer;\n"])));
+var templateObject_1$1, templateObject_2$1, templateObject_3$1, templateObject_4$1, templateObject_5$1, templateObject_6$1;
+
+var StoreComponent = function (_a) {
+    var params = _a.params, downloadParams = _a.downloadParams, color = _a.color, scroll = _a.scroll, onClose = _a.onClose, size = _a.size, border = _a.border;
+    var _b = React.useState([]), trendingStickers = _b[0], setTrendingStickers = _b[1];
+    var _c = React.useState([]), packages = _c[0], setPackages = _c[1];
+    var _d = React.useState(false), detail = _d[0], setDetail = _d[1];
+    var _e = React.useState([]), stickers = _e[0], setStickers = _e[1];
+    var _f = React.useState(null), main = _f[0], setMain = _f[1];
+    var _g = React.useState([]), hideList = _g[0], setHideList = _g[1];
+    var client = new Stipop$1(params.apikey, 'v1');
+    React.useEffect(function () {
+        var packInfo = new Array();
+        var trendingParams = {
+            userId: params.userId,
+            lang: params.lang,
+            countryCode: params.countryCode,
+            animated: params.animated,
+            pageNumber: params.pageNumber,
+            limit: params.limit,
+        };
+        var data = client.getPack(trendingParams);
+        data.then(function (_a) {
+            var body = _a.body;
+            body.packageList.map(function (pack) {
+                var packageParams = {
+                    userId: params.userId,
+                    packId: pack.packageId,
+                };
+                var packageData = client.getPackInfo(packageParams);
+                packageData.then(function (_a) {
+                    var body = _a.body;
+                    packInfo.push(body.package);
+                    setTrendingStickers(__spreadArray(__spreadArray([], trendingStickers, true), [packInfo], false));
+                });
+            });
+        });
+        var hideParams = {
+            userId: params.userId,
+        };
+        var hideData = client.myStickerHideList(hideParams);
+        hideData.then(function (_a) {
+            var body = _a.body;
+            console.log(body.packageList);
+            setHideList(body.packageList.map(function (pack) { return pack.packageId; }));
+        });
+    }, [detail]);
+    React.useEffect(function () {
+        trendingStickers.map(function (trend) { return setPackages(trend); });
+        // console.log(packages)
+    }, [trendingStickers]);
+    var clickDownload = function (packageId) {
+        var dParams = {
+            userId: params.userId,
+            packageId: packageId,
+            isPurchase: downloadParams.isPurchase,
+            price: downloadParams.price,
+            lang: downloadParams.lang,
+            countryCode: downloadParams.countryCode,
+        };
+        var data = client.download(dParams);
+        data.then(function () {
+            setDetail(false);
+        });
+    };
+    var clickDetail = function (packageId) {
+        var packageParams = {
+            userId: params.userId,
+            packId: packageId,
+        };
+        var packageData = client.getPackInfo(packageParams);
+        packageData.then(function (_a) {
+            var body = _a.body;
+            // console.log(body.package.stickers)
+            setStickers(body && body.package && body.package.stickers
+                ? body.package.stickers
+                : []);
+            setDetail(true);
+        });
+    };
+    var clickDelete = function (packageId) {
+        var deleteParams = {
+            userId: params.userId,
+            packageId: packageId,
+        };
+        var data = client.myStickerHide(deleteParams);
+        data.then(function () {
+            setDetail(false);
+        });
+        setDetail(false);
+    };
+    return (React__default["default"].createElement(StoreWrapper, { color: color, size: size, border: border },
+        React__default["default"].createElement(StoreTitle, null,
+            detail ? (React__default["default"].createElement("div", { className: "title-text" },
+                React__default["default"].createElement(PreviousBtn, null,
+                    React__default["default"].createElement(Icon, { type: "PREVIOUS", onClick: function () { return setDetail(false); } })),
+                React__default["default"].createElement("span", null, "Sticker Pack"))) : (React__default["default"].createElement("div", { className: "title-text" },
+                React__default["default"].createElement("span", null, "Sticker Store"),
+                React__default["default"].createElement(Icon, { type: "STORE_BLACK" }))),
+            React__default["default"].createElement(CloseBtn, { onClick: function () { return onClose(true); } },
+                React__default["default"].createElement(Icon, { type: "CLOSE" }))),
+        React__default["default"].createElement(PackageContainer, { detail: detail, color: color, scroll: scroll, border: border }, detail ? (React__default["default"].createElement(DetailWrapper, { scroll: scroll },
+            React__default["default"].createElement(DetailBox, null,
+                React__default["default"].createElement(MainImg, { src: main.packageImg, alt: "" }),
+                React__default["default"].createElement(DetailName, null,
+                    React__default["default"].createElement("div", { className: "packageName" }, main.packageName),
+                    React__default["default"].createElement("div", { className: "artistName" },
+                        "\u00A9",
+                        main.artistName)),
+                React__default["default"].createElement(DownloadBtn, { color: color, isDownload: main.isDownload === 'Y', isRecovery: main.isDownload === 'Y' &&
+                        hideList.indexOf(main.packageId) !== -1, onClick: function () {
+                        main.isDownload === 'Y'
+                            ? clickDelete(main.packageId)
+                            : clickDownload(main.packageId);
+                    } },
+                    React__default["default"].createElement(Icon, { type: main.isDownload === 'Y'
+                            ? hideList.indexOf(main.packageId) < 0
+                                ? 'MINUS'
+                                : 'PLUS'
+                            : 'PLUS' }))),
+            React__default["default"].createElement(DetailStickerWrapper, { size: size }, stickers.map(function (sticker, index) { return (React__default["default"].createElement("img", { src: sticker.stickerImg, alt: "", key: index })); })))) : packages && packages.length > 0 ? (React__default["default"].createElement(PackageWrapper, null, packages.map(function (pack, index) { return (React__default["default"].createElement(PackageBox, { key: index, color: color, isDownload: pack.isDownload === 'Y', onClick: function () {
+                clickDetail(pack.packageId);
+                setMain({
+                    packageId: pack.packageId,
+                    packageImg: pack.packageImg,
+                    packageName: pack.packageName,
+                    artistName: pack.artistName,
+                    isDownload: pack.isDownload,
+                });
+            } },
+            React__default["default"].createElement(PackageTitle, null,
+                pack.packageName,
+                React__default["default"].createElement("span", null,
+                    "\u00A9",
+                    pack.artistName)),
+            React__default["default"].createElement(PackageItem, null, pack && pack.stickers ? (pack.stickers.map(function (sticker, index) {
+                if (index < 5) {
+                    return (React__default["default"].createElement(StickerWrapper, { key: index },
+                        React__default["default"].createElement(Sticker, { src: sticker.stickerImg, alt: "", size: size })));
+                }
+            })) : (React__default["default"].createElement("div", null))),
+            React__default["default"].createElement(DownloadBtn, { color: color, isDownload: pack.isDownload === 'Y', isRecovery: pack.isDownload === 'Y' &&
+                    hideList.indexOf(pack.packageId) !== -1, onClick: function () {
+                    pack.isDownload === 'Y'
+                        ? clickDelete(pack.packageId)
+                        : clickDownload(pack.packageId);
+                } },
+                React__default["default"].createElement(Icon, { type: pack.isDownload === 'Y'
+                        ? hideList.indexOf(pack.packageId) < 0
+                            ? 'MINUS'
+                            : 'PLUS'
+                        : 'PLUS' })))); }))) : (React__default["default"].createElement("div", null)))));
+};
+var StoreWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: #fff;\n  border: ", ";\n  border-radius: ", ";\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  background-color: ", ";\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: #fff;\n  border: ", ";\n  border-radius: ", ";\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  background-color: ", ";\n"])), function (props) {
+    return props.size && props.size.width ? "".concat(props.size.width, "px") : '600px';
+}, function (props) {
+    return props.size && props.size.height ? "".concat(props.size.height, "px") : '400px';
+}, function (props) {
+    return props.border && props.border.border
+        ? props.border.border
+        : '1px solid lightgray';
+}, function (props) {
+    return props.border && props.border.radius ? "".concat(props.border.radius, "px") : '8px';
+}, function (props) {
+    return props.color && props.color.backgroundColor
+        ? props.color.backgroundColor
+        : '#fff';
+});
+var StoreTitle = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  width: 100%;\n  height: 25%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 32px;\n  box-sizing: border-box;\n\n  .title-text {\n    display: flex;\n    align-items: center;\n    font-size: 24px;\n    font-weight: bold;\n    span {\n      margin-right: 10px;\n    }\n  }\n"], ["\n  width: 100%;\n  height: 25%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 32px;\n  box-sizing: border-box;\n\n  .title-text {\n    display: flex;\n    align-items: center;\n    font-size: 24px;\n    font-weight: bold;\n    span {\n      margin-right: 10px;\n    }\n  }\n"])));
+var CloseBtn = styled.div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  width: 34px;\n  height: 34px;\n  border-radius: 50%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n\n  .stipop-icon {\n    width: 34px;\n    height: 34px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n  &:hover {\n    cursor: pointer;\n    background-color: #f5f5f5;\n  }\n"], ["\n  width: 34px;\n  height: 34px;\n  border-radius: 50%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n\n  .stipop-icon {\n    width: 34px;\n    height: 34px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n  &:hover {\n    cursor: pointer;\n    background-color: #f5f5f5;\n  }\n"])));
+var PreviousBtn = styled.div(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  width: 34px;\n  height: 34px;\n  border-radius: 50%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-right: 10px;\n\n  .stipop-icon {\n    width: 34px;\n    height: 34px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n\n  &:hover {\n    cursor: pointer;\n    background-color: #f5f5f5;\n  }\n"], ["\n  width: 34px;\n  height: 34px;\n  border-radius: 50%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-right: 10px;\n\n  .stipop-icon {\n    width: 34px;\n    height: 34px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n\n  &:hover {\n    cursor: pointer;\n    background-color: #f5f5f5;\n  }\n"])));
+var PackageContainer = styled.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  width: 100%;\n  height: 75%;\n  display: flex;\n  flex-direction: column;\n  overflow-y: ", ";\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  width: 100%;\n  height: 75%;\n  display: flex;\n  flex-direction: column;\n  overflow-y: ", ";\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) { return (props.detail ? 'none' : 'auto'); }, function (props) {
+    return props.color && props.color.backgroundColor
+        ? props.color.backgroundColor
+        : '#fff';
+}, function (props) {
+    return props.border && props.border.radius ? "".concat(props.border.radius, "px") : '8px';
+}, function (props) {
+    return props.border && props.border.radius ? "".concat(props.border.radius, "px") : '8px';
+}, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); });
+var DetailWrapper = styled.div(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  width: 100%;\n  margin-bottom: 32px;\n  overflow-y: auto;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  width: 100%;\n  margin-bottom: 32px;\n  overflow-y: auto;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); });
+var DetailBox = styled.div(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  display: flex;\n  padding: 0 32px;\n  margin-bottom: 15px;\n  align-items: center;\n  position: relative;\n"], ["\n  display: flex;\n  padding: 0 32px;\n  margin-bottom: 15px;\n  align-items: center;\n  position: relative;\n"])));
+var MainImg = styled.img(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n  width: 100px;\n  margin-right: 12px;\n"], ["\n  width: 100px;\n  margin-right: 12px;\n"])));
+var DetailName = styled.div(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n  .packageName {\n    font-size: 14px;\n    font-weight: bold;\n  }\n  .artistName {\n    font-size: 10px;\n    color: #a9a9a9;\n  }\n"], ["\n  .packageName {\n    font-size: 14px;\n    font-weight: bold;\n  }\n  .artistName {\n    font-size: 10px;\n    color: #a9a9a9;\n  }\n"])));
+var DetailStickerWrapper = styled.div(templateObject_10 || (templateObject_10 = __makeTemplateObject(["\n  padding: 0 32px;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-auto-rows: 100px;\n  justify-items: center;\n  align-items: center;\n  row-gap: 2%;\n\n  img {\n    width: ", ";\n    &:hover {\n      transform: scale(1.3);\n    }\n  }\n"], ["\n  padding: 0 32px;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-auto-rows: 100px;\n  justify-items: center;\n  align-items: center;\n  row-gap: 2%;\n\n  img {\n    width: ", ";\n    &:hover {\n      transform: scale(1.3);\n    }\n  }\n"])), function (props) {
+    return props.size && props.size.detailImg ? "".concat(props.size.detailImg, "%") : '70%';
+});
+var PackageWrapper = styled.div(templateObject_11 || (templateObject_11 = __makeTemplateObject(["\n  width: 100%;\n  height: 33%;\n  display: block;\n"], ["\n  width: 100%;\n  height: 33%;\n  display: block;\n"])));
+var PackageBox = styled.div(templateObject_12 || (templateObject_12 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  padding: 0 32px;\n  box-sizing: border-box;\n  background-color: ", ";\n  position: relative;\n\n  &:hover {\n    box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.1) inset;\n    cursor: pointer;\n  }\n"], ["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  padding: 0 32px;\n  box-sizing: border-box;\n  background-color: ", ";\n  position: relative;\n\n  &:hover {\n    box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.1) inset;\n    cursor: pointer;\n  }\n"])), function (props) {
+    return props.isDownload
+        ? props.color && props.color.downloadedColor
+            ? props.color.downloadedColor
+            : '#f5f6f6'
+        : '#fff';
+});
+var DownloadBtn = styled.div(templateObject_13 || (templateObject_13 = __makeTemplateObject(["\n  width: 32px;\n  height: 32px;\n  background-color: ", ";\n  border-radius: 50%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  right: 32px;\n\n  .stipop-icon {\n    width: 32px;\n    height: 32px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n\n  &:hover {\n    cursor: pointer;\n    background-color: ", ";\n  }\n"], ["\n  width: 32px;\n  height: 32px;\n  background-color: ", ";\n  border-radius: 50%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  right: 32px;\n\n  .stipop-icon {\n    width: 32px;\n    height: 32px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n\n  &:hover {\n    cursor: pointer;\n    background-color: ", ";\n  }\n"])), function (props) {
+    return props.isDownload
+        ? props.isRecovery
+            ? props.color && props.color.recoveryBtn
+                ? props.color.recoveryBtn
+                : '#ff4500'
+            : props.color && props.color.deleteBtn
+                ? props.color.deleteBtn
+                : '#b3b3b3'
+        : props.color && props.color.downloadBtn
+            ? props.color.downloadBtn
+            : '#ff4500';
+}, function (props) {
+    return props.isDownload
+        ? props.isRecovery
+            ? props.color && props.color.recoveryBtnHover
+                ? props.color.recoveryBtnHover
+                : '#ff4500'
+            : props.color && props.color.deleteBtnHover
+                ? props.color.deleteBtnHover
+                : '#b3b3b3'
+        : props.color && props.color.downloadBtnHover
+            ? props.color.downloadBtnHover
+            : '#ff4500';
+});
+var PackageTitle = styled.div(templateObject_14 || (templateObject_14 = __makeTemplateObject(["\n  font-size: 12px;\n  font-weight: bold;\n  margin-bottom: 5px;\n\n  span {\n    font-size: 10px;\n    color: #a9a9a9;\n    margin-left: 12px;\n  }\n"], ["\n  font-size: 12px;\n  font-weight: bold;\n  margin-bottom: 5px;\n\n  span {\n    font-size: 10px;\n    color: #a9a9a9;\n    margin-left: 12px;\n  }\n"])));
+var PackageItem = styled.div(templateObject_15 || (templateObject_15 = __makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 85%;\n"], ["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 85%;\n"])));
+var StickerWrapper = styled.div(templateObject_16 || (templateObject_16 = __makeTemplateObject(["\n  width: 100%;\n  display: flex;\n  align-items: center;\n"], ["\n  width: 100%;\n  display: flex;\n  align-items: center;\n"])));
+var Sticker = styled.img(templateObject_17 || (templateObject_17 = __makeTemplateObject(["\n  width: ", ";\n"], ["\n  width: ", ";\n"])), function (props) {
+    return props.size && props.size.previewImg ? "".concat(props.size.previewImg, "%") : '70%';
+});
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10, templateObject_11, templateObject_12, templateObject_13, templateObject_14, templateObject_15, templateObject_16, templateObject_17;
 
 exports.ChattingComponent = ChattingComponent;
 exports.Icon = Icon;
 exports.PickerComponent = PickerComponent;
 exports.SearchComponent = SearchComponent;
+exports.StoreComponent = StoreComponent;
 //# sourceMappingURL=index.js.map
