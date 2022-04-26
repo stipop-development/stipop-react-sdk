@@ -4,4 +4,9 @@ export default {
   SMILE: 'SMILE',
   TIME: 'TIME',
   STORE: 'STORE',
+  STORE_BLACK: 'STORE_BLACK',
+  CLOSE: 'CLOSE',
+  PLUS: 'PLUS',
+  MINUS: 'MINUS',
+  PREVIOUS: 'PREVIOUS'
 }

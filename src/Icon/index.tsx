@@ -8,6 +8,11 @@ import SearchIcon from '../svgs/search-icon.svg'
 import SmileIcon from '../svgs/smile.svg'
 import StoreIcon from '../svgs/store.svg'
 import TimeIcon from '../svgs/time.svg'
+import StoreBlackIcon from '../svgs/store-black.svg'
+import CloseIcon from '../svgs/close.svg'
+import PlusIcon from '../svgs/plus.svg'
+import MinusIcon from '../svgs/minus.svg'
+import PreviousIcon from '../svgs/previous.svg'
 
 function changeTypeToIconComponent(type) {
   switch (type) {
@@ -21,6 +26,16 @@ function changeTypeToIconComponent(type) {
       return <StoreIcon />
     case Type.TIME:
       return <TimeIcon />
+    case Type.STORE_BLACK:
+      return <StoreBlackIcon />
+    case Type.CLOSE:
+      return <CloseIcon />
+    case Type.PLUS:
+      return <PlusIcon />
+    case Type.MINUS:
+      return <MinusIcon />
+    case Type.PREVIOUS:
+      return <PreviousIcon />
     default:
       return 'icon'
   }
@@ -38,6 +53,16 @@ export function changeTypeToIconClassName(type) {
       return 'stipop-icon-store'
     case Type.TIME:
       return 'stipop-icon-time'
+    case Type.STORE_BLACK:
+      return 'stipop-icon-store-black'
+    case Type.CLOSE:
+      return 'stipop-icon-close'
+    case Type.PLUS:
+      return 'stipop-icon-plus'
+    case Type.MINUS:
+      return 'stipop-icon-minus'
+    case Type.PREVIOUS:
+      return 'stipop-icon-previous'
     default:
       return 'stipop-icon-unknown'
   }

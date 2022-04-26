@@ -3271,50 +3271,55 @@ var Type = {
     SMILE: 'SMILE',
     TIME: 'TIME',
     STORE: 'STORE',
+    STORE_BLACK: 'STORE_BLACK',
+    CLOSE: 'CLOSE',
+    PLUS: 'PLUS',
+    MINUS: 'MINUS',
+    PREVIOUS: 'PREVIOUS'
 };
 
-var _path$2;
+var _path$6;
 
-function _extends$4() { _extends$4 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$4.apply(this, arguments); }
+function _extends$9() { _extends$9 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$9.apply(this, arguments); }
 
 var SvgLogo = function SvgLogo(props) {
-  return /*#__PURE__*/React.createElement("svg", _extends$4({
+  return /*#__PURE__*/React.createElement("svg", _extends$9({
     width: 47,
     height: 17,
     xmlns: "http://www.w3.org/2000/svg"
-  }, props), _path$2 || (_path$2 = /*#__PURE__*/React.createElement("path", {
+  }, props), _path$6 || (_path$6 = /*#__PURE__*/React.createElement("path", {
     d: "M6.594 8.275c-.505-.437-1.322-.774-2.49-1.011a10.98 10.98 0 0 1-1.225-.337c-.311-.14-.447-.258-.506-.337-.078-.1-.116-.238-.116-.417 0-.139.038-.337.35-.515.272-.139.642-.218 1.089-.218.39 0 .72.04.992.139s.525.257.759.475c.253.238.544.357.856.357a.92.92 0 0 0 .564-.178c.214-.179.33-.397.33-.635a.944.944 0 0 0-.252-.634c-.331-.416-.779-.734-1.343-.971-.544-.238-1.186-.337-1.887-.337a4.86 4.86 0 0 0-1.614.277c-.525.198-.934.476-1.265.872-.33.397-.505.873-.505 1.448 0 1.387 1.05 2.28 3.132 2.696.739.138 1.264.317 1.556.515.272.178.389.397.389.654 0 .278-.117.476-.39.635-.291.178-.719.277-1.264.277a3.03 3.03 0 0 1-1.186-.238c-.35-.178-.623-.357-.798-.575-.408-.396-.875-.456-1.381-.079a.946.946 0 0 0-.389.773c0 .238.078.456.253.635.37.376.895.693 1.537.911a6.312 6.312 0 0 0 2.042.337c.72 0 1.362-.118 1.887-.356.525-.238.953-.575 1.226-1.011.272-.437.428-.912.428-1.428 0-.694-.273-1.268-.779-1.724m6.984 2.822a.81.81 0 0 0-.647-.28h-.547a.859.859 0 0 1-.708-.359c-.202-.26-.303-.559-.303-.938V5.786h1.173c.283 0 .506-.08.688-.24a.814.814 0 0 0 .283-.619.868.868 0 0 0-.283-.659c-.182-.16-.405-.24-.688-.24h-1.173V1.913c0-.28-.101-.519-.283-.719a.997.997 0 0 0-.728-.28c-.284 0-.526.1-.729.28a.971.971 0 0 0-.283.72V4.01h-.546c-.283 0-.506.08-.688.24a.838.838 0 0 0-.283.658c0 .24.101.46.283.62.182.16.405.239.688.239h.546V9.5c0 .619.142 1.178.385 1.677.263.5.627.899 1.092 1.178.465.3.991.44 1.557.44h.284c.323 0 .606-.1.809-.28a.914.914 0 0 0 .343-.719c.02-.26-.06-.5-.242-.699m2.098-7.441a.91.91 0 0 0-.657.28c-.183.18-.274.44-.274.74v7.099c0 .28.091.54.256.72.182.2.401.3.657.3a.87.87 0 0 0 .675-.3c.164-.2.255-.44.255-.72v-7.1c0-.3-.091-.54-.255-.74-.146-.18-.384-.28-.657-.28M15.436 0c-.316 0-.594.11-.817.332a1.108 1.108 0 0 0-.335.81c0 .314.112.59.335.811.223.221.501.332.817.332.316 0 .595-.11.818-.332.223-.221.334-.497.334-.81 0-.314-.111-.59-.334-.811A1.127 1.127 0 0 0 15.436 0m9.322 8.23a2.804 2.804 0 0 1-1.305 2.397 2.574 2.574 0 0 1-1.345.357c-.502 0-.944-.12-1.346-.357a2.505 2.505 0 0 1-.943-.99 2.976 2.976 0 0 1-.342-1.406c0-.515.12-1.01.342-1.426.22-.416.542-.753.943-.99a2.574 2.574 0 0 1 1.346-.357c.502 0 .943.119 1.345.356.401.238.723.575.943.99.241.417.362.912.362 1.427m-.301-3.981a4.754 4.754 0 0 0-2.35-.594c-.863 0-1.646.198-2.328.594-.703.396-1.245.95-1.667 1.644-.401.693-.602 1.485-.602 2.337v7.209c0 .297.1.535.3.733.202.178.443.277.724.277.3 0 .542-.099.743-.277.18-.179.28-.436.28-.733v-3.763c.322.297.683.535 1.065.733a4.296 4.296 0 0 0 1.807.396c.803 0 1.546-.198 2.188-.594.663-.397 1.165-.951 1.546-1.644a5.029 5.029 0 0 0 .562-2.337c0-.852-.2-1.644-.602-2.337a4.397 4.397 0 0 0-1.666-1.644m20.555 4c0 .515-.12.99-.361 1.407a2.815 2.815 0 0 1-.944.99 2.574 2.574 0 0 1-1.345.356c-.502 0-.944-.118-1.345-.356a2.505 2.505 0 0 1-.944-.99 2.976 2.976 0 0 1-.341-1.407c0-.515.12-1.01.341-1.426.221-.415.542-.752.944-.99a2.574 2.574 0 0 1 1.345-.356c.502 0 .944.118 1.345.356.402.238.723.575.944.99.26.416.361.911.361 1.426m1.386-2.337A4.596 4.596 0 0 0 44.73 4.25a4.755 4.755 0 0 0-2.349-.594c-.863 0-1.646.198-2.329.594-.703.396-1.245.95-1.666 1.644-.402.693-.603 1.485-.603 2.337v7.209c0 .297.1.535.301.733.201.178.442.277.723.277.301 0 .542-.099.743-.277.18-.179.281-.436.281-.733v-3.763a4.83 4.83 0 0 0 1.064.733 4.295 4.295 0 0 0 1.807.396c.803 0 1.546-.198 2.189-.594a4.386 4.386 0 0 0 1.546-1.644A5.03 5.03 0 0 0 47 8.23c0-.832-.2-1.624-.602-2.318m-14.143 5.06c-1.53 0-2.77-1.23-2.77-2.747s1.24-2.747 2.77-2.747 2.77 1.23 2.77 2.747-1.24 2.747-2.77 2.747m0-7.316c-2.545 0-4.608 2.045-4.608 4.569s2.063 4.57 4.608 4.57c2.545 0 4.608-2.046 4.608-4.57 0-2.524-2.063-4.57-4.608-4.57",
     fill: "#D5D5D5"
   })));
 };
 
-var _path$1;
+var _path$5;
 
-function _extends$3() { _extends$3 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$3.apply(this, arguments); }
+function _extends$8() { _extends$8 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$8.apply(this, arguments); }
 
 var SvgSearchIcon = function SvgSearchIcon(props) {
-  return /*#__PURE__*/React.createElement("svg", _extends$3({
+  return /*#__PURE__*/React.createElement("svg", _extends$8({
     width: 15,
     height: 15,
     viewBox: "0 0 18 18",
     xmlns: "http://www.w3.org/2000/svg"
-  }, props), _path$1 || (_path$1 = /*#__PURE__*/React.createElement("path", {
+  }, props), _path$5 || (_path$5 = /*#__PURE__*/React.createElement("path", {
     d: "M7.307 0a7.307 7.307 0 0 1 5.772 11.788L18 16.708 16.708 18l-4.92-4.92A7.307 7.307 0 1 1 7.308 0zm0 1.827a5.48 5.48 0 1 0 0 10.96 5.48 5.48 0 0 0 0-10.96z",
     fill: "#414141",
     fillRule: "evenodd"
   })));
 };
 
-var _g$1;
+var _g$2;
 
-function _extends$2() { _extends$2 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$2.apply(this, arguments); }
+function _extends$7() { _extends$7 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$7.apply(this, arguments); }
 
 var SvgSmile = function SvgSmile(props) {
-  return /*#__PURE__*/React.createElement("svg", _extends$2({
+  return /*#__PURE__*/React.createElement("svg", _extends$7({
     width: 18,
     height: 18,
     xmlns: "http://www.w3.org/2000/svg"
-  }, props), _g$1 || (_g$1 = /*#__PURE__*/React.createElement("g", {
+  }, props), _g$2 || (_g$2 = /*#__PURE__*/React.createElement("g", {
     transform: "translate(1 1)",
     stroke: "#FF4500",
     fill: "none",
@@ -3341,32 +3346,32 @@ var SvgSmile = function SvgSmile(props) {
   }))));
 };
 
-var _path;
+var _path$4;
 
-function _extends$1() { _extends$1 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$1.apply(this, arguments); }
+function _extends$6() { _extends$6 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$6.apply(this, arguments); }
 
 var SvgStore = function SvgStore(props) {
-  return /*#__PURE__*/React.createElement("svg", _extends$1({
+  return /*#__PURE__*/React.createElement("svg", _extends$6({
     width: 24,
     height: 18,
     xmlns: "http://www.w3.org/2000/svg"
-  }, props), _path || (_path = /*#__PURE__*/React.createElement("path", {
+  }, props), _path$4 || (_path$4 = /*#__PURE__*/React.createElement("path", {
     d: "M10.65.292a1.01 1.01 0 0 1 0 1.42l-3.275 3.29h9.124l-3.276-3.29a1.01 1.01 0 0 1 0-1.42.992.992 0 0 1 1.407 0l4.682 4.71h3.567a1 1 0 0 1 0 2h-.165L21.17 15.54A2.99 2.99 0 0 1 18.235 18H5.639a2.99 2.99 0 0 1-2.935-2.46L1.16 7.002H.995a.999.999 0 0 1-.995-1 1 1 0 0 1 .995-1h3.567L9.244.292a.992.992 0 0 1 1.407 0zM3.16 7.06l1.483 8.02c.085.46.5.803.98.803H18.25a.996.996 0 0 0 .98-.804l1.484-8.02H3.16zm3.98 2.13a.986.986 0 0 1 1.132.82l.492 2.96a.987.987 0 0 1-.808 1.135.986.986 0 0 1-1.131-.819l-.492-2.96A.987.987 0 0 1 7.14 9.19zm9.593 0a.987.987 0 0 1 .808 1.136l-.492 2.96a.986.986 0 0 1-1.132.82.987.987 0 0 1-.807-1.136l.492-2.96a.986.986 0 0 1 1.131-.82zm-4.796-.013c.581 0 1.053.445 1.053.989v2.964c0 .544-.472.989-1.053.989-.582 0-1.053-.445-1.053-.989v-2.964c0-.544.471-.989 1.053-.989z",
     fill: "#C1C1C1",
     fillRule: "evenodd"
   })));
 };
 
-var _g;
+var _g$1;
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends$5() { _extends$5 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$5.apply(this, arguments); }
 
 var SvgTime = function SvgTime(props) {
-  return /*#__PURE__*/React.createElement("svg", _extends({
+  return /*#__PURE__*/React.createElement("svg", _extends$5({
     width: 20,
     height: 20,
     xmlns: "http://www.w3.org/2000/svg"
-  }, props), _g || (_g = /*#__PURE__*/React.createElement("g", {
+  }, props), _g$1 || (_g$1 = /*#__PURE__*/React.createElement("g", {
     stroke: "#C1C1C1",
     strokeWidth: 2,
     fill: "none",
@@ -3378,6 +3383,101 @@ var SvgTime = function SvgTime(props) {
   }), /*#__PURE__*/React.createElement("path", {
     strokeLinecap: "round",
     d: "m13 13-3-2.25M10 6v4.5"
+  }))));
+};
+
+var _path$3;
+
+function _extends$4() { _extends$4 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$4.apply(this, arguments); }
+
+var SvgStoreBlack = function SvgStoreBlack(props) {
+  return /*#__PURE__*/React.createElement("svg", _extends$4({
+    width: 31,
+    height: 24,
+    xmlns: "http://www.w3.org/2000/svg"
+  }, props), _path$3 || (_path$3 = /*#__PURE__*/React.createElement("path", {
+    d: "M13.83.39c.505.52.505 1.373 0 1.893L9.576 6.669h11.848L17.17 2.283a1.372 1.372 0 0 1 0-1.893 1.264 1.264 0 0 1 1.827 0l6.08 6.28h4.631c.713 0 1.292.599 1.292 1.332 0 .733-.579 1.333-1.292 1.333h-.214L27.489 20.72C27.155 22.614 25.55 24 23.678 24H7.322c-1.872 0-3.477-1.386-3.811-3.28L1.506 9.335h-.214C.579 9.335 0 8.735 0 8.002S.579 6.67 1.292 6.67h4.632l6.08-6.28a1.264 1.264 0 0 1 1.826 0zM4 9l1.943 10.907A1.32 1.32 0 0 0 7.228 21h16.544c.63 0 1.172-.467 1.284-1.093L27 9H4zm5.002 2.019c.654-.126 1.273.391 1.381 1.16l.6 4.194c.11.755-.332 1.482-.985 1.608-.654.126-1.273-.391-1.381-1.16l-.6-4.194c-.11-.755.332-1.482.985-1.608zm12.996 0c.653.126 1.095.853.985 1.608l-.6 4.194c-.108.769-.727 1.286-1.381 1.16-.653-.126-1.095-.853-.985-1.608l.6-4.194c.108-.769.727-1.286 1.381-1.16zM15.5 11c.828 0 1.5.63 1.5 1.4v4.2c0 .77-.672 1.4-1.5 1.4s-1.5-.63-1.5-1.4v-4.2c0-.77.672-1.4 1.5-1.4z",
+    fillRule: "evenodd"
+  })));
+};
+
+var _path$2;
+
+function _extends$3() { _extends$3 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$3.apply(this, arguments); }
+
+var SvgClose = function SvgClose(props) {
+  return /*#__PURE__*/React.createElement("svg", _extends$3({
+    width: 19,
+    height: 16,
+    xmlns: "http://www.w3.org/2000/svg"
+  }, props), _path$2 || (_path$2 = /*#__PURE__*/React.createElement("path", {
+    d: "M15.73 1.73 3.27 14.27m0-12.54 12.46 12.54",
+    stroke: "#000",
+    strokeWidth: 2,
+    fill: "none",
+    fillRule: "evenodd",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  })));
+};
+
+var _path$1;
+
+function _extends$2() { _extends$2 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$2.apply(this, arguments); }
+
+var SvgPlus = function SvgPlus(props) {
+  return /*#__PURE__*/React.createElement("svg", _extends$2({
+    width: 18,
+    height: 16,
+    xmlns: "http://www.w3.org/2000/svg"
+  }, props), _path$1 || (_path$1 = /*#__PURE__*/React.createElement("path", {
+    d: "M9 1v14M2 8h14",
+    stroke: "#FFF",
+    strokeWidth: 1.75,
+    fill: "none",
+    fillRule: "evenodd",
+    strokeLinecap: "round"
+  })));
+};
+
+var _path;
+
+function _extends$1() { _extends$1 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$1.apply(this, arguments); }
+
+var SvgMinus = function SvgMinus(props) {
+  return /*#__PURE__*/React.createElement("svg", _extends$1({
+    width: 18,
+    height: 2,
+    xmlns: "http://www.w3.org/2000/svg"
+  }, props), _path || (_path = /*#__PURE__*/React.createElement("path", {
+    d: "M2 1h14",
+    stroke: "#FFF",
+    strokeWidth: 1.75,
+    fill: "none",
+    strokeLinecap: "round"
+  })));
+};
+
+var _g;
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+var SvgPrevious = function SvgPrevious(props) {
+  return /*#__PURE__*/React.createElement("svg", _extends({
+    width: 12,
+    height: 17,
+    xmlns: "http://www.w3.org/2000/svg"
+  }, props), _g || (_g = /*#__PURE__*/React.createElement("g", {
+    stroke: "#000",
+    strokeWidth: 1.75,
+    fill: "none",
+    fillRule: "evenodd",
+    strokeLinecap: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "m1 9 9.167-7.333"
+  }), /*#__PURE__*/React.createElement("path", {
+    strokeLinejoin: "round",
+    d: "m1 9 9 7"
   }))));
 };
 
@@ -3393,6 +3493,16 @@ function changeTypeToIconComponent(type) {
             return React__default.createElement(SvgStore, null);
         case Type.TIME:
             return React__default.createElement(SvgTime, null);
+        case Type.STORE_BLACK:
+            return React__default.createElement(SvgStoreBlack, null);
+        case Type.CLOSE:
+            return React__default.createElement(SvgClose, null);
+        case Type.PLUS:
+            return React__default.createElement(SvgPlus, null);
+        case Type.MINUS:
+            return React__default.createElement(SvgMinus, null);
+        case Type.PREVIOUS:
+            return React__default.createElement(SvgPrevious, null);
         default:
             return 'icon';
     }
@@ -3409,6 +3519,16 @@ function changeTypeToIconClassName(type) {
             return 'stipop-icon-store';
         case Type.TIME:
             return 'stipop-icon-time';
+        case Type.STORE_BLACK:
+            return 'stipop-icon-store-black';
+        case Type.CLOSE:
+            return 'stipop-icon-close';
+        case Type.PLUS:
+            return 'stipop-icon-plus';
+        case Type.MINUS:
+            return 'stipop-icon-minus';
+        case Type.PREVIOUS:
+            return 'stipop-icon-previous';
         default:
             return 'stipop-icon-unknown';
     }
@@ -3510,7 +3630,7 @@ var SearchComponent = function (_a) {
             React__default.createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker" }),
             React__default.createElement("span", { className: "no-sticker-text" }, "No Stickers to Show")))));
 };
-var SearchWrapper = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  min-width: 360px;\n  min-height: 300px;\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"], ["\n  width: ", ";\n  height: ", ";\n  min-width: 360px;\n  min-height: 300px;\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"])), function (props) {
+var SearchWrapper = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
 }, function (props) {
     return props.size && props.size.height ? "".concat(props.size.height, "px") : '300px';
@@ -3669,7 +3789,7 @@ var StoreWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemp
         ? "".concat(props.border.radius, "px")
         : '10px';
 });
-var StoreMenu = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  height: 45px;\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n  }\n"], ["\n  height: 45px;\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n  }\n"])), function (props) {
+var StoreMenu = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  height: 45px;\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    cursor: pointer;\n  }\n"], ["\n  height: 45px;\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    cursor: pointer;\n  }\n"])), function (props) {
     return props.menu && props.menu.bottomLine
         ? props.menu.bottomLine
         : '1px solid lightgray';
@@ -3693,7 +3813,7 @@ var PackageImgWrapper = styled.div(templateObject_3 || (templateObject_3 = __mak
             : '2px solid black'
         : '';
 });
-var PackageImg = styled.img(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  height: 65%;\n"], ["\n  height: 65%;\n"])));
+var PackageImg = styled.img(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  height: 65%;\n  cursor: pointer;\n"], ["\n  height: 65%;\n  cursor: pointer;\n"])));
 var StickerWrapper = styled.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: grid;\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: grid;\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) {
     return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
 }, function (props) {
@@ -3707,7 +3827,7 @@ var StickerWrapper = styled.div(templateObject_5 || (templateObject_5 = __makeTe
         ? "".concat(props.border.radius, "px")
         : '10px';
 }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); });
-var StickerImg = styled.img(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  width: 70%;\n"], ["\n  width: 70%;\n"])));
+var StickerImg = styled.img(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  width: 70%;\n  cursor: pointer;\n"], ["\n  width: 70%;\n  cursor: pointer;\n"])));
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
 
 export { ChattingComponent, Icon, PickerComponent, SearchComponent };

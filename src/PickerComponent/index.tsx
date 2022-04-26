@@ -149,6 +149,7 @@ const StoreMenu = styled.div`
     display: flex;
     align-items: center;
     padding: 0 10px;
+    cursor: pointer;
   }
 `
 const PackageImgWrapper = styled.div`
@@ -165,6 +166,7 @@ const PackageImgWrapper = styled.div`
 `
 const PackageImg = styled.img`
   height: 65%;
+  cursor: pointer;
 `
 const StickerWrapper = styled.div`
   height: calc(100% - 45px);
@@ -194,4 +196,5 @@ const StickerWrapper = styled.div`
 `
 const StickerImg = styled.img`
   width: 70%;
+  cursor: pointer;
 `

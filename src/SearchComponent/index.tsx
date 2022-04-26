@@ -132,8 +132,6 @@ const SearchWrapper = styled.div`
     props.size && props.size.width ? `${props.size.width}px` : '360px'};
   height: ${props =>
     props.size && props.size.height ? `${props.size.height}px` : '300px'};
-  min-width: 360px;
-  min-height: 300px;
   background-color: ${props =>
     props.backgroundColor ? props.backgroundColor : '#fff'};
   border: ${props =>
