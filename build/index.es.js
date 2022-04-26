@@ -3769,11 +3769,13 @@ var PickerComponent = function (_a) {
         React__default.createElement(StoreMenu, { backgroundColor: backgroundColor, border: border, menu: menu },
             React__default.createElement(Icon, { type: "TIME" }),
             React__default.createElement(Icon, { type: "STORE", onClick: function () { return storeClick(true); } }),
-            myStickers.length > 0 ? (myStickers.map(function (pack, index) { return (React__default.createElement(PackageImgWrapper, { menu: menu, key: index, onClick: function () {
-                    clickPackage(pack.packageId);
-                    setShowPackage(index);
-                }, show: showPackage === index },
-                React__default.createElement(PackageImg, { src: pack.packageImg }))); })) : (React__default.createElement("div", null))),
+            myStickers.length > 0 ? (myStickers.map(function (pack, index) {
+                return pack.packageId && (React__default.createElement(PackageImgWrapper, { menu: menu, key: index, onClick: function () {
+                        clickPackage(pack.packageId);
+                        setShowPackage(index);
+                    }, show: showPackage === index },
+                    React__default.createElement(PackageImg, { src: pack.packageImg })));
+            })) : (React__default.createElement("div", null))),
         stickers && (React__default.createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll }, stickers.map(function (sticker, index) { return (React__default.createElement(StickerImg, { src: sticker, alt: "", key: index, onClick: function () { return stickerClick(sticker); } })); })))));
 };
 var StoreWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n"])), function (props) {

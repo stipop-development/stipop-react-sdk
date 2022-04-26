@@ -69,19 +69,22 @@ const PickerComponent: React.FC<StoreProps> = ({
         <Icon type="TIME" />
         <Icon type="STORE" onClick={() => storeClick(true)} />
         {myStickers.length > 0 ? (
-          myStickers.map((pack, index) => (
-            <PackageImgWrapper
-              menu={menu}
-              key={index}
-              onClick={() => {
-                clickPackage(pack.packageId)
-                setShowPackage(index)
-              }}
-              show={showPackage === index}
-            >
-              <PackageImg src={pack.packageImg} />
-            </PackageImgWrapper>
-          ))
+          myStickers.map(
+            (pack, index) =>
+              pack.packageId && (
+                <PackageImgWrapper
+                  menu={menu}
+                  key={index}
+                  onClick={() => {
+                    clickPackage(pack.packageId)
+                    setShowPackage(index)
+                  }}
+                  show={showPackage === index}
+                >
+                  <PackageImg src={pack.packageImg} />
+                </PackageImgWrapper>
+              )
+          )
         ) : (
           <div></div>
         )}

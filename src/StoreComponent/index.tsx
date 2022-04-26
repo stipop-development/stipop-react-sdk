@@ -21,12 +21,13 @@ const StoreComponent: React.FC<StoreProps> = ({
   const [detail, setDetail] = useState(false)
   const [stickers, setStickers] = useState([])
   const [main, setMain] = useState(null)
-
-  const packInfo = new Array()
+  const [hideList, setHideList] = useState([])
 
   const client = new (Stipop as any)(params.apikey, 'v1')
 
   useEffect(() => {
+    const packInfo = new Array()
+
     const trendingParams = {
       userId: params.userId,
       lang: params.lang,
@@ -48,14 +49,21 @@ const StoreComponent: React.FC<StoreProps> = ({
         const packageData = client.getPackInfo(packageParams)
         packageData.then(({ body }) => {
           packInfo.push(body.package)
-          setTrendingStickers([
-            ...trendingStickers,
-            trendingStickers.concat(packInfo),
-          ])
+          setTrendingStickers([...trendingStickers, packInfo])
         })
       })
     })
-  }, [])
+
+    const hideParams = {
+      userId: params.userId,
+    }
+
+    const hideData = client.myStickerHideList(hideParams)
+    hideData.then(({ body }) => {
+      console.log(body.packageList)
+      setHideList(body.packageList.map(pack => pack.packageId))
+    })
+  }, [detail])
 
   useEffect(() => {
     trendingStickers.map(trend => setPackages(trend))
@@ -67,10 +75,13 @@ const StoreComponent: React.FC<StoreProps> = ({
       userId: params.userId,
       packageId: packageId,
       isPurchase: downloadParams.isPurchase,
+      price: downloadParams.price,
+      lang: downloadParams.lang,
+      countryCode: downloadParams.countryCode,
     }
     const data = client.download(dParams)
-    data.then(({ body }) => {
-      console.log(body)
+    data.then(() => {
+      setDetail(false)
     })
   }
 
@@ -90,6 +101,19 @@ const StoreComponent: React.FC<StoreProps> = ({
       )
       setDetail(true)
     })
+  }
+
+  const clickDelete = packageId => {
+    const deleteParams = {
+      userId: params.userId,
+      packageId: packageId,
+    }
+
+    const data = client.myStickerHide(deleteParams)
+    data.then(() => {
+      setDetail(false)
+    })
+    setDetail(false)
   }
 
   return (
@@ -129,13 +153,25 @@ const StoreComponent: React.FC<StoreProps> = ({
               <DownloadBtn
                 color={color}
                 isDownload={main.isDownload === 'Y'}
+                isRecovery={
+                  main.isDownload === 'Y' &&
+                  hideList.indexOf(main.packageId) !== -1
+                }
                 onClick={() => {
                   main.isDownload === 'Y'
-                    ? console.log(main.packageId)
+                    ? clickDelete(main.packageId)
                     : clickDownload(main.packageId)
                 }}
               >
-                <Icon type={main.isDownload === 'Y' ? 'MINUS' : 'PLUS'} />
+                <Icon
+                  type={
+                    main.isDownload === 'Y'
+                      ? hideList.indexOf(main.packageId) < 0
+                        ? 'MINUS'
+                        : 'PLUS'
+                      : 'PLUS'
+                  }
+                />
               </DownloadBtn>
             </DetailBox>
             <DetailStickerWrapper size={size}>
@@ -166,32 +202,47 @@ const StoreComponent: React.FC<StoreProps> = ({
                   {pack.packageName}
                   <span>©{pack.artistName}</span>
                 </PackageTitle>
-
-                <PackageItem key={index}>
-                  {pack.stickers.map((sticker, index) => {
-                    if (index < 5) {
-                      return (
-                        <StickerWrapper key={index}>
-                          <Sticker
-                            src={sticker.stickerImg}
-                            alt=""
-                            size={size}
-                          />
-                        </StickerWrapper>
-                      )
-                    }
-                  })}
+                <PackageItem>
+                  {pack && pack.stickers ? (
+                    pack.stickers.map((sticker, index) => {
+                      if (index < 5) {
+                        return (
+                          <StickerWrapper key={index}>
+                            <Sticker
+                              src={sticker.stickerImg}
+                              alt=""
+                              size={size}
+                            />
+                          </StickerWrapper>
+                        )
+                      }
+                    })
+                  ) : (
+                    <div></div>
+                  )}
                 </PackageItem>
                 <DownloadBtn
                   color={color}
                   isDownload={pack.isDownload === 'Y'}
+                  isRecovery={
+                    pack.isDownload === 'Y' &&
+                    hideList.indexOf(pack.packageId) !== -1
+                  }
                   onClick={() => {
                     pack.isDownload === 'Y'
-                      ? console.log(pack.packageId)
+                      ? clickDelete(pack.packageId)
                       : clickDownload(pack.packageId)
                   }}
                 >
-                  <Icon type={pack.isDownload === 'Y' ? 'MINUS' : 'PLUS'} />
+                  <Icon
+                    type={
+                      pack.isDownload === 'Y'
+                        ? hideList.indexOf(pack.packageId) < 0
+                          ? 'MINUS'
+                          : 'PLUS'
+                        : 'PLUS'
+                    }
+                  />
                 </DownloadBtn>
               </PackageBox>
             ))}
@@ -373,7 +424,7 @@ const PackageBox = styled.div`
       ? props.color && props.color.downloadedColor
         ? props.color.downloadedColor
         : '#f5f6f6'
-      : 'blue'};
+      : '#fff'};
   position: relative;
 
   &:hover {
@@ -386,7 +437,11 @@ const DownloadBtn = styled.div`
   height: 32px;
   background-color: ${props =>
     props.isDownload
-      ? props.color && props.color.deleteBtn
+      ? props.isRecovery
+        ? props.color && props.color.recoveryBtn
+          ? props.color.recoveryBtn
+          : '#ff4500'
+        : props.color && props.color.deleteBtn
         ? props.color.deleteBtn
         : '#b3b3b3'
       : props.color && props.color.downloadBtn
@@ -398,7 +453,6 @@ const DownloadBtn = styled.div`
   align-items: center;
   position: absolute;
   right: 32px;
-  z-index: 2;
 
   .stipop-icon {
     width: 32px;
@@ -412,7 +466,11 @@ const DownloadBtn = styled.div`
     cursor: pointer;
     background-color: ${props =>
       props.isDownload
-        ? props.color && props.color.deleteBtnHover
+        ? props.isRecovery
+          ? props.color && props.color.recoveryBtnHover
+            ? props.color.recoveryBtnHover
+            : '#ff4500'
+          : props.color && props.color.deleteBtnHover
           ? props.color.deleteBtnHover
           : '#b3b3b3'
         : props.color && props.color.downloadBtnHover

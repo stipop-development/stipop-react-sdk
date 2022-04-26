@@ -17,13 +17,30 @@ export const Store = () => (
     downloadParams={{
       isPurchase: 'N',
     }}
+    scroll={false}
+  />
+)
+
+export const CustomStore = () => (
+  <StoreComponent
+    params={{
+      apikey: '3bbe419e29e0e4728474e52a965154fb',
+      userId: 'david@stipop.io',
+      lang: 'en',
+      pageNumber: 1,
+      limit: 100,
+    }}
+    downloadParams={{
+      isPurchase: 'N',
+    }}
     color={{
       backgroundColor: 'blue',
       downloadedColor: 'yellow',
-      downloadBtn: 'yellow',
+      downloadBtn: '#ff4500',
       downloadBtnHover: 'blue',
       deleteBtn: 'blue',
-      deleteBtnHover: 'yellow',
+      deleteBtnHover: '#ff4500',
+      recoveryBtnHover: 'blue',
     }}
     size={{
       detailImg: 70,

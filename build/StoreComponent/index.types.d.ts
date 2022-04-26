@@ -29,6 +29,8 @@ interface Color {
     downloadBtnHover?: string;
     deleteBtn?: string;
     deleteBtnHover?: string;
+    recoveryBtn?: string;
+    recoveryBtnHover?: string;
 }
 interface Size {
     width?: number;
