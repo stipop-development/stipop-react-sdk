@@ -15,6 +15,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   column,
   scroll,
   stickerClick,
+  storeClick,
 }) => {
   const [myStickers, setMyStickers] = useState([])
   const [stickers, setStickers] = useState([])
@@ -66,7 +67,7 @@ const PickerComponent: React.FC<StoreProps> = ({
     <StoreWrapper size={size} border={border}>
       <StoreMenu backgroundColor={backgroundColor} border={border} menu={menu}>
         <Icon type="TIME" />
-        <Icon type="STORE" />
+        <Icon type="STORE" onClick={() => storeClick(true)} />
         {myStickers.length > 0 ? (
           myStickers.map((pack, index) => (
             <PackageImgWrapper
@@ -144,6 +145,14 @@ const StoreMenu = styled.div`
     props.border && (props.border.radius || props.border.radius == 0)
       ? `${props.border.radius}px`
       : '10px'};
+  padding: 0 10px;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
   .stipop-icon {
     height: 90%;
     display: flex;

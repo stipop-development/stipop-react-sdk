@@ -7,6 +7,7 @@ export interface StoreProps {
     column?: number;
     scroll?: boolean;
     stickerClick?: Function;
+    storeClick?: Function;
 }
 interface Params {
     apikey: string;

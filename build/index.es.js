@@ -3726,7 +3726,7 @@ var ChattingInput = styled.input(templateObject_6$1 || (templateObject_6$1 = __m
 var templateObject_1$1, templateObject_2$1, templateObject_3$1, templateObject_4$1, templateObject_5$1, templateObject_6$1;
 
 var PickerComponent = function (_a) {
-    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, stickerClick = _a.stickerClick;
+    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, stickerClick = _a.stickerClick, storeClick = _a.storeClick;
     var _b = useState([]), myStickers = _b[0], setMyStickers = _b[1];
     var _c = useState([]), stickers = _c[0], setStickers = _c[1];
     var _d = useState(0), showPackage = _d[0], setShowPackage = _d[1];
@@ -3768,7 +3768,7 @@ var PickerComponent = function (_a) {
     return (React__default.createElement(StoreWrapper, { size: size, border: border },
         React__default.createElement(StoreMenu, { backgroundColor: backgroundColor, border: border, menu: menu },
             React__default.createElement(Icon, { type: "TIME" }),
-            React__default.createElement(Icon, { type: "STORE" }),
+            React__default.createElement(Icon, { type: "STORE", onClick: function () { return storeClick(true); } }),
             myStickers.length > 0 ? (myStickers.map(function (pack, index) { return (React__default.createElement(PackageImgWrapper, { menu: menu, key: index, onClick: function () {
                     clickPackage(pack.packageId);
                     setShowPackage(index);
@@ -3789,7 +3789,7 @@ var StoreWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemp
         ? "".concat(props.border.radius, "px")
         : '10px';
 });
-var StoreMenu = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  height: 45px;\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    cursor: pointer;\n  }\n"], ["\n  height: 45px;\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    cursor: pointer;\n  }\n"])), function (props) {
+var StoreMenu = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  height: 45px;\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  padding: 0 10px;\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    cursor: pointer;\n  }\n"], ["\n  height: 45px;\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  padding: 0 10px;\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    cursor: pointer;\n  }\n"])), function (props) {
     return props.menu && props.menu.bottomLine
         ? props.menu.bottomLine
         : '1px solid lightgray';
