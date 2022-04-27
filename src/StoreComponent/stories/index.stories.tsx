@@ -17,9 +17,12 @@ export const Store = () => (
     downloadParams={{
       isPurchase: 'N',
     }}
-    scroll={false}
+    scroll={true}
     color={{
       downloadedColor: '#555555',
+    }}
+    size={{
+      packageHeight: 25,
     }}
   />
 )

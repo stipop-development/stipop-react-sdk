@@ -87,6 +87,7 @@ const StoreComponent: React.FC<StoreProps> = ({
         }
       }
     }
+    console.log(packages)
   }, [packages])
 
   const clickDownload = packageId => {
@@ -131,35 +132,22 @@ const StoreComponent: React.FC<StoreProps> = ({
     })
   }
 
-  const clickDetail = packageId => {
-    setIsLoading(true)
-    const packageParams = {
-      userId: params.userId,
-      packId: packageId,
-    }
-
-    const packageData = client.getPackInfo(packageParams)
-    packageData.then(({ body }) => {
-      // console.log(body.package.stickers)
-      setStickers(
-        body && body.package && body.package.stickers
-          ? body.package.stickers
-          : []
-      )
-      setDetail(true)
-    })
+  const clickDetail = async packageId => {
+    await setIsLoading(true)
+    await setStickers(
+      packages.filter(pack => pack.packageId === packageId)[0].stickers
+    )
+    await setDetail(true)
+    await setIsLoading(false)
   }
 
-  useEffect(() => {
-    if (stickers && stickers.length >= 15) {
-      // if (stickers.length >= 15) {
-      setIsLoading(false)
-      // }
-    }
-  }, [stickers])
+  // useEffect(() => {
+  //   setIsLoading(false)
+  // }, [stickers])
 
   useEffect(() => {
     console.log(isLoading)
+    console.log(currentScroll)
   }, [isLoading])
 
   return (
@@ -236,7 +224,7 @@ const StoreComponent: React.FC<StoreProps> = ({
                     />
                   </DownloadBtn>
                 </DetailBox>
-                <DetailStickerWrapper size={size}>
+                <DetailStickerWrapper size={size} scroll={scroll}>
                   {stickers &&
                     stickers.map((sticker, index) => (
                       <img
@@ -249,11 +237,12 @@ const StoreComponent: React.FC<StoreProps> = ({
                 </DetailStickerWrapper>
               </DetailWrapper>
             ) : packages && packages.length > 0 ? (
-              <PackageWrapper size={size}>
+              <PackageWrapper size={size} scroll={scroll}>
                 {packages.map((pack, index) => (
                   <PackageBox
                     key={index}
                     color={color}
+                    size={size}
                     isDownload={pack.isDownload === 'Y'}
                     onClick={e => {
                       if (e.target.id !== 'download-btn') {
@@ -422,7 +411,6 @@ const PackageContainer = styled.div`
   height: 80%;
   display: flex;
   flex-direction: column;
-  overflow-y: ${props => (props.detail ? 'none' : 'auto')};
   background-color: ${props =>
     props.color && props.color.backgroundColor
       ? props.color.backgroundColor
@@ -431,30 +419,19 @@ const PackageContainer = styled.div`
     props.border && props.border.radius ? `${props.border.radius}px` : '8px'};
   border-bottom-right-radius: ${props =>
     props.border && props.border.radius ? `${props.border.radius}px` : '8px'};
-  -ms-overflow-style: ${props => (props.scroll === false ? 'none' : '')};
-  scrollbar-width: ${props => (props.scroll === false ? 'none' : '')};
-
-  &::-webkit-scrollbar {
-    display: ${props => (props.scroll === false ? 'none' : '')};
-  }
 `
 const DetailWrapper = styled.div`
   width: 100%;
-  margin-bottom: 32px;
-  overflow-y: auto;
-  -ms-overflow-style: ${props => (props.scroll === false ? 'none' : '')};
-  scrollbar-width: ${props => (props.scroll === false ? 'none' : '')};
-
-  &::-webkit-scrollbar {
-    display: ${props => (props.scroll === false ? 'none' : '')};
-  }
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 `
 const DetailBox = styled.div`
   display: flex;
   padding: 0 32px;
-  margin-bottom: 15px;
   align-items: center;
   position: relative;
+  margin-bottom: 12px;
 `
 const MainImg = styled.img`
   width: ${props =>
@@ -472,6 +449,7 @@ const DetailName = styled.div`
   }
 `
 const DetailStickerWrapper = styled.div`
+  height: 100%;
   padding: 0 32px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -479,6 +457,13 @@ const DetailStickerWrapper = styled.div`
   justify-items: center;
   align-items: center;
   row-gap: 2%;
+  overflow-y: auto;
+  -ms-overflow-style: ${props => (props.scroll === false ? 'none' : '')};
+  scrollbar-width: ${props => (props.scroll === false ? 'none' : '')};
+
+  &::-webkit-scrollbar {
+    display: ${props => (props.scroll === false ? 'none' : '')};
+  }
 
   img {
     width: ${props =>
@@ -490,15 +475,22 @@ const DetailStickerWrapper = styled.div`
 `
 const PackageWrapper = styled.div`
   width: 100%;
+  height: 100%;
+  display: block;
+  overflow-y: auto;
+  -ms-overflow-style: ${props => (props.scroll === false ? 'none' : '')};
+  scrollbar-width: ${props => (props.scroll === false ? 'none' : '')};
+
+  &::-webkit-scrollbar {
+    display: ${props => (props.scroll === false ? 'none' : '')};
+  }
+`
+const PackageBox = styled.div`
+  width: 100%;
   height: ${props =>
     props.size && props.size.packageHeight
       ? `${props.size.packageHeight}%`
       : '33%'};
-  display: block;
-`
-const PackageBox = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
