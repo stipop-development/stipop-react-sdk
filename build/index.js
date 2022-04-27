@@ -3887,7 +3887,6 @@ var StoreComponent = function (_a) {
         var data = client.getPack(trendingParams);
         data.then(function (_a) {
             var body = _a.body;
-            console.log(body);
             body.packageList.map(function (pack) {
                 var packageParams = {
                     userId: params.userId,
@@ -3921,13 +3920,19 @@ var StoreComponent = function (_a) {
     React.useEffect(function () {
         if (packages && packages.length > 0) {
             if (params.limit) {
+                console.log(packages.length);
+                console.log(params.limit);
                 if (packages.length === params.limit) {
                     setIsLoading(false);
+                    return;
                 }
             }
             else {
+                console.log(packages.length);
+                console.log(params.limit);
                 if (packages.length === 20) {
                     setIsLoading(false);
+                    return;
                 }
             }
         }

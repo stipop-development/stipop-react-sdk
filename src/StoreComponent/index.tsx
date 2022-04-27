@@ -41,7 +41,6 @@ const StoreComponent: React.FC<StoreProps> = ({
     const data = client.getPack(trendingParams)
 
     data.then(({ body }) => {
-      console.log(body)
       body.packageList.map(pack => {
         const packageParams = {
           userId: params.userId,
@@ -79,12 +78,18 @@ const StoreComponent: React.FC<StoreProps> = ({
   useEffect(() => {
     if (packages && packages.length > 0) {
       if (params.limit) {
+        console.log(packages.length)
+        console.log(params.limit)
         if (packages.length === params.limit) {
           setIsLoading(false)
+          return
         }
       } else {
+        console.log(packages.length)
+        console.log(params.limit)
         if (packages.length === 20) {
           setIsLoading(false)
+          return
         }
       }
     }

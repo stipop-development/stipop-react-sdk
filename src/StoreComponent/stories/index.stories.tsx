@@ -12,6 +12,7 @@ export const Store = () => (
       userId: 'david@stipop.io',
       lang: 'en',
       pageNumber: 10,
+      limit: 50,
     }}
     downloadParams={{
       isPurchase: 'N',
