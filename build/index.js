@@ -3870,8 +3870,10 @@ var StoreComponent = function (_a) {
     var _e = React.useState([]), stickers = _e[0], setStickers = _e[1];
     var _f = React.useState(null), main = _f[0], setMain = _f[1];
     var _g = React.useState([]), hideList = _g[0], setHideList = _g[1];
+    var _h = React.useState(false), isLoading = _h[0], setIsLoading = _h[1];
     var client = new Stipop$1(params.apikey, 'v1');
     React.useEffect(function () {
+        setIsLoading(true);
         var packInfo = new Array();
         var trendingParams = {
             userId: params.userId,
@@ -3905,6 +3907,7 @@ var StoreComponent = function (_a) {
             var body = _a.body;
             // console.log(body.packageList)
             setHideList(body.packageList.map(function (pack) { return pack.packageId; }));
+            setIsLoading(false);
         });
     }, [detail]);
     React.useEffect(function () {
@@ -3920,10 +3923,7 @@ var StoreComponent = function (_a) {
             lang: downloadParams.lang,
             countryCode: downloadParams.countryCode,
         };
-        var data = client.download(dParams);
-        data.then(function () {
-            setDetail(false);
-        });
+        client.download(dParams);
     };
     var clickDetail = function (packageId) {
         var packageParams = {
@@ -3945,13 +3945,9 @@ var StoreComponent = function (_a) {
             userId: params.userId,
             packageId: packageId,
         };
-        var data = client.myStickerHide(deleteParams);
-        data.then(function () {
-            setDetail(false);
-        });
-        setDetail(false);
+        client.myStickerHide(deleteParams);
     };
-    return (React__default["default"].createElement(StoreWrapper, { color: color, size: size, border: border },
+    return (React__default["default"].createElement(React__default["default"].Fragment, null, isLoading ? (React__default["default"].createElement(StoreWrapper, null)) : (React__default["default"].createElement(StoreWrapper, { color: color, size: size, border: border },
         React__default["default"].createElement(StoreTitle, null,
             detail ? (React__default["default"].createElement("div", { className: "title-text" },
                 React__default["default"].createElement(PreviousBtn, null,
@@ -4011,7 +4007,7 @@ var StoreComponent = function (_a) {
                         ? hideList.indexOf(pack.packageId) < 0
                             ? 'MINUS'
                             : 'PLUS'
-                        : 'PLUS' })))); }))) : (React__default["default"].createElement("div", null)))));
+                        : 'PLUS' })))); }))) : (React__default["default"].createElement("div", null)))))));
 };
 var StoreWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: #fff;\n  border: ", ";\n  border-radius: ", ";\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  background-color: ", ";\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: #fff;\n  border: ", ";\n  border-radius: ", ";\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  background-color: ", ";\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '600px';

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Stipop from 'stipop-js-sdk'
-import axios from 'axios'
 
 import { StoreProps } from './index.types'
 
@@ -22,10 +21,12 @@ const StoreComponent: React.FC<StoreProps> = ({
   const [stickers, setStickers] = useState([])
   const [main, setMain] = useState(null)
   const [hideList, setHideList] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   const client = new (Stipop as any)(params.apikey, 'v1')
 
   useEffect(() => {
+    setIsLoading(true)
     const packInfo = new Array()
 
     const trendingParams = {
@@ -62,6 +63,7 @@ const StoreComponent: React.FC<StoreProps> = ({
     hideData.then(({ body }) => {
       // console.log(body.packageList)
       setHideList(body.packageList.map(pack => pack.packageId))
+      setIsLoading(false)
     })
   }, [detail])
 
@@ -79,10 +81,7 @@ const StoreComponent: React.FC<StoreProps> = ({
       lang: downloadParams.lang,
       countryCode: downloadParams.countryCode,
     }
-    const data = client.download(dParams)
-    data.then(() => {
-      setDetail(false)
-    })
+    client.download(dParams)
   }
 
   const clickDetail = packageId => {
@@ -109,149 +108,151 @@ const StoreComponent: React.FC<StoreProps> = ({
       packageId: packageId,
     }
 
-    const data = client.myStickerHide(deleteParams)
-    data.then(() => {
-      setDetail(false)
-    })
-    setDetail(false)
+    client.myStickerHide(deleteParams)
   }
 
   return (
-    <StoreWrapper color={color} size={size} border={border}>
-      <StoreTitle>
-        {detail ? (
-          <div className="title-text">
-            <PreviousBtn>
-              <Icon type="PREVIOUS" onClick={() => setDetail(false)} />
-            </PreviousBtn>
-            <span>Sticker Pack</span>
-          </div>
-        ) : (
-          <div className="title-text">
-            <span>Sticker Store</span>
-            <Icon type="STORE_BLACK" />
-          </div>
-        )}
-        <CloseBtn onClick={() => onClose(true)}>
-          <Icon type="CLOSE" />
-        </CloseBtn>
-      </StoreTitle>
-      <PackageContainer
-        detail={detail}
-        color={color}
-        scroll={scroll}
-        border={border}
-      >
-        {detail ? (
-          <DetailWrapper scroll={scroll}>
-            <DetailBox>
-              <MainImg src={main.packageImg} alt="" />
-              <DetailName>
-                <div className="packageName">{main.packageName}</div>
-                <div className="artistName">©{main.artistName}</div>
-              </DetailName>
-              <DownloadBtn
-                color={color}
-                isDownload={main.isDownload === 'Y'}
-                isRecovery={
-                  main.isDownload === 'Y' &&
-                  hideList.indexOf(main.packageId) !== -1
-                }
-                onClick={() => {
-                  main.isDownload === 'Y'
-                    ? clickDelete(main.packageId)
-                    : clickDownload(main.packageId)
-                }}
-              >
-                <Icon
-                  type={
-                    main.isDownload === 'Y'
-                      ? hideList.indexOf(main.packageId) < 0
-                        ? 'MINUS'
-                        : 'PLUS'
-                      : 'PLUS'
-                  }
-                />
-              </DownloadBtn>
-            </DetailBox>
-            <DetailStickerWrapper size={size}>
-              {stickers.map((sticker, index) => (
-                <img src={sticker.stickerImg} alt="" key={index} />
-              ))}
-            </DetailStickerWrapper>
-          </DetailWrapper>
-        ) : packages && packages.length > 0 ? (
-          <PackageWrapper>
-            {packages.map((pack, index) => (
-              <PackageBox
-                key={index}
-                color={color}
-                isDownload={pack.isDownload === 'Y'}
-                onClick={() => {
-                  clickDetail(pack.packageId)
-                  setMain({
-                    packageId: pack.packageId,
-                    packageImg: pack.packageImg,
-                    packageName: pack.packageName,
-                    artistName: pack.artistName,
-                    isDownload: pack.isDownload,
-                  })
-                }}
-              >
-                <PackageTitle>
-                  {pack.packageName}
-                  <span>©{pack.artistName}</span>
-                </PackageTitle>
-                <PackageItem>
-                  {pack && pack.stickers ? (
-                    pack.stickers.map((sticker, index) => {
-                      if (index < 5) {
-                        return (
-                          <StickerWrapper key={index}>
-                            <Sticker
-                              src={sticker.stickerImg}
-                              alt=""
-                              size={size}
-                            />
-                          </StickerWrapper>
-                        )
-                      }
-                    })
-                  ) : (
-                    <div></div>
-                  )}
-                </PackageItem>
-                <DownloadBtn
-                  color={color}
-                  isDownload={pack.isDownload === 'Y'}
-                  isRecovery={
-                    pack.isDownload === 'Y' &&
-                    hideList.indexOf(pack.packageId) !== -1
-                  }
-                  onClick={() => {
-                    pack.isDownload === 'Y'
-                      ? clickDelete(pack.packageId)
-                      : clickDownload(pack.packageId)
-                  }}
-                >
-                  <Icon
-                    type={
-                      pack.isDownload === 'Y'
-                        ? hideList.indexOf(pack.packageId) < 0
-                          ? 'MINUS'
-                          : 'PLUS'
-                        : 'PLUS'
+    <>
+      {isLoading ? (
+        <StoreWrapper></StoreWrapper>
+      ) : (
+        <StoreWrapper color={color} size={size} border={border}>
+          <StoreTitle>
+            {detail ? (
+              <div className="title-text">
+                <PreviousBtn>
+                  <Icon type="PREVIOUS" onClick={() => setDetail(false)} />
+                </PreviousBtn>
+                <span>Sticker Pack</span>
+              </div>
+            ) : (
+              <div className="title-text">
+                <span>Sticker Store</span>
+                <Icon type="STORE_BLACK" />
+              </div>
+            )}
+            <CloseBtn onClick={() => onClose(true)}>
+              <Icon type="CLOSE" />
+            </CloseBtn>
+          </StoreTitle>
+          <PackageContainer
+            detail={detail}
+            color={color}
+            scroll={scroll}
+            border={border}
+          >
+            {detail ? (
+              <DetailWrapper scroll={scroll}>
+                <DetailBox>
+                  <MainImg src={main.packageImg} alt="" />
+                  <DetailName>
+                    <div className="packageName">{main.packageName}</div>
+                    <div className="artistName">©{main.artistName}</div>
+                  </DetailName>
+                  <DownloadBtn
+                    color={color}
+                    isDownload={main.isDownload === 'Y'}
+                    isRecovery={
+                      main.isDownload === 'Y' &&
+                      hideList.indexOf(main.packageId) !== -1
                     }
-                  />
-                </DownloadBtn>
-              </PackageBox>
-            ))}
-          </PackageWrapper>
-        ) : (
-          <div></div>
-        )}
-      </PackageContainer>
-    </StoreWrapper>
+                    onClick={() => {
+                      main.isDownload === 'Y'
+                        ? clickDelete(main.packageId)
+                        : clickDownload(main.packageId)
+                    }}
+                  >
+                    <Icon
+                      type={
+                        main.isDownload === 'Y'
+                          ? hideList.indexOf(main.packageId) < 0
+                            ? 'MINUS'
+                            : 'PLUS'
+                          : 'PLUS'
+                      }
+                    />
+                  </DownloadBtn>
+                </DetailBox>
+                <DetailStickerWrapper size={size}>
+                  {stickers.map((sticker, index) => (
+                    <img src={sticker.stickerImg} alt="" key={index} />
+                  ))}
+                </DetailStickerWrapper>
+              </DetailWrapper>
+            ) : packages && packages.length > 0 ? (
+              <PackageWrapper>
+                {packages.map((pack, index) => (
+                  <PackageBox
+                    key={index}
+                    color={color}
+                    isDownload={pack.isDownload === 'Y'}
+                    onClick={() => {
+                      clickDetail(pack.packageId)
+                      setMain({
+                        packageId: pack.packageId,
+                        packageImg: pack.packageImg,
+                        packageName: pack.packageName,
+                        artistName: pack.artistName,
+                        isDownload: pack.isDownload,
+                      })
+                    }}
+                  >
+                    <PackageTitle>
+                      {pack.packageName}
+                      <span>©{pack.artistName}</span>
+                    </PackageTitle>
+                    <PackageItem>
+                      {pack && pack.stickers ? (
+                        pack.stickers.map((sticker, index) => {
+                          if (index < 5) {
+                            return (
+                              <StickerWrapper key={index}>
+                                <Sticker
+                                  src={sticker.stickerImg}
+                                  alt=""
+                                  size={size}
+                                />
+                              </StickerWrapper>
+                            )
+                          }
+                        })
+                      ) : (
+                        <div></div>
+                      )}
+                    </PackageItem>
+                    <DownloadBtn
+                      color={color}
+                      isDownload={pack.isDownload === 'Y'}
+                      isRecovery={
+                        pack.isDownload === 'Y' &&
+                        hideList.indexOf(pack.packageId) !== -1
+                      }
+                      onClick={() => {
+                        pack.isDownload === 'Y'
+                          ? clickDelete(pack.packageId)
+                          : clickDownload(pack.packageId)
+                      }}
+                    >
+                      <Icon
+                        type={
+                          pack.isDownload === 'Y'
+                            ? hideList.indexOf(pack.packageId) < 0
+                              ? 'MINUS'
+                              : 'PLUS'
+                            : 'PLUS'
+                        }
+                      />
+                    </DownloadBtn>
+                  </PackageBox>
+                ))}
+              </PackageWrapper>
+            ) : (
+              <div></div>
+            )}
+          </PackageContainer>
+        </StoreWrapper>
+      )}
+    </>
   )
 }
 
