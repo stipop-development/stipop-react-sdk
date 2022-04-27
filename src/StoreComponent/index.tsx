@@ -67,18 +67,11 @@ const StoreComponent: React.FC<StoreProps> = ({
 
   useEffect(() => {
     setPackages(trendingStickers[0])
-    if (packages) {
-      if (params.limit) {
-        if (packages.length === params.limit) {
-          setIsLoading(false)
-        }
-      } else {
-        if (packages.length === 20) {
-          setIsLoading(false)
-        }
-      }
-    }
   }, [trendingStickers])
+
+  useEffect(() => {
+    setIsLoading(false)
+  }, [packages, stickers])
 
   const clickDownload = packageId => {
     setIsLoading(true)
@@ -140,10 +133,6 @@ const StoreComponent: React.FC<StoreProps> = ({
       setDetail(true)
     })
   }
-
-  useEffect(() => {
-    setIsLoading(false)
-  }, [stickers])
 
   return (
     <>
