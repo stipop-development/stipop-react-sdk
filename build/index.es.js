@@ -3848,6 +3848,7 @@ var StoreComponent = function (_a) {
     var _j = useState(0); _j[0]; var setCurrentScroll = _j[1];
     var client = new Stipop$1(params.apikey, 'v1');
     useEffect(function () {
+        setIsLoading(true);
         var packInfo = new Array();
         var trendingParams = {
             userId: params.userId,
@@ -3880,6 +3881,7 @@ var StoreComponent = function (_a) {
         hideData.then(function (_a) {
             var body = _a.body;
             setHideList(body.packageList.map(function (pack) { return pack.packageId; }));
+            setIsLoading(false);
         });
     }, []);
     useEffect(function () {
