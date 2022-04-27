@@ -11,8 +11,7 @@ export const Store = () => (
       apikey: '3bbe419e29e0e4728474e52a965154fb',
       userId: 'david@stipop.io',
       lang: 'en',
-      pageNumber: 1,
-      limit: 50,
+      pageNumber: 10,
     }}
     downloadParams={{
       isPurchase: 'N',
@@ -30,7 +29,6 @@ export const CustomStore = () => (
       apikey: '3bbe419e29e0e4728474e52a965154fb',
       userId: 'david@stipop.io',
       lang: 'en',
-      pageNumber: 1,
       limit: 20,
     }}
     downloadParams={{
