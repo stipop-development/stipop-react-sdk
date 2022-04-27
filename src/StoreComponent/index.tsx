@@ -67,16 +67,8 @@ const StoreComponent: React.FC<StoreProps> = ({
 
   useEffect(() => {
     setPackages(trendingStickers[0])
-    if (packages) {
-      if (params.limit) {
-        if (packages.length === params.limit) {
-          setIsLoading(false)
-        }
-      } else {
-        if (packages.length === 20) {
-          setIsLoading(false)
-        }
-      }
+    if (packages.length > 0) {
+      setIsLoading(false)
     }
   }, [trendingStickers])
 
