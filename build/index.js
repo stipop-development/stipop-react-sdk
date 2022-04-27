@@ -3907,7 +3907,7 @@ var StoreComponent = function (_a) {
             // console.log(body.packageList)
             setHideList(body.packageList.map(function (pack) { return pack.packageId; }));
         });
-    }, [detail]);
+    }, []);
     React.useEffect(function () {
         trendingStickers.map(function (trend) { return setPackages(trend); });
         // console.log(packages)

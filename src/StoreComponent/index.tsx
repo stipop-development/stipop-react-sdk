@@ -63,7 +63,7 @@ const StoreComponent: React.FC<StoreProps> = ({
       // console.log(body.packageList)
       setHideList(body.packageList.map(pack => pack.packageId))
     })
-  }, [detail])
+  }, [])
 
   useEffect(() => {
     trendingStickers.map(trend => setPackages(trend))
