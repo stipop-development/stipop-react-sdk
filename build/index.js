@@ -3920,23 +3920,17 @@ var StoreComponent = function (_a) {
     React.useEffect(function () {
         if (packages && packages.length > 0) {
             if (params.limit) {
-                console.log(packages.length);
-                console.log(params.limit);
                 if (packages.length >= params.limit) {
                     setIsLoading(false);
-                    return;
                 }
             }
             else {
-                console.log(packages.length);
-                console.log(params.limit);
                 if (packages.length === 20) {
                     setIsLoading(false);
-                    return;
                 }
             }
         }
-    });
+    }, [packages]);
     var clickDownload = function (packageId) {
         setIsLoading(true);
         var dParams = {
@@ -3991,6 +3985,13 @@ var StoreComponent = function (_a) {
             setDetail(true);
         });
     };
+    React.useEffect(function () {
+        if (stickers && stickers.length >= 15) {
+            // if (stickers.length >= 15) {
+            setIsLoading(false);
+            // }
+        }
+    }, [stickers]);
     React.useEffect(function () {
         console.log(isLoading);
     }, [isLoading]);
