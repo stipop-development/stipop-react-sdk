@@ -21,7 +21,7 @@ const StoreComponent: React.FC<StoreProps> = ({
   const [stickers, setStickers] = useState([])
   const [main, setMain] = useState(null)
   const [hideList, setHideList] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [currentScroll, setCurrentScroll] = useState(0)
 
   const client = new (Stipop as any)(params.apikey, 'v1')
@@ -71,7 +71,7 @@ const StoreComponent: React.FC<StoreProps> = ({
   }, [trendingStickers])
 
   useEffect(() => {
-    if (packages && packages.length > 0) {
+    if (packages && packages.length >= 20) {
       setIsLoading(false)
     }
     if (stickers && stickers.length > 0) {

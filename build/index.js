@@ -3870,7 +3870,7 @@ var StoreComponent = function (_a) {
     var _e = React.useState([]), stickers = _e[0], setStickers = _e[1];
     var _f = React.useState(null), main = _f[0], setMain = _f[1];
     var _g = React.useState([]), hideList = _g[0], setHideList = _g[1];
-    var _h = React.useState(true), isLoading = _h[0], setIsLoading = _h[1];
+    var _h = React.useState(false), isLoading = _h[0], setIsLoading = _h[1];
     var _j = React.useState(0); _j[0]; var setCurrentScroll = _j[1];
     var client = new Stipop$1(params.apikey, 'v1');
     React.useEffect(function () {
@@ -3913,7 +3913,7 @@ var StoreComponent = function (_a) {
         setPackages(trendingStickers[0]);
     }, [trendingStickers]);
     React.useEffect(function () {
-        if (packages && packages.length > 0) {
+        if (packages && packages.length >= 20) {
             setIsLoading(false);
         }
         if (stickers && stickers.length > 0) {
