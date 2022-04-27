@@ -22,6 +22,7 @@ const StoreComponent: React.FC<StoreProps> = ({
   const [main, setMain] = useState(null)
   const [hideList, setHideList] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const [currentScroll, setCurrentScroll] = useState(0)
 
   const client = new (Stipop as any)(params.apikey, 'v1')
 
@@ -60,21 +61,27 @@ const StoreComponent: React.FC<StoreProps> = ({
 
     const hideData = client.myStickerHideList(hideParams)
     hideData.then(({ body }) => {
-      // console.log(body.packageList)
       setHideList(body.packageList.map(pack => pack.packageId))
     })
   }, [])
 
   useEffect(() => {
-    trendingStickers.map(trend => setPackages(trend))
-    // console.log(packages)
+    setPackages(trendingStickers[0])
+    if (packages) {
+      if (params.limit) {
+        if (packages.length === params.limit) {
+          setIsLoading(false)
+        }
+      } else {
+        if (packages.length === 20) {
+          setIsLoading(false)
+        }
+      }
+    }
   }, [trendingStickers])
 
-  useEffect(() => {
-    setIsLoading(false)
-  }, [packages])
-
   const clickDownload = packageId => {
+    setIsLoading(true)
     const dParams = {
       userId: params.userId,
       packageId: packageId,
@@ -83,10 +90,40 @@ const StoreComponent: React.FC<StoreProps> = ({
       lang: downloadParams.lang,
       countryCode: downloadParams.countryCode,
     }
-    client.download(dParams)
+    const data = client.download(dParams)
+    data.then(() => {
+      setPackages(
+        packages.map(pack => {
+          if (pack.packageId === packageId) {
+            pack.isDownload = 'Y'
+          }
+          return pack
+        })
+      )
+      setIsLoading(false)
+    })
+  }
+
+  const clickDelete = packageId => {
+    setIsLoading(true)
+    const deleteParams = {
+      userId: params.userId,
+      packageId: packageId,
+    }
+
+    const data = client.myStickerHide(deleteParams)
+    data.then(() => {
+      if (hideList.indexOf(packageId) < 0) {
+        setHideList(hideList.concat(packageId))
+      } else {
+        setHideList(hideList.filter(item => item !== packageId))
+      }
+      setIsLoading(false)
+    })
   }
 
   const clickDetail = packageId => {
+    setIsLoading(true)
     const packageParams = {
       userId: params.userId,
       packId: packageId,
@@ -104,20 +141,26 @@ const StoreComponent: React.FC<StoreProps> = ({
     })
   }
 
-  const clickDelete = packageId => {
-    const deleteParams = {
-      userId: params.userId,
-      packageId: packageId,
+  useEffect(() => {
+    if (stickers.length > 0) {
+      setIsLoading(false)
     }
-
-    client.myStickerHide(deleteParams)
-  }
+  }, [stickers])
 
   return (
     <>
       {isLoading ? (
-        <StoreWrapper>
-          <div>loading</div>
+        <StoreWrapper color={color} size={size} border={border}>
+          <div
+            style={{
+              height: '100%',
+              display: 'flex',
+              justifyContent: ' center',
+              alignItems: 'center',
+            }}
+          >
+            <span>loading</span>
+          </div>
         </StoreWrapper>
       ) : (
         <StoreWrapper color={color} size={size} border={border}>
@@ -144,6 +187,7 @@ const StoreComponent: React.FC<StoreProps> = ({
             color={color}
             scroll={scroll}
             border={border}
+            onScroll={e => setCurrentScroll(e.target.scrollTop)}
           >
             {detail ? (
               <DetailWrapper scroll={scroll}>
@@ -178,27 +222,30 @@ const StoreComponent: React.FC<StoreProps> = ({
                   </DownloadBtn>
                 </DetailBox>
                 <DetailStickerWrapper size={size}>
-                  {stickers.map((sticker, index) => (
-                    <img src={sticker.stickerImg} alt="" key={index} />
-                  ))}
+                  {stickers &&
+                    stickers.map((sticker, index) => (
+                      <img src={sticker.stickerImg} alt="" key={index} />
+                    ))}
                 </DetailStickerWrapper>
               </DetailWrapper>
             ) : packages && packages.length > 0 ? (
-              <PackageWrapper>
+              <PackageWrapper size={size}>
                 {packages.map((pack, index) => (
                   <PackageBox
                     key={index}
                     color={color}
                     isDownload={pack.isDownload === 'Y'}
-                    onClick={() => {
-                      clickDetail(pack.packageId)
-                      setMain({
-                        packageId: pack.packageId,
-                        packageImg: pack.packageImg,
-                        packageName: pack.packageName,
-                        artistName: pack.artistName,
-                        isDownload: pack.isDownload,
-                      })
+                    onClick={e => {
+                      if (e.target.id !== 'download-btn') {
+                        clickDetail(pack.packageId)
+                        setMain({
+                          packageId: pack.packageId,
+                          packageImg: pack.packageImg,
+                          packageName: pack.packageName,
+                          artistName: pack.artistName,
+                          isDownload: pack.isDownload,
+                        })
+                      }
                     }}
                   >
                     <PackageTitle>
@@ -247,6 +294,14 @@ const StoreComponent: React.FC<StoreProps> = ({
                         }
                       />
                     </DownloadBtn>
+                    <BtnWrapper
+                      id="download-btn"
+                      onClick={() => {
+                        pack.isDownload === 'Y'
+                          ? clickDelete(pack.packageId)
+                          : clickDownload(pack.packageId)
+                      }}
+                    ></BtnWrapper>
                   </PackageBox>
                 ))}
               </PackageWrapper>
@@ -266,7 +321,7 @@ const StoreWrapper = styled.div`
   width: ${props =>
     props.size && props.size.width ? `${props.size.width}px` : '600px'};
   height: ${props =>
-    props.size && props.size.height ? `${props.size.height}px` : '400px'};
+    props.size && props.size.height ? `${props.size.height}px` : '600px'};
   background-color: #fff;
   border: ${props =>
     props.border && props.border.border
@@ -282,7 +337,7 @@ const StoreWrapper = styled.div`
 `
 const StoreTitle = styled.div`
   width: 100%;
-  height: 25%;
+  height: 20%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -343,7 +398,7 @@ const PreviousBtn = styled.div`
 `
 const PackageContainer = styled.div`
   width: 100%;
-  height: 75%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   overflow-y: ${props => (props.detail ? 'none' : 'auto')};
@@ -414,7 +469,10 @@ const DetailStickerWrapper = styled.div`
 `
 const PackageWrapper = styled.div`
   width: 100%;
-  height: 33%;
+  height: ${props =>
+    props.size && props.size.packageHeight
+      ? `${props.size.packageHeight}%`
+      : '33%'};
   display: block;
 `
 const PackageBox = styled.div`
@@ -429,7 +487,7 @@ const PackageBox = styled.div`
     props.isDownload
       ? props.color && props.color.downloadedColor
         ? props.color.downloadedColor
-        : '#f5f6f6'
+        : '#fff'
       : props.color && props.color.backgroundColor
       ? props.color.backgroundColor
       : '#fff'};
@@ -447,8 +505,7 @@ const PackageBox = styled.div`
         ? props.color.packageHoverColor
         : props.color && props.color.backgroundColor
         ? props.color.backgroundColor
-        : '#fff'};
-    box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.1) inset;
+        : '##f5f6f6'};
     cursor: pointer;
   }
 `
@@ -498,6 +555,14 @@ const DownloadBtn = styled.div`
         : '#ff4500'};
   }
 `
+const BtnWrapper = styled.div`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  position: absolute;
+  right: 32px;
+`
+
 const PackageTitle = styled.div`
   font-size: 12px;
   font-weight: bold;

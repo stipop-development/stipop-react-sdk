@@ -44,6 +44,7 @@ interface Size {
     previewImg?: number
     detailImg?: number
     mainImg?: number
+    packageHeight?: number
 }
 
 interface Border {

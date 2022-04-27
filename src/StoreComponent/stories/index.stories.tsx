@@ -12,12 +12,15 @@ export const Store = () => (
       userId: 'david@stipop.io',
       lang: 'en',
       pageNumber: 1,
-      limit: 100,
+      limit: 50,
     }}
     downloadParams={{
       isPurchase: 'N',
     }}
     scroll={false}
+    color={{
+      downloadedColor: '#555555',
+    }}
   />
 )
 
@@ -28,7 +31,7 @@ export const CustomStore = () => (
       userId: 'david@stipop.io',
       lang: 'en',
       pageNumber: 1,
-      limit: 100,
+      limit: 20,
     }}
     downloadParams={{
       isPurchase: 'N',
