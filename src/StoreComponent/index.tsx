@@ -70,7 +70,12 @@ const StoreComponent: React.FC<StoreProps> = ({
   }, [trendingStickers])
 
   useEffect(() => {
-    setIsLoading(false)
+    if (packages && packages.length > 0) {
+      setIsLoading(false)
+    }
+    if (stickers && stickers.length > 0) {
+      setIsLoading(false)
+    }
   }, [packages, stickers])
 
   const clickDownload = packageId => {

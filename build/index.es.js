@@ -3886,7 +3886,12 @@ var StoreComponent = function (_a) {
         setPackages(trendingStickers[0]);
     }, [trendingStickers]);
     useEffect(function () {
-        setIsLoading(false);
+        if (packages && packages.length > 0) {
+            setIsLoading(false);
+        }
+        if (stickers && stickers.length > 0) {
+            setIsLoading(false);
+        }
     }, [packages, stickers]);
     var clickDownload = function (packageId) {
         setIsLoading(true);
