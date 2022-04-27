@@ -3887,7 +3887,16 @@ var StoreComponent = function (_a) {
     }, [trendingStickers]);
     useEffect(function () {
         if (packages && packages.length > 0) {
-            setIsLoading(false);
+            if (params.limit) {
+                if (packages.length === params.limit) {
+                    setIsLoading(false);
+                }
+            }
+            else {
+                if (packages.length >= 20) {
+                    setIsLoading(false);
+                }
+            }
         }
         if (stickers && stickers.length > 0) {
             setIsLoading(false);
@@ -3947,14 +3956,20 @@ var StoreComponent = function (_a) {
             setDetail(true);
         });
     };
-    return (React__default.createElement(React__default.Fragment, null, isLoading ? (React__default.createElement(StoreWrapper, { color: color, size: size, border: border },
-        React__default.createElement("div", { style: {
-                height: '100%',
-                display: 'flex',
-                justifyContent: ' center',
-                alignItems: 'center',
-            } },
-            React__default.createElement("span", null, "loading")))) : (React__default.createElement(StoreWrapper, { color: color, size: size, border: border },
+    return (React__default.createElement(React__default.Fragment, null, !isLoading && (
+    // <StoreWrapper color={color} size={size} border={border}>
+    //   <div
+    //     style={{
+    //       height: '100%',
+    //       display: 'flex',
+    //       justifyContent: ' center',
+    //       alignItems: 'center',
+    //     }}
+    //   >
+    //     <span>loading</span>
+    //   </div>
+    // </StoreWrapper>
+    React__default.createElement(StoreWrapper, { color: color, size: size, border: border },
         React__default.createElement(StoreTitle, null,
             detail ? (React__default.createElement("div", { className: "title-text" },
                 React__default.createElement(PreviousBtn, null,
