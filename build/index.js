@@ -3910,13 +3910,19 @@ var StoreComponent = function (_a) {
     }, []);
     React.useEffect(function () {
         setPackages(trendingStickers[0]);
-        if (packages.length > 0) {
-            setIsLoading(false);
+        if (packages) {
+            if (params.limit) {
+                if (packages.length === params.limit) {
+                    setIsLoading(false);
+                }
+            }
+            else {
+                if (packages.length === 20) {
+                    setIsLoading(false);
+                }
+            }
         }
     }, [trendingStickers]);
-    React.useEffect(function () {
-        setIsLoading(false);
-    }, [packages]);
     var clickDownload = function (packageId) {
         setIsLoading(true);
         var dParams = {
@@ -3972,9 +3978,7 @@ var StoreComponent = function (_a) {
         });
     };
     React.useEffect(function () {
-        if (stickers.length > 0) {
-            setIsLoading(false);
-        }
+        setIsLoading(false);
     }, [stickers]);
     return (React__default["default"].createElement(React__default["default"].Fragment, null, isLoading ? (React__default["default"].createElement(StoreWrapper, { color: color, size: size, border: border },
         React__default["default"].createElement("div", { style: {
