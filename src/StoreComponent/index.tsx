@@ -80,7 +80,7 @@ const StoreComponent: React.FC<StoreProps> = ({
       if (params.limit) {
         console.log(packages.length)
         console.log(params.limit)
-        if (packages.length === params.limit) {
+        if (packages.length >= params.limit) {
           setIsLoading(false)
           return
         }

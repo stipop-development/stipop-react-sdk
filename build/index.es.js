@@ -3896,7 +3896,7 @@ var StoreComponent = function (_a) {
             if (params.limit) {
                 console.log(packages.length);
                 console.log(params.limit);
-                if (packages.length === params.limit) {
+                if (packages.length >= params.limit) {
                     setIsLoading(false);
                     return;
                 }
