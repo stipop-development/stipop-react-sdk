@@ -3914,6 +3914,9 @@ var StoreComponent = function (_a) {
             setIsLoading(false);
         }
     }, [trendingStickers]);
+    React.useEffect(function () {
+        setIsLoading(false);
+    }, [packages]);
     var clickDownload = function (packageId) {
         setIsLoading(true);
         var dParams = {

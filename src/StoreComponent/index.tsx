@@ -72,6 +72,10 @@ const StoreComponent: React.FC<StoreProps> = ({
     }
   }, [trendingStickers])
 
+  useEffect(() => {
+    setIsLoading(false)
+  }, [packages])
+
   const clickDownload = packageId => {
     setIsLoading(true)
     const dParams = {
