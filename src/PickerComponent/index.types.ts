@@ -30,4 +30,5 @@ interface Menu {
   backgroundColor?: string
   bottomLine?: string
   selectedLine?: string
+  height?: number
 }

@@ -41,6 +41,7 @@ export const CustomStore = () => (
       deleteBtn: 'blue',
       deleteBtnHover: '#ff4500',
       recoveryBtnHover: 'blue',
+      packageHoverColor: 'black',
     }}
     size={{
       detailImg: 70,

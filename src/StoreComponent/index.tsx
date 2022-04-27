@@ -60,7 +60,7 @@ const StoreComponent: React.FC<StoreProps> = ({
 
     const hideData = client.myStickerHideList(hideParams)
     hideData.then(({ body }) => {
-      console.log(body.packageList)
+      // console.log(body.packageList)
       setHideList(body.packageList.map(pack => pack.packageId))
     })
   }, [detail])
@@ -376,7 +376,8 @@ const DetailBox = styled.div`
   position: relative;
 `
 const MainImg = styled.img`
-  width: 100px;
+  width: ${props =>
+    props.size && props.size.mainImg ? `${props.size.mainImg}px` : '100px'};
   margin-right: 12px;
 `
 const DetailName = styled.div`
@@ -424,10 +425,24 @@ const PackageBox = styled.div`
       ? props.color && props.color.downloadedColor
         ? props.color.downloadedColor
         : '#f5f6f6'
+      : props.color && props.color.backgroundColor
+      ? props.color.backgroundColor
       : '#fff'};
   position: relative;
 
   &:hover {
+    background-color: ${props =>
+      props.isDownload
+        ? props.color && props.color.downloadedHoverColor
+          ? props.color.downloadedHoverColor
+          : props.color && props.color.downloadedColor
+          ? props.color.downloadedColor
+          : '#f5f6f6'
+        : props.color && props.color.packageHoverColor
+        ? props.color.packageHoverColor
+        : props.color && props.color.backgroundColor
+        ? props.color.backgroundColor
+        : '#fff'};
     box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.1) inset;
     cursor: pointer;
   }

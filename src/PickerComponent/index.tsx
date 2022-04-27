@@ -65,7 +65,7 @@ const PickerComponent: React.FC<StoreProps> = ({
 
   return (
     <StoreWrapper size={size} border={border}>
-      <StoreMenu backgroundColor={backgroundColor} border={border} menu={menu}>
+      <PickerMenu backgroundColor={backgroundColor} border={border} menu={menu}>
         <Icon type="TIME" />
         <Icon type="STORE" onClick={() => storeClick(true)} />
         {myStickers.length > 0 ? (
@@ -88,7 +88,7 @@ const PickerComponent: React.FC<StoreProps> = ({
         ) : (
           <div></div>
         )}
-      </StoreMenu>
+      </PickerMenu>
       {stickers && (
         <StickerWrapper
           backgroundColor={backgroundColor}
@@ -98,6 +98,7 @@ const PickerComponent: React.FC<StoreProps> = ({
         >
           {stickers.map((sticker, index) => (
             <StickerImg
+              size={size}
               src={sticker}
               alt=""
               key={index}
@@ -128,8 +129,9 @@ const StoreWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `
-const StoreMenu = styled.div`
-  height: 45px;
+const PickerMenu = styled.div`
+  height: ${props =>
+    props.menu && props.menu.height ? `${props.menu.height}px` : '45px'};
   border-bottom: ${props =>
     props.menu && props.menu.bottomLine
       ? props.menu.bottomLine
@@ -207,6 +209,7 @@ const StickerWrapper = styled.div`
   }
 `
 const StickerImg = styled.img`
-  width: 70%;
+  width: ${props =>
+    props.size && props.size.imgSize ? `${props.size.imgSize}%` : '70%'};
   cursor: pointer;
 `

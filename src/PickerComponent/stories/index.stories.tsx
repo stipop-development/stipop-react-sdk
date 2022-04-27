@@ -11,9 +11,19 @@ export const Picker = () => (
       apikey: '3bbe419e29e0e4728474e52a965154fb',
       userId: 'david@stipop.io',
     }}
+  />
+)
+
+export const CustomPicker = () => (
+  <PickerComponent
+    params={{
+      apikey: '3bbe419e29e0e4728474e52a965154fb',
+      userId: 'david@stipop.io',
+    }}
     size={{
       width: 500,
       height: 400,
+      imgSize: 60,
     }}
     border={{
       border: '2px solid black',
@@ -24,9 +34,10 @@ export const Picker = () => (
       selectedLine: '3px solid white',
       backgroundColor: '#ededed',
       bottomLine: '2px solid black',
+      height: 70,
     }}
     column={5}
     scroll={false}
-    stickerClick={sticker => console.log(sticker)}
+    stickerClick={url => console.log(url)}
   />
 )

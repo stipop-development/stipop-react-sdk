@@ -3766,7 +3766,7 @@ var PickerComponent = function (_a) {
         });
     };
     return (React__default.createElement(StoreWrapper$1, { size: size, border: border },
-        React__default.createElement(StoreMenu, { backgroundColor: backgroundColor, border: border, menu: menu },
+        React__default.createElement(PickerMenu, { backgroundColor: backgroundColor, border: border, menu: menu },
             React__default.createElement(Icon, { type: "TIME" }),
             React__default.createElement(Icon, { type: "STORE", onClick: function () { return storeClick(true); } }),
             myStickers.length > 0 ? (myStickers.map(function (pack, index) {
@@ -3776,7 +3776,7 @@ var PickerComponent = function (_a) {
                     }, show: showPackage === index },
                     React__default.createElement(PackageImg, { src: pack.packageImg })));
             })) : (React__default.createElement("div", null))),
-        stickers && (React__default.createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll }, stickers.map(function (sticker, index) { return (React__default.createElement(StickerImg, { src: sticker, alt: "", key: index, onClick: function () { return stickerClick(sticker); } })); })))));
+        stickers && (React__default.createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll }, stickers.map(function (sticker, index) { return (React__default.createElement(StickerImg, { size: size, src: sticker, alt: "", key: index, onClick: function () { return stickerClick(sticker); } })); })))));
 };
 var StoreWrapper$1 = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
@@ -3791,7 +3791,9 @@ var StoreWrapper$1 = styled.div(templateObject_1$1 || (templateObject_1$1 = __ma
         ? "".concat(props.border.radius, "px")
         : '10px';
 });
-var StoreMenu = styled.div(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  height: 45px;\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  padding: 0 10px;\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    cursor: pointer;\n  }\n"], ["\n  height: 45px;\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  padding: 0 10px;\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    cursor: pointer;\n  }\n"])), function (props) {
+var PickerMenu = styled.div(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  height: ", ";\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  padding: 0 10px;\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    cursor: pointer;\n  }\n"], ["\n  height: ", ";\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  padding: 0 10px;\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    cursor: pointer;\n  }\n"])), function (props) {
+    return props.menu && props.menu.height ? "".concat(props.menu.height, "px") : '45px';
+}, function (props) {
     return props.menu && props.menu.bottomLine
         ? props.menu.bottomLine
         : '1px solid lightgray';
@@ -3829,7 +3831,9 @@ var StickerWrapper$1 = styled.div(templateObject_5$1 || (templateObject_5$1 = __
         ? "".concat(props.border.radius, "px")
         : '10px';
 }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); });
-var StickerImg = styled.img(templateObject_6$1 || (templateObject_6$1 = __makeTemplateObject(["\n  width: 70%;\n  cursor: pointer;\n"], ["\n  width: 70%;\n  cursor: pointer;\n"])));
+var StickerImg = styled.img(templateObject_6$1 || (templateObject_6$1 = __makeTemplateObject(["\n  width: ", ";\n  cursor: pointer;\n"], ["\n  width: ", ";\n  cursor: pointer;\n"])), function (props) {
+    return props.size && props.size.imgSize ? "".concat(props.size.imgSize, "%") : '70%';
+});
 var templateObject_1$1, templateObject_2$1, templateObject_3$1, templateObject_4$1, templateObject_5$1, templateObject_6$1;
 
 var StoreComponent = function (_a) {
@@ -3873,7 +3877,7 @@ var StoreComponent = function (_a) {
         var hideData = client.myStickerHideList(hideParams);
         hideData.then(function (_a) {
             var body = _a.body;
-            console.log(body.packageList);
+            // console.log(body.packageList)
             setHideList(body.packageList.map(function (pack) { return pack.packageId; }));
         });
     }, [detail]);
@@ -4012,18 +4016,34 @@ var PackageContainer = styled.div(templateObject_5 || (templateObject_5 = __make
 }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); });
 var DetailWrapper = styled.div(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  width: 100%;\n  margin-bottom: 32px;\n  overflow-y: auto;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  width: 100%;\n  margin-bottom: 32px;\n  overflow-y: auto;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); });
 var DetailBox = styled.div(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  display: flex;\n  padding: 0 32px;\n  margin-bottom: 15px;\n  align-items: center;\n  position: relative;\n"], ["\n  display: flex;\n  padding: 0 32px;\n  margin-bottom: 15px;\n  align-items: center;\n  position: relative;\n"])));
-var MainImg = styled.img(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n  width: 100px;\n  margin-right: 12px;\n"], ["\n  width: 100px;\n  margin-right: 12px;\n"])));
+var MainImg = styled.img(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n  width: ", ";\n  margin-right: 12px;\n"], ["\n  width: ", ";\n  margin-right: 12px;\n"])), function (props) {
+    return props.size && props.size.mainImg ? "".concat(props.size.mainImg, "px") : '100px';
+});
 var DetailName = styled.div(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n  .packageName {\n    font-size: 14px;\n    font-weight: bold;\n  }\n  .artistName {\n    font-size: 10px;\n    color: #a9a9a9;\n  }\n"], ["\n  .packageName {\n    font-size: 14px;\n    font-weight: bold;\n  }\n  .artistName {\n    font-size: 10px;\n    color: #a9a9a9;\n  }\n"])));
 var DetailStickerWrapper = styled.div(templateObject_10 || (templateObject_10 = __makeTemplateObject(["\n  padding: 0 32px;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-auto-rows: 100px;\n  justify-items: center;\n  align-items: center;\n  row-gap: 2%;\n\n  img {\n    width: ", ";\n    &:hover {\n      transform: scale(1.3);\n    }\n  }\n"], ["\n  padding: 0 32px;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-auto-rows: 100px;\n  justify-items: center;\n  align-items: center;\n  row-gap: 2%;\n\n  img {\n    width: ", ";\n    &:hover {\n      transform: scale(1.3);\n    }\n  }\n"])), function (props) {
     return props.size && props.size.detailImg ? "".concat(props.size.detailImg, "%") : '70%';
 });
 var PackageWrapper = styled.div(templateObject_11 || (templateObject_11 = __makeTemplateObject(["\n  width: 100%;\n  height: 33%;\n  display: block;\n"], ["\n  width: 100%;\n  height: 33%;\n  display: block;\n"])));
-var PackageBox = styled.div(templateObject_12 || (templateObject_12 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  padding: 0 32px;\n  box-sizing: border-box;\n  background-color: ", ";\n  position: relative;\n\n  &:hover {\n    box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.1) inset;\n    cursor: pointer;\n  }\n"], ["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  padding: 0 32px;\n  box-sizing: border-box;\n  background-color: ", ";\n  position: relative;\n\n  &:hover {\n    box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.1) inset;\n    cursor: pointer;\n  }\n"])), function (props) {
+var PackageBox = styled.div(templateObject_12 || (templateObject_12 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  padding: 0 32px;\n  box-sizing: border-box;\n  background-color: ", ";\n  position: relative;\n\n  &:hover {\n    background-color: ", ";\n    box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.1) inset;\n    cursor: pointer;\n  }\n"], ["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  padding: 0 32px;\n  box-sizing: border-box;\n  background-color: ", ";\n  position: relative;\n\n  &:hover {\n    background-color: ", ";\n    box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.1) inset;\n    cursor: pointer;\n  }\n"])), function (props) {
     return props.isDownload
         ? props.color && props.color.downloadedColor
             ? props.color.downloadedColor
             : '#f5f6f6'
-        : '#fff';
+        : props.color && props.color.backgroundColor
+            ? props.color.backgroundColor
+            : '#fff';
+}, function (props) {
+    return props.isDownload
+        ? props.color && props.color.downloadedHoverColor
+            ? props.color.downloadedHoverColor
+            : props.color && props.color.downloadedColor
+                ? props.color.downloadedColor
+                : '#f5f6f6'
+        : props.color && props.color.packageHoverColor
+            ? props.color.packageHoverColor
+            : props.color && props.color.backgroundColor
+                ? props.color.backgroundColor
+                : '#fff';
 });
 var DownloadBtn = styled.div(templateObject_13 || (templateObject_13 = __makeTemplateObject(["\n  width: 32px;\n  height: 32px;\n  background-color: ", ";\n  border-radius: 50%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  right: 32px;\n\n  .stipop-icon {\n    width: 32px;\n    height: 32px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n\n  &:hover {\n    cursor: pointer;\n    background-color: ", ";\n  }\n"], ["\n  width: 32px;\n  height: 32px;\n  background-color: ", ";\n  border-radius: 50%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  right: 32px;\n\n  .stipop-icon {\n    width: 32px;\n    height: 32px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n\n  &:hover {\n    cursor: pointer;\n    background-color: ", ";\n  }\n"])), function (props) {
     return props.isDownload

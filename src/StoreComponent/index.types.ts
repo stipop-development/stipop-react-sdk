@@ -27,7 +27,9 @@ interface Params {
 
 interface Color {
     backgroundColor?: string
+    packageHoverColor?: string
     downloadedColor?: string
+    downloadedHoverColor?: string
     downloadBtn?: string
     downloadBtnHover?: string
     deleteBtn?: string
@@ -41,6 +43,7 @@ interface Size {
     height?: number
     previewImg?: number
     detailImg?: number
+    mainImg?: number
 }
 
 interface Border {
