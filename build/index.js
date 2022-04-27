@@ -3870,10 +3870,9 @@ var StoreComponent = function (_a) {
     var _e = React.useState([]), stickers = _e[0], setStickers = _e[1];
     var _f = React.useState(null), main = _f[0], setMain = _f[1];
     var _g = React.useState([]), hideList = _g[0], setHideList = _g[1];
-    var _h = React.useState(false), isLoading = _h[0], setIsLoading = _h[1];
+    var _h = React.useState(true), isLoading = _h[0], setIsLoading = _h[1];
     var client = new Stipop$1(params.apikey, 'v1');
     React.useEffect(function () {
-        setIsLoading(true);
         var packInfo = new Array();
         var trendingParams = {
             userId: params.userId,
@@ -3907,12 +3906,12 @@ var StoreComponent = function (_a) {
             var body = _a.body;
             // console.log(body.packageList)
             setHideList(body.packageList.map(function (pack) { return pack.packageId; }));
-            setIsLoading(false);
         });
     }, [detail]);
     React.useEffect(function () {
         trendingStickers.map(function (trend) { return setPackages(trend); });
         // console.log(packages)
+        setIsLoading(false);
     }, [trendingStickers]);
     var clickDownload = function (packageId) {
         var dParams = {

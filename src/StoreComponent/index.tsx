@@ -21,12 +21,11 @@ const StoreComponent: React.FC<StoreProps> = ({
   const [stickers, setStickers] = useState([])
   const [main, setMain] = useState(null)
   const [hideList, setHideList] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   const client = new (Stipop as any)(params.apikey, 'v1')
 
   useEffect(() => {
-    setIsLoading(true)
     const packInfo = new Array()
 
     const trendingParams = {
@@ -63,13 +62,13 @@ const StoreComponent: React.FC<StoreProps> = ({
     hideData.then(({ body }) => {
       // console.log(body.packageList)
       setHideList(body.packageList.map(pack => pack.packageId))
-      setIsLoading(false)
     })
   }, [detail])
 
   useEffect(() => {
     trendingStickers.map(trend => setPackages(trend))
     // console.log(packages)
+    setIsLoading(false)
   }, [trendingStickers])
 
   const clickDownload = packageId => {
