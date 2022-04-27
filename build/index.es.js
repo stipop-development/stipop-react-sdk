@@ -4006,7 +4006,9 @@ var StoreComponent = function (_a) {
                                 : 'PLUS'
                             : 'PLUS' }))),
             React__default.createElement(DetailStickerWrapper, { size: size }, stickers &&
-                stickers.map(function (sticker, index) { return (React__default.createElement("img", { src: sticker.stickerImg, alt: "", key: index })); })))) : packages && packages.length > 0 ? (React__default.createElement(PackageWrapper, { size: size }, packages.map(function (pack, index) { return (React__default.createElement(PackageBox, { key: index, color: color, isDownload: pack.isDownload === 'Y', onClick: function (e) {
+                stickers.map(function (sticker, index) { return (React__default.createElement("img", { src: "".concat(sticker.stickerImg, "?d=100x100"), 
+                    // src={sticker.stickerImg}
+                    alt: "", key: index })); })))) : packages && packages.length > 0 ? (React__default.createElement(PackageWrapper, { size: size }, packages.map(function (pack, index) { return (React__default.createElement(PackageBox, { key: index, color: color, isDownload: pack.isDownload === 'Y', onClick: function (e) {
                 if (e.target.id !== 'download-btn') {
                     clickDetail(pack.packageId);
                     setMain({
@@ -4026,7 +4028,9 @@ var StoreComponent = function (_a) {
             React__default.createElement(PackageItem, null, pack && pack.stickers ? (pack.stickers.map(function (sticker, index) {
                 if (index < 5) {
                     return (React__default.createElement(StickerWrapper, { key: index },
-                        React__default.createElement(Sticker, { src: sticker.stickerImg, alt: "", size: size })));
+                        React__default.createElement(Sticker, { src: "".concat(sticker.stickerImg, "?d=100x100"), 
+                            // src={sticker.stickerImg}
+                            alt: "", size: size })));
                 }
             })) : (React__default.createElement("div", null))),
             React__default.createElement(DownloadBtn, { color: color, isDownload: pack.isDownload === 'Y', isRecovery: pack.isDownload === 'Y' &&

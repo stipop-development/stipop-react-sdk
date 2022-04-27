@@ -239,7 +239,12 @@ const StoreComponent: React.FC<StoreProps> = ({
                 <DetailStickerWrapper size={size}>
                   {stickers &&
                     stickers.map((sticker, index) => (
-                      <img src={sticker.stickerImg} alt="" key={index} />
+                      <img
+                        src={`${sticker.stickerImg}?d=100x100`}
+                        // src={sticker.stickerImg}
+                        alt=""
+                        key={index}
+                      />
                     ))}
                 </DetailStickerWrapper>
               </DetailWrapper>
@@ -274,7 +279,8 @@ const StoreComponent: React.FC<StoreProps> = ({
                             return (
                               <StickerWrapper key={index}>
                                 <Sticker
-                                  src={sticker.stickerImg}
+                                  src={`${sticker.stickerImg}?d=100x100`}
+                                  // src={sticker.stickerImg}
                                   alt=""
                                   size={size}
                                 />
