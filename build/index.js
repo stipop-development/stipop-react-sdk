@@ -3907,7 +3907,6 @@ var StoreComponent = function (_a) {
         hideData.then(function (_a) {
             var body = _a.body;
             setHideList(body.packageList.map(function (pack) { return pack.packageId; }));
-            setIsLoading(false);
         });
     }, []);
     React.useEffect(function () {
@@ -3978,82 +3977,77 @@ var StoreComponent = function (_a) {
     React.useEffect(function () {
         console.log(isLoading);
     }, [isLoading]);
-    return (React__default["default"].createElement(React__default["default"].Fragment, null, isLoading ? (React__default["default"].createElement(StoreWrapper, { color: color, size: size, border: border },
-        React__default["default"].createElement("div", { style: {
-                height: '100%',
-                display: 'flex',
-                justifyContent: ' center',
-                alignItems: 'center',
-            } },
-            React__default["default"].createElement("span", null, "loading")))) : (React__default["default"].createElement(StoreWrapper, { color: color, size: size, border: border },
-        React__default["default"].createElement(StoreTitle, null,
-            detail ? (React__default["default"].createElement("div", { className: "title-text" },
-                React__default["default"].createElement(PreviousBtn, null,
-                    React__default["default"].createElement(Icon, { type: "PREVIOUS", onClick: function () { return setDetail(false); } })),
-                React__default["default"].createElement("span", null, "Sticker Pack"))) : (React__default["default"].createElement("div", { className: "title-text" },
-                React__default["default"].createElement("span", null, "Sticker Store"),
-                React__default["default"].createElement(Icon, { type: "STORE_BLACK" }))),
-            React__default["default"].createElement(CloseBtn, { onClick: function () { return onClose(true); } },
-                React__default["default"].createElement(Icon, { type: "CLOSE" }))),
-        React__default["default"].createElement(PackageContainer, { detail: detail, color: color, scroll: scroll, border: border, onScroll: function (e) { return setCurrentScroll(e.target.scrollTop); } }, detail ? (React__default["default"].createElement(DetailWrapper, { scroll: scroll },
-            React__default["default"].createElement(DetailBox, null,
-                React__default["default"].createElement(MainImg, { src: main.packageImg, alt: "" }),
-                React__default["default"].createElement(DetailName, null,
-                    React__default["default"].createElement("div", { className: "packageName" }, main.packageName),
-                    React__default["default"].createElement("div", { className: "artistName" },
+    return (React__default["default"].createElement(React__default["default"].Fragment, null,
+        React__default["default"].createElement(StoreWrapper, { color: color, size: size, border: border },
+            React__default["default"].createElement(StoreTitle, null,
+                detail ? (React__default["default"].createElement("div", { className: "title-text" },
+                    React__default["default"].createElement(PreviousBtn, null,
+                        React__default["default"].createElement(Icon, { type: "PREVIOUS", onClick: function () { return setDetail(false); } })),
+                    React__default["default"].createElement("span", null, "Sticker Pack"))) : (React__default["default"].createElement("div", { className: "title-text" },
+                    React__default["default"].createElement("span", null, "Sticker Store"),
+                    React__default["default"].createElement(Icon, { type: "STORE_BLACK" }))),
+                React__default["default"].createElement(CloseBtn, { onClick: function () { return onClose(true); } },
+                    React__default["default"].createElement(Icon, { type: "CLOSE" }))),
+            React__default["default"].createElement(PackageContainer, { detail: detail, color: color, scroll: scroll, border: border, onScroll: function (e) { return setCurrentScroll(e.target.scrollTop); } }, detail ? (React__default["default"].createElement(DetailWrapper, { scroll: scroll },
+                React__default["default"].createElement(DetailBox, null,
+                    React__default["default"].createElement(MainImg, { src: main.packageImg, alt: "" }),
+                    React__default["default"].createElement(DetailName, null,
+                        React__default["default"].createElement("div", { className: "packageName" }, main.packageName),
+                        React__default["default"].createElement("div", { className: "artistName" },
+                            "\u00A9",
+                            main.artistName)),
+                    React__default["default"].createElement(DownloadBtn, { color: color, isDownload: main.isDownload === 'Y', isRecovery: main.isDownload === 'Y' &&
+                            hideList.indexOf(main.packageId) !== -1, onClick: function () {
+                            main.isDownload === 'Y'
+                                ? clickDelete(main.packageId)
+                                : clickDownload(main.packageId);
+                        } },
+                        React__default["default"].createElement(Icon, { type: main.isDownload === 'Y'
+                                ? hideList.indexOf(main.packageId) < 0
+                                    ? 'MINUS'
+                                    : 'PLUS'
+                                : 'PLUS' }))),
+                React__default["default"].createElement(DetailStickerWrapper, { size: size }, stickers &&
+                    !isLoading &&
+                    stickers.map(function (sticker, index) { return (React__default["default"].createElement("img", { src: sticker.stickerImg, alt: "", key: index })); })))) : packages && packages.length > 0 && !isLoading ? (React__default["default"].createElement(PackageWrapper, { size: size }, packages.map(function (pack, index) { return (React__default["default"].createElement(PackageBox, { key: index, color: color, isDownload: pack.isDownload === 'Y', onClick: function (e) {
+                    if (e.target.id !== 'download-btn') {
+                        clickDetail(pack.packageId);
+                        setMain({
+                            packageId: pack.packageId,
+                            packageImg: pack.packageImg,
+                            packageName: pack.packageName,
+                            artistName: pack.artistName,
+                            isDownload: pack.isDownload,
+                        });
+                    }
+                } },
+                React__default["default"].createElement(PackageTitle, null,
+                    pack.packageName,
+                    React__default["default"].createElement("span", null,
                         "\u00A9",
-                        main.artistName)),
-                React__default["default"].createElement(DownloadBtn, { color: color, isDownload: main.isDownload === 'Y', isRecovery: main.isDownload === 'Y' &&
-                        hideList.indexOf(main.packageId) !== -1, onClick: function () {
-                        main.isDownload === 'Y'
-                            ? clickDelete(main.packageId)
-                            : clickDownload(main.packageId);
+                        pack.artistName)),
+                React__default["default"].createElement(PackageItem, null, pack && pack.stickers && !isLoading ? (pack.stickers.map(function (sticker, index) {
+                    if (index < 5) {
+                        return (React__default["default"].createElement(StickerWrapper, { key: index },
+                            React__default["default"].createElement(Sticker, { src: sticker.stickerImg, alt: "", size: size })));
+                    }
+                })) : (React__default["default"].createElement("div", null))),
+                React__default["default"].createElement(DownloadBtn, { color: color, isDownload: pack.isDownload === 'Y', isRecovery: pack.isDownload === 'Y' &&
+                        hideList.indexOf(pack.packageId) !== -1, onClick: function () {
+                        pack.isDownload === 'Y'
+                            ? clickDelete(pack.packageId)
+                            : clickDownload(pack.packageId);
                     } },
-                    React__default["default"].createElement(Icon, { type: main.isDownload === 'Y'
-                            ? hideList.indexOf(main.packageId) < 0
+                    React__default["default"].createElement(Icon, { type: pack.isDownload === 'Y'
+                            ? hideList.indexOf(pack.packageId) < 0
                                 ? 'MINUS'
                                 : 'PLUS'
-                            : 'PLUS' }))),
-            React__default["default"].createElement(DetailStickerWrapper, { size: size }, stickers &&
-                stickers.map(function (sticker, index) { return (React__default["default"].createElement("img", { src: sticker.stickerImg, alt: "", key: index })); })))) : packages && packages.length > 0 ? (React__default["default"].createElement(PackageWrapper, { size: size }, packages.map(function (pack, index) { return (React__default["default"].createElement(PackageBox, { key: index, color: color, isDownload: pack.isDownload === 'Y', onClick: function (e) {
-                if (e.target.id !== 'download-btn') {
-                    clickDetail(pack.packageId);
-                    setMain({
-                        packageId: pack.packageId,
-                        packageImg: pack.packageImg,
-                        packageName: pack.packageName,
-                        artistName: pack.artistName,
-                        isDownload: pack.isDownload,
-                    });
-                }
-            } },
-            React__default["default"].createElement(PackageTitle, null,
-                pack.packageName,
-                React__default["default"].createElement("span", null,
-                    "\u00A9",
-                    pack.artistName)),
-            React__default["default"].createElement(PackageItem, null, pack && pack.stickers ? (pack.stickers.map(function (sticker, index) {
-                if (index < 5) {
-                    return (React__default["default"].createElement(StickerWrapper, { key: index },
-                        React__default["default"].createElement(Sticker, { src: sticker.stickerImg, alt: "", size: size })));
-                }
-            })) : (React__default["default"].createElement("div", null))),
-            React__default["default"].createElement(DownloadBtn, { color: color, isDownload: pack.isDownload === 'Y', isRecovery: pack.isDownload === 'Y' &&
-                    hideList.indexOf(pack.packageId) !== -1, onClick: function () {
-                    pack.isDownload === 'Y'
-                        ? clickDelete(pack.packageId)
-                        : clickDownload(pack.packageId);
-                } },
-                React__default["default"].createElement(Icon, { type: pack.isDownload === 'Y'
-                        ? hideList.indexOf(pack.packageId) < 0
-                            ? 'MINUS'
-                            : 'PLUS'
-                        : 'PLUS' })),
-            React__default["default"].createElement(BtnWrapper, { id: "download-btn", onClick: function () {
-                    pack.isDownload === 'Y'
-                        ? clickDelete(pack.packageId)
-                        : clickDownload(pack.packageId);
-                } }))); }))) : (React__default["default"].createElement("div", null)))))));
+                            : 'PLUS' })),
+                React__default["default"].createElement(BtnWrapper, { id: "download-btn", onClick: function () {
+                        pack.isDownload === 'Y'
+                            ? clickDelete(pack.packageId)
+                            : clickDownload(pack.packageId);
+                    } }))); }))) : (React__default["default"].createElement("div", null))))));
 };
 var StoreWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: #fff;\n  border: ", ";\n  border-radius: ", ";\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  background-color: ", ";\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: #fff;\n  border: ", ";\n  border-radius: ", ";\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  background-color: ", ";\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '600px';
