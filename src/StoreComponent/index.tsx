@@ -71,15 +71,7 @@ const StoreComponent: React.FC<StoreProps> = ({
 
   useEffect(() => {
     if (packages && packages.length > 0) {
-      if (params.limit) {
-        if (packages.length === params.limit) {
-          setIsLoading(false)
-        }
-      } else {
-        if (packages.length >= 20) {
-          setIsLoading(false)
-        }
-      }
+      setIsLoading(false)
     }
     if (stickers && stickers.length > 0) {
       setIsLoading(false)
@@ -147,21 +139,26 @@ const StoreComponent: React.FC<StoreProps> = ({
     })
   }
 
+  useEffect(() => {
+    console.log(isLoading)
+  }, [isLoading])
+
   return (
     <>
-      {!isLoading && (
-        // <StoreWrapper color={color} size={size} border={border}>
-        //   <div
-        //     style={{
-        //       height: '100%',
-        //       display: 'flex',
-        //       justifyContent: ' center',
-        //       alignItems: 'center',
-        //     }}
-        //   >
-        //     <span>loading</span>
-        //   </div>
-        // </StoreWrapper>
+      {isLoading ? (
+        <StoreWrapper color={color} size={size} border={border}>
+          <div
+            style={{
+              height: '100%',
+              display: 'flex',
+              justifyContent: ' center',
+              alignItems: 'center',
+            }}
+          >
+            <span>loading</span>
+          </div>
+        </StoreWrapper>
+      ) : (
         <StoreWrapper color={color} size={size} border={border}>
           <StoreTitle>
             {detail ? (
