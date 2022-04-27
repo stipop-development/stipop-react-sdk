@@ -3885,8 +3885,10 @@ var StoreComponent = function (_a) {
     useEffect(function () {
         trendingStickers.map(function (trend) { return setPackages(trend); });
         // console.log(packages)
-        setIsLoading(false);
     }, [trendingStickers]);
+    useEffect(function () {
+        setIsLoading(false);
+    }, [packages]);
     var clickDownload = function (packageId) {
         var dParams = {
             userId: params.userId,
@@ -3920,7 +3922,8 @@ var StoreComponent = function (_a) {
         };
         client.myStickerHide(deleteParams);
     };
-    return (React__default.createElement(React__default.Fragment, null, isLoading ? (React__default.createElement(StoreWrapper, null)) : (React__default.createElement(StoreWrapper, { color: color, size: size, border: border },
+    return (React__default.createElement(React__default.Fragment, null, isLoading ? (React__default.createElement(StoreWrapper, null,
+        React__default.createElement("div", null, "loading"))) : (React__default.createElement(StoreWrapper, { color: color, size: size, border: border },
         React__default.createElement(StoreTitle, null,
             detail ? (React__default.createElement("div", { className: "title-text" },
                 React__default.createElement(PreviousBtn, null,

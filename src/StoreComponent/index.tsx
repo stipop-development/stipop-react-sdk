@@ -68,8 +68,11 @@ const StoreComponent: React.FC<StoreProps> = ({
   useEffect(() => {
     trendingStickers.map(trend => setPackages(trend))
     // console.log(packages)
-    setIsLoading(false)
   }, [trendingStickers])
+
+  useEffect(() => {
+    setIsLoading(false)
+  }, [packages])
 
   const clickDownload = packageId => {
     const dParams = {
@@ -113,7 +116,9 @@ const StoreComponent: React.FC<StoreProps> = ({
   return (
     <>
       {isLoading ? (
-        <StoreWrapper></StoreWrapper>
+        <StoreWrapper>
+          <div>loading</div>
+        </StoreWrapper>
       ) : (
         <StoreWrapper color={color} size={size} border={border}>
           <StoreTitle>
