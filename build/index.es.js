@@ -4115,11 +4115,7 @@ var StoreComponent = function (_a) {
                 }
             })) : (React__default.createElement("div", null))),
             React__default.createElement(DownloadBtn, { color: color, isDownload: pack.isDownload === 'Y', isRecovery: pack.isDownload === 'Y' &&
-                    hideList.indexOf(pack.packageId) !== -1, onClick: function () {
-                    pack.isDownload === 'Y'
-                        ? clickDelete(pack.packageId)
-                        : clickDownload(pack.packageId);
-                } },
+                    hideList.indexOf(pack.packageId) !== -1 },
                 React__default.createElement(Icon, { type: pack.isDownload === 'Y'
                         ? hideList.indexOf(pack.packageId) < 0
                             ? 'MINUS'

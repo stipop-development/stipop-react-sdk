@@ -285,11 +285,6 @@ const StoreComponent: React.FC<StoreProps> = ({
                         pack.isDownload === 'Y' &&
                         hideList.indexOf(pack.packageId) !== -1
                       }
-                      onClick={() => {
-                        pack.isDownload === 'Y'
-                          ? clickDelete(pack.packageId)
-                          : clickDownload(pack.packageId)
-                      }}
                     >
                       <Icon
                         type={
