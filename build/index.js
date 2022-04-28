@@ -4002,9 +4002,7 @@ var StoreComponent = function (_a) {
                 case 3:
                     pack = _a.sent();
                     console.log(pack);
-                    return [4 /*yield*/, pack.scrollTo(0, currentScroll)];
-                case 4:
-                    _a.sent();
+                    // await pack.scrollTo(0, currentScroll)
                     if (!isLoading) {
                         console.log(pack);
                         console.log(packageWrapper);
@@ -4055,9 +4053,7 @@ var StoreComponent = function (_a) {
                 case 3:
                     pack = _a.sent();
                     console.log(pack);
-                    return [4 /*yield*/, pack.scrollTo(0, currentScroll)];
-                case 4:
-                    _a.sent();
+                    // await pack.scrollTo(0, currentScroll)
                     if (!isLoading) {
                         console.log(pack);
                         console.log(packageWrapper);
