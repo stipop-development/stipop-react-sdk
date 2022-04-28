@@ -26,8 +26,6 @@ const StoreComponent: React.FC<StoreProps> = ({
   const client = new (Stipop as any)(params.apikey, 'v1')
   const packInfo = new Array()
 
-  const packageWrapper = document.getElementById('package-wrapper')
-
   useEffect(() => {
     setIsLoading(true)
     const trendingParams = {

@@ -3885,7 +3885,6 @@ var StoreComponent = function (_a) {
     var _h = useState(0), currentScroll = _h[0], setCurrentScroll = _h[1];
     var client = new Stipop$1(params.apikey, 'v1');
     var packInfo = new Array();
-    document.getElementById('package-wrapper');
     useEffect(function () {
         setIsLoading(true);
         var trendingParams = {
@@ -3901,7 +3900,6 @@ var StoreComponent = function (_a) {
             var body = _a.body;
             var PackageIds = body.packageList.map(function (pack) { return pack.packageId; });
             PackageIds.filter(function (item, index) { return PackageIds.indexOf(item) === index; });
-            console.log(PackageIds);
             // body.packageList.map(pack => {
             PackageIds.map(function (pack) {
                 var packageParams = {
@@ -3986,12 +3984,25 @@ var StoreComponent = function (_a) {
             pack.scrollTo(0, currentScroll);
         }
     }, [isLoading]);
-    var clickDetail = function (packageId) {
-        setIsLoading(true);
-        setStickers(packages.filter(function (pack) { return pack.packageId === packageId; })[0].stickers);
-        setDetail(true);
-        setIsLoading(false);
-    };
+    var clickDetail = function (packageId) { return __awaiter$1(void 0, void 0, void 0, function () {
+        return __generator$1(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, setIsLoading(true)];
+                case 1:
+                    _a.sent();
+                    return [4 /*yield*/, setStickers(packages.filter(function (pack) { return pack.packageId === packageId; })[0].stickers)];
+                case 2:
+                    _a.sent();
+                    return [4 /*yield*/, setDetail(true)];
+                case 3:
+                    _a.sent();
+                    return [4 /*yield*/, setIsLoading(false)];
+                case 4:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    }); };
     var clickPrevious = function () { return __awaiter$1(void 0, void 0, void 0, function () {
         var pack;
         return __generator$1(this, function (_a) {
