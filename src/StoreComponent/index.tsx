@@ -44,6 +44,7 @@ const StoreComponent: React.FC<StoreProps> = ({
     data.then(({ body }) => {
       const PackageIds = body.packageList.map(pack => pack.packageId)
       PackageIds.filter((item, index) => PackageIds.indexOf(item) === index)
+      console.log(PackageIds)
 
       // body.packageList.map(pack => {
       PackageIds.map(pack => {

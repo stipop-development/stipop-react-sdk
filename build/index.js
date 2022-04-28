@@ -3927,6 +3927,7 @@ var StoreComponent = function (_a) {
             var body = _a.body;
             var PackageIds = body.packageList.map(function (pack) { return pack.packageId; });
             PackageIds.filter(function (item, index) { return PackageIds.indexOf(item) === index; });
+            console.log(PackageIds);
             // body.packageList.map(pack => {
             PackageIds.map(function (pack) {
                 var packageParams = {
