@@ -103,9 +103,6 @@ const StoreComponent: React.FC<StoreProps> = ({
       )
       await setIsLoading(false)
     })
-    if (!isLoading) {
-      await packageWrapper.scrollTo(0, currentScroll)
-    }
   }
 
   const clickDelete = async packageId => {
@@ -124,9 +121,6 @@ const StoreComponent: React.FC<StoreProps> = ({
       }
       await setIsLoading(false)
     })
-    if (!isLoading) {
-      await packageWrapper.scrollTo(0, currentScroll)
-    }
   }
 
   const clickDetail = async packageId => {
@@ -309,10 +303,13 @@ const StoreComponent: React.FC<StoreProps> = ({
                     </DownloadBtn>
                     <BtnWrapper
                       id="download-btn"
-                      onClick={() => {
+                      onClick={async () => {
                         pack.isDownload === 'Y'
-                          ? clickDelete(pack.packageId)
-                          : clickDownload(pack.packageId)
+                          ? await clickDelete(pack.packageId)
+                          : await clickDownload(pack.packageId)
+                        const wrapper =
+                          document.getElementById('package-wrapper')
+                        await wrapper.scrollTo(0, currentScroll)
                       }}
                     ></BtnWrapper>
                   </PackageBox>
