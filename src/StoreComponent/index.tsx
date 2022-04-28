@@ -111,13 +111,12 @@ const StoreComponent: React.FC<StoreProps> = ({
         })
       )
       await setIsLoading(false)
-
-      if (!isLoading) {
-        const pack = document.getElementById('package-wrapper')
-        console.log(pack)
-        pack.scrollTo(0, currentScroll)
-      }
     })
+    if (!isLoading) {
+      const pack = document.getElementById('package-wrapper')
+      console.log(pack)
+      await pack.scrollTo(0, currentScroll)
+    }
   }
 
   const clickDelete = async packageId => {
@@ -135,13 +134,12 @@ const StoreComponent: React.FC<StoreProps> = ({
         setHideList(hideList.filter(item => item !== packageId))
       }
       await setIsLoading(false)
-
-      if (!isLoading) {
-        const pack = document.getElementById('package-wrapper')
-        console.log(pack)
-        pack.scrollTo(0, currentScroll)
-      }
     })
+    if (!isLoading) {
+      const pack = document.getElementById('package-wrapper')
+      console.log(pack)
+      await pack.scrollTo(0, currentScroll)
+    }
   }
 
   const clickDetail = async packageId => {

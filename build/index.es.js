@@ -3945,7 +3945,7 @@ var StoreComponent = function (_a) {
         // console.log(packages)
     }, [packages]);
     var clickDownload = function (packageId) { return __awaiter$1(void 0, void 0, void 0, function () {
-        var dParams, data;
+        var dParams, data, pack;
         return __generator$1(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, setIsLoading(true)];
@@ -3961,7 +3961,6 @@ var StoreComponent = function (_a) {
                     };
                     data = client.download(dParams);
                     return [4 /*yield*/, data.then(function () { return __awaiter$1(void 0, void 0, void 0, function () {
-                            var pack;
                             return __generator$1(this, function (_a) {
                                 switch (_a.label) {
                                     case 0:
@@ -3974,23 +3973,25 @@ var StoreComponent = function (_a) {
                                         return [4 /*yield*/, setIsLoading(false)];
                                     case 1:
                                         _a.sent();
-                                        if (!isLoading) {
-                                            pack = document.getElementById('package-wrapper');
-                                            console.log(pack);
-                                            pack.scrollTo(0, currentScroll);
-                                        }
                                         return [2 /*return*/];
                                 }
                             });
                         }); })];
                 case 2:
                     _a.sent();
-                    return [2 /*return*/];
+                    if (!!isLoading) return [3 /*break*/, 4];
+                    pack = document.getElementById('package-wrapper');
+                    console.log(pack);
+                    return [4 /*yield*/, pack.scrollTo(0, currentScroll)];
+                case 3:
+                    _a.sent();
+                    _a.label = 4;
+                case 4: return [2 /*return*/];
             }
         });
     }); };
     var clickDelete = function (packageId) { return __awaiter$1(void 0, void 0, void 0, function () {
-        var deleteParams, data;
+        var deleteParams, data, pack;
         return __generator$1(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, setIsLoading(true)];
@@ -4002,7 +4003,6 @@ var StoreComponent = function (_a) {
                     };
                     data = client.myStickerHide(deleteParams);
                     data.then(function () { return __awaiter$1(void 0, void 0, void 0, function () {
-                        var pack;
                         return __generator$1(this, function (_a) {
                             switch (_a.label) {
                                 case 0:
@@ -4015,16 +4015,18 @@ var StoreComponent = function (_a) {
                                     return [4 /*yield*/, setIsLoading(false)];
                                 case 1:
                                     _a.sent();
-                                    if (!isLoading) {
-                                        pack = document.getElementById('package-wrapper');
-                                        console.log(pack);
-                                        pack.scrollTo(0, currentScroll);
-                                    }
                                     return [2 /*return*/];
                             }
                         });
                     }); });
-                    return [2 /*return*/];
+                    if (!!isLoading) return [3 /*break*/, 3];
+                    pack = document.getElementById('package-wrapper');
+                    console.log(pack);
+                    return [4 /*yield*/, pack.scrollTo(0, currentScroll)];
+                case 2:
+                    _a.sent();
+                    _a.label = 3;
+                case 3: return [2 /*return*/];
             }
         });
     }); };
