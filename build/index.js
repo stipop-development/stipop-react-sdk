@@ -4002,16 +4002,18 @@ var StoreComponent = function (_a) {
                 case 3:
                     pack = _a.sent();
                     console.log(pack);
-                    // await pack.scrollTo(0, currentScroll)
-                    if (!isLoading) {
-                        console.log(pack);
-                        console.log(packageWrapper);
-                    }
-                    else {
-                        console.log(pack);
-                        console.log(packageWrapper);
-                    }
-                    return [2 /*return*/];
+                    if (!!isLoading) return [3 /*break*/, 5];
+                    console.log(pack);
+                    console.log(packageWrapper);
+                    return [4 /*yield*/, packageWrapper.scrollTo(0, currentScroll)];
+                case 4:
+                    _a.sent();
+                    return [3 /*break*/, 6];
+                case 5:
+                    console.log(pack);
+                    console.log(packageWrapper);
+                    _a.label = 6;
+                case 6: return [2 /*return*/];
             }
         });
     }); };
@@ -4053,16 +4055,18 @@ var StoreComponent = function (_a) {
                 case 3:
                     pack = _a.sent();
                     console.log(pack);
-                    // await pack.scrollTo(0, currentScroll)
-                    if (!isLoading) {
-                        console.log(pack);
-                        console.log(packageWrapper);
-                    }
-                    else {
-                        console.log(pack);
-                        console.log(packageWrapper);
-                    }
-                    return [2 /*return*/];
+                    if (!!isLoading) return [3 /*break*/, 5];
+                    console.log(pack);
+                    console.log(packageWrapper);
+                    return [4 /*yield*/, packageWrapper.scrollTo(0, currentScroll)];
+                case 4:
+                    _a.sent();
+                    return [3 /*break*/, 6];
+                case 5:
+                    console.log(pack);
+                    console.log(packageWrapper);
+                    _a.label = 6;
+                case 6: return [2 /*return*/];
             }
         });
     }); };
