@@ -4004,6 +4004,9 @@ var StoreComponent = function (_a) {
                                         if (pack) {
                                             console.log(pack);
                                         }
+                                        else {
+                                            console.log(document.getElementById('package-wrapper'));
+                                        }
                                         return [4 /*yield*/, document
                                                 .getElementById('package-wrapper')
                                                 .scrollTo(0, currentScroll)];
@@ -4048,6 +4051,9 @@ var StoreComponent = function (_a) {
                                     pack = document.getElementById('package-wrapper');
                                     if (pack) {
                                         console.log(pack);
+                                    }
+                                    else {
+                                        console.log(document.getElementById('package-wrapper'));
                                     }
                                     return [4 /*yield*/, document
                                             .getElementById('package-wrapper')

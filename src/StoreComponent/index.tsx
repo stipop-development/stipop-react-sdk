@@ -114,6 +114,8 @@ const StoreComponent: React.FC<StoreProps> = ({
       const pack = document.getElementById('package-wrapper')
       if (pack) {
         console.log(pack)
+      } else {
+        console.log(document.getElementById('package-wrapper'))
       }
       await document
         .getElementById('package-wrapper')
@@ -139,6 +141,8 @@ const StoreComponent: React.FC<StoreProps> = ({
       const pack = document.getElementById('package-wrapper')
       if (pack) {
         console.log(pack)
+      } else {
+        console.log(document.getElementById('package-wrapper'))
       }
       await document
         .getElementById('package-wrapper')
