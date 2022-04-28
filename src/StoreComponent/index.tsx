@@ -103,16 +103,8 @@ const StoreComponent: React.FC<StoreProps> = ({
       )
       await setIsLoading(false)
     })
-    const pack = await document.getElementById('package-wrapper')
-    console.log(pack)
-    // await pack.scrollTo(0, currentScroll)
     if (!isLoading) {
-      console.log(pack)
-      console.log(packageWrapper)
       await packageWrapper.scrollTo(0, currentScroll)
-    } else {
-      console.log(pack)
-      console.log(packageWrapper)
     }
   }
 
@@ -132,16 +124,8 @@ const StoreComponent: React.FC<StoreProps> = ({
       }
       await setIsLoading(false)
     })
-    const pack = await document.getElementById('package-wrapper')
-    console.log(pack)
-    // await pack.scrollTo(0, currentScroll)
     if (!isLoading) {
-      console.log(pack)
-      console.log(packageWrapper)
       await packageWrapper.scrollTo(0, currentScroll)
-    } else {
-      console.log(pack)
-      console.log(packageWrapper)
     }
   }
 

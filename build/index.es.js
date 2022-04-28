@@ -3937,7 +3937,7 @@ var StoreComponent = function (_a) {
         // console.log(packages)
     }, [packages]);
     var clickDownload = function (packageId) { return __awaiter$1(void 0, void 0, void 0, function () {
-        var dParams, data, pack;
+        var dParams, data;
         return __generator$1(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, setIsLoading(true)];
@@ -3972,27 +3972,17 @@ var StoreComponent = function (_a) {
                         }); })];
                 case 2:
                     _a.sent();
-                    return [4 /*yield*/, document.getElementById('package-wrapper')];
-                case 3:
-                    pack = _a.sent();
-                    console.log(pack);
-                    if (!!isLoading) return [3 /*break*/, 5];
-                    console.log(pack);
-                    console.log(packageWrapper);
+                    if (!!isLoading) return [3 /*break*/, 4];
                     return [4 /*yield*/, packageWrapper.scrollTo(0, currentScroll)];
-                case 4:
+                case 3:
                     _a.sent();
-                    return [3 /*break*/, 6];
-                case 5:
-                    console.log(pack);
-                    console.log(packageWrapper);
-                    _a.label = 6;
-                case 6: return [2 /*return*/];
+                    _a.label = 4;
+                case 4: return [2 /*return*/];
             }
         });
     }); };
     var clickDelete = function (packageId) { return __awaiter$1(void 0, void 0, void 0, function () {
-        var deleteParams, data, pack;
+        var deleteParams, data;
         return __generator$1(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, setIsLoading(true)];
@@ -4025,22 +4015,12 @@ var StoreComponent = function (_a) {
                         }); })];
                 case 2:
                     _a.sent();
-                    return [4 /*yield*/, document.getElementById('package-wrapper')];
-                case 3:
-                    pack = _a.sent();
-                    console.log(pack);
-                    if (!!isLoading) return [3 /*break*/, 5];
-                    console.log(pack);
-                    console.log(packageWrapper);
+                    if (!!isLoading) return [3 /*break*/, 4];
                     return [4 /*yield*/, packageWrapper.scrollTo(0, currentScroll)];
-                case 4:
+                case 3:
                     _a.sent();
-                    return [3 /*break*/, 6];
-                case 5:
-                    console.log(pack);
-                    console.log(packageWrapper);
-                    _a.label = 6;
-                case 6: return [2 /*return*/];
+                    _a.label = 4;
+                case 4: return [2 /*return*/];
             }
         });
     }); };
