@@ -3974,18 +3974,11 @@ var StoreComponent = function (_a) {
                                         return [4 /*yield*/, setIsLoading(false)];
                                     case 1:
                                         _a.sent();
-                                        pack = document.getElementById('package-wrapper');
-                                        if (pack) {
+                                        if (!isLoading) {
+                                            pack = document.getElementById('package-wrapper');
                                             console.log(pack);
+                                            pack.scrollTo(0, currentScroll);
                                         }
-                                        else {
-                                            console.log(document.getElementById('package-wrapper'));
-                                        }
-                                        return [4 /*yield*/, document
-                                                .getElementById('package-wrapper')
-                                                .scrollTo(0, currentScroll)];
-                                    case 2:
-                                        _a.sent();
                                         return [2 /*return*/];
                                 }
                             });
@@ -4022,18 +4015,11 @@ var StoreComponent = function (_a) {
                                     return [4 /*yield*/, setIsLoading(false)];
                                 case 1:
                                     _a.sent();
-                                    pack = document.getElementById('package-wrapper');
-                                    if (pack) {
+                                    if (!isLoading) {
+                                        pack = document.getElementById('package-wrapper');
                                         console.log(pack);
+                                        pack.scrollTo(0, currentScroll);
                                     }
-                                    else {
-                                        console.log(document.getElementById('package-wrapper'));
-                                    }
-                                    return [4 /*yield*/, document
-                                            .getElementById('package-wrapper')
-                                            .scrollTo(0, currentScroll)];
-                                case 2:
-                                    _a.sent();
                                     return [2 /*return*/];
                             }
                         });

@@ -111,15 +111,12 @@ const StoreComponent: React.FC<StoreProps> = ({
         })
       )
       await setIsLoading(false)
-      const pack = document.getElementById('package-wrapper')
-      if (pack) {
+
+      if (!isLoading) {
+        const pack = document.getElementById('package-wrapper')
         console.log(pack)
-      } else {
-        console.log(document.getElementById('package-wrapper'))
+        pack.scrollTo(0, currentScroll)
       }
-      await document
-        .getElementById('package-wrapper')
-        .scrollTo(0, currentScroll)
     })
   }
 
@@ -138,15 +135,12 @@ const StoreComponent: React.FC<StoreProps> = ({
         setHideList(hideList.filter(item => item !== packageId))
       }
       await setIsLoading(false)
-      const pack = document.getElementById('package-wrapper')
-      if (pack) {
+
+      if (!isLoading) {
+        const pack = document.getElementById('package-wrapper')
         console.log(pack)
-      } else {
-        console.log(document.getElementById('package-wrapper'))
+        pack.scrollTo(0, currentScroll)
       }
-      await document
-        .getElementById('package-wrapper')
-        .scrollTo(0, currentScroll)
     })
   }
 
