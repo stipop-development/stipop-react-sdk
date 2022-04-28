@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import Stipop from 'stipop-js-sdk'
 
@@ -87,11 +87,11 @@ const StoreComponent: React.FC<StoreProps> = ({
         }
       }
     }
-    console.log(packages)
+    // console.log(packages)
   }, [packages])
 
-  const clickDownload = packageId => {
-    setIsLoading(true)
+  const clickDownload = async packageId => {
+    await setIsLoading(true)
     const dParams = {
       userId: params.userId,
       packageId: packageId,
@@ -111,11 +111,13 @@ const StoreComponent: React.FC<StoreProps> = ({
         })
       )
       setIsLoading(false)
+      const pack = document.getElementById('package-wrapper')
+      pack.scrollTo(0, currentScroll)
     })
   }
 
-  const clickDelete = packageId => {
-    setIsLoading(true)
+  const clickDelete = async packageId => {
+    await setIsLoading(true)
     const deleteParams = {
       userId: params.userId,
       packageId: packageId,
@@ -129,6 +131,8 @@ const StoreComponent: React.FC<StoreProps> = ({
         setHideList(hideList.filter(item => item !== packageId))
       }
       setIsLoading(false)
+      const pack = document.getElementById('package-wrapper')
+      pack.scrollTo(0, currentScroll)
     })
   }
 
@@ -141,14 +145,11 @@ const StoreComponent: React.FC<StoreProps> = ({
     await setIsLoading(false)
   }
 
-  // useEffect(() => {
-  //   setIsLoading(false)
-  // }, [stickers])
-
-  useEffect(() => {
-    console.log(isLoading)
-    console.log(currentScroll)
-  }, [isLoading])
+  const clickPrevious = async () => {
+    await setDetail(false)
+    const pack = document.getElementById('package-wrapper')
+    await pack.scrollTo(0, currentScroll)
+  }
 
   return (
     <>
@@ -171,7 +172,12 @@ const StoreComponent: React.FC<StoreProps> = ({
             {detail ? (
               <div className="title-text">
                 <PreviousBtn>
-                  <Icon type="PREVIOUS" onClick={() => setDetail(false)} />
+                  <Icon
+                    type="PREVIOUS"
+                    onClick={() => {
+                      clickPrevious()
+                    }}
+                  />
                 </PreviousBtn>
                 <span>Sticker Pack</span>
               </div>
@@ -190,7 +196,6 @@ const StoreComponent: React.FC<StoreProps> = ({
             color={color}
             scroll={scroll}
             border={border}
-            onScroll={e => setCurrentScroll(e.target.scrollTop)}
           >
             {detail ? (
               <DetailWrapper scroll={scroll}>
@@ -237,7 +242,12 @@ const StoreComponent: React.FC<StoreProps> = ({
                 </DetailStickerWrapper>
               </DetailWrapper>
             ) : packages && packages.length > 0 ? (
-              <PackageWrapper size={size} scroll={scroll}>
+              <PackageWrapper
+                id="package-wrapper"
+                size={size}
+                scroll={scroll}
+                onScroll={e => setCurrentScroll(e.target.scrollTop)}
+              >
                 {packages.map((pack, index) => (
                   <PackageBox
                     key={index}

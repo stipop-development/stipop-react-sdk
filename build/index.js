@@ -3968,46 +3968,66 @@ var StoreComponent = function (_a) {
                 }
             }
         }
-        console.log(packages);
+        // console.log(packages)
     }, [packages]);
-    var clickDownload = function (packageId) {
-        setIsLoading(true);
-        var dParams = {
-            userId: params.userId,
-            packageId: packageId,
-            isPurchase: downloadParams.isPurchase,
-            price: downloadParams.price,
-            lang: downloadParams.lang,
-            countryCode: downloadParams.countryCode,
-        };
-        var data = client.download(dParams);
-        data.then(function () {
-            setPackages(packages.map(function (pack) {
-                if (pack.packageId === packageId) {
-                    pack.isDownload = 'Y';
-                }
-                return pack;
-            }));
-            setIsLoading(false);
-        });
-    };
-    var clickDelete = function (packageId) {
-        setIsLoading(true);
-        var deleteParams = {
-            userId: params.userId,
-            packageId: packageId,
-        };
-        var data = client.myStickerHide(deleteParams);
-        data.then(function () {
-            if (hideList.indexOf(packageId) < 0) {
-                setHideList(hideList.concat(packageId));
+    var clickDownload = function (packageId) { return __awaiter$1(void 0, void 0, void 0, function () {
+        var dParams, data;
+        return __generator$1(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, setIsLoading(true)];
+                case 1:
+                    _a.sent();
+                    dParams = {
+                        userId: params.userId,
+                        packageId: packageId,
+                        isPurchase: downloadParams.isPurchase,
+                        price: downloadParams.price,
+                        lang: downloadParams.lang,
+                        countryCode: downloadParams.countryCode,
+                    };
+                    data = client.download(dParams);
+                    data.then(function () {
+                        setPackages(packages.map(function (pack) {
+                            if (pack.packageId === packageId) {
+                                pack.isDownload = 'Y';
+                            }
+                            return pack;
+                        }));
+                        setIsLoading(false);
+                        var pack = document.getElementById('package-wrapper');
+                        pack.scrollTo(0, currentScroll);
+                    });
+                    return [2 /*return*/];
             }
-            else {
-                setHideList(hideList.filter(function (item) { return item !== packageId; }));
-            }
-            setIsLoading(false);
         });
-    };
+    }); };
+    var clickDelete = function (packageId) { return __awaiter$1(void 0, void 0, void 0, function () {
+        var deleteParams, data;
+        return __generator$1(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, setIsLoading(true)];
+                case 1:
+                    _a.sent();
+                    deleteParams = {
+                        userId: params.userId,
+                        packageId: packageId,
+                    };
+                    data = client.myStickerHide(deleteParams);
+                    data.then(function () {
+                        if (hideList.indexOf(packageId) < 0) {
+                            setHideList(hideList.concat(packageId));
+                        }
+                        else {
+                            setHideList(hideList.filter(function (item) { return item !== packageId; }));
+                        }
+                        setIsLoading(false);
+                        var pack = document.getElementById('package-wrapper');
+                        pack.scrollTo(0, currentScroll);
+                    });
+                    return [2 /*return*/];
+            }
+        });
+    }); };
     var clickDetail = function (packageId) { return __awaiter$1(void 0, void 0, void 0, function () {
         return __generator$1(this, function (_a) {
             switch (_a.label) {
@@ -4027,13 +4047,21 @@ var StoreComponent = function (_a) {
             }
         });
     }); };
-    // useEffect(() => {
-    //   setIsLoading(false)
-    // }, [stickers])
-    React.useEffect(function () {
-        console.log(isLoading);
-        console.log(currentScroll);
-    }, [isLoading]);
+    var clickPrevious = function () { return __awaiter$1(void 0, void 0, void 0, function () {
+        var pack;
+        return __generator$1(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, setDetail(false)];
+                case 1:
+                    _a.sent();
+                    pack = document.getElementById('package-wrapper');
+                    return [4 /*yield*/, pack.scrollTo(0, currentScroll)];
+                case 2:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    }); };
     return (React__default["default"].createElement(React__default["default"].Fragment, null, isLoading ? (React__default["default"].createElement(StoreWrapper, { color: color, size: size, border: border },
         React__default["default"].createElement("div", { style: {
                 height: '100%',
@@ -4045,13 +4073,15 @@ var StoreComponent = function (_a) {
         React__default["default"].createElement(StoreTitle, null,
             detail ? (React__default["default"].createElement("div", { className: "title-text" },
                 React__default["default"].createElement(PreviousBtn, null,
-                    React__default["default"].createElement(Icon, { type: "PREVIOUS", onClick: function () { return setDetail(false); } })),
+                    React__default["default"].createElement(Icon, { type: "PREVIOUS", onClick: function () {
+                            clickPrevious();
+                        } })),
                 React__default["default"].createElement("span", null, "Sticker Pack"))) : (React__default["default"].createElement("div", { className: "title-text" },
                 React__default["default"].createElement("span", null, "Sticker Store"),
                 React__default["default"].createElement(Icon, { type: "STORE_BLACK" }))),
             React__default["default"].createElement(CloseBtn, { onClick: function () { return onClose(true); } },
                 React__default["default"].createElement(Icon, { type: "CLOSE" }))),
-        React__default["default"].createElement(PackageContainer, { detail: detail, color: color, scroll: scroll, border: border, onScroll: function (e) { return setCurrentScroll(e.target.scrollTop); } }, detail ? (React__default["default"].createElement(DetailWrapper, { scroll: scroll },
+        React__default["default"].createElement(PackageContainer, { detail: detail, color: color, scroll: scroll, border: border }, detail ? (React__default["default"].createElement(DetailWrapper, { scroll: scroll },
             React__default["default"].createElement(DetailBox, null,
                 React__default["default"].createElement(MainImg, { src: main.packageImg, alt: "" }),
                 React__default["default"].createElement(DetailName, null,
@@ -4073,7 +4103,7 @@ var StoreComponent = function (_a) {
             React__default["default"].createElement(DetailStickerWrapper, { size: size, scroll: scroll }, stickers &&
                 stickers.map(function (sticker, index) { return (React__default["default"].createElement("img", { src: "".concat(sticker.stickerImg, "?d=100x100"), 
                     // src={sticker.stickerImg}
-                    alt: "", key: index })); })))) : packages && packages.length > 0 ? (React__default["default"].createElement(PackageWrapper, { size: size, scroll: scroll }, packages.map(function (pack, index) { return (React__default["default"].createElement(PackageBox, { key: index, color: color, size: size, isDownload: pack.isDownload === 'Y', onClick: function (e) {
+                    alt: "", key: index })); })))) : packages && packages.length > 0 ? (React__default["default"].createElement(PackageWrapper, { id: "package-wrapper", size: size, scroll: scroll, onScroll: function (e) { return setCurrentScroll(e.target.scrollTop); } }, packages.map(function (pack, index) { return (React__default["default"].createElement(PackageBox, { key: index, color: color, size: size, isDownload: pack.isDownload === 'Y', onClick: function (e) {
                 if (e.target.id !== 'download-btn') {
                     clickDetail(pack.packageId);
                     setMain({

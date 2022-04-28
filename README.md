@@ -4,10 +4,10 @@
 
 ## Installation
 
-stipop-sdk-test can be installed on Linux, Mac OS or Windows without any issues.
+stipop-react-sdk can be installed on Linux, Mac OS or Windows without any issues.
 
 ```node
-npm install --save stipop-sdk-test
+npm install --save stipop-react-sdk
 ```
 
 ## Getting API Key
@@ -23,7 +23,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 > Sticker Search Component
 
 ```react
-import { SearchComponent } from 'stipop-sdk-test'
+import { SearchComponent } from 'stipop-react-sdk'
 
 const App = () => {
   return (
@@ -58,7 +58,7 @@ export default App
   ##### Examples
 
   ```react
-  import { SearchComponent } from 'stipop-sdk-test'
+  import { SearchComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -93,7 +93,7 @@ export default App
   ##### Examples
 
   ```react
-  import { SearchComponent } from 'stipop-sdk-test'
+  import { SearchComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -129,7 +129,7 @@ export default App
   ##### Examples
 
   ```react
-  import { SearchComponent } from 'stipop-sdk-test'
+  import { SearchComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -168,7 +168,7 @@ export default App
   ##### Examples
 
   ```react
-  import { SearchComponent } from 'stipop-sdk-test'
+  import { SearchComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -204,7 +204,7 @@ export default App
   ##### Examples
 
   ```react
-  import { SearchComponent } from 'stipop-sdk-test'
+  import { SearchComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -233,7 +233,7 @@ export default App
   ##### Examples
 
   ```react
-  import { SearchComponent } from 'stipop-sdk-test'
+  import { SearchComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -262,7 +262,7 @@ export default App
   ##### Examples
 
   ```react
-  import { SearchComponent } from 'stipop-sdk-test'
+  import { SearchComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -291,7 +291,7 @@ export default App
   | Function | optional | sticker URL |
   
   ```react
-  import { SearchComponent } from 'stipop-sdk-test'
+  import { SearchComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -316,7 +316,7 @@ export default App
 > Sticker Picker Component
 
 ```react
-import { PickerComponent } from 'stipop-sdk-test'
+import { PickerComponent } from 'stipop-react-sdk'
 
 const App = () => {
   return (
@@ -344,7 +344,7 @@ export default App
   | userId | string | required |         |
 
   ```react
-  import { PickerComponent } from 'stipop-sdk-test'
+  import { PickerComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -373,7 +373,7 @@ export default App
   | imgSize | number | optional | 70      |
 
   ```react
-  import { PickerComponent } from 'stipop-sdk-test'
+  import { PickerComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -406,7 +406,7 @@ export default App
   | radius | number | optional | 10                  |
 
   ```react
-  import { PickerComponent } from 'stipop-sdk-test'
+  import { PickerComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -440,7 +440,7 @@ export default App
   | selectedLine    | string | optional | 2px solid black     |
 
   ```react
-  import { PickerComponent } from 'stipop-sdk-test'
+  import { PickerComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -471,7 +471,7 @@ export default App
   | string | optional | #fff    |
 
   ```react
-  import { PickerComponent } from 'stipop-sdk-test'
+  import { PickerComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -497,7 +497,7 @@ export default App
   | number | optional | 4       |
 
   ```react
-  import { PickerComponent } from 'stipop-sdk-test'
+  import { PickerComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -523,7 +523,7 @@ export default App
   | boolean | optional | true    |
 
   ```react
-  import { PickerComponent } from 'stipop-sdk-test'
+  import { PickerComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -551,7 +551,7 @@ export default App
   | Function | optional | sticker URL |
 
   ```react
-  import { PickerComponent } from 'stipop-sdk-test'
+  import { PickerComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -579,7 +579,7 @@ export default App
   | Function | optional | true  |
 
   ```react
-  import { PickerComponent } from 'stipop-sdk-test'
+  import { PickerComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -603,7 +603,7 @@ export default App
 > Sticker Store Component
 
 ```react
-import { StoreComponent } from 'stipop-sdk-test'
+import { StoreComponent } from 'stipop-react-sdk'
 
 const App = () => {
   return (
@@ -639,7 +639,7 @@ export default App
   | limit       | number | optional             | 20 (max: 50)                                                 |
 
   ```react
-  import { StoreComponent } from 'stipop-sdk-test'
+  import { StoreComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -677,7 +677,7 @@ export default App
   | price       | string | optional | if **isPurchase** is **Y**, the default price is set for stickers.<br />**Defualt Price**: Still Stickers [$0.99], Animated Stickers [$1.99] |
 
   ```react
-  import { StoreComponent } from 'stipop-sdk-test'
+  import { StoreComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -718,7 +718,7 @@ export default App
   | recoveryBtnHover     | string | optional | #ff4500 |
 
   ```react
-  import { StoreComponent } from 'stipop-sdk-test'
+  import { StoreComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -764,7 +764,7 @@ export default App
   | mainImg    | number | optional | 100     |
 
   ```react
-  import { StoreComponent } from 'stipop-sdk-test'
+  import { StoreComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -802,7 +802,7 @@ export default App
   | radius | number | optional | 8                   |
 
   ```react
-  import { StoreComponent } from 'stipop-sdk-test'
+  import { StoreComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -834,7 +834,7 @@ export default App
   | boolean | optional | true    |
 
   ```react
-  import { StoreComponent } from 'stipop-sdk-test'
+  import { StoreComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
@@ -865,7 +865,7 @@ export default App
   | Function | optional | true  |
 
   ```react
-  import { StoreComponent } from 'stipop-sdk-test'
+  import { StoreComponent } from 'stipop-react-sdk'
   
   const App = () => {
     return (
