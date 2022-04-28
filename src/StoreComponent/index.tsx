@@ -50,7 +50,9 @@ const StoreComponent: React.FC<StoreProps> = ({
 
         const packageData = client.getPackInfo(packageParams)
         packageData.then(({ body }) => {
-          packInfo.push(body.package)
+          if (packInfo.indexOf(body.package) < 0) {
+            packInfo.push(body.package)
+          }
           setPackages(packages.concat(packInfo))
         })
       })
@@ -114,8 +116,7 @@ const StoreComponent: React.FC<StoreProps> = ({
     }
 
     const data = client.myStickerHide(hideParams)
-    data.then(res => {
-      console.log(res)
+    data.then(() => {
       if (hideList.indexOf(packageId) < 0) {
         setHideList(hideList.concat(packageId))
       } else {

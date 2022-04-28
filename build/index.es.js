@@ -3907,7 +3907,9 @@ var StoreComponent = function (_a) {
                 var packageData = client.getPackInfo(packageParams);
                 packageData.then(function (_a) {
                     var body = _a.body;
-                    packInfo.push(body.package);
+                    if (packInfo.indexOf(body.package) < 0) {
+                        packInfo.push(body.package);
+                    }
                     setPackages(packages.concat(packInfo));
                 });
             });
@@ -3965,8 +3967,7 @@ var StoreComponent = function (_a) {
             packageId: packageId,
         };
         var data = client.myStickerHide(hideParams);
-        data.then(function (res) {
-            console.log(res);
+        data.then(function () {
             if (hideList.indexOf(packageId) < 0) {
                 setHideList(hideList.concat(packageId));
             }
