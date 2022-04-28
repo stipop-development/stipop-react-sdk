@@ -3945,7 +3945,7 @@ var StoreComponent = function (_a) {
         // console.log(packages)
     }, [packages]);
     var clickDownload = function (packageId) { return __awaiter$1(void 0, void 0, void 0, function () {
-        var dParams, data, pack;
+        var dParams, data;
         return __generator$1(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, setIsLoading(true)];
@@ -3968,19 +3968,22 @@ var StoreComponent = function (_a) {
                                 return pack;
                             }));
                             setIsLoading(false);
-                        })];
+                        })
+                        // const pack = document.getElementById('package-wrapper')
+                    ];
                 case 2:
                     _a.sent();
-                    pack = document.getElementById('package-wrapper');
-                    return [4 /*yield*/, pack.scrollTo(0, currentScroll)];
+                    // const pack = document.getElementById('package-wrapper')
+                    return [4 /*yield*/, document.getElementById('package-wrapper').scrollTo(0, currentScroll)];
                 case 3:
+                    // const pack = document.getElementById('package-wrapper')
                     _a.sent();
                     return [2 /*return*/];
             }
         });
     }); };
     var clickDelete = function (packageId) { return __awaiter$1(void 0, void 0, void 0, function () {
-        var deleteParams, data, pack;
+        var deleteParams, data;
         return __generator$1(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, setIsLoading(true)];
@@ -3999,12 +4002,15 @@ var StoreComponent = function (_a) {
                                 setHideList(hideList.filter(function (item) { return item !== packageId; }));
                             }
                             setIsLoading(false);
-                        })];
+                        })
+                        // const pack = document.getElementById('package-wrapper')
+                    ];
                 case 2:
                     _a.sent();
-                    pack = document.getElementById('package-wrapper');
-                    return [4 /*yield*/, pack.scrollTo(0, currentScroll)];
+                    // const pack = document.getElementById('package-wrapper')
+                    return [4 /*yield*/, document.getElementById('package-wrapper').scrollTo(0, currentScroll)];
                 case 3:
+                    // const pack = document.getElementById('package-wrapper')
                     _a.sent();
                     return [2 /*return*/];
             }

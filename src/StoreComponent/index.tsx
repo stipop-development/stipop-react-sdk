@@ -112,8 +112,8 @@ const StoreComponent: React.FC<StoreProps> = ({
       )
       setIsLoading(false)
     })
-    const pack = document.getElementById('package-wrapper')
-    await pack.scrollTo(0, currentScroll)
+    // const pack = document.getElementById('package-wrapper')
+    await document.getElementById('package-wrapper').scrollTo(0, currentScroll)
   }
 
   const clickDelete = async packageId => {
@@ -132,8 +132,8 @@ const StoreComponent: React.FC<StoreProps> = ({
       }
       setIsLoading(false)
     })
-    const pack = document.getElementById('package-wrapper')
-    await pack.scrollTo(0, currentScroll)
+    // const pack = document.getElementById('package-wrapper')
+    await document.getElementById('package-wrapper').scrollTo(0, currentScroll)
   }
 
   const clickDetail = async packageId => {
