@@ -101,7 +101,7 @@ const StoreComponent: React.FC<StoreProps> = ({
       countryCode: downloadParams.countryCode,
     }
     const data = client.download(dParams)
-    await data.then(async () => {
+    await data.then(() => {
       setPackages(
         packages.map(pack => {
           if (pack.packageId === packageId) {
@@ -110,13 +110,11 @@ const StoreComponent: React.FC<StoreProps> = ({
           return pack
         })
       )
-      await setIsLoading(false)
+      setIsLoading(false)
     })
-    if (!isLoading) {
-      const pack = document.getElementById('package-wrapper')
-      console.log(pack)
-      await pack.scrollTo(0, currentScroll)
-    }
+    const pack = document.getElementById('package-wrapper')
+    console.log(pack)
+    await pack.scrollTo(0, currentScroll)
   }
 
   const clickDelete = async packageId => {
@@ -127,19 +125,17 @@ const StoreComponent: React.FC<StoreProps> = ({
     }
 
     const data = client.myStickerHide(deleteParams)
-    data.then(async () => {
+    await data.then(() => {
       if (hideList.indexOf(packageId) < 0) {
         setHideList(hideList.concat(packageId))
       } else {
         setHideList(hideList.filter(item => item !== packageId))
       }
-      await setIsLoading(false)
+      setIsLoading(false)
     })
-    if (!isLoading) {
-      const pack = document.getElementById('package-wrapper')
-      console.log(pack)
-      await pack.scrollTo(0, currentScroll)
-    }
+    const pack = document.getElementById('package-wrapper')
+    console.log(pack)
+    await pack.scrollTo(0, currentScroll)
   }
 
   const clickDetail = async packageId => {

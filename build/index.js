@@ -3986,33 +3986,23 @@ var StoreComponent = function (_a) {
                         countryCode: downloadParams.countryCode,
                     };
                     data = client.download(dParams);
-                    return [4 /*yield*/, data.then(function () { return __awaiter$1(void 0, void 0, void 0, function () {
-                            return __generator$1(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        setPackages(packages.map(function (pack) {
-                                            if (pack.packageId === packageId) {
-                                                pack.isDownload = 'Y';
-                                            }
-                                            return pack;
-                                        }));
-                                        return [4 /*yield*/, setIsLoading(false)];
-                                    case 1:
-                                        _a.sent();
-                                        return [2 /*return*/];
+                    return [4 /*yield*/, data.then(function () {
+                            setPackages(packages.map(function (pack) {
+                                if (pack.packageId === packageId) {
+                                    pack.isDownload = 'Y';
                                 }
-                            });
-                        }); })];
+                                return pack;
+                            }));
+                            setIsLoading(false);
+                        })];
                 case 2:
                     _a.sent();
-                    if (!!isLoading) return [3 /*break*/, 4];
                     pack = document.getElementById('package-wrapper');
                     console.log(pack);
                     return [4 /*yield*/, pack.scrollTo(0, currentScroll)];
                 case 3:
                     _a.sent();
-                    _a.label = 4;
-                case 4: return [2 /*return*/];
+                    return [2 /*return*/];
             }
         });
     }); };
@@ -4028,31 +4018,23 @@ var StoreComponent = function (_a) {
                         packageId: packageId,
                     };
                     data = client.myStickerHide(deleteParams);
-                    data.then(function () { return __awaiter$1(void 0, void 0, void 0, function () {
-                        return __generator$1(this, function (_a) {
-                            switch (_a.label) {
-                                case 0:
-                                    if (hideList.indexOf(packageId) < 0) {
-                                        setHideList(hideList.concat(packageId));
-                                    }
-                                    else {
-                                        setHideList(hideList.filter(function (item) { return item !== packageId; }));
-                                    }
-                                    return [4 /*yield*/, setIsLoading(false)];
-                                case 1:
-                                    _a.sent();
-                                    return [2 /*return*/];
+                    return [4 /*yield*/, data.then(function () {
+                            if (hideList.indexOf(packageId) < 0) {
+                                setHideList(hideList.concat(packageId));
                             }
-                        });
-                    }); });
-                    if (!!isLoading) return [3 /*break*/, 3];
+                            else {
+                                setHideList(hideList.filter(function (item) { return item !== packageId; }));
+                            }
+                            setIsLoading(false);
+                        })];
+                case 2:
+                    _a.sent();
                     pack = document.getElementById('package-wrapper');
                     console.log(pack);
                     return [4 /*yield*/, pack.scrollTo(0, currentScroll)];
-                case 2:
+                case 3:
                     _a.sent();
-                    _a.label = 3;
-                case 3: return [2 /*return*/];
+                    return [2 /*return*/];
             }
         });
     }); };
