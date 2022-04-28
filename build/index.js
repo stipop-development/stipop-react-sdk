@@ -4148,7 +4148,6 @@ var StoreComponent = function (_a) {
                             : 'PLUS'
                         : 'PLUS' })),
             React__default["default"].createElement(BtnWrapper, { id: "download-btn", onClick: function () { return __awaiter$1(void 0, void 0, void 0, function () {
-                    var wrapper;
                     return __generator$1(this, function (_b) {
                         switch (_b.label) {
                             case 0:
@@ -4162,8 +4161,9 @@ var StoreComponent = function (_a) {
                                 _b.sent();
                                 _b.label = 4;
                             case 4:
-                                wrapper = document.getElementById('package-wrapper');
-                                return [4 /*yield*/, wrapper.scrollTo(0, currentScroll)];
+                                return [4 /*yield*/, document
+                                        .querySelector('#package-wrapper')
+                                        .scrollTo(0, currentScroll)];
                             case 5:
                                 _b.sent();
                                 return [2 /*return*/];
