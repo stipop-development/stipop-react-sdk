@@ -42,7 +42,10 @@ const StoreComponent: React.FC<StoreProps> = ({
     const data = client.getPack(trendingParams)
 
     data.then(({ body }) => {
-      body.packageList.map(pack => {
+      const data = body.packageList.filter(
+        (item, index) => body.packageList.indexOf(item) === index
+      )
+      data.map(pack => {
         const packageParams = {
           userId: params.userId,
           packId: pack.packageId,
@@ -50,9 +53,7 @@ const StoreComponent: React.FC<StoreProps> = ({
 
         const packageData = client.getPackInfo(packageParams)
         packageData.then(({ body }) => {
-          if (packInfo.indexOf(body.package) < 0) {
-            packInfo.push(body.package)
-          }
+          packInfo.push(body.package)
           setPackages(packages.concat(packInfo))
         })
       })

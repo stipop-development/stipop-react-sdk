@@ -3925,7 +3925,8 @@ var StoreComponent = function (_a) {
         var data = client.getPack(trendingParams);
         data.then(function (_a) {
             var body = _a.body;
-            body.packageList.map(function (pack) {
+            var data = body.packageList.filter(function (item, index) { return body.packageList.indexOf(item) === index; });
+            data.map(function (pack) {
                 var packageParams = {
                     userId: params.userId,
                     packId: pack.packageId,
@@ -3933,9 +3934,7 @@ var StoreComponent = function (_a) {
                 var packageData = client.getPackInfo(packageParams);
                 packageData.then(function (_a) {
                     var body = _a.body;
-                    if (packInfo.indexOf(body.package) < 0) {
-                        packInfo.push(body.package);
-                    }
+                    packInfo.push(body.package);
                     setPackages(packages.concat(packInfo));
                 });
             });
