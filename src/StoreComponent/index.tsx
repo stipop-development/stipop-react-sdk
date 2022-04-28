@@ -44,7 +44,6 @@ const StoreComponent: React.FC<StoreProps> = ({
     data.then(({ body }) => {
       const PackageIds = body.packageList.map(pack => pack.packageId)
       PackageIds.filter((item, index) => PackageIds.indexOf(item) === index)
-      console.log(PackageIds)
 
       // body.packageList.map(pack => {
       PackageIds.map(pack => {
@@ -137,13 +136,13 @@ const StoreComponent: React.FC<StoreProps> = ({
     }
   }, [isLoading])
 
-  const clickDetail = packageId => {
-    setIsLoading(true)
-    setStickers(
+  const clickDetail = async packageId => {
+    await setIsLoading(true)
+    await setStickers(
       packages.filter(pack => pack.packageId === packageId)[0].stickers
     )
-    setDetail(true)
-    setIsLoading(false)
+    await setDetail(true)
+    await setIsLoading(false)
   }
 
   const clickPrevious = async () => {
