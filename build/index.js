@@ -3925,10 +3925,13 @@ var StoreComponent = function (_a) {
         var data = client.getPack(trendingParams);
         data.then(function (_a) {
             var body = _a.body;
-            body.packageList.map(function (pack) {
+            var PackageIds = body.packageList.map(function (pack) { return pack.packageId; });
+            PackageIds.filter(function (item, index) { return PackageIds.indexOf(item) === index; });
+            // body.packageList.map(pack => {
+            PackageIds.map(function (pack) {
                 var packageParams = {
                     userId: params.userId,
-                    packId: pack.packageId,
+                    packId: pack,
                 };
                 var packageData = client.getPackInfo(packageParams);
                 packageData.then(function (_a) {
@@ -3947,7 +3950,6 @@ var StoreComponent = function (_a) {
             var body = _a.body;
             setHideList(hideList.concat(body.packageList.map(function (pack) { return pack.packageId; })));
         });
-        setPackages(packages.filter(function (item, index) { return packages.indexOf(item) === index; }));
     }, []);
     React.useEffect(function () {
         if (packages && packages.length > 0) {

@@ -42,10 +42,14 @@ const StoreComponent: React.FC<StoreProps> = ({
     const data = client.getPack(trendingParams)
 
     data.then(({ body }) => {
-      body.packageList.map(pack => {
+      const PackageIds = body.packageList.map(pack => pack.packageId)
+      PackageIds.filter((item, index) => PackageIds.indexOf(item) === index)
+
+      // body.packageList.map(pack => {
+      PackageIds.map(pack => {
         const packageParams = {
           userId: params.userId,
-          packId: pack.packageId,
+          packId: pack,
         }
 
         const packageData = client.getPackInfo(packageParams)
@@ -65,10 +69,6 @@ const StoreComponent: React.FC<StoreProps> = ({
     hideData.then(({ body }) => {
       setHideList(hideList.concat(body.packageList.map(pack => pack.packageId)))
     })
-
-    setPackages(
-      packages.filter((item, index) => packages.indexOf(item) === index)
-    )
   }, [])
 
   useEffect(() => {
