@@ -3899,8 +3899,7 @@ var StoreComponent = function (_a) {
         var data = client.getPack(trendingParams);
         data.then(function (_a) {
             var body = _a.body;
-            var data = body.packageList.filter(function (item, index) { return body.packageList.indexOf(item) === index; });
-            data.map(function (pack) {
+            body.packageList.map(function (pack) {
                 var packageParams = {
                     userId: params.userId,
                     packId: pack.packageId,
@@ -3922,6 +3921,7 @@ var StoreComponent = function (_a) {
             var body = _a.body;
             setHideList(hideList.concat(body.packageList.map(function (pack) { return pack.packageId; })));
         });
+        setPackages(packages.filter(function (item, index) { return packages.indexOf(item) === index; }));
     }, []);
     useEffect(function () {
         if (packages && packages.length > 0) {
@@ -3936,7 +3936,6 @@ var StoreComponent = function (_a) {
                 }
             }
         }
-        // console.log(packages)
     }, [packages]);
     var clickDownload = function (packageId) {
         setIsLoading(true);

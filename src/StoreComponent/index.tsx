@@ -42,10 +42,7 @@ const StoreComponent: React.FC<StoreProps> = ({
     const data = client.getPack(trendingParams)
 
     data.then(({ body }) => {
-      const data = body.packageList.filter(
-        (item, index) => body.packageList.indexOf(item) === index
-      )
-      data.map(pack => {
+      body.packageList.map(pack => {
         const packageParams = {
           userId: params.userId,
           packId: pack.packageId,
@@ -68,6 +65,10 @@ const StoreComponent: React.FC<StoreProps> = ({
     hideData.then(({ body }) => {
       setHideList(hideList.concat(body.packageList.map(pack => pack.packageId)))
     })
+
+    setPackages(
+      packages.filter((item, index) => packages.indexOf(item) === index)
+    )
   }, [])
 
   useEffect(() => {
@@ -82,7 +83,6 @@ const StoreComponent: React.FC<StoreProps> = ({
         }
       }
     }
-    // console.log(packages)
   }, [packages])
 
   const clickDownload = packageId => {
