@@ -3902,7 +3902,6 @@ var templateObject_1$1, templateObject_2$1, templateObject_3$1, templateObject_4
 
 var StoreComponent = function (_a) {
     var params = _a.params, downloadParams = _a.downloadParams, color = _a.color, scroll = _a.scroll, onClose = _a.onClose, size = _a.size, border = _a.border;
-    // const [trendingStickers, setTrendingStickers] = useState([])
     var _b = React.useState([]), packages = _b[0], setPackages = _b[1];
     var _c = React.useState(false), detail = _c[0], setDetail = _c[1];
     var _d = React.useState([]), stickers = _d[0], setStickers = _d[1];
@@ -3912,6 +3911,7 @@ var StoreComponent = function (_a) {
     var _h = React.useState(0), currentScroll = _h[0], setCurrentScroll = _h[1];
     var client = new Stipop$1(params.apikey, 'v1');
     var packInfo = new Array();
+    var packageWrapper = document.getElementById('package-wrapper');
     React.useEffect(function () {
         setIsLoading(true);
         var trendingParams = {
@@ -3934,7 +3934,6 @@ var StoreComponent = function (_a) {
                 packageData.then(function (_a) {
                     var body = _a.body;
                     packInfo.push(body.package);
-                    // setTrendingStickers([...trendingStickers, packInfo])
                     setPackages(packages.concat(packInfo));
                 });
             });
@@ -3948,13 +3947,6 @@ var StoreComponent = function (_a) {
             setHideList(body.packageList.map(function (pack) { return pack.packageId; }));
         });
     }, []);
-    // useEffect(() => {
-    //   setPackages(trendingStickers[0])
-    // }, [trendingStickers])
-    // useEffect(() => {
-    //   console.log(packages)
-    //   console.log(hideList)
-    // }, [packages, hideList])
     React.useEffect(function () {
         if (packages && packages.length > 0) {
             if (params.limit) {
@@ -4013,6 +4005,12 @@ var StoreComponent = function (_a) {
                     return [4 /*yield*/, pack.scrollTo(0, currentScroll)];
                 case 4:
                     _a.sent();
+                    if (!isLoading) {
+                        console.log(packageWrapper);
+                    }
+                    else {
+                        console.log(packageWrapper);
+                    }
                     return [2 /*return*/];
             }
         });
@@ -4058,6 +4056,12 @@ var StoreComponent = function (_a) {
                     return [4 /*yield*/, pack.scrollTo(0, currentScroll)];
                 case 4:
                     _a.sent();
+                    if (!isLoading) {
+                        console.log(packageWrapper);
+                    }
+                    else {
+                        console.log(packageWrapper);
+                    }
                     return [2 /*return*/];
             }
         });

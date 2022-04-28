@@ -15,7 +15,6 @@ const StoreComponent: React.FC<StoreProps> = ({
   size,
   border,
 }) => {
-  // const [trendingStickers, setTrendingStickers] = useState([])
   const [packages, setPackages] = useState([])
   const [detail, setDetail] = useState(false)
   const [stickers, setStickers] = useState([])
@@ -26,6 +25,8 @@ const StoreComponent: React.FC<StoreProps> = ({
 
   const client = new (Stipop as any)(params.apikey, 'v1')
   const packInfo = new Array()
+
+  const packageWrapper = document.getElementById('package-wrapper')
 
   useEffect(() => {
     setIsLoading(true)
@@ -50,7 +51,6 @@ const StoreComponent: React.FC<StoreProps> = ({
         const packageData = client.getPackInfo(packageParams)
         packageData.then(({ body }) => {
           packInfo.push(body.package)
-          // setTrendingStickers([...trendingStickers, packInfo])
           setPackages(packages.concat(packInfo))
         })
       })
@@ -65,15 +65,6 @@ const StoreComponent: React.FC<StoreProps> = ({
       setHideList(body.packageList.map(pack => pack.packageId))
     })
   }, [])
-
-  // useEffect(() => {
-  //   setPackages(trendingStickers[0])
-  // }, [trendingStickers])
-
-  // useEffect(() => {
-  //   console.log(packages)
-  //   console.log(hideList)
-  // }, [packages, hideList])
 
   useEffect(() => {
     if (packages && packages.length > 0) {
@@ -115,6 +106,11 @@ const StoreComponent: React.FC<StoreProps> = ({
     const pack = await document.getElementById('package-wrapper')
     console.log(pack)
     await pack.scrollTo(0, currentScroll)
+    if (!isLoading) {
+      console.log(packageWrapper)
+    } else {
+      console.log(packageWrapper)
+    }
   }
 
   const clickDelete = async packageId => {
@@ -136,6 +132,11 @@ const StoreComponent: React.FC<StoreProps> = ({
     const pack = await document.getElementById('package-wrapper')
     console.log(pack)
     await pack.scrollTo(0, currentScroll)
+    if (!isLoading) {
+      console.log(packageWrapper)
+    } else {
+      console.log(packageWrapper)
+    }
   }
 
   const clickDetail = async packageId => {
