@@ -123,6 +123,13 @@ const StoreComponent: React.FC<StoreProps> = ({
     })
   }
 
+  useEffect(() => {
+    const pack = document.getElementById('package-wrapper')
+    if (pack) {
+      pack.scrollTo(0, currentScroll)
+    }
+  }, [isLoading])
+
   const clickDetail = async packageId => {
     await setIsLoading(true)
     await setStickers(
@@ -298,18 +305,10 @@ const StoreComponent: React.FC<StoreProps> = ({
                     </DownloadBtn>
                     <BtnWrapper
                       id="download-btn"
-                      onClick={async () => {
+                      onClick={() => {
                         pack.isDownload === 'Y'
-                          ? await clickDelete(pack.packageId)
-                          : await clickDownload(pack.packageId)
-                        if (!isLoading) {
-                          await console.log(
-                            document.getElementById('package-wrapper')
-                          )
-                          await document
-                            .getElementById('package-wrapper')
-                            .scrollTo(0, currentScroll)
-                        }
+                          ? clickDelete(pack.packageId)
+                          : clickDownload(pack.packageId)
                       }}
                     ></BtnWrapper>
                   </PackageBox>

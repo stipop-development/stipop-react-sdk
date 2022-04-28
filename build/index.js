@@ -4040,6 +4040,12 @@ var StoreComponent = function (_a) {
             }
         });
     }); };
+    React.useEffect(function () {
+        var pack = document.getElementById('package-wrapper');
+        if (pack) {
+            pack.scrollTo(0, currentScroll);
+        }
+    }, [isLoading]);
     var clickDetail = function (packageId) { return __awaiter$1(void 0, void 0, void 0, function () {
         return __generator$1(this, function (_a) {
             switch (_a.label) {
@@ -4147,34 +4153,11 @@ var StoreComponent = function (_a) {
                             ? 'MINUS'
                             : 'PLUS'
                         : 'PLUS' })),
-            React__default["default"].createElement(BtnWrapper, { id: "download-btn", onClick: function () { return __awaiter$1(void 0, void 0, void 0, function () {
-                    return __generator$1(this, function (_b) {
-                        switch (_b.label) {
-                            case 0:
-                                if (!(pack.isDownload === 'Y')) return [3 /*break*/, 2];
-                                return [4 /*yield*/, clickDelete(pack.packageId)];
-                            case 1:
-                                _b.sent();
-                                return [3 /*break*/, 4];
-                            case 2: return [4 /*yield*/, clickDownload(pack.packageId)];
-                            case 3:
-                                _b.sent();
-                                _b.label = 4;
-                            case 4:
-                                if (!!isLoading) return [3 /*break*/, 7];
-                                return [4 /*yield*/, console.log(document.getElementById('package-wrapper'))];
-                            case 5:
-                                _b.sent();
-                                return [4 /*yield*/, document
-                                        .getElementById('package-wrapper')
-                                        .scrollTo(0, currentScroll)];
-                            case 6:
-                                _b.sent();
-                                _b.label = 7;
-                            case 7: return [2 /*return*/];
-                        }
-                    });
-                }); } }))); }))) : (React__default["default"].createElement("div", null)))))));
+            React__default["default"].createElement(BtnWrapper, { id: "download-btn", onClick: function () {
+                    pack.isDownload === 'Y'
+                        ? clickDelete(pack.packageId)
+                        : clickDownload(pack.packageId);
+                } }))); }))) : (React__default["default"].createElement("div", null)))))));
 };
 var StoreWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: #fff;\n  border: ", ";\n  border-radius: ", ";\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  background-color: ", ";\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: #fff;\n  border: ", ";\n  border-radius: ", ";\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  background-color: ", ";\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '600px';
