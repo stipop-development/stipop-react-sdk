@@ -3987,6 +3987,7 @@ var StoreComponent = function (_a) {
                     };
                     data = client.download(dParams);
                     return [4 /*yield*/, data.then(function () { return __awaiter$1(void 0, void 0, void 0, function () {
+                            var pack;
                             return __generator$1(this, function (_a) {
                                 switch (_a.label) {
                                     case 0:
@@ -3999,6 +4000,10 @@ var StoreComponent = function (_a) {
                                         return [4 /*yield*/, setIsLoading(false)];
                                     case 1:
                                         _a.sent();
+                                        pack = document.getElementById('package-wrapper');
+                                        if (pack) {
+                                            console.log(pack);
+                                        }
                                         return [4 /*yield*/, document
                                                 .getElementById('package-wrapper')
                                                 .scrollTo(0, currentScroll)];
@@ -4007,9 +4012,7 @@ var StoreComponent = function (_a) {
                                         return [2 /*return*/];
                                 }
                             });
-                        }); })
-                        // const pack = document.getElementById('package-wrapper')
-                    ];
+                        }); })];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];
@@ -4029,6 +4032,7 @@ var StoreComponent = function (_a) {
                     };
                     data = client.myStickerHide(deleteParams);
                     data.then(function () { return __awaiter$1(void 0, void 0, void 0, function () {
+                        var pack;
                         return __generator$1(this, function (_a) {
                             switch (_a.label) {
                                 case 0:
@@ -4041,6 +4045,10 @@ var StoreComponent = function (_a) {
                                     return [4 /*yield*/, setIsLoading(false)];
                                 case 1:
                                     _a.sent();
+                                    pack = document.getElementById('package-wrapper');
+                                    if (pack) {
+                                        console.log(pack);
+                                    }
                                     return [4 /*yield*/, document
                                             .getElementById('package-wrapper')
                                             .scrollTo(0, currentScroll)];
