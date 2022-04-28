@@ -3912,7 +3912,9 @@ var StoreComponent = function (_a) {
                 packageData.then(function (_a) {
                     var body = _a.body;
                     packInfo.push(body.package);
-                    setPackages(packages.concat(packInfo));
+                    if (packages.length === 0) {
+                        setPackages(packages.concat(packInfo));
+                    }
                 });
             });
         });

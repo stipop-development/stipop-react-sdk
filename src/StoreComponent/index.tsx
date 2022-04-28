@@ -56,7 +56,9 @@ const StoreComponent: React.FC<StoreProps> = ({
         const packageData = client.getPackInfo(packageParams)
         packageData.then(({ body }) => {
           packInfo.push(body.package)
-          setPackages(packages.concat(packInfo))
+          if (packages.length === 0) {
+            setPackages(packages.concat(packInfo))
+          }
         })
       })
     })
