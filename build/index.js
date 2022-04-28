@@ -3986,23 +3986,31 @@ var StoreComponent = function (_a) {
                         countryCode: downloadParams.countryCode,
                     };
                     data = client.download(dParams);
-                    return [4 /*yield*/, data.then(function () {
-                            setPackages(packages.map(function (pack) {
-                                if (pack.packageId === packageId) {
-                                    pack.isDownload = 'Y';
+                    return [4 /*yield*/, data.then(function () { return __awaiter$1(void 0, void 0, void 0, function () {
+                            return __generator$1(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        setPackages(packages.map(function (pack) {
+                                            if (pack.packageId === packageId) {
+                                                pack.isDownload = 'Y';
+                                            }
+                                            return pack;
+                                        }));
+                                        return [4 /*yield*/, setIsLoading(false)];
+                                    case 1:
+                                        _a.sent();
+                                        return [4 /*yield*/, document
+                                                .getElementById('package-wrapper')
+                                                .scrollTo(0, currentScroll)];
+                                    case 2:
+                                        _a.sent();
+                                        return [2 /*return*/];
                                 }
-                                return pack;
-                            }));
-                            setIsLoading(false);
-                        })
+                            });
+                        }); })
                         // const pack = document.getElementById('package-wrapper')
                     ];
                 case 2:
-                    _a.sent();
-                    // const pack = document.getElementById('package-wrapper')
-                    return [4 /*yield*/, document.getElementById('package-wrapper').scrollTo(0, currentScroll)];
-                case 3:
-                    // const pack = document.getElementById('package-wrapper')
                     _a.sent();
                     return [2 /*return*/];
             }
@@ -4020,24 +4028,28 @@ var StoreComponent = function (_a) {
                         packageId: packageId,
                     };
                     data = client.myStickerHide(deleteParams);
-                    return [4 /*yield*/, data.then(function () {
-                            if (hideList.indexOf(packageId) < 0) {
-                                setHideList(hideList.concat(packageId));
+                    data.then(function () { return __awaiter$1(void 0, void 0, void 0, function () {
+                        return __generator$1(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    if (hideList.indexOf(packageId) < 0) {
+                                        setHideList(hideList.concat(packageId));
+                                    }
+                                    else {
+                                        setHideList(hideList.filter(function (item) { return item !== packageId; }));
+                                    }
+                                    return [4 /*yield*/, setIsLoading(false)];
+                                case 1:
+                                    _a.sent();
+                                    return [4 /*yield*/, document
+                                            .getElementById('package-wrapper')
+                                            .scrollTo(0, currentScroll)];
+                                case 2:
+                                    _a.sent();
+                                    return [2 /*return*/];
                             }
-                            else {
-                                setHideList(hideList.filter(function (item) { return item !== packageId; }));
-                            }
-                            setIsLoading(false);
-                        })
-                        // const pack = document.getElementById('package-wrapper')
-                    ];
-                case 2:
-                    _a.sent();
-                    // const pack = document.getElementById('package-wrapper')
-                    return [4 /*yield*/, document.getElementById('package-wrapper').scrollTo(0, currentScroll)];
-                case 3:
-                    // const pack = document.getElementById('package-wrapper')
-                    _a.sent();
+                        });
+                    }); });
                     return [2 /*return*/];
             }
         });
