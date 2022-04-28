@@ -302,9 +302,14 @@ const StoreComponent: React.FC<StoreProps> = ({
                         pack.isDownload === 'Y'
                           ? await clickDelete(pack.packageId)
                           : await clickDownload(pack.packageId)
-                        await document
-                          .querySelector('#package-wrapper')
-                          .scrollTo(0, currentScroll)
+                        if (!isLoading) {
+                          await console.log(
+                            document.getElementById('package-wrapper')
+                          )
+                          await document
+                            .getElementById('package-wrapper')
+                            .scrollTo(0, currentScroll)
+                        }
                       }}
                     ></BtnWrapper>
                   </PackageBox>

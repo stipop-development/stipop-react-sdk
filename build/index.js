@@ -4161,12 +4161,17 @@ var StoreComponent = function (_a) {
                                 _b.sent();
                                 _b.label = 4;
                             case 4:
-                                return [4 /*yield*/, document
-                                        .querySelector('#package-wrapper')
-                                        .scrollTo(0, currentScroll)];
+                                if (!!isLoading) return [3 /*break*/, 7];
+                                return [4 /*yield*/, console.log(document.getElementById('package-wrapper'))];
                             case 5:
                                 _b.sent();
-                                return [2 /*return*/];
+                                return [4 /*yield*/, document
+                                        .getElementById('package-wrapper')
+                                        .scrollTo(0, currentScroll)];
+                            case 6:
+                                _b.sent();
+                                _b.label = 7;
+                            case 7: return [2 /*return*/];
                         }
                     });
                 }); } }))); }))) : (React__default["default"].createElement("div", null)))))));
