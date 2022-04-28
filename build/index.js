@@ -4006,9 +4006,11 @@ var StoreComponent = function (_a) {
                 case 4:
                     _a.sent();
                     if (!isLoading) {
+                        console.log(pack);
                         console.log(packageWrapper);
                     }
                     else {
+                        console.log(pack);
                         console.log(packageWrapper);
                     }
                     return [2 /*return*/];
@@ -4057,9 +4059,11 @@ var StoreComponent = function (_a) {
                 case 4:
                     _a.sent();
                     if (!isLoading) {
+                        console.log(pack);
                         console.log(packageWrapper);
                     }
                     else {
+                        console.log(pack);
                         console.log(packageWrapper);
                     }
                     return [2 /*return*/];
