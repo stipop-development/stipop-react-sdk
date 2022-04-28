@@ -3914,11 +3914,12 @@ var StoreComponent = function (_a) {
         });
         var hideParams = {
             userId: params.userId,
+            limit: 50,
         };
         var hideData = client.myStickerHideList(hideParams);
         hideData.then(function (_a) {
             var body = _a.body;
-            setHideList(body.packageList.map(function (pack) { return pack.packageId; }));
+            setHideList(hideList.concat(body.packageList.map(function (pack) { return pack.packageId; })));
         });
     }, []);
     useEffect(function () {
@@ -3936,109 +3937,57 @@ var StoreComponent = function (_a) {
         }
         // console.log(packages)
     }, [packages]);
-    var clickDownload = function (packageId) { return __awaiter$1(void 0, void 0, void 0, function () {
-        var dParams, data;
-        return __generator$1(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, setIsLoading(true)];
-                case 1:
-                    _a.sent();
-                    dParams = {
-                        userId: params.userId,
-                        packageId: packageId,
-                        isPurchase: downloadParams.isPurchase,
-                        price: downloadParams.price,
-                        lang: downloadParams.lang,
-                        countryCode: downloadParams.countryCode,
-                    };
-                    data = client.download(dParams);
-                    return [4 /*yield*/, data.then(function () { return __awaiter$1(void 0, void 0, void 0, function () {
-                            return __generator$1(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0: return [4 /*yield*/, setPackages(packages.map(function (pack) {
-                                            if (pack.packageId === packageId) {
-                                                pack.isDownload = 'Y';
-                                            }
-                                            return pack;
-                                        }))];
-                                    case 1:
-                                        _a.sent();
-                                        return [4 /*yield*/, setIsLoading(false)];
-                                    case 2:
-                                        _a.sent();
-                                        return [2 /*return*/];
-                                }
-                            });
-                        }); })];
-                case 2:
-                    _a.sent();
-                    return [2 /*return*/];
-            }
+    var clickDownload = function (packageId) {
+        setIsLoading(true);
+        var dParams = {
+            userId: params.userId,
+            packageId: packageId,
+            isPurchase: downloadParams.isPurchase,
+            price: downloadParams.price,
+            lang: downloadParams.lang,
+            countryCode: downloadParams.countryCode,
+        };
+        var data = client.download(dParams);
+        data.then(function () {
+            setPackages(packages.map(function (pack) {
+                if (pack.packageId === packageId) {
+                    pack.isDownload = 'Y';
+                }
+                return pack;
+            }));
+            setIsLoading(false);
         });
-    }); };
-    var clickDelete = function (packageId) { return __awaiter$1(void 0, void 0, void 0, function () {
-        var deleteParams, data;
-        return __generator$1(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, setIsLoading(true)];
-                case 1:
-                    _a.sent();
-                    deleteParams = {
-                        userId: params.userId,
-                        packageId: packageId,
-                    };
-                    data = client.myStickerHide(deleteParams);
-                    return [4 /*yield*/, data.then(function () { return __awaiter$1(void 0, void 0, void 0, function () {
-                            return __generator$1(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        if (!(hideList.indexOf(packageId) < 0)) return [3 /*break*/, 2];
-                                        return [4 /*yield*/, setHideList(hideList.concat(packageId))];
-                                    case 1:
-                                        _a.sent();
-                                        return [3 /*break*/, 4];
-                                    case 2: return [4 /*yield*/, setHideList(hideList.filter(function (item) { return item !== packageId; }))];
-                                    case 3:
-                                        _a.sent();
-                                        _a.label = 4;
-                                    case 4: return [4 /*yield*/, setIsLoading(false)];
-                                    case 5:
-                                        _a.sent();
-                                        return [2 /*return*/];
-                                }
-                            });
-                        }); })];
-                case 2:
-                    _a.sent();
-                    return [2 /*return*/];
+    };
+    var clickHide = function (packageId) {
+        setIsLoading(true);
+        var hideParams = {
+            userId: params.userId,
+            packageId: packageId,
+        };
+        var data = client.myStickerHide(hideParams);
+        data.then(function (res) {
+            console.log(res);
+            if (hideList.indexOf(packageId) < 0) {
+                setHideList(hideList.concat(packageId));
             }
+            else {
+                setHideList(hideList.filter(function (item) { return item !== packageId; }));
+            }
+            setIsLoading(false);
         });
-    }); };
+    };
     useEffect(function () {
         var pack = document.getElementById('package-wrapper');
         if (pack) {
             pack.scrollTo(0, currentScroll);
         }
     }, [isLoading]);
-    var clickDetail = function (packageId) { return __awaiter$1(void 0, void 0, void 0, function () {
-        return __generator$1(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, setIsLoading(true)];
-                case 1:
-                    _a.sent();
-                    return [4 /*yield*/, setStickers(packages.filter(function (pack) { return pack.packageId === packageId; })[0].stickers)];
-                case 2:
-                    _a.sent();
-                    return [4 /*yield*/, setDetail(true)];
-                case 3:
-                    _a.sent();
-                    return [4 /*yield*/, setIsLoading(false)];
-                case 4:
-                    _a.sent();
-                    return [2 /*return*/];
-            }
-        });
-    }); };
+    var clickDetail = function (packageId) {
+        setIsLoading(true);
+        setStickers(packages.filter(function (pack) { return pack.packageId === packageId; })[0].stickers);
+        setDetail(true);
+        setIsLoading(false);
+    };
     var clickPrevious = function () { return __awaiter$1(void 0, void 0, void 0, function () {
         var pack;
         return __generator$1(this, function (_a) {
@@ -4084,7 +4033,7 @@ var StoreComponent = function (_a) {
                 React__default.createElement(DownloadBtn, { color: color, isDownload: main.isDownload === 'Y', isRecovery: main.isDownload === 'Y' &&
                         hideList.indexOf(main.packageId) !== -1, onClick: function () {
                         main.isDownload === 'Y'
-                            ? clickDelete(main.packageId)
+                            ? clickHide(main.packageId)
                             : clickDownload(main.packageId);
                     } },
                     React__default.createElement(Icon, { type: main.isDownload === 'Y'
@@ -4129,7 +4078,7 @@ var StoreComponent = function (_a) {
                         : 'PLUS' })),
             React__default.createElement(BtnWrapper, { id: "download-btn", onClick: function () {
                     pack.isDownload === 'Y'
-                        ? clickDelete(pack.packageId)
+                        ? clickHide(pack.packageId)
                         : clickDownload(pack.packageId);
                 } }))); }))) : (React__default.createElement("div", null)))))));
 };

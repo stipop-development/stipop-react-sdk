@@ -58,11 +58,12 @@ const StoreComponent: React.FC<StoreProps> = ({
 
     const hideParams = {
       userId: params.userId,
+      limit: 50,
     }
 
     const hideData = client.myStickerHideList(hideParams)
     hideData.then(({ body }) => {
-      setHideList(body.packageList.map(pack => pack.packageId))
+      setHideList(hideList.concat(body.packageList.map(pack => pack.packageId)))
     })
   }, [])
 
@@ -81,8 +82,8 @@ const StoreComponent: React.FC<StoreProps> = ({
     // console.log(packages)
   }, [packages])
 
-  const clickDownload = async packageId => {
-    await setIsLoading(true)
+  const clickDownload = packageId => {
+    setIsLoading(true)
     const dParams = {
       userId: params.userId,
       packageId: packageId,
@@ -92,8 +93,8 @@ const StoreComponent: React.FC<StoreProps> = ({
       countryCode: downloadParams.countryCode,
     }
     const data = client.download(dParams)
-    await data.then(async () => {
-      await setPackages(
+    data.then(() => {
+      setPackages(
         packages.map(pack => {
           if (pack.packageId === packageId) {
             pack.isDownload = 'Y'
@@ -101,25 +102,26 @@ const StoreComponent: React.FC<StoreProps> = ({
           return pack
         })
       )
-      await setIsLoading(false)
+      setIsLoading(false)
     })
   }
 
-  const clickDelete = async packageId => {
-    await setIsLoading(true)
-    const deleteParams = {
+  const clickHide = packageId => {
+    setIsLoading(true)
+    const hideParams = {
       userId: params.userId,
       packageId: packageId,
     }
 
-    const data = client.myStickerHide(deleteParams)
-    await data.then(async () => {
+    const data = client.myStickerHide(hideParams)
+    data.then(res => {
+      console.log(res)
       if (hideList.indexOf(packageId) < 0) {
-        await setHideList(hideList.concat(packageId))
+        setHideList(hideList.concat(packageId))
       } else {
-        await setHideList(hideList.filter(item => item !== packageId))
+        setHideList(hideList.filter(item => item !== packageId))
       }
-      await setIsLoading(false)
+      setIsLoading(false)
     })
   }
 
@@ -130,13 +132,13 @@ const StoreComponent: React.FC<StoreProps> = ({
     }
   }, [isLoading])
 
-  const clickDetail = async packageId => {
-    await setIsLoading(true)
-    await setStickers(
+  const clickDetail = packageId => {
+    setIsLoading(true)
+    setStickers(
       packages.filter(pack => pack.packageId === packageId)[0].stickers
     )
-    await setDetail(true)
-    await setIsLoading(false)
+    setDetail(true)
+    setIsLoading(false)
   }
 
   const clickPrevious = async () => {
@@ -208,7 +210,7 @@ const StoreComponent: React.FC<StoreProps> = ({
                     }
                     onClick={() => {
                       main.isDownload === 'Y'
-                        ? clickDelete(main.packageId)
+                        ? clickHide(main.packageId)
                         : clickDownload(main.packageId)
                     }}
                   >
@@ -307,7 +309,7 @@ const StoreComponent: React.FC<StoreProps> = ({
                       id="download-btn"
                       onClick={() => {
                         pack.isDownload === 'Y'
-                          ? clickDelete(pack.packageId)
+                          ? clickHide(pack.packageId)
                           : clickDownload(pack.packageId)
                       }}
                     ></BtnWrapper>
