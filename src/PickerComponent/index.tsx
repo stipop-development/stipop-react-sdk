@@ -5,6 +5,7 @@ import Stipop from 'stipop-js-sdk'
 import { StoreProps } from './index.types'
 
 import Icon from '../Icon'
+import LoadingSpinner from '../LoadingSpinner'
 
 const PickerComponent: React.FC<StoreProps> = ({
   params,
@@ -20,6 +21,9 @@ const PickerComponent: React.FC<StoreProps> = ({
   const [myStickers, setMyStickers] = useState([])
   const [stickers, setStickers] = useState([])
   const [showPackage, setShowPackage] = useState(0)
+
+  const [isLoading, setIsLoading] = useState(true)
+
   const client = new (Stipop as any)(params.apikey, 'v1')
 
   useEffect(() => {
@@ -46,7 +50,8 @@ const PickerComponent: React.FC<StoreProps> = ({
     })
   }, [])
 
-  const clickPackage = packageId => {
+  const clickPackage = async packageId => {
+    await setIsLoading(true)
     const packageParams = {
       userId: params.userId,
       packId: packageId,
@@ -54,7 +59,7 @@ const PickerComponent: React.FC<StoreProps> = ({
 
     const data = client.getPackInfo(packageParams)
 
-    data.then(({ body }) => {
+    await data.then(({ body }) => {
       setStickers(
         body && body.package && body.package.stickers
           ? body.package.stickers.map(sticker => sticker.stickerImg)
@@ -62,6 +67,12 @@ const PickerComponent: React.FC<StoreProps> = ({
       )
     })
   }
+
+  useEffect(() => {
+    if (stickers && stickers.length > 0) {
+      setIsLoading(false)
+    }
+  }, [stickers])
 
   return (
     <StoreWrapper size={size} border={border}>
@@ -89,7 +100,17 @@ const PickerComponent: React.FC<StoreProps> = ({
           <div></div>
         )}
       </PickerMenu>
-      {stickers && (
+      {stickers && isLoading ? (
+        <StickerWrapper
+          backgroundColor={backgroundColor}
+          border={border}
+          column={column}
+          scroll={scroll}
+          isLoading={isLoading}
+        >
+          <LoadingSpinner />
+        </StickerWrapper>
+      ) : (
         <StickerWrapper
           backgroundColor={backgroundColor}
           border={border}
@@ -185,7 +206,7 @@ const PackageImg = styled.img`
 const StickerWrapper = styled.div`
   height: calc(100% - 45px);
   padding: 15px;
-  display: grid;
+  display: ${props => (props.isLoading ? '' : 'grid')};
   grid-template-columns: ${props =>
     props.column ? `repeat(${props.column}, 1fr)` : 'repeat(4, 1fr)'};
   row-gap: 8%;

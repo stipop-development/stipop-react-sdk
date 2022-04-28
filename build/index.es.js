@@ -3668,7 +3668,7 @@ var SearchComponent = function (_a) {
             React__default.createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker" }),
             React__default.createElement("span", { className: "no-sticker-text" }, "No Stickers to Show")))));
 };
-var SearchWrapper = styled.div(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"])), function (props) {
+var SearchWrapper = styled.div(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 15px 20px 20px 20px;\n  box-sizing: border-box;\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
 }, function (props) {
     return props.size && props.size.height ? "".concat(props.size.height, "px") : '300px';
@@ -3683,7 +3683,7 @@ var SearchWrapper = styled.div(templateObject_1$3 || (templateObject_1$3 = __mak
         ? "".concat(props.border.radius, "px")
         : '10px';
 });
-var SearchForm = styled.div(templateObject_2$3 || (templateObject_2$3 = __makeTemplateObject(["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"], ["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"])));
+var SearchForm = styled.div(templateObject_2$4 || (templateObject_2$4 = __makeTemplateObject(["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"], ["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"])));
 var SearchInput = styled.input(templateObject_3$3 || (templateObject_3$3 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"])), function (props) {
     return props.input && props.input.width
         ? "".concat(props.input.width, "%")
@@ -3727,7 +3727,7 @@ var NoSticker = styled.div(templateObject_6$3 || (templateObject_6$3 = __makeTem
 var StickerImg$1 = styled.img(templateObject_7$1 || (templateObject_7$1 = __makeTemplateObject(["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"], ["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"])), function (props) {
     return props.size && props.size.imgSize ? "".concat(props.size.imgSize, "%") : '60%';
 });
-var templateObject_1$3, templateObject_2$3, templateObject_3$3, templateObject_4$3, templateObject_5$3, templateObject_6$3, templateObject_7$1;
+var templateObject_1$4, templateObject_2$4, templateObject_3$3, templateObject_4$3, templateObject_5$3, templateObject_6$3, templateObject_7$1;
 
 var ChattingComponent = function (_a) {
     var width = _a.width, height = _a.height, sticker = _a.sticker;
@@ -3755,19 +3755,28 @@ var ChattingComponent = function (_a) {
                     }
                 } }))));
 };
-var ChattingWrapper = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: #f8f6fe;\n  position: relative;\n  padding: 15px;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: #f8f6fe;\n  position: relative;\n  padding: 15px;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n"])), function (props) { return (props.width ? "".concat(props.width, "px") : '80vw'); }, function (props) { return (props.height ? "".concat(props.height, "px") : '90vh'); });
-var ChatList = styled.div(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  height: calc(100% - 60px);\n  overflow-y: auto;\n"], ["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  height: calc(100% - 60px);\n  overflow-y: auto;\n"])));
+var ChattingWrapper = styled.div(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: #f8f6fe;\n  position: relative;\n  padding: 15px;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: #f8f6fe;\n  position: relative;\n  padding: 15px;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n"])), function (props) { return (props.width ? "".concat(props.width, "px") : '80vw'); }, function (props) { return (props.height ? "".concat(props.height, "px") : '90vh'); });
+var ChatList = styled.div(templateObject_2$3 || (templateObject_2$3 = __makeTemplateObject(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  height: calc(100% - 60px);\n  overflow-y: auto;\n"], ["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  height: calc(100% - 60px);\n  overflow-y: auto;\n"])));
 var ChatWrapper = styled.div(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n  margin: 5px 0;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  padding-right: 5px;\n\n  span {\n    font-size: 12px;\n    color: #696969;\n    padding-right: 5px;\n    margin-bottom: 2px;\n  }\n"], ["\n  margin: 5px 0;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  padding-right: 5px;\n\n  span {\n    font-size: 12px;\n    color: #696969;\n    padding-right: 5px;\n    margin-bottom: 2px;\n  }\n"])));
 var Chat = styled.div(templateObject_4$2 || (templateObject_4$2 = __makeTemplateObject(["\n  background-color: ", ";\n  border-radius: 10px;\n  display: inline-block;\n  padding: 5px 10px;\n  word-break: break-all;\n  font-size: 14px;\n\n  img {\n    width: 80px;\n    height: 80px;\n  }\n"], ["\n  background-color: ", ";\n  border-radius: 10px;\n  display: inline-block;\n  padding: 5px 10px;\n  word-break: break-all;\n  font-size: 14px;\n\n  img {\n    width: 80px;\n    height: 80px;\n  }\n"])), function (props) { return (props.sticker ? '' : '#fff'); });
 var ChattingFrom = styled.div(templateObject_5$2 || (templateObject_5$2 = __makeTemplateObject(["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  box-sizing: border-box;\n"], ["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  box-sizing: border-box;\n"])));
 var ChattingInput = styled.input(templateObject_6$2 || (templateObject_6$2 = __makeTemplateObject(["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"], ["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"])));
-var templateObject_1$2, templateObject_2$2, templateObject_3$2, templateObject_4$2, templateObject_5$2, templateObject_6$2;
+var templateObject_1$3, templateObject_2$3, templateObject_3$2, templateObject_4$2, templateObject_5$2, templateObject_6$2;
+
+var LoadingSpinner = function () {
+    return (React__default.createElement(SpinnerContainer, null,
+        React__default.createElement(Spinner, null)));
+};
+var SpinnerContainer = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n"], ["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n"])));
+var Spinner = styled.div(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  width: 20px;\n  height: 20px;\n  border: 5px solid #f3f3f3;\n  border-top: 5px solid #383636;\n  border-radius: 50%;\n\n  @keyframes spinner {\n    0% {\n      transform: rotate(0deg);\n    }\n    100% {\n      transform: rotate(360deg);\n    }\n  }\n\n  animation: spinner 1s linear infinite;\n"], ["\n  width: 20px;\n  height: 20px;\n  border: 5px solid #f3f3f3;\n  border-top: 5px solid #383636;\n  border-radius: 50%;\n\n  @keyframes spinner {\n    0% {\n      transform: rotate(0deg);\n    }\n    100% {\n      transform: rotate(360deg);\n    }\n  }\n\n  animation: spinner 1s linear infinite;\n"])));
+var templateObject_1$2, templateObject_2$2;
 
 var PickerComponent = function (_a) {
     var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, stickerClick = _a.stickerClick, storeClick = _a.storeClick;
     var _b = useState([]), myStickers = _b[0], setMyStickers = _b[1];
     var _c = useState([]), stickers = _c[0], setStickers = _c[1];
     var _d = useState(0), showPackage = _d[0], setShowPackage = _d[1];
+    var _e = useState(true), isLoading = _e[0], setIsLoading = _e[1];
     var client = new Stipop$1(params.apikey, 'v1');
     useEffect(function () {
         var storeParams = {
@@ -3790,19 +3799,35 @@ var PickerComponent = function (_a) {
             });
         });
     }, []);
-    var clickPackage = function (packageId) {
-        var packageParams = {
-            userId: params.userId,
-            packId: packageId,
-        };
-        var data = client.getPackInfo(packageParams);
-        data.then(function (_a) {
-            var body = _a.body;
-            setStickers(body && body.package && body.package.stickers
-                ? body.package.stickers.map(function (sticker) { return sticker.stickerImg; })
-                : []);
+    var clickPackage = function (packageId) { return __awaiter$1(void 0, void 0, void 0, function () {
+        var packageParams, data;
+        return __generator$1(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, setIsLoading(true)];
+                case 1:
+                    _a.sent();
+                    packageParams = {
+                        userId: params.userId,
+                        packId: packageId,
+                    };
+                    data = client.getPackInfo(packageParams);
+                    return [4 /*yield*/, data.then(function (_a) {
+                            var body = _a.body;
+                            setStickers(body && body.package && body.package.stickers
+                                ? body.package.stickers.map(function (sticker) { return sticker.stickerImg; })
+                                : []);
+                        })];
+                case 2:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
         });
-    };
+    }); };
+    useEffect(function () {
+        if (stickers && stickers.length > 0) {
+            setIsLoading(false);
+        }
+    }, [stickers]);
     return (React__default.createElement(StoreWrapper$1, { size: size, border: border },
         React__default.createElement(PickerMenu, { backgroundColor: backgroundColor, border: border, menu: menu },
             React__default.createElement(Icon, { type: "TIME" }),
@@ -3814,7 +3839,8 @@ var PickerComponent = function (_a) {
                     }, show: showPackage === index },
                     React__default.createElement(PackageImg, { src: pack.packageImg })));
             })) : (React__default.createElement("div", null))),
-        stickers && (React__default.createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll }, stickers.map(function (sticker, index) { return (React__default.createElement(StickerImg, { size: size, src: sticker, alt: "", key: index, onClick: function () { return stickerClick(sticker); } })); })))));
+        stickers && isLoading ? (React__default.createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading },
+            React__default.createElement(LoadingSpinner, null))) : (React__default.createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll }, stickers.map(function (sticker, index) { return (React__default.createElement(StickerImg, { size: size, src: sticker, alt: "", key: index, onClick: function () { return stickerClick(sticker); } })); })))));
 };
 var StoreWrapper$1 = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
@@ -3856,7 +3882,7 @@ var PackageImgWrapper = styled.div(templateObject_3$1 || (templateObject_3$1 = _
         : '';
 });
 var PackageImg = styled.img(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  height: 65%;\n  cursor: pointer;\n"], ["\n  height: 65%;\n  cursor: pointer;\n"])));
-var StickerWrapper$1 = styled.div(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: grid;\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: grid;\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) {
+var StickerWrapper$1 = styled.div(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) { return (props.isLoading ? '' : 'grid'); }, function (props) {
     return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
 }, function (props) {
     return props.backgroundColor ? props.backgroundColor : '#fff';
@@ -4019,13 +4045,7 @@ var StoreComponent = function (_a) {
         });
     }); };
     return (React__default.createElement(React__default.Fragment, null, isLoading ? (React__default.createElement(StoreWrapper, { color: color, size: size, border: border },
-        React__default.createElement("div", { style: {
-                height: '100%',
-                display: 'flex',
-                justifyContent: ' center',
-                alignItems: 'center',
-            } },
-            React__default.createElement("span", null, "loading")))) : (React__default.createElement(StoreWrapper, { color: color, size: size, border: border },
+        React__default.createElement(LoadingSpinner, null))) : (React__default.createElement(StoreWrapper, { color: color, size: size, border: border },
         React__default.createElement(StoreTitle, null,
             detail ? (React__default.createElement("div", { className: "title-text" },
                 React__default.createElement(PreviousBtn, null,

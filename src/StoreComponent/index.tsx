@@ -5,6 +5,7 @@ import Stipop from 'stipop-js-sdk'
 import { StoreProps } from './index.types'
 
 import Icon from '../Icon/index'
+import LoadingSpinner from '../LoadingSpinner'
 
 const StoreComponent: React.FC<StoreProps> = ({
   params,
@@ -153,16 +154,7 @@ const StoreComponent: React.FC<StoreProps> = ({
     <>
       {isLoading ? (
         <StoreWrapper color={color} size={size} border={border}>
-          <div
-            style={{
-              height: '100%',
-              display: 'flex',
-              justifyContent: ' center',
-              alignItems: 'center',
-            }}
-          >
-            <span>loading</span>
-          </div>
+          <LoadingSpinner />
         </StoreWrapper>
       ) : (
         <StoreWrapper color={color} size={size} border={border}>
