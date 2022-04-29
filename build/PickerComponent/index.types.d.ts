@@ -27,5 +27,6 @@ interface Menu {
     bottomLine?: string;
     selectedLine?: string;
     height?: number;
+    listCnt?: number;
 }
 export {};

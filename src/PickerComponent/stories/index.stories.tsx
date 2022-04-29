@@ -21,7 +21,7 @@ export const CustomPicker = () => (
       userId: 'david@stipop.io',
     }}
     size={{
-      width: 500,
+      width: 520,
       height: 400,
       imgSize: 60,
     }}
@@ -35,6 +35,7 @@ export const CustomPicker = () => (
       backgroundColor: '#ededed',
       bottomLine: '2px solid black',
       height: 70,
+      listCnt: 7,
     }}
     column={5}
     scroll={false}

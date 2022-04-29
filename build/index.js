@@ -1373,7 +1373,7 @@ function decode(input) {
  * @returns {String|Null} The encoded string.
  * @api private
  */
-function encode(input) {
+function encode$1(input) {
   try {
     return encodeURIComponent(input);
   } catch (e) {
@@ -1444,8 +1444,8 @@ function querystringify(obj, prefix) {
         value = '';
       }
 
-      key = encode(key);
-      value = encode(value);
+      key = encode$1(key);
+      value = encode$1(value);
 
       //
       // If we failed to encode the strings, we should bail out as we don't
@@ -3339,15 +3339,17 @@ var Type = {
     CLOSE: 'CLOSE',
     PLUS: 'PLUS',
     MINUS: 'MINUS',
-    PREVIOUS: 'PREVIOUS'
+    PREVIOUS: 'PREVIOUS',
+    LEFT_ARROW: 'LEFT_ARROW',
+    RIGHT_ARROW_BLACK: 'RIGHT_ARROW_BLACK'
 };
 
 var _path$6;
 
-function _extends$9() { _extends$9 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$9.apply(this, arguments); }
+function _extends$b() { _extends$b = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$b.apply(this, arguments); }
 
 var SvgLogo = function SvgLogo(props) {
-  return /*#__PURE__*/React__namespace.createElement("svg", _extends$9({
+  return /*#__PURE__*/React__namespace.createElement("svg", _extends$b({
     width: 47,
     height: 17,
     xmlns: "http://www.w3.org/2000/svg"
@@ -3359,10 +3361,10 @@ var SvgLogo = function SvgLogo(props) {
 
 var _path$5;
 
-function _extends$8() { _extends$8 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$8.apply(this, arguments); }
+function _extends$a() { _extends$a = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$a.apply(this, arguments); }
 
 var SvgSearchIcon = function SvgSearchIcon(props) {
-  return /*#__PURE__*/React__namespace.createElement("svg", _extends$8({
+  return /*#__PURE__*/React__namespace.createElement("svg", _extends$a({
     width: 15,
     height: 15,
     viewBox: "0 0 18 18",
@@ -3374,16 +3376,16 @@ var SvgSearchIcon = function SvgSearchIcon(props) {
   })));
 };
 
-var _g$2;
+var _g$4;
 
-function _extends$7() { _extends$7 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$7.apply(this, arguments); }
+function _extends$9() { _extends$9 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$9.apply(this, arguments); }
 
 var SvgSmile = function SvgSmile(props) {
-  return /*#__PURE__*/React__namespace.createElement("svg", _extends$7({
+  return /*#__PURE__*/React__namespace.createElement("svg", _extends$9({
     width: 18,
     height: 18,
     xmlns: "http://www.w3.org/2000/svg"
-  }, props), _g$2 || (_g$2 = /*#__PURE__*/React__namespace.createElement("g", {
+  }, props), _g$4 || (_g$4 = /*#__PURE__*/React__namespace.createElement("g", {
     transform: "translate(1 1)",
     stroke: "#FF4500",
     fill: "none",
@@ -3412,10 +3414,10 @@ var SvgSmile = function SvgSmile(props) {
 
 var _path$4;
 
-function _extends$6() { _extends$6 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$6.apply(this, arguments); }
+function _extends$8() { _extends$8 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$8.apply(this, arguments); }
 
 var SvgStore = function SvgStore(props) {
-  return /*#__PURE__*/React__namespace.createElement("svg", _extends$6({
+  return /*#__PURE__*/React__namespace.createElement("svg", _extends$8({
     width: 24,
     height: 18,
     xmlns: "http://www.w3.org/2000/svg"
@@ -3426,16 +3428,16 @@ var SvgStore = function SvgStore(props) {
   })));
 };
 
-var _g$1;
+var _g$3;
 
-function _extends$5() { _extends$5 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$5.apply(this, arguments); }
+function _extends$7() { _extends$7 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$7.apply(this, arguments); }
 
 var SvgTime = function SvgTime(props) {
-  return /*#__PURE__*/React__namespace.createElement("svg", _extends$5({
+  return /*#__PURE__*/React__namespace.createElement("svg", _extends$7({
     width: 20,
     height: 20,
     xmlns: "http://www.w3.org/2000/svg"
-  }, props), _g$1 || (_g$1 = /*#__PURE__*/React__namespace.createElement("g", {
+  }, props), _g$3 || (_g$3 = /*#__PURE__*/React__namespace.createElement("g", {
     stroke: "#C1C1C1",
     strokeWidth: 2,
     fill: "none",
@@ -3452,10 +3454,10 @@ var SvgTime = function SvgTime(props) {
 
 var _path$3;
 
-function _extends$4() { _extends$4 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$4.apply(this, arguments); }
+function _extends$6() { _extends$6 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$6.apply(this, arguments); }
 
 var SvgStoreBlack = function SvgStoreBlack(props) {
-  return /*#__PURE__*/React__namespace.createElement("svg", _extends$4({
+  return /*#__PURE__*/React__namespace.createElement("svg", _extends$6({
     width: 31,
     height: 24,
     xmlns: "http://www.w3.org/2000/svg"
@@ -3467,10 +3469,10 @@ var SvgStoreBlack = function SvgStoreBlack(props) {
 
 var _path$2;
 
-function _extends$3() { _extends$3 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$3.apply(this, arguments); }
+function _extends$5() { _extends$5 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$5.apply(this, arguments); }
 
 var SvgClose = function SvgClose(props) {
-  return /*#__PURE__*/React__namespace.createElement("svg", _extends$3({
+  return /*#__PURE__*/React__namespace.createElement("svg", _extends$5({
     width: 19,
     height: 16,
     xmlns: "http://www.w3.org/2000/svg"
@@ -3487,10 +3489,10 @@ var SvgClose = function SvgClose(props) {
 
 var _path$1;
 
-function _extends$2() { _extends$2 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$2.apply(this, arguments); }
+function _extends$4() { _extends$4 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$4.apply(this, arguments); }
 
 var SvgPlus = function SvgPlus(props) {
-  return /*#__PURE__*/React__namespace.createElement("svg", _extends$2({
+  return /*#__PURE__*/React__namespace.createElement("svg", _extends$4({
     width: 18,
     height: 16,
     xmlns: "http://www.w3.org/2000/svg"
@@ -3506,10 +3508,10 @@ var SvgPlus = function SvgPlus(props) {
 
 var _path;
 
-function _extends$1() { _extends$1 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$1.apply(this, arguments); }
+function _extends$3() { _extends$3 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$3.apply(this, arguments); }
 
 var SvgMinus = function SvgMinus(props) {
-  return /*#__PURE__*/React__namespace.createElement("svg", _extends$1({
+  return /*#__PURE__*/React__namespace.createElement("svg", _extends$3({
     width: 18,
     height: 2,
     xmlns: "http://www.w3.org/2000/svg"
@@ -3522,11 +3524,57 @@ var SvgMinus = function SvgMinus(props) {
   })));
 };
 
+var _g$2;
+
+function _extends$2() { _extends$2 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$2.apply(this, arguments); }
+
+var SvgPrevious = function SvgPrevious(props) {
+  return /*#__PURE__*/React__namespace.createElement("svg", _extends$2({
+    width: 12,
+    height: 17,
+    xmlns: "http://www.w3.org/2000/svg"
+  }, props), _g$2 || (_g$2 = /*#__PURE__*/React__namespace.createElement("g", {
+    stroke: "#000",
+    strokeWidth: 1.75,
+    fill: "none",
+    fillRule: "evenodd",
+    strokeLinecap: "round"
+  }, /*#__PURE__*/React__namespace.createElement("path", {
+    d: "m1 9 9.167-7.333"
+  }), /*#__PURE__*/React__namespace.createElement("path", {
+    strokeLinejoin: "round",
+    d: "m1 9 9 7"
+  }))));
+};
+
+var _g$1;
+
+function _extends$1() { _extends$1 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$1.apply(this, arguments); }
+
+var SvgLeftArrow = function SvgLeftArrow(props) {
+  return /*#__PURE__*/React__namespace.createElement("svg", _extends$1({
+    width: 12,
+    height: 17,
+    xmlns: "http://www.w3.org/2000/svg"
+  }, props), _g$1 || (_g$1 = /*#__PURE__*/React__namespace.createElement("g", {
+    stroke: "#C1C1C1",
+    strokeWidth: 1.75,
+    fill: "none",
+    fillRule: "evenodd",
+    strokeLinecap: "round"
+  }, /*#__PURE__*/React__namespace.createElement("path", {
+    d: "m2 9 8.25-7.333"
+  }), /*#__PURE__*/React__namespace.createElement("path", {
+    strokeLinejoin: "round",
+    d: "m2 9 8 7"
+  }))));
+};
+
 var _g;
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-var SvgPrevious = function SvgPrevious(props) {
+var SvgRightArrowBlack = function SvgRightArrowBlack(props) {
   return /*#__PURE__*/React__namespace.createElement("svg", _extends({
     width: 12,
     height: 17,
@@ -3538,10 +3586,10 @@ var SvgPrevious = function SvgPrevious(props) {
     fillRule: "evenodd",
     strokeLinecap: "round"
   }, /*#__PURE__*/React__namespace.createElement("path", {
-    d: "m1 9 9.167-7.333"
+    d: "M11 9 1.833 1.667"
   }), /*#__PURE__*/React__namespace.createElement("path", {
     strokeLinejoin: "round",
-    d: "m1 9 9 7"
+    d: "m11 9-9 7"
   }))));
 };
 
@@ -3567,6 +3615,10 @@ function changeTypeToIconComponent(type) {
             return React__default["default"].createElement(SvgMinus, null);
         case Type.PREVIOUS:
             return React__default["default"].createElement(SvgPrevious, null);
+        case Type.LEFT_ARROW:
+            return React__default["default"].createElement(SvgLeftArrow, null);
+        case Type.RIGHT_ARROW_BLACK:
+            return React__default["default"].createElement(SvgRightArrowBlack, null);
         default:
             return 'icon';
     }
@@ -3593,6 +3645,10 @@ function changeTypeToIconClassName(type) {
             return 'stipop-icon-minus';
         case Type.PREVIOUS:
             return 'stipop-icon-previous';
+        case Type.LEFT_ARROW:
+            return 'stipop-icon-left-arrow';
+        case Type.RIGHT_ARROW_BLACK:
+            return 'stipop-icon-right-arrow-black';
         default:
             return 'stipop-icon-unknown';
     }
@@ -3750,10 +3806,10 @@ var StickerWrapper$2 = styled.div(templateObject_5$3 || (templateObject_5$3 = __
     return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
 }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); });
 var NoSticker = styled.div(templateObject_6$3 || (templateObject_6$3 = __makeTemplateObject(["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"], ["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"])));
-var StickerImg$1 = styled.img(templateObject_7$1 || (templateObject_7$1 = __makeTemplateObject(["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"], ["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"])), function (props) {
+var StickerImg$1 = styled.img(templateObject_7$2 || (templateObject_7$2 = __makeTemplateObject(["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"], ["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"])), function (props) {
     return props.size && props.size.imgSize ? "".concat(props.size.imgSize, "%") : '60%';
 });
-var templateObject_1$4, templateObject_2$4, templateObject_3$3, templateObject_4$3, templateObject_5$3, templateObject_6$3, templateObject_7$1;
+var templateObject_1$4, templateObject_2$4, templateObject_3$3, templateObject_4$3, templateObject_5$3, templateObject_6$3, templateObject_7$2;
 
 var ChattingComponent = function (_a) {
     var width = _a.width, height = _a.height, sticker = _a.sticker;
@@ -3789,6 +3845,1818 @@ var ChattingFrom = styled.div(templateObject_5$2 || (templateObject_5$2 = __make
 var ChattingInput = styled.input(templateObject_6$2 || (templateObject_6$2 = __makeTemplateObject(["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"], ["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"])));
 var templateObject_1$3, templateObject_2$3, templateObject_3$2, templateObject_4$2, templateObject_5$2, templateObject_6$2;
 
+var axios$2 = {exports: {}};
+
+var bind$2 = function bind(fn, thisArg) {
+  return function wrap() {
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+    return fn.apply(thisArg, args);
+  };
+};
+
+var bind$1 = bind$2;
+
+// utils is a library of generic helper functions non-specific to axios
+
+var toString = Object.prototype.toString;
+
+/**
+ * Determine if a value is an Array
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Array, otherwise false
+ */
+function isArray(val) {
+  return Array.isArray(val);
+}
+
+/**
+ * Determine if a value is undefined
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if the value is undefined, otherwise false
+ */
+function isUndefined(val) {
+  return typeof val === 'undefined';
+}
+
+/**
+ * Determine if a value is a Buffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Buffer, otherwise false
+ */
+function isBuffer(val) {
+  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor)
+    && typeof val.constructor.isBuffer === 'function' && val.constructor.isBuffer(val);
+}
+
+/**
+ * Determine if a value is an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an ArrayBuffer, otherwise false
+ */
+function isArrayBuffer(val) {
+  return toString.call(val) === '[object ArrayBuffer]';
+}
+
+/**
+ * Determine if a value is a FormData
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an FormData, otherwise false
+ */
+function isFormData(val) {
+  return toString.call(val) === '[object FormData]';
+}
+
+/**
+ * Determine if a value is a view on an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false
+ */
+function isArrayBufferView(val) {
+  var result;
+  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
+    result = ArrayBuffer.isView(val);
+  } else {
+    result = (val) && (val.buffer) && (isArrayBuffer(val.buffer));
+  }
+  return result;
+}
+
+/**
+ * Determine if a value is a String
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a String, otherwise false
+ */
+function isString(val) {
+  return typeof val === 'string';
+}
+
+/**
+ * Determine if a value is a Number
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Number, otherwise false
+ */
+function isNumber(val) {
+  return typeof val === 'number';
+}
+
+/**
+ * Determine if a value is an Object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Object, otherwise false
+ */
+function isObject(val) {
+  return val !== null && typeof val === 'object';
+}
+
+/**
+ * Determine if a value is a plain Object
+ *
+ * @param {Object} val The value to test
+ * @return {boolean} True if value is a plain Object, otherwise false
+ */
+function isPlainObject(val) {
+  if (toString.call(val) !== '[object Object]') {
+    return false;
+  }
+
+  var prototype = Object.getPrototypeOf(val);
+  return prototype === null || prototype === Object.prototype;
+}
+
+/**
+ * Determine if a value is a Date
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Date, otherwise false
+ */
+function isDate(val) {
+  return toString.call(val) === '[object Date]';
+}
+
+/**
+ * Determine if a value is a File
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a File, otherwise false
+ */
+function isFile(val) {
+  return toString.call(val) === '[object File]';
+}
+
+/**
+ * Determine if a value is a Blob
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Blob, otherwise false
+ */
+function isBlob(val) {
+  return toString.call(val) === '[object Blob]';
+}
+
+/**
+ * Determine if a value is a Function
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Function, otherwise false
+ */
+function isFunction(val) {
+  return toString.call(val) === '[object Function]';
+}
+
+/**
+ * Determine if a value is a Stream
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Stream, otherwise false
+ */
+function isStream(val) {
+  return isObject(val) && isFunction(val.pipe);
+}
+
+/**
+ * Determine if a value is a URLSearchParams object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a URLSearchParams object, otherwise false
+ */
+function isURLSearchParams(val) {
+  return toString.call(val) === '[object URLSearchParams]';
+}
+
+/**
+ * Trim excess whitespace off the beginning and end of a string
+ *
+ * @param {String} str The String to trim
+ * @returns {String} The String freed of excess whitespace
+ */
+function trim(str) {
+  return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, '');
+}
+
+/**
+ * Determine if we're running in a standard browser environment
+ *
+ * This allows axios to run in a web worker, and react-native.
+ * Both environments support XMLHttpRequest, but not fully standard globals.
+ *
+ * web workers:
+ *  typeof window -> undefined
+ *  typeof document -> undefined
+ *
+ * react-native:
+ *  navigator.product -> 'ReactNative'
+ * nativescript
+ *  navigator.product -> 'NativeScript' or 'NS'
+ */
+function isStandardBrowserEnv() {
+  if (typeof navigator !== 'undefined' && (navigator.product === 'ReactNative' ||
+                                           navigator.product === 'NativeScript' ||
+                                           navigator.product === 'NS')) {
+    return false;
+  }
+  return (
+    typeof window !== 'undefined' &&
+    typeof document !== 'undefined'
+  );
+}
+
+/**
+ * Iterate over an Array or an Object invoking a function for each item.
+ *
+ * If `obj` is an Array callback will be called passing
+ * the value, index, and complete array for each item.
+ *
+ * If 'obj' is an Object callback will be called passing
+ * the value, key, and complete object for each property.
+ *
+ * @param {Object|Array} obj The object to iterate
+ * @param {Function} fn The callback to invoke for each item
+ */
+function forEach(obj, fn) {
+  // Don't bother if no value provided
+  if (obj === null || typeof obj === 'undefined') {
+    return;
+  }
+
+  // Force an array if not already something iterable
+  if (typeof obj !== 'object') {
+    /*eslint no-param-reassign:0*/
+    obj = [obj];
+  }
+
+  if (isArray(obj)) {
+    // Iterate over array values
+    for (var i = 0, l = obj.length; i < l; i++) {
+      fn.call(null, obj[i], i, obj);
+    }
+  } else {
+    // Iterate over object keys
+    for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        fn.call(null, obj[key], key, obj);
+      }
+    }
+  }
+}
+
+/**
+ * Accepts varargs expecting each argument to be an object, then
+ * immutably merges the properties of each object and returns result.
+ *
+ * When multiple objects contain the same key the later object in
+ * the arguments list will take precedence.
+ *
+ * Example:
+ *
+ * ```js
+ * var result = merge({foo: 123}, {foo: 456});
+ * console.log(result.foo); // outputs 456
+ * ```
+ *
+ * @param {Object} obj1 Object to merge
+ * @returns {Object} Result of all merge properties
+ */
+function merge(/* obj1, obj2, obj3, ... */) {
+  var result = {};
+  function assignValue(val, key) {
+    if (isPlainObject(result[key]) && isPlainObject(val)) {
+      result[key] = merge(result[key], val);
+    } else if (isPlainObject(val)) {
+      result[key] = merge({}, val);
+    } else if (isArray(val)) {
+      result[key] = val.slice();
+    } else {
+      result[key] = val;
+    }
+  }
+
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    forEach(arguments[i], assignValue);
+  }
+  return result;
+}
+
+/**
+ * Extends object a by mutably adding to it the properties of object b.
+ *
+ * @param {Object} a The object to be extended
+ * @param {Object} b The object to copy properties from
+ * @param {Object} thisArg The object to bind function to
+ * @return {Object} The resulting value of object a
+ */
+function extend(a, b, thisArg) {
+  forEach(b, function assignValue(val, key) {
+    if (thisArg && typeof val === 'function') {
+      a[key] = bind$1(val, thisArg);
+    } else {
+      a[key] = val;
+    }
+  });
+  return a;
+}
+
+/**
+ * Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
+ *
+ * @param {string} content with BOM
+ * @return {string} content value without BOM
+ */
+function stripBOM(content) {
+  if (content.charCodeAt(0) === 0xFEFF) {
+    content = content.slice(1);
+  }
+  return content;
+}
+
+var utils$e = {
+  isArray: isArray,
+  isArrayBuffer: isArrayBuffer,
+  isBuffer: isBuffer,
+  isFormData: isFormData,
+  isArrayBufferView: isArrayBufferView,
+  isString: isString,
+  isNumber: isNumber,
+  isObject: isObject,
+  isPlainObject: isPlainObject,
+  isUndefined: isUndefined,
+  isDate: isDate,
+  isFile: isFile,
+  isBlob: isBlob,
+  isFunction: isFunction,
+  isStream: isStream,
+  isURLSearchParams: isURLSearchParams,
+  isStandardBrowserEnv: isStandardBrowserEnv,
+  forEach: forEach,
+  merge: merge,
+  extend: extend,
+  trim: trim,
+  stripBOM: stripBOM
+};
+
+var utils$d = utils$e;
+
+function encode(val) {
+  return encodeURIComponent(val).
+    replace(/%3A/gi, ':').
+    replace(/%24/g, '$').
+    replace(/%2C/gi, ',').
+    replace(/%20/g, '+').
+    replace(/%5B/gi, '[').
+    replace(/%5D/gi, ']');
+}
+
+/**
+ * Build a URL by appending params to the end
+ *
+ * @param {string} url The base of the url (e.g., http://www.google.com)
+ * @param {object} [params] The params to be appended
+ * @returns {string} The formatted url
+ */
+var buildURL$2 = function buildURL(url, params, paramsSerializer) {
+  /*eslint no-param-reassign:0*/
+  if (!params) {
+    return url;
+  }
+
+  var serializedParams;
+  if (paramsSerializer) {
+    serializedParams = paramsSerializer(params);
+  } else if (utils$d.isURLSearchParams(params)) {
+    serializedParams = params.toString();
+  } else {
+    var parts = [];
+
+    utils$d.forEach(params, function serialize(val, key) {
+      if (val === null || typeof val === 'undefined') {
+        return;
+      }
+
+      if (utils$d.isArray(val)) {
+        key = key + '[]';
+      } else {
+        val = [val];
+      }
+
+      utils$d.forEach(val, function parseValue(v) {
+        if (utils$d.isDate(v)) {
+          v = v.toISOString();
+        } else if (utils$d.isObject(v)) {
+          v = JSON.stringify(v);
+        }
+        parts.push(encode(key) + '=' + encode(v));
+      });
+    });
+
+    serializedParams = parts.join('&');
+  }
+
+  if (serializedParams) {
+    var hashmarkIndex = url.indexOf('#');
+    if (hashmarkIndex !== -1) {
+      url = url.slice(0, hashmarkIndex);
+    }
+
+    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
+  }
+
+  return url;
+};
+
+var utils$c = utils$e;
+
+function InterceptorManager$1() {
+  this.handlers = [];
+}
+
+/**
+ * Add a new interceptor to the stack
+ *
+ * @param {Function} fulfilled The function to handle `then` for a `Promise`
+ * @param {Function} rejected The function to handle `reject` for a `Promise`
+ *
+ * @return {Number} An ID used to remove interceptor later
+ */
+InterceptorManager$1.prototype.use = function use(fulfilled, rejected, options) {
+  this.handlers.push({
+    fulfilled: fulfilled,
+    rejected: rejected,
+    synchronous: options ? options.synchronous : false,
+    runWhen: options ? options.runWhen : null
+  });
+  return this.handlers.length - 1;
+};
+
+/**
+ * Remove an interceptor from the stack
+ *
+ * @param {Number} id The ID that was returned by `use`
+ */
+InterceptorManager$1.prototype.eject = function eject(id) {
+  if (this.handlers[id]) {
+    this.handlers[id] = null;
+  }
+};
+
+/**
+ * Iterate over all the registered interceptors
+ *
+ * This method is particularly useful for skipping over any
+ * interceptors that may have become `null` calling `eject`.
+ *
+ * @param {Function} fn The function to call for each interceptor
+ */
+InterceptorManager$1.prototype.forEach = function forEach(fn) {
+  utils$c.forEach(this.handlers, function forEachHandler(h) {
+    if (h !== null) {
+      fn(h);
+    }
+  });
+};
+
+var InterceptorManager_1 = InterceptorManager$1;
+
+var utils$b = utils$e;
+
+var normalizeHeaderName$1 = function normalizeHeaderName(headers, normalizedName) {
+  utils$b.forEach(headers, function processHeader(value, name) {
+    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
+      headers[normalizedName] = value;
+      delete headers[name];
+    }
+  });
+};
+
+/**
+ * Update an Error with the specified config, error code, and response.
+ *
+ * @param {Error} error The error to update.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The error.
+ */
+var enhanceError$2 = function enhanceError(error, config, code, request, response) {
+  error.config = config;
+  if (code) {
+    error.code = code;
+  }
+
+  error.request = request;
+  error.response = response;
+  error.isAxiosError = true;
+
+  error.toJSON = function toJSON() {
+    return {
+      // Standard
+      message: this.message,
+      name: this.name,
+      // Microsoft
+      description: this.description,
+      number: this.number,
+      // Mozilla
+      fileName: this.fileName,
+      lineNumber: this.lineNumber,
+      columnNumber: this.columnNumber,
+      stack: this.stack,
+      // Axios
+      config: this.config,
+      code: this.code,
+      status: this.response && this.response.status ? this.response.status : null
+    };
+  };
+  return error;
+};
+
+var transitional = {
+  silentJSONParsing: true,
+  forcedJSONParsing: true,
+  clarifyTimeoutError: false
+};
+
+var enhanceError$1 = enhanceError$2;
+
+/**
+ * Create an Error with the specified message, config, error code, request and response.
+ *
+ * @param {string} message The error message.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The created error.
+ */
+var createError$2 = function createError(message, config, code, request, response) {
+  var error = new Error(message);
+  return enhanceError$1(error, config, code, request, response);
+};
+
+var createError$1 = createError$2;
+
+/**
+ * Resolve or reject a Promise based on response status.
+ *
+ * @param {Function} resolve A function that resolves the promise.
+ * @param {Function} reject A function that rejects the promise.
+ * @param {object} response The response.
+ */
+var settle$1 = function settle(resolve, reject, response) {
+  var validateStatus = response.config.validateStatus;
+  if (!response.status || !validateStatus || validateStatus(response.status)) {
+    resolve(response);
+  } else {
+    reject(createError$1(
+      'Request failed with status code ' + response.status,
+      response.config,
+      null,
+      response.request,
+      response
+    ));
+  }
+};
+
+var utils$a = utils$e;
+
+var cookies$1 = (
+  utils$a.isStandardBrowserEnv() ?
+
+  // Standard browser envs support document.cookie
+    (function standardBrowserEnv() {
+      return {
+        write: function write(name, value, expires, path, domain, secure) {
+          var cookie = [];
+          cookie.push(name + '=' + encodeURIComponent(value));
+
+          if (utils$a.isNumber(expires)) {
+            cookie.push('expires=' + new Date(expires).toGMTString());
+          }
+
+          if (utils$a.isString(path)) {
+            cookie.push('path=' + path);
+          }
+
+          if (utils$a.isString(domain)) {
+            cookie.push('domain=' + domain);
+          }
+
+          if (secure === true) {
+            cookie.push('secure');
+          }
+
+          document.cookie = cookie.join('; ');
+        },
+
+        read: function read(name) {
+          var match = document.cookie.match(new RegExp('(^|;\\s*)(' + name + ')=([^;]*)'));
+          return (match ? decodeURIComponent(match[3]) : null);
+        },
+
+        remove: function remove(name) {
+          this.write(name, '', Date.now() - 86400000);
+        }
+      };
+    })() :
+
+  // Non standard browser env (web workers, react-native) lack needed support.
+    (function nonStandardBrowserEnv() {
+      return {
+        write: function write() {},
+        read: function read() { return null; },
+        remove: function remove() {}
+      };
+    })()
+);
+
+/**
+ * Determines whether the specified URL is absolute
+ *
+ * @param {string} url The URL to test
+ * @returns {boolean} True if the specified URL is absolute, otherwise false
+ */
+var isAbsoluteURL$1 = function isAbsoluteURL(url) {
+  // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
+  // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
+  // by any combination of letters, digits, plus, period, or hyphen.
+  return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url);
+};
+
+/**
+ * Creates a new URL by combining the specified URLs
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} relativeURL The relative URL
+ * @returns {string} The combined URL
+ */
+var combineURLs$1 = function combineURLs(baseURL, relativeURL) {
+  return relativeURL
+    ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
+    : baseURL;
+};
+
+var isAbsoluteURL = isAbsoluteURL$1;
+var combineURLs = combineURLs$1;
+
+/**
+ * Creates a new URL by combining the baseURL with the requestedURL,
+ * only when the requestedURL is not already an absolute URL.
+ * If the requestURL is absolute, this function returns the requestedURL untouched.
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} requestedURL Absolute or relative URL to combine
+ * @returns {string} The combined full path
+ */
+var buildFullPath$1 = function buildFullPath(baseURL, requestedURL) {
+  if (baseURL && !isAbsoluteURL(requestedURL)) {
+    return combineURLs(baseURL, requestedURL);
+  }
+  return requestedURL;
+};
+
+var utils$9 = utils$e;
+
+// Headers whose duplicates are ignored by node
+// c.f. https://nodejs.org/api/http.html#http_message_headers
+var ignoreDuplicateOf = [
+  'age', 'authorization', 'content-length', 'content-type', 'etag',
+  'expires', 'from', 'host', 'if-modified-since', 'if-unmodified-since',
+  'last-modified', 'location', 'max-forwards', 'proxy-authorization',
+  'referer', 'retry-after', 'user-agent'
+];
+
+/**
+ * Parse headers into an object
+ *
+ * ```
+ * Date: Wed, 27 Aug 2014 08:58:49 GMT
+ * Content-Type: application/json
+ * Connection: keep-alive
+ * Transfer-Encoding: chunked
+ * ```
+ *
+ * @param {String} headers Headers needing to be parsed
+ * @returns {Object} Headers parsed into an object
+ */
+var parseHeaders$1 = function parseHeaders(headers) {
+  var parsed = {};
+  var key;
+  var val;
+  var i;
+
+  if (!headers) { return parsed; }
+
+  utils$9.forEach(headers.split('\n'), function parser(line) {
+    i = line.indexOf(':');
+    key = utils$9.trim(line.substr(0, i)).toLowerCase();
+    val = utils$9.trim(line.substr(i + 1));
+
+    if (key) {
+      if (parsed[key] && ignoreDuplicateOf.indexOf(key) >= 0) {
+        return;
+      }
+      if (key === 'set-cookie') {
+        parsed[key] = (parsed[key] ? parsed[key] : []).concat([val]);
+      } else {
+        parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
+      }
+    }
+  });
+
+  return parsed;
+};
+
+var utils$8 = utils$e;
+
+var isURLSameOrigin$1 = (
+  utils$8.isStandardBrowserEnv() ?
+
+  // Standard browser envs have full support of the APIs needed to test
+  // whether the request URL is of the same origin as current location.
+    (function standardBrowserEnv() {
+      var msie = /(msie|trident)/i.test(navigator.userAgent);
+      var urlParsingNode = document.createElement('a');
+      var originURL;
+
+      /**
+    * Parse a URL to discover it's components
+    *
+    * @param {String} url The URL to be parsed
+    * @returns {Object}
+    */
+      function resolveURL(url) {
+        var href = url;
+
+        if (msie) {
+        // IE needs attribute set twice to normalize properties
+          urlParsingNode.setAttribute('href', href);
+          href = urlParsingNode.href;
+        }
+
+        urlParsingNode.setAttribute('href', href);
+
+        // urlParsingNode provides the UrlUtils interface - http://url.spec.whatwg.org/#urlutils
+        return {
+          href: urlParsingNode.href,
+          protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, '') : '',
+          host: urlParsingNode.host,
+          search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, '') : '',
+          hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, '') : '',
+          hostname: urlParsingNode.hostname,
+          port: urlParsingNode.port,
+          pathname: (urlParsingNode.pathname.charAt(0) === '/') ?
+            urlParsingNode.pathname :
+            '/' + urlParsingNode.pathname
+        };
+      }
+
+      originURL = resolveURL(window.location.href);
+
+      /**
+    * Determine if a URL shares the same origin as the current location
+    *
+    * @param {String} requestURL The URL to test
+    * @returns {boolean} True if URL shares the same origin, otherwise false
+    */
+      return function isURLSameOrigin(requestURL) {
+        var parsed = (utils$8.isString(requestURL)) ? resolveURL(requestURL) : requestURL;
+        return (parsed.protocol === originURL.protocol &&
+            parsed.host === originURL.host);
+      };
+    })() :
+
+  // Non standard browser envs (web workers, react-native) lack needed support.
+    (function nonStandardBrowserEnv() {
+      return function isURLSameOrigin() {
+        return true;
+      };
+    })()
+);
+
+/**
+ * A `Cancel` is an object that is thrown when an operation is canceled.
+ *
+ * @class
+ * @param {string=} message The message.
+ */
+function Cancel$3(message) {
+  this.message = message;
+}
+
+Cancel$3.prototype.toString = function toString() {
+  return 'Cancel' + (this.message ? ': ' + this.message : '');
+};
+
+Cancel$3.prototype.__CANCEL__ = true;
+
+var Cancel_1 = Cancel$3;
+
+var utils$7 = utils$e;
+var settle = settle$1;
+var cookies = cookies$1;
+var buildURL$1 = buildURL$2;
+var buildFullPath = buildFullPath$1;
+var parseHeaders = parseHeaders$1;
+var isURLSameOrigin = isURLSameOrigin$1;
+var createError = createError$2;
+var transitionalDefaults$1 = transitional;
+var Cancel$2 = Cancel_1;
+
+var xhr = function xhrAdapter(config) {
+  return new Promise(function dispatchXhrRequest(resolve, reject) {
+    var requestData = config.data;
+    var requestHeaders = config.headers;
+    var responseType = config.responseType;
+    var onCanceled;
+    function done() {
+      if (config.cancelToken) {
+        config.cancelToken.unsubscribe(onCanceled);
+      }
+
+      if (config.signal) {
+        config.signal.removeEventListener('abort', onCanceled);
+      }
+    }
+
+    if (utils$7.isFormData(requestData)) {
+      delete requestHeaders['Content-Type']; // Let the browser set it
+    }
+
+    var request = new XMLHttpRequest();
+
+    // HTTP basic authentication
+    if (config.auth) {
+      var username = config.auth.username || '';
+      var password = config.auth.password ? unescape(encodeURIComponent(config.auth.password)) : '';
+      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
+    }
+
+    var fullPath = buildFullPath(config.baseURL, config.url);
+    request.open(config.method.toUpperCase(), buildURL$1(fullPath, config.params, config.paramsSerializer), true);
+
+    // Set the request timeout in MS
+    request.timeout = config.timeout;
+
+    function onloadend() {
+      if (!request) {
+        return;
+      }
+      // Prepare the response
+      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
+      var responseData = !responseType || responseType === 'text' ||  responseType === 'json' ?
+        request.responseText : request.response;
+      var response = {
+        data: responseData,
+        status: request.status,
+        statusText: request.statusText,
+        headers: responseHeaders,
+        config: config,
+        request: request
+      };
+
+      settle(function _resolve(value) {
+        resolve(value);
+        done();
+      }, function _reject(err) {
+        reject(err);
+        done();
+      }, response);
+
+      // Clean up request
+      request = null;
+    }
+
+    if ('onloadend' in request) {
+      // Use onloadend if available
+      request.onloadend = onloadend;
+    } else {
+      // Listen for ready state to emulate onloadend
+      request.onreadystatechange = function handleLoad() {
+        if (!request || request.readyState !== 4) {
+          return;
+        }
+
+        // The request errored out and we didn't get a response, this will be
+        // handled by onerror instead
+        // With one exception: request that using file: protocol, most browsers
+        // will return status as 0 even though it's a successful request
+        if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
+          return;
+        }
+        // readystate handler is calling before onerror or ontimeout handlers,
+        // so we should call onloadend on the next 'tick'
+        setTimeout(onloadend);
+      };
+    }
+
+    // Handle browser request cancellation (as opposed to a manual cancellation)
+    request.onabort = function handleAbort() {
+      if (!request) {
+        return;
+      }
+
+      reject(createError('Request aborted', config, 'ECONNABORTED', request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle low level network errors
+    request.onerror = function handleError() {
+      // Real errors are hidden from us by the browser
+      // onerror should only fire if it's a network error
+      reject(createError('Network Error', config, null, request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle timeout
+    request.ontimeout = function handleTimeout() {
+      var timeoutErrorMessage = config.timeout ? 'timeout of ' + config.timeout + 'ms exceeded' : 'timeout exceeded';
+      var transitional = config.transitional || transitionalDefaults$1;
+      if (config.timeoutErrorMessage) {
+        timeoutErrorMessage = config.timeoutErrorMessage;
+      }
+      reject(createError(
+        timeoutErrorMessage,
+        config,
+        transitional.clarifyTimeoutError ? 'ETIMEDOUT' : 'ECONNABORTED',
+        request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Add xsrf header
+    // This is only done if running in a standard browser environment.
+    // Specifically not if we're in a web worker, or react-native.
+    if (utils$7.isStandardBrowserEnv()) {
+      // Add xsrf header
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
+        cookies.read(config.xsrfCookieName) :
+        undefined;
+
+      if (xsrfValue) {
+        requestHeaders[config.xsrfHeaderName] = xsrfValue;
+      }
+    }
+
+    // Add headers to the request
+    if ('setRequestHeader' in request) {
+      utils$7.forEach(requestHeaders, function setRequestHeader(val, key) {
+        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
+          // Remove Content-Type if data is undefined
+          delete requestHeaders[key];
+        } else {
+          // Otherwise add header to the request
+          request.setRequestHeader(key, val);
+        }
+      });
+    }
+
+    // Add withCredentials to request if needed
+    if (!utils$7.isUndefined(config.withCredentials)) {
+      request.withCredentials = !!config.withCredentials;
+    }
+
+    // Add responseType to request if needed
+    if (responseType && responseType !== 'json') {
+      request.responseType = config.responseType;
+    }
+
+    // Handle progress if needed
+    if (typeof config.onDownloadProgress === 'function') {
+      request.addEventListener('progress', config.onDownloadProgress);
+    }
+
+    // Not all browsers support upload events
+    if (typeof config.onUploadProgress === 'function' && request.upload) {
+      request.upload.addEventListener('progress', config.onUploadProgress);
+    }
+
+    if (config.cancelToken || config.signal) {
+      // Handle cancellation
+      // eslint-disable-next-line func-names
+      onCanceled = function(cancel) {
+        if (!request) {
+          return;
+        }
+        reject(!cancel || (cancel && cancel.type) ? new Cancel$2('canceled') : cancel);
+        request.abort();
+        request = null;
+      };
+
+      config.cancelToken && config.cancelToken.subscribe(onCanceled);
+      if (config.signal) {
+        config.signal.aborted ? onCanceled() : config.signal.addEventListener('abort', onCanceled);
+      }
+    }
+
+    if (!requestData) {
+      requestData = null;
+    }
+
+    // Send the request
+    request.send(requestData);
+  });
+};
+
+var utils$6 = utils$e;
+var normalizeHeaderName = normalizeHeaderName$1;
+var enhanceError = enhanceError$2;
+var transitionalDefaults = transitional;
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils$6.isUndefined(headers) && utils$6.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = xhr;
+  } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
+    // For node use HTTP adapter
+    adapter = xhr;
+  }
+  return adapter;
+}
+
+function stringifySafely(rawValue, parser, encoder) {
+  if (utils$6.isString(rawValue)) {
+    try {
+      (parser || JSON.parse)(rawValue);
+      return utils$6.trim(rawValue);
+    } catch (e) {
+      if (e.name !== 'SyntaxError') {
+        throw e;
+      }
+    }
+  }
+
+  return (encoder || JSON.stringify)(rawValue);
+}
+
+var defaults$3 = {
+
+  transitional: transitionalDefaults,
+
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Accept');
+    normalizeHeaderName(headers, 'Content-Type');
+
+    if (utils$6.isFormData(data) ||
+      utils$6.isArrayBuffer(data) ||
+      utils$6.isBuffer(data) ||
+      utils$6.isStream(data) ||
+      utils$6.isFile(data) ||
+      utils$6.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils$6.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils$6.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils$6.isObject(data) || (headers && headers['Content-Type'] === 'application/json')) {
+      setContentTypeIfUnset(headers, 'application/json');
+      return stringifySafely(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    var transitional = this.transitional || defaults$3.transitional;
+    var silentJSONParsing = transitional && transitional.silentJSONParsing;
+    var forcedJSONParsing = transitional && transitional.forcedJSONParsing;
+    var strictJSONParsing = !silentJSONParsing && this.responseType === 'json';
+
+    if (strictJSONParsing || (forcedJSONParsing && utils$6.isString(data) && data.length)) {
+      try {
+        return JSON.parse(data);
+      } catch (e) {
+        if (strictJSONParsing) {
+          if (e.name === 'SyntaxError') {
+            throw enhanceError(e, this, 'E_JSON_PARSE');
+          }
+          throw e;
+        }
+      }
+    }
+
+    return data;
+  }],
+
+  /**
+   * A timeout in milliseconds to abort a request. If set to 0 (default) a
+   * timeout is not created.
+   */
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+  maxBodyLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  },
+
+  headers: {
+    common: {
+      'Accept': 'application/json, text/plain, */*'
+    }
+  }
+};
+
+utils$6.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults$3.headers[method] = {};
+});
+
+utils$6.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults$3.headers[method] = utils$6.merge(DEFAULT_CONTENT_TYPE);
+});
+
+var defaults_1 = defaults$3;
+
+var utils$5 = utils$e;
+var defaults$2 = defaults_1;
+
+/**
+ * Transform the data for a request or a response
+ *
+ * @param {Object|String} data The data to be transformed
+ * @param {Array} headers The headers for the request or response
+ * @param {Array|Function} fns A single function or Array of functions
+ * @returns {*} The resulting transformed data
+ */
+var transformData$1 = function transformData(data, headers, fns) {
+  var context = this || defaults$2;
+  /*eslint no-param-reassign:0*/
+  utils$5.forEach(fns, function transform(fn) {
+    data = fn.call(context, data, headers);
+  });
+
+  return data;
+};
+
+var isCancel$1 = function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+};
+
+var utils$4 = utils$e;
+var transformData = transformData$1;
+var isCancel = isCancel$1;
+var defaults$1 = defaults_1;
+var Cancel$1 = Cancel_1;
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+function throwIfCancellationRequested(config) {
+  if (config.cancelToken) {
+    config.cancelToken.throwIfRequested();
+  }
+
+  if (config.signal && config.signal.aborted) {
+    throw new Cancel$1('canceled');
+  }
+}
+
+/**
+ * Dispatch a request to the server using the configured adapter.
+ *
+ * @param {object} config The config that is to be used for the request
+ * @returns {Promise} The Promise to be fulfilled
+ */
+var dispatchRequest$1 = function dispatchRequest(config) {
+  throwIfCancellationRequested(config);
+
+  // Ensure headers exist
+  config.headers = config.headers || {};
+
+  // Transform request data
+  config.data = transformData.call(
+    config,
+    config.data,
+    config.headers,
+    config.transformRequest
+  );
+
+  // Flatten headers
+  config.headers = utils$4.merge(
+    config.headers.common || {},
+    config.headers[config.method] || {},
+    config.headers
+  );
+
+  utils$4.forEach(
+    ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
+    function cleanHeaderConfig(method) {
+      delete config.headers[method];
+    }
+  );
+
+  var adapter = config.adapter || defaults$1.adapter;
+
+  return adapter(config).then(function onAdapterResolution(response) {
+    throwIfCancellationRequested(config);
+
+    // Transform response data
+    response.data = transformData.call(
+      config,
+      response.data,
+      response.headers,
+      config.transformResponse
+    );
+
+    return response;
+  }, function onAdapterRejection(reason) {
+    if (!isCancel(reason)) {
+      throwIfCancellationRequested(config);
+
+      // Transform response data
+      if (reason && reason.response) {
+        reason.response.data = transformData.call(
+          config,
+          reason.response.data,
+          reason.response.headers,
+          config.transformResponse
+        );
+      }
+    }
+
+    return Promise.reject(reason);
+  });
+};
+
+var utils$3 = utils$e;
+
+/**
+ * Config-specific merge-function which creates a new config-object
+ * by merging two configuration objects together.
+ *
+ * @param {Object} config1
+ * @param {Object} config2
+ * @returns {Object} New object resulting from merging config2 to config1
+ */
+var mergeConfig$2 = function mergeConfig(config1, config2) {
+  // eslint-disable-next-line no-param-reassign
+  config2 = config2 || {};
+  var config = {};
+
+  function getMergedValue(target, source) {
+    if (utils$3.isPlainObject(target) && utils$3.isPlainObject(source)) {
+      return utils$3.merge(target, source);
+    } else if (utils$3.isPlainObject(source)) {
+      return utils$3.merge({}, source);
+    } else if (utils$3.isArray(source)) {
+      return source.slice();
+    }
+    return source;
+  }
+
+  // eslint-disable-next-line consistent-return
+  function mergeDeepProperties(prop) {
+    if (!utils$3.isUndefined(config2[prop])) {
+      return getMergedValue(config1[prop], config2[prop]);
+    } else if (!utils$3.isUndefined(config1[prop])) {
+      return getMergedValue(undefined, config1[prop]);
+    }
+  }
+
+  // eslint-disable-next-line consistent-return
+  function valueFromConfig2(prop) {
+    if (!utils$3.isUndefined(config2[prop])) {
+      return getMergedValue(undefined, config2[prop]);
+    }
+  }
+
+  // eslint-disable-next-line consistent-return
+  function defaultToConfig2(prop) {
+    if (!utils$3.isUndefined(config2[prop])) {
+      return getMergedValue(undefined, config2[prop]);
+    } else if (!utils$3.isUndefined(config1[prop])) {
+      return getMergedValue(undefined, config1[prop]);
+    }
+  }
+
+  // eslint-disable-next-line consistent-return
+  function mergeDirectKeys(prop) {
+    if (prop in config2) {
+      return getMergedValue(config1[prop], config2[prop]);
+    } else if (prop in config1) {
+      return getMergedValue(undefined, config1[prop]);
+    }
+  }
+
+  var mergeMap = {
+    'url': valueFromConfig2,
+    'method': valueFromConfig2,
+    'data': valueFromConfig2,
+    'baseURL': defaultToConfig2,
+    'transformRequest': defaultToConfig2,
+    'transformResponse': defaultToConfig2,
+    'paramsSerializer': defaultToConfig2,
+    'timeout': defaultToConfig2,
+    'timeoutMessage': defaultToConfig2,
+    'withCredentials': defaultToConfig2,
+    'adapter': defaultToConfig2,
+    'responseType': defaultToConfig2,
+    'xsrfCookieName': defaultToConfig2,
+    'xsrfHeaderName': defaultToConfig2,
+    'onUploadProgress': defaultToConfig2,
+    'onDownloadProgress': defaultToConfig2,
+    'decompress': defaultToConfig2,
+    'maxContentLength': defaultToConfig2,
+    'maxBodyLength': defaultToConfig2,
+    'transport': defaultToConfig2,
+    'httpAgent': defaultToConfig2,
+    'httpsAgent': defaultToConfig2,
+    'cancelToken': defaultToConfig2,
+    'socketPath': defaultToConfig2,
+    'responseEncoding': defaultToConfig2,
+    'validateStatus': mergeDirectKeys
+  };
+
+  utils$3.forEach(Object.keys(config1).concat(Object.keys(config2)), function computeConfigValue(prop) {
+    var merge = mergeMap[prop] || mergeDeepProperties;
+    var configValue = merge(prop);
+    (utils$3.isUndefined(configValue) && merge !== mergeDirectKeys) || (config[prop] = configValue);
+  });
+
+  return config;
+};
+
+var data = {
+  "version": "0.26.1"
+};
+
+var VERSION = data.version;
+
+var validators$1 = {};
+
+// eslint-disable-next-line func-names
+['object', 'boolean', 'number', 'function', 'string', 'symbol'].forEach(function(type, i) {
+  validators$1[type] = function validator(thing) {
+    return typeof thing === type || 'a' + (i < 1 ? 'n ' : ' ') + type;
+  };
+});
+
+var deprecatedWarnings = {};
+
+/**
+ * Transitional option validator
+ * @param {function|boolean?} validator - set to false if the transitional option has been removed
+ * @param {string?} version - deprecated version / removed since version
+ * @param {string?} message - some message with additional info
+ * @returns {function}
+ */
+validators$1.transitional = function transitional(validator, version, message) {
+  function formatMessage(opt, desc) {
+    return '[Axios v' + VERSION + '] Transitional option \'' + opt + '\'' + desc + (message ? '. ' + message : '');
+  }
+
+  // eslint-disable-next-line func-names
+  return function(value, opt, opts) {
+    if (validator === false) {
+      throw new Error(formatMessage(opt, ' has been removed' + (version ? ' in ' + version : '')));
+    }
+
+    if (version && !deprecatedWarnings[opt]) {
+      deprecatedWarnings[opt] = true;
+      // eslint-disable-next-line no-console
+      console.warn(
+        formatMessage(
+          opt,
+          ' has been deprecated since v' + version + ' and will be removed in the near future'
+        )
+      );
+    }
+
+    return validator ? validator(value, opt, opts) : true;
+  };
+};
+
+/**
+ * Assert object's properties type
+ * @param {object} options
+ * @param {object} schema
+ * @param {boolean?} allowUnknown
+ */
+
+function assertOptions(options, schema, allowUnknown) {
+  if (typeof options !== 'object') {
+    throw new TypeError('options must be an object');
+  }
+  var keys = Object.keys(options);
+  var i = keys.length;
+  while (i-- > 0) {
+    var opt = keys[i];
+    var validator = schema[opt];
+    if (validator) {
+      var value = options[opt];
+      var result = value === undefined || validator(value, opt, options);
+      if (result !== true) {
+        throw new TypeError('option ' + opt + ' must be ' + result);
+      }
+      continue;
+    }
+    if (allowUnknown !== true) {
+      throw Error('Unknown option ' + opt);
+    }
+  }
+}
+
+var validator$1 = {
+  assertOptions: assertOptions,
+  validators: validators$1
+};
+
+var utils$2 = utils$e;
+var buildURL = buildURL$2;
+var InterceptorManager = InterceptorManager_1;
+var dispatchRequest = dispatchRequest$1;
+var mergeConfig$1 = mergeConfig$2;
+var validator = validator$1;
+
+var validators = validator.validators;
+/**
+ * Create a new instance of Axios
+ *
+ * @param {Object} instanceConfig The default config for the instance
+ */
+function Axios$1(instanceConfig) {
+  this.defaults = instanceConfig;
+  this.interceptors = {
+    request: new InterceptorManager(),
+    response: new InterceptorManager()
+  };
+}
+
+/**
+ * Dispatch a request
+ *
+ * @param {Object} config The config specific for this request (merged with this.defaults)
+ */
+Axios$1.prototype.request = function request(configOrUrl, config) {
+  /*eslint no-param-reassign:0*/
+  // Allow for axios('example/url'[, config]) a la fetch API
+  if (typeof configOrUrl === 'string') {
+    config = config || {};
+    config.url = configOrUrl;
+  } else {
+    config = configOrUrl || {};
+  }
+
+  config = mergeConfig$1(this.defaults, config);
+
+  // Set config.method
+  if (config.method) {
+    config.method = config.method.toLowerCase();
+  } else if (this.defaults.method) {
+    config.method = this.defaults.method.toLowerCase();
+  } else {
+    config.method = 'get';
+  }
+
+  var transitional = config.transitional;
+
+  if (transitional !== undefined) {
+    validator.assertOptions(transitional, {
+      silentJSONParsing: validators.transitional(validators.boolean),
+      forcedJSONParsing: validators.transitional(validators.boolean),
+      clarifyTimeoutError: validators.transitional(validators.boolean)
+    }, false);
+  }
+
+  // filter out skipped interceptors
+  var requestInterceptorChain = [];
+  var synchronousRequestInterceptors = true;
+  this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
+    if (typeof interceptor.runWhen === 'function' && interceptor.runWhen(config) === false) {
+      return;
+    }
+
+    synchronousRequestInterceptors = synchronousRequestInterceptors && interceptor.synchronous;
+
+    requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  var responseInterceptorChain = [];
+  this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
+    responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  var promise;
+
+  if (!synchronousRequestInterceptors) {
+    var chain = [dispatchRequest, undefined];
+
+    Array.prototype.unshift.apply(chain, requestInterceptorChain);
+    chain = chain.concat(responseInterceptorChain);
+
+    promise = Promise.resolve(config);
+    while (chain.length) {
+      promise = promise.then(chain.shift(), chain.shift());
+    }
+
+    return promise;
+  }
+
+
+  var newConfig = config;
+  while (requestInterceptorChain.length) {
+    var onFulfilled = requestInterceptorChain.shift();
+    var onRejected = requestInterceptorChain.shift();
+    try {
+      newConfig = onFulfilled(newConfig);
+    } catch (error) {
+      onRejected(error);
+      break;
+    }
+  }
+
+  try {
+    promise = dispatchRequest(newConfig);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+
+  while (responseInterceptorChain.length) {
+    promise = promise.then(responseInterceptorChain.shift(), responseInterceptorChain.shift());
+  }
+
+  return promise;
+};
+
+Axios$1.prototype.getUri = function getUri(config) {
+  config = mergeConfig$1(this.defaults, config);
+  return buildURL(config.url, config.params, config.paramsSerializer).replace(/^\?/, '');
+};
+
+// Provide aliases for supported request methods
+utils$2.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {
+  /*eslint func-names:0*/
+  Axios$1.prototype[method] = function(url, config) {
+    return this.request(mergeConfig$1(config || {}, {
+      method: method,
+      url: url,
+      data: (config || {}).data
+    }));
+  };
+});
+
+utils$2.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  /*eslint func-names:0*/
+  Axios$1.prototype[method] = function(url, data, config) {
+    return this.request(mergeConfig$1(config || {}, {
+      method: method,
+      url: url,
+      data: data
+    }));
+  };
+});
+
+var Axios_1 = Axios$1;
+
+var Cancel = Cancel_1;
+
+/**
+ * A `CancelToken` is an object that can be used to request cancellation of an operation.
+ *
+ * @class
+ * @param {Function} executor The executor function.
+ */
+function CancelToken(executor) {
+  if (typeof executor !== 'function') {
+    throw new TypeError('executor must be a function.');
+  }
+
+  var resolvePromise;
+
+  this.promise = new Promise(function promiseExecutor(resolve) {
+    resolvePromise = resolve;
+  });
+
+  var token = this;
+
+  // eslint-disable-next-line func-names
+  this.promise.then(function(cancel) {
+    if (!token._listeners) return;
+
+    var i;
+    var l = token._listeners.length;
+
+    for (i = 0; i < l; i++) {
+      token._listeners[i](cancel);
+    }
+    token._listeners = null;
+  });
+
+  // eslint-disable-next-line func-names
+  this.promise.then = function(onfulfilled) {
+    var _resolve;
+    // eslint-disable-next-line func-names
+    var promise = new Promise(function(resolve) {
+      token.subscribe(resolve);
+      _resolve = resolve;
+    }).then(onfulfilled);
+
+    promise.cancel = function reject() {
+      token.unsubscribe(_resolve);
+    };
+
+    return promise;
+  };
+
+  executor(function cancel(message) {
+    if (token.reason) {
+      // Cancellation has already been requested
+      return;
+    }
+
+    token.reason = new Cancel(message);
+    resolvePromise(token.reason);
+  });
+}
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+CancelToken.prototype.throwIfRequested = function throwIfRequested() {
+  if (this.reason) {
+    throw this.reason;
+  }
+};
+
+/**
+ * Subscribe to the cancel signal
+ */
+
+CancelToken.prototype.subscribe = function subscribe(listener) {
+  if (this.reason) {
+    listener(this.reason);
+    return;
+  }
+
+  if (this._listeners) {
+    this._listeners.push(listener);
+  } else {
+    this._listeners = [listener];
+  }
+};
+
+/**
+ * Unsubscribe from the cancel signal
+ */
+
+CancelToken.prototype.unsubscribe = function unsubscribe(listener) {
+  if (!this._listeners) {
+    return;
+  }
+  var index = this._listeners.indexOf(listener);
+  if (index !== -1) {
+    this._listeners.splice(index, 1);
+  }
+};
+
+/**
+ * Returns an object that contains a new `CancelToken` and a function that, when called,
+ * cancels the `CancelToken`.
+ */
+CancelToken.source = function source() {
+  var cancel;
+  var token = new CancelToken(function executor(c) {
+    cancel = c;
+  });
+  return {
+    token: token,
+    cancel: cancel
+  };
+};
+
+var CancelToken_1 = CancelToken;
+
+/**
+ * Syntactic sugar for invoking a function and expanding an array for arguments.
+ *
+ * Common use case would be to use `Function.prototype.apply`.
+ *
+ *  ```js
+ *  function f(x, y, z) {}
+ *  var args = [1, 2, 3];
+ *  f.apply(null, args);
+ *  ```
+ *
+ * With `spread` this example can be re-written.
+ *
+ *  ```js
+ *  spread(function(x, y, z) {})([1, 2, 3]);
+ *  ```
+ *
+ * @param {Function} callback
+ * @returns {Function}
+ */
+var spread = function spread(callback) {
+  return function wrap(arr) {
+    return callback.apply(null, arr);
+  };
+};
+
+var utils$1 = utils$e;
+
+/**
+ * Determines whether the payload is an error thrown by Axios
+ *
+ * @param {*} payload The value to test
+ * @returns {boolean} True if the payload is an error thrown by Axios, otherwise false
+ */
+var isAxiosError = function isAxiosError(payload) {
+  return utils$1.isObject(payload) && (payload.isAxiosError === true);
+};
+
+var utils = utils$e;
+var bind = bind$2;
+var Axios = Axios_1;
+var mergeConfig = mergeConfig$2;
+var defaults = defaults_1;
+
+/**
+ * Create an instance of Axios
+ *
+ * @param {Object} defaultConfig The default config for the instance
+ * @return {Axios} A new instance of Axios
+ */
+function createInstance(defaultConfig) {
+  var context = new Axios(defaultConfig);
+  var instance = bind(Axios.prototype.request, context);
+
+  // Copy axios.prototype to instance
+  utils.extend(instance, Axios.prototype, context);
+
+  // Copy context to instance
+  utils.extend(instance, context);
+
+  // Factory for creating new instances
+  instance.create = function create(instanceConfig) {
+    return createInstance(mergeConfig(defaultConfig, instanceConfig));
+  };
+
+  return instance;
+}
+
+// Create the default instance to be exported
+var axios$1 = createInstance(defaults);
+
+// Expose Axios class to allow class inheritance
+axios$1.Axios = Axios;
+
+// Expose Cancel & CancelToken
+axios$1.Cancel = Cancel_1;
+axios$1.CancelToken = CancelToken_1;
+axios$1.isCancel = isCancel$1;
+axios$1.VERSION = data.version;
+
+// Expose all/spread
+axios$1.all = function all(promises) {
+  return Promise.all(promises);
+};
+axios$1.spread = spread;
+
+// Expose isAxiosError
+axios$1.isAxiosError = isAxiosError;
+
+axios$2.exports = axios$1;
+
+// Allow use of default import syntax in TypeScript
+axios$2.exports.default = axios$1;
+
+var axios = axios$2.exports;
+
 var LoadingSpinner = function () {
     return (React__default["default"].createElement(SpinnerContainer, null,
         React__default["default"].createElement(Spinner, null)));
@@ -3801,9 +5669,21 @@ var PickerComponent = function (_a) {
     var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, stickerClick = _a.stickerClick, storeClick = _a.storeClick;
     var _b = React.useState([]), myStickers = _b[0], setMyStickers = _b[1];
     var _c = React.useState([]), stickers = _c[0], setStickers = _c[1];
-    var _d = React.useState(0), showPackage = _d[0], setShowPackage = _d[1];
+    var _d = React.useState(-1), showPackage = _d[0], setShowPackage = _d[1];
     var _e = React.useState(true), isLoading = _e[0], setIsLoading = _e[1];
+    var _f = React.useState(false), recentView = _f[0], setRecentView = _f[1];
+    var _g = React.useState(0), itemCnt = _g[0], setItemCnt = _g[1];
+    var _h = React.useState(0), itemNum = _h[0], setItemNum = _h[1];
+    var _j = React.useState(0), scrollX = _j[0], setScrollX = _j[1];
+    var menuList = document.getElementById('picker-menu');
     var client = new Stipop$1(params.apikey, 'v1');
+    var itemWidth = size && size.width
+        ? menu && menu.listCnt
+            ? size.width / (menu.listCnt + 2)
+            : size.width / 6
+        : menu && menu.listCnt
+            ? 360 / (menu.listCnt + 2)
+            : 45;
     React.useEffect(function () {
         var storeParams = {
             userId: params.userId,
@@ -3811,18 +5691,9 @@ var PickerComponent = function (_a) {
         var data = client.mySticker(storeParams);
         data.then(function (_a) {
             var body = _a.body;
+            setItemCnt(body && body.packageList ? body.packageList.length : 0);
             setMyStickers(body && body.packageList ? body.packageList : []);
-            var packageParams = {
-                userId: params.userId,
-                packId: body.packageList[0].packageId,
-            };
-            var packageData = client.getPackInfo(packageParams);
-            packageData.then(function (_a) {
-                var body = _a.body;
-                setStickers(body && body.package && body.package.stickers
-                    ? body.package.stickers.map(function (sticker) { return sticker.stickerImg; })
-                    : []);
-            });
+            clickTime();
         });
     }, []);
     var clickPackage = function (packageId) { return __awaiter$1(void 0, void 0, void 0, function () {
@@ -3831,6 +5702,9 @@ var PickerComponent = function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, setIsLoading(true)];
                 case 1:
+                    _a.sent();
+                    return [4 /*yield*/, setRecentView(false)];
+                case 2:
                     _a.sent();
                     packageParams = {
                         userId: params.userId,
@@ -3843,32 +5717,105 @@ var PickerComponent = function (_a) {
                                 ? body.package.stickers.map(function (sticker) { return sticker.stickerImg; })
                                 : []);
                         })];
-                case 2:
+                case 3:
                     _a.sent();
                     return [2 /*return*/];
             }
         });
     }); };
+    var clickTime = function () { return __awaiter$1(void 0, void 0, void 0, function () {
+        var requestUrl;
+        return __generator$1(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, setIsLoading(true)];
+                case 1:
+                    _a.sent();
+                    requestUrl = "https://messenger.stipop.io/v1/package/send/".concat(params.userId, "?limit=50");
+                    axios
+                        .get(requestUrl, {
+                        headers: {
+                            apikey: params.apikey,
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                        .then(function (_a) {
+                        var data = _a.data;
+                        setRecentView(true);
+                        setStickers(data && data.body && data.body.stsickerList
+                            ? data.body.stickerList
+                            : []);
+                    });
+                    return [2 /*return*/];
+            }
+        });
+    }); };
     React.useEffect(function () {
+        console.log(stickers);
         if (stickers && stickers.length > 0) {
             setIsLoading(false);
         }
+        else {
+            if (recentView) {
+                setIsLoading(false);
+            }
+            else {
+                setIsLoading(true);
+            }
+        }
     }, [stickers]);
-    return (React__default["default"].createElement(StoreWrapper$1, { size: size, border: border },
-        React__default["default"].createElement(PickerMenu, { backgroundColor: backgroundColor, border: border, menu: menu },
-            React__default["default"].createElement(Icon, { type: "TIME" }),
-            React__default["default"].createElement(Icon, { type: "STORE", onClick: function () { return storeClick(true); } }),
-            myStickers.length > 0 ? (myStickers.map(function (pack, index) {
-                return pack.packageId && (React__default["default"].createElement(PackageImgWrapper, { menu: menu, key: index, onClick: function () {
-                        clickPackage(pack.packageId);
-                        setShowPackage(index);
-                    }, show: showPackage === index },
-                    React__default["default"].createElement(PackageImg, { src: pack.packageImg })));
-            })) : (React__default["default"].createElement("div", null))),
-        stickers && isLoading ? (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading },
-            React__default["default"].createElement(LoadingSpinner, null))) : (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: sticker, alt: "", key: index, onClick: function () { return stickerClick(sticker); } })); })))));
+    React.useEffect(function () {
+        console.log(isLoading);
+    }, [isLoading]);
+    return (React__default["default"].createElement(PickerWrapper, { size: size, border: border },
+        React__default["default"].createElement(MenuBox, null,
+            React__default["default"].createElement(ArrowWrapper, { id: itemNum ? 'left-black' : 'left', backgroundColor: backgroundColor, border: border, menu: menu, size: size, onClick: function () {
+                    menuList.scrollTo(scrollX - itemWidth, 0);
+                } }, itemNum ? (React__default["default"].createElement(Icon, { type: "RIGHT_ARROW_BLACK" })) : (React__default["default"].createElement(Icon, { type: "LEFT_ARROW" }))),
+            React__default["default"].createElement(PickerMenu, { id: "picker-menu", backgroundColor: backgroundColor, border: border, menu: menu, onScroll: function (e) {
+                    setItemNum(Math.trunc(e.target.scrollLeft /
+                        (size && size.width
+                            ? menu && menu.listCnt
+                                ? size.width / (menu.listCnt + 2)
+                                : size.width / 6
+                            : menu && menu.listCnt
+                                ? 360 / (menu.listCnt + 2)
+                                : 45)));
+                    setScrollX(e.target.scrollLeft);
+                } },
+                React__default["default"].createElement(IconWrapper, { backgroundColor: backgroundColor, border: border, menu: menu, size: size, onClick: function () {
+                        clickTime();
+                        setShowPackage(-1);
+                    }, show: showPackage === -1 },
+                    React__default["default"].createElement(Icon, { type: "TIME" })),
+                React__default["default"].createElement(IconWrapper, { backgroundColor: backgroundColor, border: border, menu: menu, size: size },
+                    React__default["default"].createElement(Icon, { type: "STORE", onClick: function () { return storeClick(true); } })),
+                myStickers.length > 0
+                    ? myStickers.map(function (pack, index) {
+                        return pack.packageId && (React__default["default"].createElement(PackageImgWrapper, { menu: menu, size: size, key: index, onClick: function () {
+                                clickPackage(pack.packageId);
+                                setShowPackage(index);
+                            }, show: showPackage === index },
+                            React__default["default"].createElement(PackageImg, { src: pack.packageImg })));
+                    })
+                    : ''),
+            React__default["default"].createElement(ArrowWrapper, { id: itemCnt - (menu && menu.listCnt ? menu.listCnt : 6) > itemNum
+                    ? 'right-black'
+                    : 'right', backgroundColor: backgroundColor, border: border, menu: menu, size: size, onClick: function () {
+                    menuList.scrollTo(scrollX + itemWidth, 0);
+                } }, itemCnt - (menu && menu.listCnt ? menu.listCnt : 6) > itemNum ? (React__default["default"].createElement(Icon, { type: "RIGHT_ARROW_BLACK" })) : (React__default["default"].createElement(Icon, { type: "LEFT_ARROW" })))),
+        !recentView ? (stickers && isLoading ? (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading },
+            React__default["default"].createElement(LoadingSpinner, null))) : (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: sticker, alt: "", key: index, onClick: function () { return stickerClick(sticker); } })); })))) : isLoading ? (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading },
+            React__default["default"].createElement(LoadingSpinner, null))) : stickers.length > 0 ? (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: sticker, alt: "", key: index, onClick: function () { return stickerClick(sticker); } })); }))) : (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: recentView },
+            React__default["default"].createElement("div", { style: {
+                    width: '100%',
+                    height: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                } },
+                React__default["default"].createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker", style: { width: '40%' } }))))));
 };
-var StoreWrapper$1 = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n"])), function (props) {
+var PickerWrapper = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
 }, function (props) {
     return props.size && props.size.height ? "".concat(props.size.height, "px") : '300px';
@@ -3881,12 +5828,17 @@ var StoreWrapper$1 = styled.div(templateObject_1$1 || (templateObject_1$1 = __ma
         ? "".concat(props.border.radius, "px")
         : '10px';
 });
-var PickerMenu = styled.div(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  height: ", ";\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  padding: 0 10px;\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    cursor: pointer;\n  }\n"], ["\n  height: ", ";\n  border-bottom: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  padding: 0 10px;\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  .stipop-icon {\n    height: 90%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    cursor: pointer;\n  }\n"])), function (props) {
-    return props.menu && props.menu.height ? "".concat(props.menu.height, "px") : '45px';
+var MenuBox = styled.div(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  width: 100%;\n  display: flex;\n"], ["\n  width: 100%;\n  display: flex;\n"])));
+var ArrowWrapper = styled.div(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-bottom: ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n\n  .stipop-icon {\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  }\n\n  &#left {\n    padding-left: 10px;\n  }\n  &#left-black {\n    padding-left: 10px;\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n  &#right-black {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n  }\n  &#right {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n"], ["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-bottom: ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n\n  .stipop-icon {\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  }\n\n  &#left {\n    padding-left: 10px;\n  }\n  &#left-black {\n    padding-left: 10px;\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n  &#right-black {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n  }\n  &#right {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n"])), function (props) {
+    return props.size && props.size.width
+        ? props.menu && props.menu.listCnt
+            ? "".concat(props.size.width / (props.menu.listCnt + 2), "px")
+            : "".concat(props.size.width / 6)
+        : props.menu && props.menu.listCnt
+            ? "".concat(360 / (props.menu.listCnt + 2))
+            : '45px';
 }, function (props) {
-    return props.menu && props.menu.bottomLine
-        ? props.menu.bottomLine
-        : '1px solid lightgray';
+    return props.menu && props.menu.height ? "".concat(props.menu.height, "px") : '45px';
 }, function (props) {
     return props.menu && props.menu.backgroundColor
         ? props.menu.backgroundColor
@@ -3896,19 +5848,69 @@ var PickerMenu = styled.div(templateObject_2$1 || (templateObject_2$1 = __makeTe
         ? "".concat(props.border.radius, "px")
         : '10px';
 }, function (props) {
+    return props.menu && props.menu.bottomLine
+        ? props.menu.bottomLine
+        : '1px solid lightgray';
+}, function (props) {
+    return props.border && (props.border.radius || props.border.radius == 0)
+        ? "".concat(props.border.radius, "px")
+        : '10px';
+}, function (props) {
     return props.border && (props.border.radius || props.border.radius == 0)
         ? "".concat(props.border.radius, "px")
         : '10px';
 });
-var PackageImgWrapper = styled.div(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  height: 100%;\n  padding: 0 10px;\n  display: flex;\n  align-items: center;\n  border-bottom: ", ";\n"], ["\n  height: 100%;\n  padding: 0 10px;\n  display: flex;\n  align-items: center;\n  border-bottom: ", ";\n"])), function (props) {
+var IconWrapper = styled.div(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n\n  .stipop-icon {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    border-bottom: ", ";\n    box-sizing: border-box;\n  }\n"], ["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n\n  .stipop-icon {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    border-bottom: ", ";\n    box-sizing: border-box;\n  }\n"])), function (props) {
+    return props.size && props.size.width
+        ? props.menu && props.menu.listCnt
+            ? "".concat(props.size.width / (props.menu.listCnt + 2), "px")
+            : "".concat(props.size.width / 6)
+        : props.menu && props.menu.listCnt
+            ? "".concat(360 / (props.menu.listCnt + 2))
+            : '45px';
+}, function (props) {
+    return props.menu && props.menu.height ? "".concat(props.menu.height, "px") : '45px';
+}, function (props) {
+    return props.menu && props.menu.backgroundColor
+        ? props.menu.backgroundColor
+        : '#fff';
+}, function (props) {
     return props.show
         ? props.menu && props.menu.selectedLine
             ? props.menu.selectedLine
             : '2px solid black'
-        : '';
+        : props.menu && props.menu.bottomLine
+            ? props.menu.bottomLine
+            : '1px solid lightgray';
 });
-var PackageImg = styled.img(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  height: 65%;\n  cursor: pointer;\n"], ["\n  height: 65%;\n  cursor: pointer;\n"])));
-var StickerWrapper$1 = styled.div(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) { return (props.isLoading ? '' : 'grid'); }, function (props) {
+var PickerMenu = styled.div(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  height: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n"], ["\n  height: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n"])), function (props) {
+    return props.menu && props.menu.height ? "".concat(props.menu.height, "px") : '45px';
+}, function (props) {
+    return props.menu && props.menu.backgroundColor
+        ? props.menu.backgroundColor
+        : '#fff';
+});
+var PackageImgWrapper = styled.div(templateObject_6$1 || (templateObject_6$1 = __makeTemplateObject(["\n  /* flex-basis: ", "; */\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: 100%;\n  /* padding: 0 10px; */\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-bottom: ", ";\n  box-sizing: border-box;\n  &:hover {\n    cursor: pointer;\n  }\n"], ["\n  /* flex-basis: ", "; */\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: 100%;\n  /* padding: 0 10px; */\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-bottom: ", ";\n  box-sizing: border-box;\n  &:hover {\n    cursor: pointer;\n  }\n"])), function (props) {
+    return props.menu && props.menu.height ? "".concat(props.menu.height, "px") : '45px';
+}, function (props) {
+    return props.size && props.size.width
+        ? props.menu && props.menu.listCnt
+            ? "".concat(props.size.width / (props.menu.listCnt + 2), "px")
+            : "".concat(props.size.width / 6)
+        : props.menu && props.menu.listCnt
+            ? "".concat(360 / (props.menu.listCnt + 2))
+            : '45px';
+}, function (props) {
+    return props.show
+        ? props.menu && props.menu.selectedLine
+            ? props.menu.selectedLine
+            : '2px solid black'
+        : props.menu && props.menu.bottomLine
+            ? props.menu.bottomLine
+            : '1px solid lightgray';
+});
+var PackageImg = styled.img(templateObject_7$1 || (templateObject_7$1 = __makeTemplateObject(["\n  width: 60%;\n"], ["\n  width: 60%;\n"])));
+var StickerWrapper$1 = styled.div(templateObject_8$1 || (templateObject_8$1 = __makeTemplateObject(["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) { return (props.isLoading ? 'block' : 'grid'); }, function (props) {
     return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
 }, function (props) {
     return props.backgroundColor ? props.backgroundColor : '#fff';
@@ -3921,10 +5923,10 @@ var StickerWrapper$1 = styled.div(templateObject_5$1 || (templateObject_5$1 = __
         ? "".concat(props.border.radius, "px")
         : '10px';
 }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); });
-var StickerImg = styled.img(templateObject_6$1 || (templateObject_6$1 = __makeTemplateObject(["\n  width: ", ";\n  cursor: pointer;\n"], ["\n  width: ", ";\n  cursor: pointer;\n"])), function (props) {
+var StickerImg = styled.img(templateObject_9$1 || (templateObject_9$1 = __makeTemplateObject(["\n  width: ", ";\n  cursor: pointer;\n"], ["\n  width: ", ";\n  cursor: pointer;\n"])), function (props) {
     return props.size && props.size.imgSize ? "".concat(props.size.imgSize, "%") : '70%';
 });
-var templateObject_1$1, templateObject_2$1, templateObject_3$1, templateObject_4$1, templateObject_5$1, templateObject_6$1;
+var templateObject_1$1, templateObject_2$1, templateObject_3$1, templateObject_4$1, templateObject_5$1, templateObject_6$1, templateObject_7$1, templateObject_8$1, templateObject_9$1;
 
 var StoreComponent = function (_a) {
     var params = _a.params, downloadParams = _a.downloadParams, color = _a.color, scroll = _a.scroll, onClose = _a.onClose, size = _a.size, border = _a.border;

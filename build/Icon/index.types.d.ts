@@ -9,5 +9,7 @@ declare const _default: {
     PLUS: string;
     MINUS: string;
     PREVIOUS: string;
+    LEFT_ARROW: string;
+    RIGHT_ARROW_BLACK: string;
 };
 export default _default;

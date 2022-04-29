@@ -13,6 +13,8 @@ import CloseIcon from '../svgs/close.svg'
 import PlusIcon from '../svgs/plus.svg'
 import MinusIcon from '../svgs/minus.svg'
 import PreviousIcon from '../svgs/previous.svg'
+import LeftArrow from '../svgs/left-arrow.svg'
+import RightArrowBlack from '../svgs/right-arrow-black.svg'
 
 function changeTypeToIconComponent(type) {
   switch (type) {
@@ -36,6 +38,10 @@ function changeTypeToIconComponent(type) {
       return <MinusIcon />
     case Type.PREVIOUS:
       return <PreviousIcon />
+    case Type.LEFT_ARROW:
+      return <LeftArrow />
+    case Type.RIGHT_ARROW_BLACK:
+      return <RightArrowBlack />
     default:
       return 'icon'
   }
@@ -63,6 +69,10 @@ export function changeTypeToIconClassName(type) {
       return 'stipop-icon-minus'
     case Type.PREVIOUS:
       return 'stipop-icon-previous'
+    case Type.LEFT_ARROW:
+      return 'stipop-icon-left-arrow'
+    case Type.RIGHT_ARROW_BLACK:
+      return 'stipop-icon-right-arrow-black'
     default:
       return 'stipop-icon-unknown'
   }
