@@ -26,6 +26,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   const [isLoading, setIsLoading] = useState(true)
 
   const [recentView, setRecentView] = useState(false)
+
   const [itemCnt, setItemCnt] = useState(0)
   const [itemNum, setItemNum] = useState(0)
   const [scrollX, setScrollX] = useState(0)
@@ -95,7 +96,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   }
 
   useEffect(() => {
-    console.log(stickers)
+    // console.log(stickers)
     if (stickers && stickers.length > 0) {
       setIsLoading(false)
     } else {
@@ -107,9 +108,9 @@ const PickerComponent: React.FC<StoreProps> = ({
     }
   }, [stickers])
 
-  useEffect(() => {
-    console.log(isLoading)
-  }, [isLoading])
+  // useEffect(() => {
+  //   console.log(isLoading)
+  // }, [isLoading])
 
   return (
     <PickerWrapper size={size} border={border}>

@@ -5750,7 +5750,7 @@ var PickerComponent = function (_a) {
         });
     }); };
     React.useEffect(function () {
-        console.log(stickers);
+        // console.log(stickers)
         if (stickers && stickers.length > 0) {
             setIsLoading(false);
         }
@@ -5763,9 +5763,9 @@ var PickerComponent = function (_a) {
             }
         }
     }, [stickers]);
-    React.useEffect(function () {
-        console.log(isLoading);
-    }, [isLoading]);
+    // useEffect(() => {
+    //   console.log(isLoading)
+    // }, [isLoading])
     return (React__default["default"].createElement(PickerWrapper, { size: size, border: border },
         React__default["default"].createElement(MenuBox, null,
             React__default["default"].createElement(ArrowWrapper, { id: itemNum ? 'left-black' : 'left', backgroundColor: backgroundColor, border: border, menu: menu, size: size, onClick: function () {
