@@ -487,6 +487,22 @@ const DetailStickerWrapper = styled.div`
 
   &::-webkit-scrollbar {
     display: ${props => (props.scroll === false ? 'none' : '')};
+    width: 9px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: ${props =>
+      props.color && props.color.backgroundColor
+        ? props.color.backgroundColor
+        : '#fff'};
+    border-bottom-right-radius: ${props =>
+      props.border && props.border.radius ? `${props.border.radius}px` : '8px'};
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #bcc0c4;
+    border-radius: 5px;
+    &:hover {
+      background: #6d7072;
+    }
   }
 
   img {

@@ -548,6 +548,24 @@ const StickerWrapper = styled.div`
 
   &::-webkit-scrollbar {
     display: ${props => (props.scroll === false ? 'none' : '')};
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: ${props =>
+      props.color && props.color.backgroundColor
+        ? props.color.backgroundColor
+        : '#fff'};
+    border-bottom-right-radius: ${props =>
+      props.border && (props.border.radius || props.border.radius == 0)
+        ? `${props.border.radius}px`
+        : '10px'};
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #bcc0c4;
+    border-radius: 5px;
+    &:hover {
+      background: #6d7072;
+    }
   }
   -webkit-user-select: none;
   -moz-user-select: none;
