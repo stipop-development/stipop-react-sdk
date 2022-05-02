@@ -69,14 +69,28 @@ const PickerComponent: React.FC<StoreProps> = ({
     await data.then(({ body }) => {
       setStickers(
         body && body.package && body.package.stickers
-          ? body.package.stickers.map(sticker => sticker.stickerImg)
+          ? body.package.stickers
           : []
       )
     })
   }
 
-  const clickTime = async () => {
-    await setIsLoading(true)
+  const clickSticker = stickerId => {
+    const requestUrl = `https://messenger.stipop.io/v1/analytics/send/${stickerId}?userId=${params.userId}`
+    axios
+      .post(requestUrl, {
+        headers: {
+          // apikey: '3bbe419e29e0e4728474e52a965154fb',
+          'Content-Type': 'application/json',
+          apikey: params.apikey,
+        },
+      })
+      .then(({ data }) => {
+        console.log(data)
+      })
+  }
+  const clickTime = () => {
+    setIsLoading(true)
     const requestUrl = `https://messenger.stipop.io/v1/package/send/${params.userId}?limit=50`
     axios
       .get(requestUrl, {
@@ -86,9 +100,10 @@ const PickerComponent: React.FC<StoreProps> = ({
         },
       })
       .then(({ data }) => {
+        console.log(data.body.stickerList)
         setRecentView(true)
         setStickers(
-          data && data.body && data.body.stsickerList
+          data && data.body && data.body.stickerList
             ? data.body.stickerList
             : []
         )
@@ -96,7 +111,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   }
 
   useEffect(() => {
-    // console.log(stickers)
+    console.log(stickers)
     if (stickers && stickers.length > 0) {
       setIsLoading(false)
     } else {
@@ -235,10 +250,13 @@ const PickerComponent: React.FC<StoreProps> = ({
             {stickers.map((sticker, index) => (
               <StickerImg
                 size={size}
-                src={sticker}
+                src={sticker.stickerImg}
                 alt=""
                 key={index}
-                onClick={() => stickerClick(sticker)}
+                onClick={() => {
+                  stickerClick(sticker.stickerImg)
+                  clickSticker(sticker.stickerId)
+                }}
               />
             ))}
           </StickerWrapper>
@@ -264,7 +282,7 @@ const PickerComponent: React.FC<StoreProps> = ({
           {stickers.map((sticker, index) => (
             <StickerImg
               size={size}
-              src={sticker}
+              src={sticker.stickerImg}
               alt=""
               key={index}
               onClick={() => stickerClick(sticker)}

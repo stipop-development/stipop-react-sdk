@@ -11,19 +11,13 @@ export const Store = () => (
       apikey: '3bbe419e29e0e4728474e52a965154fb',
       userId: 'david@stipop.io',
       lang: 'en',
-      pageNumber: 5,
+      pageNumber: 2,
       limit: 50,
     }}
     downloadParams={{
       isPurchase: 'N',
     }}
     scroll={true}
-    color={{
-      downloadedColor: '#555555',
-    }}
-    size={{
-      packageHeight: 25,
-    }}
   />
 )
 
@@ -34,6 +28,7 @@ export const CustomStore = () => (
       userId: 'david@stipop.io',
       lang: 'en',
       limit: 20,
+      pageNumber: 5,
     }}
     downloadParams={{
       isPurchase: 'N',
@@ -58,6 +53,6 @@ export const CustomStore = () => (
       radius: 20,
       border: '2px solid black',
     }}
-    scroll={false}
+    // scroll={false}
   />
 )

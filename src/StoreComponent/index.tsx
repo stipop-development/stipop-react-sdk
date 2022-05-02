@@ -23,6 +23,8 @@ const StoreComponent: React.FC<StoreProps> = ({
   const [hideList, setHideList] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [currentScroll, setCurrentScroll] = useState(0)
+  const [btnLoading, setBtnLoading] = useState(0)
+  const [btnHover, setBtnHover] = useState(0)
 
   const client = new (Stipop as any)(params.apikey, 'v1')
   const packInfo = new Array()
@@ -87,7 +89,7 @@ const StoreComponent: React.FC<StoreProps> = ({
   }, [packages])
 
   const clickDownload = packageId => {
-    setIsLoading(true)
+    setBtnLoading(packageId)
     const dParams = {
       userId: params.userId,
       packageId: packageId,
@@ -106,12 +108,21 @@ const StoreComponent: React.FC<StoreProps> = ({
           return pack
         })
       )
-      setIsLoading(false)
+      if (main) {
+        setMain({
+          packageId: main.packageId,
+          packageImg: main.packageImg,
+          packageName: main.packageName,
+          artistName: main.artistName,
+          isDownload: 'Y',
+        })
+      }
+      setBtnLoading(0)
     })
   }
 
   const clickHide = packageId => {
-    setIsLoading(true)
+    setBtnLoading(packageId)
     const hideParams = {
       userId: params.userId,
       packageId: packageId,
@@ -124,7 +135,7 @@ const StoreComponent: React.FC<StoreProps> = ({
       } else {
         setHideList(hideList.filter(item => item !== packageId))
       }
-      setIsLoading(false)
+      setBtnLoading(0)
     })
   }
 
@@ -195,29 +206,36 @@ const StoreComponent: React.FC<StoreProps> = ({
                     <div className="packageName">{main.packageName}</div>
                     <div className="artistName">©{main.artistName}</div>
                   </DetailName>
-                  <DownloadBtn
-                    color={color}
-                    isDownload={main.isDownload === 'Y'}
-                    isRecovery={
-                      main.isDownload === 'Y' &&
-                      hideList.indexOf(main.packageId) !== -1
-                    }
-                    onClick={() => {
-                      main.isDownload === 'Y'
-                        ? clickHide(main.packageId)
-                        : clickDownload(main.packageId)
-                    }}
-                  >
-                    <Icon
-                      type={
-                        main.isDownload === 'Y'
-                          ? hideList.indexOf(main.packageId) < 0
-                            ? 'MINUS'
-                            : 'PLUS'
-                          : 'PLUS'
+                  {btnLoading ? (
+                    <DownloadBtn style={{ right: '64px' }}>
+                      <LoadingSpinner />
+                    </DownloadBtn>
+                  ) : (
+                    <DownloadBtn
+                      color={color}
+                      isDownload={main.isDownload === 'Y'}
+                      isRecovery={
+                        main.isDownload === 'Y' &&
+                        hideList.indexOf(main.packageId) !== -1
                       }
-                    />
-                  </DownloadBtn>
+                      style={{ right: '64px' }}
+                      onClick={() => {
+                        main.isDownload === 'Y'
+                          ? clickHide(main.packageId)
+                          : clickDownload(main.packageId)
+                      }}
+                    >
+                      <Icon
+                        type={
+                          main.isDownload === 'Y'
+                            ? hideList.indexOf(main.packageId) < 0
+                              ? 'MINUS'
+                              : 'PLUS'
+                            : 'PLUS'
+                        }
+                      />
+                    </DownloadBtn>
+                  )}
                 </DetailBox>
                 <DetailStickerWrapper size={size} scroll={scroll}>
                   {stickers &&
@@ -236,6 +254,8 @@ const StoreComponent: React.FC<StoreProps> = ({
                 id="package-wrapper"
                 size={size}
                 scroll={scroll}
+                border={border}
+                color={color}
                 onScroll={e => setCurrentScroll(e.target.scrollTop)}
               >
                 {packages.map((pack, index) => (
@@ -281,26 +301,35 @@ const StoreComponent: React.FC<StoreProps> = ({
                         <div></div>
                       )}
                     </PackageItem>
-                    <DownloadBtn
-                      color={color}
-                      isDownload={pack.isDownload === 'Y'}
-                      isRecovery={
-                        pack.isDownload === 'Y' &&
-                        hideList.indexOf(pack.packageId) !== -1
-                      }
-                    >
-                      <Icon
-                        type={
-                          pack.isDownload === 'Y'
-                            ? hideList.indexOf(pack.packageId) < 0
-                              ? 'MINUS'
-                              : 'PLUS'
-                            : 'PLUS'
+                    {btnLoading && btnLoading === pack.packageId ? (
+                      <DownloadBtn>
+                        <LoadingSpinner />
+                      </DownloadBtn>
+                    ) : (
+                      <DownloadBtn
+                        color={color}
+                        isDownload={pack.isDownload === 'Y'}
+                        btnHover={btnHover === pack.packageId}
+                        isRecovery={
+                          pack.isDownload === 'Y' &&
+                          hideList.indexOf(pack.packageId) !== -1
                         }
-                      />
-                    </DownloadBtn>
+                      >
+                        <Icon
+                          type={
+                            pack.isDownload === 'Y'
+                              ? hideList.indexOf(pack.packageId) < 0
+                                ? 'MINUS'
+                                : 'PLUS'
+                              : 'PLUS'
+                          }
+                        />
+                      </DownloadBtn>
+                    )}
                     <BtnWrapper
                       id="download-btn"
+                      onMouseEnter={() => setBtnHover(pack.packageId)}
+                      onMouseLeave={() => setBtnHover(0)}
                       onClick={() => {
                         pack.isDownload === 'Y'
                           ? clickHide(pack.packageId)
@@ -423,7 +452,7 @@ const DetailWrapper = styled.div`
 `
 const DetailBox = styled.div`
   display: flex;
-  padding: 0 32px;
+  padding: 0 68px 0 45px;
   align-items: center;
   position: relative;
   margin-bottom: 12px;
@@ -473,11 +502,34 @@ const PackageWrapper = styled.div`
   height: 100%;
   display: block;
   overflow-y: auto;
+  border-bottom-left-radius: ${props =>
+    props.border && props.border.radius ? `${props.border.radius}px` : '8px'};
+  border-bottom-right-radius: ${props =>
+    props.border && props.border.radius ? `${props.border.radius}px` : '8px'};
   -ms-overflow-style: ${props => (props.scroll === false ? 'none' : '')};
   scrollbar-width: ${props => (props.scroll === false ? 'none' : '')};
 
   &::-webkit-scrollbar {
     display: ${props => (props.scroll === false ? 'none' : '')};
+    width: 9px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: ${props =>
+      props.color && props.color.backgroundColor
+        ? props.color.backgroundColor
+        : '#fff'};
+    border-bottom-right-radius: ${props =>
+      props.border && props.border.radius ? `${props.border.radius}px` : '8px'};
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #bcc0c4;
+    border-radius: 5px;
+    /* border-left: 2px solid #fff;
+    border-right: 2px solid #fff;
+    background-clip: padding-box; */
+    &:hover {
+      background: #6d7072;
+    }
   }
 `
 const PackageBox = styled.div`
@@ -500,6 +552,7 @@ const PackageBox = styled.div`
       ? props.color.backgroundColor
       : '#fff'};
   position: relative;
+  border-bottom: 0.5px solid #e6e6e6;
 
   &:hover {
     background-color: ${props =>
@@ -513,7 +566,7 @@ const PackageBox = styled.div`
         ? props.color.packageHoverColor
         : props.color && props.color.backgroundColor
         ? props.color.backgroundColor
-        : '##f5f6f6'};
+        : '#f5f6f6'};
     cursor: pointer;
   }
 `
@@ -523,12 +576,24 @@ const DownloadBtn = styled.div`
   background-color: ${props =>
     props.isDownload
       ? props.isRecovery
-        ? props.color && props.color.recoveryBtn
+        ? props.btnHover
+          ? props.color && props.color.recoveryBtnHover
+            ? props.color.recoveryBtnHover
+            : '#d13900'
+          : props.color && props.color.recoveryBtn
           ? props.color.recoveryBtn
           : '#ff4500'
+        : props.btnHover
+        ? props.color && props.color.deleteBtnHover
+          ? props.color.deleteBtnHover
+          : '#b3b3b3'
         : props.color && props.color.deleteBtn
         ? props.color.deleteBtn
         : '#b3b3b3'
+      : props.btnHover
+      ? props.color && props.color.downloadBtnHover
+        ? props.color.downloadBtnHover
+        : '#d13900'
       : props.color && props.color.downloadBtn
       ? props.color.downloadBtn
       : '#ff4500'};
@@ -554,13 +619,13 @@ const DownloadBtn = styled.div`
         ? props.isRecovery
           ? props.color && props.color.recoveryBtnHover
             ? props.color.recoveryBtnHover
-            : '#ff4500'
+            : '#d13900'
           : props.color && props.color.deleteBtnHover
           ? props.color.deleteBtnHover
           : '#b3b3b3'
         : props.color && props.color.downloadBtnHover
         ? props.color.downloadBtnHover
-        : '#ff4500'};
+        : '#d13900'};
   }
 `
 const BtnWrapper = styled.div`
@@ -569,15 +634,20 @@ const BtnWrapper = styled.div`
   border-radius: 50%;
   position: absolute;
   right: 32px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 const PackageTitle = styled.div`
   font-size: 12px;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 
   span {
     font-size: 10px;
+    font-weight: normal;
     color: #a9a9a9;
     margin-left: 12px;
   }
