@@ -5669,7 +5669,7 @@ var PickerComponent = function (_a) {
     var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, stickerClick = _a.stickerClick, storeClick = _a.storeClick;
     var _b = React.useState([]), myStickers = _b[0], setMyStickers = _b[1];
     var _c = React.useState([]), stickers = _c[0], setStickers = _c[1];
-    var _d = React.useState(-1), showPackage = _d[0], setShowPackage = _d[1];
+    var _d = React.useState(0), showPackage = _d[0], setShowPackage = _d[1];
     var _e = React.useState(true), isLoading = _e[0], setIsLoading = _e[1];
     var _f = React.useState(false), recentView = _f[0], setRecentView = _f[1];
     var _g = React.useState(0), itemCnt = _g[0], setItemCnt = _g[1];
@@ -5693,7 +5693,17 @@ var PickerComponent = function (_a) {
             var body = _a.body;
             setItemCnt(body && body.packageList ? body.packageList.length : 0);
             setMyStickers(body && body.packageList ? body.packageList : []);
-            clickTime();
+            var packageParams = {
+                userId: params.userId,
+                packId: body.packageList[0].packageId,
+            };
+            var packageData = client.getPackInfo(packageParams);
+            packageData.then(function (_a) {
+                var body = _a.body;
+                setStickers(body && body.package && body.package.stickers
+                    ? body.package.stickers
+                    : []);
+            });
         });
     }, []);
     var clickPackage = function (packageId) { return __awaiter$1(void 0, void 0, void 0, function () {
@@ -5759,6 +5769,7 @@ var PickerComponent = function (_a) {
     };
     React.useEffect(function () {
         console.log(stickers);
+        console.log(recentView);
         if (stickers && stickers.length > 0) {
             setIsLoading(false);
         }
@@ -5777,7 +5788,10 @@ var PickerComponent = function (_a) {
     return (React__default["default"].createElement(PickerWrapper, { size: size, border: border },
         React__default["default"].createElement(MenuBox, null,
             React__default["default"].createElement(ArrowWrapper, { id: itemNum ? 'left-black' : 'left', backgroundColor: backgroundColor, border: border, menu: menu, size: size, onClick: function () {
-                    menuList.scrollTo(scrollX - itemWidth, 0);
+                    menuList.scrollTo(scrollX -
+                        (menu && menu.listCnt
+                            ? itemWidth * menu.listCnt
+                            : itemWidth * 6), 0);
                 } }, itemNum ? (React__default["default"].createElement(Icon, { type: "RIGHT_ARROW_BLACK" })) : (React__default["default"].createElement(Icon, { type: "LEFT_ARROW" }))),
             React__default["default"].createElement(PickerMenu, { id: "picker-menu", backgroundColor: backgroundColor, border: border, menu: menu, onScroll: function (e) {
                     setItemNum(Math.trunc(e.target.scrollLeft /
@@ -5803,13 +5817,16 @@ var PickerComponent = function (_a) {
                                 clickPackage(pack.packageId);
                                 setShowPackage(index);
                             }, show: showPackage === index },
-                            React__default["default"].createElement(PackageImg, { src: pack.packageImg })));
+                            React__default["default"].createElement(PackageImg, { src: pack.packageImg, show: showPackage === index })));
                     })
                     : ''),
             React__default["default"].createElement(ArrowWrapper, { id: itemCnt - (menu && menu.listCnt ? menu.listCnt : 6) > itemNum
                     ? 'right-black'
                     : 'right', backgroundColor: backgroundColor, border: border, menu: menu, size: size, onClick: function () {
-                    menuList.scrollTo(scrollX + itemWidth, 0);
+                    menuList.scrollTo(scrollX +
+                        (menu && menu.listCnt
+                            ? itemWidth * menu.listCnt
+                            : itemWidth * 6), 0);
                 } }, itemCnt - (menu && menu.listCnt ? menu.listCnt : 6) > itemNum ? (React__default["default"].createElement(Icon, { type: "RIGHT_ARROW_BLACK" })) : (React__default["default"].createElement(Icon, { type: "LEFT_ARROW" })))),
         !recentView ? (stickers && isLoading ? (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading },
             React__default["default"].createElement(LoadingSpinner, null))) : (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: sticker.stickerImg, alt: "", key: index, onClick: function () {
@@ -5920,8 +5937,8 @@ var PackageImgWrapper = styled.div(templateObject_6$1 || (templateObject_6$1 = _
             ? props.menu.bottomLine
             : '1px solid lightgray';
 });
-var PackageImg = styled.img(templateObject_7$1 || (templateObject_7$1 = __makeTemplateObject(["\n  width: 60%;\n"], ["\n  width: 60%;\n"])));
-var StickerWrapper$1 = styled.div(templateObject_8$1 || (templateObject_8$1 = __makeTemplateObject(["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) { return (props.isLoading ? 'block' : 'grid'); }, function (props) {
+var PackageImg = styled.img(templateObject_7$1 || (templateObject_7$1 = __makeTemplateObject(["\n  width: 60%;\n  filter: ", ";\n"], ["\n  width: 60%;\n  filter: ", ";\n"])), function (props) { return (props.show ? '' : 'brightness(60%)'); });
+var StickerWrapper$1 = styled.div(templateObject_8$1 || (templateObject_8$1 = __makeTemplateObject(["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) { return (props.isLoading ? 'block' : 'grid'); }, function (props) {
     return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
 }, function (props) {
     return props.backgroundColor ? props.backgroundColor : '#fff';
@@ -6202,10 +6219,10 @@ var MainImg = styled.img(templateObject_8 || (templateObject_8 = __makeTemplateO
     return props.size && props.size.mainImg ? "".concat(props.size.mainImg, "px") : '100px';
 });
 var DetailName = styled.div(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n  .packageName {\n    font-size: 14px;\n    font-weight: bold;\n  }\n  .artistName {\n    font-size: 10px;\n    color: #a9a9a9;\n  }\n"], ["\n  .packageName {\n    font-size: 14px;\n    font-weight: bold;\n  }\n  .artistName {\n    font-size: 10px;\n    color: #a9a9a9;\n  }\n"])));
-var DetailStickerWrapper = styled.div(templateObject_10 || (templateObject_10 = __makeTemplateObject(["\n  height: 100%;\n  padding: 0 32px;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-auto-rows: 100px;\n  justify-items: center;\n  align-items: center;\n  row-gap: 2%;\n  overflow-y: auto;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n\n  img {\n    width: ", ";\n    &:hover {\n      transform: scale(1.3);\n    }\n  }\n"], ["\n  height: 100%;\n  padding: 0 32px;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-auto-rows: 100px;\n  justify-items: center;\n  align-items: center;\n  row-gap: 2%;\n  overflow-y: auto;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n\n  img {\n    width: ", ";\n    &:hover {\n      transform: scale(1.3);\n    }\n  }\n"])), function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) {
+var DetailStickerWrapper = styled.div(templateObject_10 || (templateObject_10 = __makeTemplateObject(["\n  height: 100%;\n  padding: 0 32px;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-auto-rows: 100px;\n  justify-items: center;\n  align-items: center;\n  row-gap: 2%;\n  overflow-y: auto;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n\n  img {\n    width: ", ";\n    &:hover {\n      transform: scale(1.3);\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  height: 100%;\n  padding: 0 32px;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-auto-rows: 100px;\n  justify-items: center;\n  align-items: center;\n  row-gap: 2%;\n  overflow-y: auto;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n\n  img {\n    width: ", ";\n    &:hover {\n      transform: scale(1.3);\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) {
     return props.size && props.size.detailImg ? "".concat(props.size.detailImg, "%") : '70%';
 });
-var PackageWrapper = styled.div(templateObject_11 || (templateObject_11 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  display: block;\n  overflow-y: auto;\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    width: 9px;\n  }\n  &::-webkit-scrollbar-track {\n    background-color: ", ";\n    border-bottom-right-radius: ", ";\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    /* border-left: 2px solid #fff;\n    border-right: 2px solid #fff;\n    background-clip: padding-box; */\n    &:hover {\n      background: #6d7072;\n    }\n  }\n"], ["\n  width: 100%;\n  height: 100%;\n  display: block;\n  overflow-y: auto;\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    width: 9px;\n  }\n  &::-webkit-scrollbar-track {\n    background-color: ", ";\n    border-bottom-right-radius: ", ";\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    /* border-left: 2px solid #fff;\n    border-right: 2px solid #fff;\n    background-clip: padding-box; */\n    &:hover {\n      background: #6d7072;\n    }\n  }\n"])), function (props) {
+var PackageWrapper = styled.div(templateObject_11 || (templateObject_11 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  display: block;\n  overflow-y: auto;\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    width: 9px;\n  }\n  &::-webkit-scrollbar-track {\n    background-color: ", ";\n    border-bottom-right-radius: ", ";\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: #6d7072;\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  width: 100%;\n  height: 100%;\n  display: block;\n  overflow-y: auto;\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    width: 9px;\n  }\n  &::-webkit-scrollbar-track {\n    background-color: ", ";\n    border-bottom-right-radius: ", ";\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: #6d7072;\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) {
     return props.border && props.border.radius ? "".concat(props.border.radius, "px") : '8px';
 }, function (props) {
     return props.border && props.border.radius ? "".concat(props.border.radius, "px") : '8px';

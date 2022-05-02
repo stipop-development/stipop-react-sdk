@@ -22,7 +22,7 @@ const PickerComponent: React.FC<StoreProps> = ({
 }) => {
   const [myStickers, setMyStickers] = useState([])
   const [stickers, setStickers] = useState([])
-  const [showPackage, setShowPackage] = useState(-1)
+  const [showPackage, setShowPackage] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
 
   const [recentView, setRecentView] = useState(false)
@@ -52,7 +52,19 @@ const PickerComponent: React.FC<StoreProps> = ({
     data.then(({ body }) => {
       setItemCnt(body && body.packageList ? body.packageList.length : 0)
       setMyStickers(body && body.packageList ? body.packageList : [])
-      clickTime()
+      const packageParams = {
+        userId: params.userId,
+        packId: body.packageList[0].packageId,
+      }
+
+      const packageData = client.getPackInfo(packageParams)
+      packageData.then(({ body }) => {
+        setStickers(
+          body && body.package && body.package.stickers
+            ? body.package.stickers
+            : []
+        )
+      })
     })
   }, [])
 
@@ -112,6 +124,7 @@ const PickerComponent: React.FC<StoreProps> = ({
 
   useEffect(() => {
     console.log(stickers)
+    console.log(recentView)
     if (stickers && stickers.length > 0) {
       setIsLoading(false)
     } else {
@@ -137,7 +150,13 @@ const PickerComponent: React.FC<StoreProps> = ({
           menu={menu}
           size={size}
           onClick={() => {
-            menuList.scrollTo(scrollX - itemWidth, 0)
+            menuList.scrollTo(
+              scrollX -
+                (menu && menu.listCnt
+                  ? itemWidth * menu.listCnt
+                  : itemWidth * 6),
+              0
+            )
           }}
         >
           {itemNum ? (
@@ -202,7 +221,10 @@ const PickerComponent: React.FC<StoreProps> = ({
                       }}
                       show={showPackage === index}
                     >
-                      <PackageImg src={pack.packageImg} />
+                      <PackageImg
+                        src={pack.packageImg}
+                        show={showPackage === index}
+                      />
                     </PackageImgWrapper>
                   )
               )
@@ -219,7 +241,13 @@ const PickerComponent: React.FC<StoreProps> = ({
           menu={menu}
           size={size}
           onClick={() => {
-            menuList.scrollTo(scrollX + itemWidth, 0)
+            menuList.scrollTo(
+              scrollX +
+                (menu && menu.listCnt
+                  ? itemWidth * menu.listCnt
+                  : itemWidth * 6),
+              0
+            )
           }}
         >
           {itemCnt - (menu && menu.listCnt ? menu.listCnt : 6) > itemNum ? (
@@ -494,6 +522,7 @@ const PackageImgWrapper = styled.div`
 `
 const PackageImg = styled.img`
   width: 60%;
+  filter: ${props => (props.show ? '' : 'brightness(60%)')};
 `
 const StickerWrapper = styled.div`
   height: calc(100% - 45px);
@@ -520,6 +549,10 @@ const StickerWrapper = styled.div`
   &::-webkit-scrollbar {
     display: ${props => (props.scroll === false ? 'none' : '')};
   }
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
 `
 const StickerImg = styled.img`
   width: ${props =>

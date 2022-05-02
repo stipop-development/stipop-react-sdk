@@ -11,6 +11,7 @@ export const Picker = () => (
       apikey: '3bbe419e29e0e4728474e52a965154fb',
       userId: 'david@stipop.io',
     }}
+    stickerClick={url => console.log(url)}
   />
 )
 

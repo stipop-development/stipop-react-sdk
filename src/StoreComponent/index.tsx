@@ -496,6 +496,10 @@ const DetailStickerWrapper = styled.div`
       transform: scale(1.3);
     }
   }
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
 `
 const PackageWrapper = styled.div`
   width: 100%;
@@ -524,13 +528,14 @@ const PackageWrapper = styled.div`
   &::-webkit-scrollbar-thumb {
     background: #bcc0c4;
     border-radius: 5px;
-    /* border-left: 2px solid #fff;
-    border-right: 2px solid #fff;
-    background-clip: padding-box; */
     &:hover {
       background: #6d7072;
     }
   }
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
 `
 const PackageBox = styled.div`
   width: 100%;
