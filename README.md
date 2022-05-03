@@ -50,173 +50,160 @@ export default App
 
 #### List of Params
 
-| Parameters                          | Type     |
-| ----------------------------------- | -------- |
-| [params](#params)                   | Object   |
-| [size](#size)                       | Object   |
-| [border](#border)                   | Object   |
-| [input](#input)                     | Object   |
-| [backgroundColor](#backgroundcolor) | String   |
-| [column](#column)                   | Number   |
-| [scroll](#scroll)                   | Boolean  |
-| [stickerClick](#stickerclick)       | Function |
+- #### params
 
--------
+  ##### Parameters
 
-#### params
+  | Name       | Type   | Required             | Default      |
+  | ---------- | ------ | -------------------- | ------------ |
+  | apikey     | String | required             |              |
+  | userId     | String | required             |              |
+  | lang       | String | strongly recommended | en           |
+  | pageNumber | number | optional             | 1            |
+  | limit      | Number | optional             | 20 (max: 50) |
+  | default    | string | optional             | hi           |
 
-##### Parameters
+  ##### Example
 
-| Name       | Type   | Required             | Default      |
-| ---------- | ------ | -------------------- | ------------ |
-| apikey     | String | required             |              |
-| userId     | String | required             |              |
-| lang       | String | strongly recommended | en           |
-| pageNumber | number | optional             | 1            |
-| limit      | Number | optional             | 20 (max: 50) |
-| default    | string | optional             | hi           |
+  ```react
+  import { SearchComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <SearchComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+          lang: 'en',
+          pageNumber: 1,
+          limit: 20,
+          default: 'hi',
+        }}
+      />
+    )
+  }
+  
+  export default App
+  ```
 
-##### Examples
+  
 
-```react
-import { SearchComponent } from 'stipop-react-sdk'
+- #### size
 
-const App = () => {
-  return (
-    <SearchComponent 
-      params={{
-        apikey: 'apikey',
-        userId: 'userId',
-        lang: 'en',
-        pageNumber: 1,
-        limit: 20,
-        default: 'hi',
-      }}
-    />
-  )
-}
+  ##### Parameters
 
-export default App
-```
+  | Name    | Type   | Required | Default |
+  | ------- | ------ | -------- | ------- |
+  | width   | number | optional | 360     |
+  | height  | number | optional | 300     |
+  | imgSize | number | optional | 60      |
 
--------
+  ##### Example
 
-#### size
+  ```react
+  import { SearchComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <SearchComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+          lang: 'en',
+        }}
+        size={{
+          width: 360,
+          height: 300,
+          imgSize: 60,
+        }}
+      />
+    )
+  }
+  
+  export default App
+  ```
 
-##### Parameters
+  
 
-| Name    | Type   | Required | Default |
-| ------- | ------ | -------- | ------- |
-| width   | number | optional | 360     |
-| height  | number | optional | 300     |
-| imgSize | number | optional | 60      |
+- #### border
 
-##### Examples
+  ##### Parameters
 
-```react
-import { SearchComponent } from 'stipop-react-sdk'
+  | Name   | Type   | Required | Default             |
+  | ------ | ------ | -------- | ------------------- |
+  | border | string | optional | 1px solid lightgray |
+  | radius | number | optional | 10                  |
 
-const App = () => {
-  return (
-    <SearchComponent 
-      params={{
-        apikey: 'apikey',
-        userId: 'userId',
-        lang: 'en',
-      }}
-      size={{
-        width: 360,
-        height: 300,
-        imgSize: 60,
-      }}
-    />
-  )
-}
+  ##### Example
 
-export default App
-```
+  ```react
+  import { SearchComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <SearchComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+          lang: 'en',
+        }}
+        border={{
+          border: '1px solid lightgray',
+          radius: 10,
+        }}
+      />
+    )
+  }
+  
+  export default App
+  ```
 
-------
+  
 
-#### border
+- #### input
 
-##### Parameters
+  ##### Parameters
 
-| Name   | Type   | Required | Default             |
-| ------ | ------ | -------- | ------------------- |
-| border | string | optional | 1px solid lightgray |
-| radius | number | optional | 10                  |
+  | Name            | Type   | Required | Default             |
+  | --------------- | ------ | -------- | ------------------- |
+  | width           | number | optional | 100                 |
+  | height          | number | optional | 32                  |
+  | border          | string | optional | 2px solid lightgray |
+  | radius          | number | optional | 50                  |
+  | backgroundColor | string | optional | #fff                |
+  | color           | string | optional | #000                |
 
-##### Examples
+  ##### Example
 
-```react
-import { SearchComponent } from 'stipop-react-sdk'
+  ```react
+  import { SearchComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <SearchComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+          lang: 'en',
+        }}
+        input={{
+          width: 100,
+          height: 32,
+          border: '2px solid lightgray',
+          radius: 50,
+          backgroundColor: '#fff',
+          color: '#000',
+        }}
+      />
+    )
+  }
+  
+  export default App
+  ```
 
-const App = () => {
-  return (
-    <SearchComponent 
-      params={{
-        apikey: 'apikey',
-        userId: 'userId',
-        lang: 'en',
-      }}
-      border={{
-        border: '1px solid lightgray',
-        radius: 10,
-      }}
-    />
-  )
-}
+  
 
-export default App
-```
-
--------
-
-#### input
-
-##### Parameters
-
-| Name            | Type   | Required | Default             |
-| --------------- | ------ | -------- | ------------------- |
-| width           | number | optional | 100                 |
-| height          | number | optional | 32                  |
-| border          | string | optional | 2px solid lightgray |
-| radius          | number | optional | 50                  |
-| backgroundColor | string | optional | #fff                |
-| color           | string | optional | #000                |
-
-##### Examples
-
-```react
-import { SearchComponent } from 'stipop-react-sdk'
-
-const App = () => {
-  return (
-    <SearchComponent 
-      params={{
-        apikey: 'apikey',
-        userId: 'userId',
-        lang: 'en',
-      }}
-      input={{
-        width: 100,
-        height: 32,
-        border: '2px solid lightgray',
-        radius: 50,
-        backgroundColor: '#fff',
-        color: '#000',
-      }}
-    />
-  )
-}
-
-export default App
-```
-
---------
-
-#### backgroundColor
+- #### backgroundColor
 
 | Type   | Required | Default |
 | ------ | -------- | ------- |
@@ -659,15 +646,15 @@ export default App
 
 #### List of Params
 
-| Parameters                        | Type     |
-| --------------------------------- | -------- |
-| [params](#params)                 | Object   |
-| [downloadParams](#downloadparams) | Object   |
-| [color](#color)                   | Object   |
-| [size](#size)                     | Object   |
-| [border](#border)                 | Object   |
-| [scroll](#scroll)                 | Boolean  |
-| [onClose](#onclose)               | Function |
+| Parameters                                      | Type     |
+| ----------------------------------------------- | -------- |
+| [params](#storecomponent/list-of-params/params) | Object   |
+| [downloadParams](#downloadparams)               | Object   |
+| [color](#color)                                 | Object   |
+| [size](#size)                                   | Object   |
+| [border](#border)                               | Object   |
+| [scroll](#scroll)                               | Boolean  |
+| [onClose](#onclose)                             | Function |
 
 ------
 
