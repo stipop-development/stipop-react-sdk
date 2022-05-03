@@ -496,6 +496,10 @@ const PickerMenu = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
 `
 const PackageImgWrapper = styled.div`
   /* flex-basis: ${props =>

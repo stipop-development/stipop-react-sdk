@@ -5922,7 +5922,7 @@ var IconWrapper = styled.div(templateObject_4$1 || (templateObject_4$1 = __makeT
             ? props.menu.bottomLine
             : '1px solid lightgray';
 });
-var PickerMenu = styled.div(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  height: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n"], ["\n  height: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n"])), function (props) {
+var PickerMenu = styled.div(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  height: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  height: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) {
     return props.menu && props.menu.height ? "".concat(props.menu.height, "px") : '45px';
 }, function (props) {
     return props.menu && props.menu.backgroundColor
