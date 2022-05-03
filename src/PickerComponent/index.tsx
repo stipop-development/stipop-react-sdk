@@ -543,9 +543,7 @@ const StickerWrapper = styled.div`
   grid-template-columns: ${props =>
     props.column ? `repeat(${props.column}, 1fr)` : 'repeat(4, 1fr)'};
   grid-template-rows: ${props =>
-    props.size && props.size.imgSize
-      ? `repeat(calc(400 / ${props.size.imgSize}), 1fr)`
-      : 'repeat(calc(400 / 60), 1fr)'};
+    props.column ? `repeat(${props.column}, 1fr)` : 'repeat(4, 1fr)'};
   row-gap: 8%;
   justify-items: center;
   overflow-y: auto;
