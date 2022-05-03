@@ -6298,8 +6298,8 @@ var PackageWrapper = styled.div(templateObject_11 || (templateObject_11 = __make
         : '8px';
 });
 var PackageBox = styled.div(templateObject_12 || (templateObject_12 = __makeTemplateObject(["\n  width: 100%;\n  height: ", ";\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  padding: 0 32px;\n  box-sizing: border-box;\n  background-color: ", ";\n  position: relative;\n  border-bottom: 0.5px solid #e6e6e6;\n\n  &:hover {\n    background-color: ", ";\n    cursor: pointer;\n  }\n"], ["\n  width: 100%;\n  height: ", ";\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  padding: 0 32px;\n  box-sizing: border-box;\n  background-color: ", ";\n  position: relative;\n  border-bottom: 0.5px solid #e6e6e6;\n\n  &:hover {\n    background-color: ", ";\n    cursor: pointer;\n  }\n"])), function (props) {
-    return props.size && props.size.packageHeight
-        ? "".concat(props.size.packageHeight, "%")
+    return props.size && props.size.packageListHeight
+        ? "".concat(props.size.packageListHeight, "%")
         : '33%';
 }, function (props) {
     return props.isDownload

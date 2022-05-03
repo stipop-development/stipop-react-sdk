@@ -572,8 +572,8 @@ const PackageWrapper = styled.div`
 const PackageBox = styled.div`
   width: 100%;
   height: ${props =>
-    props.size && props.size.packageHeight
-      ? `${props.size.packageHeight}%`
+    props.size && props.size.packageListHeight
+      ? `${props.size.packageListHeight}%`
       : '33%'};
   display: flex;
   flex-direction: column;

@@ -481,6 +481,7 @@ export default App
   | backgroundColor | string | optional | #fff                |
   | bottomLine      | string | optional | 1px solid lightgray |
   | selectedLine    | string | optional | 2px solid black     |
+  | listCnt         | number | optional | 6                   |
 
   ##### Example
 
@@ -499,6 +500,7 @@ export default App
           backgroundColor: '#fff',
           bottomLine: '1px solid lightgray',
           selectedLine: '2px solid black',
+          listCnt: 6,
         }}
       />
     )
@@ -828,13 +830,14 @@ export default App
 
   ##### Parameters
 
-  | Name       | Type   | Required | Default |
-  | ---------- | ------ | -------- | ------- |
-  | width      | number | optional | 600     |
-  | height     | number | optional | 400     |
-  | previewImg | number | optional | 70      |
-  | detailImg  | number | optional | 70      |
-  | mainImg    | number | optional | 100     |
+  | Name              | Type   | Required | Default |
+  | ----------------- | ------ | -------- | ------- |
+  | width             | number | optional | 600     |
+  | height            | number | optional | 400     |
+  | previewImg        | number | optional | 70      |
+  | detailImg         | number | optional | 70      |
+  | mainImg           | number | optional | 100     |
+  | packageListHeight | number | optional | 33      |
 
   ##### Example
 

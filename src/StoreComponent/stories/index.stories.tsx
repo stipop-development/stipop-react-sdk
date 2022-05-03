@@ -48,6 +48,7 @@ export const CustomStore = () => (
       previewImg: 60,
       width: 500,
       height: 350,
+      packageListHeight: 25,
     }}
     border={{
       radius: 20,

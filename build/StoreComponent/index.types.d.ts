@@ -40,7 +40,7 @@ interface Size {
     previewImg?: number;
     detailImg?: number;
     mainImg?: number;
-    packageHeight?: number;
+    packageListHeight?: number;
 }
 interface Border {
     border?: string;
