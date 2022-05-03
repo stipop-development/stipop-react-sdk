@@ -361,14 +361,14 @@ export default App
 
 | Parameters                            | Type     |
 | ------------------------------------- | -------- |
-| [params](#params-2)                   | Object   |
-| [size](#size-2)                       | Object   |
-| [border](#border-2)                   | Object   |
+| [params](#params-1)                   | Object   |
+| [size](#size-1)                       | Object   |
+| [border](#border-1)                   | Object   |
 | [menu](#menu)                         | Object   |
-| [backgroundColor](#backgroundcolor-2) | String   |
-| [column](#column-2)                   | Number   |
-| [scroll](#scroll-2)                   | Boolean  |
-| [stickerClick](#stickerclick-2)       | Function |
+| [backgroundColor](#backgroundcolor-1) | String   |
+| [column](#column-1)                   | Number   |
+| [scroll](#scroll-1)                   | Boolean  |
+| [stickerClick](#stickerclick-1)       | Function |
 | [storeClick](#storeclick)             | Function |
 
 - #### params
@@ -683,12 +683,12 @@ export default App
 
 | Parameters                        | Type     |
 | --------------------------------- | -------- |
-| [params](#params-3)               | Object   |
+| [params](#params-2)               | Object   |
 | [downloadParams](#downloadparams) | Object   |
 | [color](#color)                   | Object   |
-| [size](#size-3)                   | Object   |
-| [border](#border-3)               | Object   |
-| [scroll](#scroll-3)               | Boolean  |
+| [size](#size-2)                   | Object   |
+| [border](#border-2)               | Object   |
+| [scroll](#scroll-2)               | Boolean  |
 | [onClose](#onclose)               | Function |
 
 - #### params
