@@ -5709,17 +5709,22 @@ var PickerComponent = function (_a) {
     }); };
     var clickSticker = function (stickerId) {
         var requestUrl = "https://messenger.stipop.io/v1/analytics/send/".concat(stickerId, "?userId=").concat(params.userId);
-        axios
-            .post(requestUrl, {
+        // axios
+        //   .post(requestUrl, {
+        //     headers: {
+        //       apikey: params.apikey,
+        //       'Content-Type': 'application/json',
+        //     },
+        //   })
+        //   .then(res => {
+        //     console.log(res.data.headers)
+        //   })
+        fetch(requestUrl, {
+            method: 'POST',
             headers: {
-                // apikey: '3bbe419e29e0e4728474e52a965154fb',
-                'Content-Type': 'application/json',
                 apikey: params.apikey,
+                'Content-Type': 'application/json',
             },
-        })
-            .then(function (_a) {
-            var data = _a.data;
-            console.log(data);
         });
     };
     var clickTime = function () {
@@ -5734,7 +5739,7 @@ var PickerComponent = function (_a) {
         })
             .then(function (_a) {
             var data = _a.data;
-            console.log(data.body.stickerList);
+            // console.log(data.body.stickerList)
             setRecentView(true);
             setStickers(data && data.body && data.body.stickerList
                 ? data.body.stickerList
@@ -5742,8 +5747,8 @@ var PickerComponent = function (_a) {
         });
     };
     useEffect(function () {
-        console.log(stickers);
-        console.log(recentView);
+        // console.log(stickers)
+        // console.log(recentView)
         if (stickers && stickers.length > 0) {
             setIsLoading(false);
         }
@@ -5807,7 +5812,7 @@ var PickerComponent = function (_a) {
                 stickerClick(sticker.stickerImg);
                 clickSticker(sticker.stickerId);
             } })); })))) : isLoading ? (React__default.createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading },
-            React__default.createElement(LoadingSpinner, null))) : stickers.length > 0 ? (React__default.createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading }, stickers.map(function (sticker, index) { return (React__default.createElement(StickerImg, { size: size, src: sticker.stickerImg, alt: "", key: index, onClick: function () { return stickerClick(sticker); } })); }))) : (React__default.createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: recentView },
+            React__default.createElement(LoadingSpinner, null))) : stickers.length > 0 ? (React__default.createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading }, stickers.map(function (sticker, index) { return (React__default.createElement(StickerImg, { size: size, src: sticker.stickerImg, alt: "", key: index, onClick: function () { return stickerClick(sticker.stickerImg); } })); }))) : (React__default.createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: recentView },
             React__default.createElement("div", { style: {
                     width: '100%',
                     height: '100%',
