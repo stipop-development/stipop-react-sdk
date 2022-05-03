@@ -90,6 +90,13 @@ const PickerComponent: React.FC<StoreProps> = ({
 
   const clickSticker = stickerId => {
     const requestUrl = `https://messenger.stipop.io/v1/analytics/send/${stickerId}?userId=${params.userId}`
+    fetch(requestUrl, {
+      method: 'POST',
+      headers: {
+        apikey: params.apikey,
+        'Content-Type': 'application/json',
+      },
+    })
     // axios
     //   .post(requestUrl, {
     //     headers: {
@@ -100,13 +107,6 @@ const PickerComponent: React.FC<StoreProps> = ({
     //   .then(res => {
     //     console.log(res.data.headers)
     //   })
-    fetch(requestUrl, {
-      method: 'POST',
-      headers: {
-        apikey: params.apikey,
-        'Content-Type': 'application/json',
-      },
-    })
   }
   const clickTime = () => {
     setIsLoading(true)

@@ -69,16 +69,33 @@ const SearchComponent: React.FC<SearchProps> = ({
 
       data.then(({ body }) => {
         // console.log(body)
-        setStickerList(
-          body && body.stickerList
-            ? body.stickerList.map(sticker => sticker.stickerImg)
-            : []
-        )
+        setStickerList(body && body.stickerList ? body.stickerList : [])
       })
     } else {
       setKeyword(params.default ? params.default : 'hi')
     }
   }, [keyword, params.lang, params.pageNumber, params.limit])
+
+  const clickSticker = stickerId => {
+    const requestUrl = `https://messenger.stipop.io/v1/analytics/send/${stickerId}?userId=${params.userId}`
+    fetch(requestUrl, {
+      method: 'POST',
+      headers: {
+        apikey: params.apikey,
+        'Content-Type': 'application/json',
+      },
+    })
+    // axios
+    //   .post(requestUrl, {
+    //     headers: {
+    //       apikey: params.apikey,
+    //       'Content-Type': 'application/json',
+    //     },
+    //   })
+    //   .then(res => {
+    //     console.log(res.data.headers)
+    //   })
+  }
 
   return (
     <SearchWrapper
@@ -110,9 +127,12 @@ const SearchComponent: React.FC<SearchProps> = ({
         >
           {stickerList.map((sticker, index) => (
             <StickerImg
-              src={sticker}
+              src={sticker.stickerImg}
               key={index}
-              onClick={() => stickerClick(sticker)}
+              onClick={() => {
+                stickerClick(sticker.stickerImg)
+                clickSticker(sticker.stickerId)
+              }}
               size={size}
             />
           ))}

@@ -3703,15 +3703,33 @@ var SearchComponent = function (_a) {
             data.then(function (_a) {
                 var body = _a.body;
                 // console.log(body)
-                setStickerList(body && body.stickerList
-                    ? body.stickerList.map(function (sticker) { return sticker.stickerImg; })
-                    : []);
+                setStickerList(body && body.stickerList ? body.stickerList : []);
             });
         }
         else {
             setKeyword(params.default ? params.default : 'hi');
         }
     }, [keyword, params.lang, params.pageNumber, params.limit]);
+    var clickSticker = function (stickerId) {
+        var requestUrl = "https://messenger.stipop.io/v1/analytics/send/".concat(stickerId, "?userId=").concat(params.userId);
+        fetch(requestUrl, {
+            method: 'POST',
+            headers: {
+                apikey: params.apikey,
+                'Content-Type': 'application/json',
+            },
+        });
+        // axios
+        //   .post(requestUrl, {
+        //     headers: {
+        //       apikey: params.apikey,
+        //       'Content-Type': 'application/json',
+        //     },
+        //   })
+        //   .then(res => {
+        //     console.log(res.data.headers)
+        //   })
+    };
     return (React__default.createElement(SearchWrapper, { size: size, backgroundColor: backgroundColor, border: border },
         React__default.createElement(SearchForm, null,
             React__default.createElement(SearchInput, { type: "text", onChange: function (e) { return setKeyword(e.target.value); }, placeholder: "Search sticker...", input: input }),
@@ -3720,7 +3738,10 @@ var SearchComponent = function (_a) {
                 React__default.createElement("div", null,
                     React__default.createElement("span", null, "POWERED BY"),
                     React__default.createElement(Icon, { type: "LOGO" })))),
-        stickerList.length > 0 ? (React__default.createElement(StickerWrapper$2, { column: column, scroll: scroll, border: border, backgroundColor: backgroundColor }, stickerList.map(function (sticker, index) { return (React__default.createElement(StickerImg$1, { src: sticker, key: index, onClick: function () { return stickerClick(sticker); }, size: size })); }))) : (React__default.createElement(NoSticker, null,
+        stickerList.length > 0 ? (React__default.createElement(StickerWrapper$2, { column: column, scroll: scroll, border: border, backgroundColor: backgroundColor }, stickerList.map(function (sticker, index) { return (React__default.createElement(StickerImg$1, { src: sticker.stickerImg, key: index, onClick: function () {
+                stickerClick(sticker.stickerImg);
+                clickSticker(sticker.stickerId);
+            }, size: size })); }))) : (React__default.createElement(NoSticker, null,
             React__default.createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker" }),
             React__default.createElement("span", { className: "no-sticker-text" }, "No Stickers to Show")))));
 };
@@ -5715,6 +5736,13 @@ var PickerComponent = function (_a) {
     }); };
     var clickSticker = function (stickerId) {
         var requestUrl = "https://messenger.stipop.io/v1/analytics/send/".concat(stickerId, "?userId=").concat(params.userId);
+        fetch(requestUrl, {
+            method: 'POST',
+            headers: {
+                apikey: params.apikey,
+                'Content-Type': 'application/json',
+            },
+        });
         // axios
         //   .post(requestUrl, {
         //     headers: {
@@ -5725,13 +5753,6 @@ var PickerComponent = function (_a) {
         //   .then(res => {
         //     console.log(res.data.headers)
         //   })
-        fetch(requestUrl, {
-            method: 'POST',
-            headers: {
-                apikey: params.apikey,
-                'Content-Type': 'application/json',
-            },
-        });
     };
     var clickTime = function () {
         setIsLoading(true);
