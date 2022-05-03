@@ -42,80 +42,90 @@ export default App
 
 #### List of Params
 
-- #### params
+------
 
-  ##### Parameters
+| Parameters        | Type |
+| ----------------- | ---- |
+| [params](#params) |      |
+| [size](#size)     |      |
+|                   |      |
 
-  | Name       | Type   | Required             | Default      |
-  | ---------- | ------ | -------------------- | ------------ |
-  | apikey     | String | required             |              |
-  | userId     | String | required             |              |
-  | lang       | String | strongly recommended | en           |
-  | pageNumber | number | optional             | 1            |
-  | limit      | Number | optional             | 20 (max: 50) |
-  | default    | string | optional             | hi           |
+-------
 
-  ##### Examples
+#### Params
 
-  ```react
-  import { SearchComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-      <SearchComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-          lang: 'en',
-          pageNumber: 1,
-          limit: 20,
-          default: 'hi',
-        }}
-      />
-    )
-  }
-  
-  export default App
-  ```
+##### Parameters
 
-  
+| Name       | Type   | Required             | Default      |
+| ---------- | ------ | -------------------- | ------------ |
+| apikey     | String | required             |              |
+| userId     | String | required             |              |
+| lang       | String | strongly recommended | en           |
+| pageNumber | number | optional             | 1            |
+| limit      | Number | optional             | 20 (max: 50) |
+| default    | string | optional             | hi           |
 
-- #### size
+##### Examples
 
-  ##### Parameters
+```react
+import { SearchComponent } from 'stipop-react-sdk'
 
-  | Name    | Type   | Required | Default |
-  | ------- | ------ | -------- | ------- |
-  | width   | number | optional | 360     |
-  | height  | number | optional | 300     |
-  | imgSize | number | optional | 60      |
+const App = () => {
+  return (
+    <SearchComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+        lang: 'en',
+        pageNumber: 1,
+        limit: 20,
+        default: 'hi',
+      }}
+    />
+  )
+}
 
-  ##### Examples
+export default App
+```
 
-  ```react
-  import { SearchComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-      <SearchComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-          lang: 'en',
-        }}
-        size={{
-          width: 360,
-          height: 300,
-          imgSize: 60,
-        }}
-      />
-    )
-  }
-  
-  export default App
-  ```
 
-  
+
+#### size
+
+##### Parameters
+
+| Name    | Type   | Required | Default |
+| ------- | ------ | -------- | ------- |
+| width   | number | optional | 360     |
+| height  | number | optional | 300     |
+| imgSize | number | optional | 60      |
+
+##### Examples
+
+```react
+import { SearchComponent } from 'stipop-react-sdk'
+
+const App = () => {
+  return (
+    <SearchComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+        lang: 'en',
+      }}
+      size={{
+        width: 360,
+        height: 300,
+        imgSize: 60,
+      }}
+    />
+  )
+}
+
+export default App
+```
+
+
 
 - #### border
 
@@ -285,11 +295,11 @@ export default App
 - #### stickerClick
 
   > Get Sticker URL Function
-  
+
   | Type     | Required | Value       |
   | -------- | -------- | ----------- |
   | Function | optional | sticker URL |
-  
+
   ```react
   import { SearchComponent } from 'stipop-react-sdk'
   
@@ -308,7 +318,7 @@ export default App
   
   export default App
   ```
-  
+
 
 
 ### PickerComponent
