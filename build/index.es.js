@@ -3690,7 +3690,7 @@ var SearchComponent = function (_a) {
     //   }
     // }, [keyword, params.lang, params.pageNumber, params.limit])
     useEffect(function () {
-        console.log(keyword);
+        // console.log(keyword)
         var searchParams = {
             userId: params.userId,
             q: keyword,
@@ -3702,7 +3702,7 @@ var SearchComponent = function (_a) {
             var data = client.getSearch(searchParams);
             data.then(function (_a) {
                 var body = _a.body;
-                console.log(body);
+                // console.log(body)
                 setStickerList(body && body.stickerList
                     ? body.stickerList.map(function (sticker) { return sticker.stickerImg; })
                     : []);
@@ -3720,7 +3720,7 @@ var SearchComponent = function (_a) {
                 React__default.createElement("div", null,
                     React__default.createElement("span", null, "POWERED BY"),
                     React__default.createElement(Icon, { type: "LOGO" })))),
-        stickerList.length > 0 ? (React__default.createElement(StickerWrapper$2, { column: column, scroll: scroll }, stickerList.map(function (sticker, index) { return (React__default.createElement(StickerImg$1, { src: sticker, key: index, onClick: function () { return stickerClick(sticker); }, size: size })); }))) : (React__default.createElement(NoSticker, null,
+        stickerList.length > 0 ? (React__default.createElement(StickerWrapper$2, { column: column, scroll: scroll, border: border, backgroundColor: backgroundColor }, stickerList.map(function (sticker, index) { return (React__default.createElement(StickerImg$1, { src: sticker, key: index, onClick: function () { return stickerClick(sticker); }, size: size })); }))) : (React__default.createElement(NoSticker, null,
             React__default.createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker" }),
             React__default.createElement("span", { className: "no-sticker-text" }, "No Stickers to Show")))));
 };
@@ -3776,9 +3776,15 @@ var InputHolder = styled.div(templateObject_4$3 || (templateObject_4$3 = __makeT
         ? props.input.backgroundColor
         : '#fff';
 });
-var StickerWrapper$2 = styled.div(templateObject_5$3 || (templateObject_5$3 = __makeTemplateObject(["\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"], ["\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n  }\n"])), function (props) {
+var StickerWrapper$2 = styled.div(templateObject_5$3 || (templateObject_5$3 = __makeTemplateObject(["\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    width: 9px;\n  }\n  &::-webkit-scrollbar-track {\n    background-color: ", ";\n    border-bottom-right-radius: ", ";\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: #6d7072;\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  width: 100%;\n  height: 90%;\n  overflow-y: auto;\n  display: grid;\n  grid-template-columns: ", ";\n  grid-template-rows: auto;\n  row-gap: 8%;\n  justify-items: center;\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    width: 9px;\n  }\n  &::-webkit-scrollbar-track {\n    background-color: ", ";\n    border-bottom-right-radius: ", ";\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: #6d7072;\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) {
     return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
-}, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); });
+}, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) {
+    return props.backgroundColor ? props.backgroundColor : '#fff';
+}, function (props) {
+    return props.border && (props.border.radius || props.border.radius == 0)
+        ? "".concat(props.border.radius, "px")
+        : '8px';
+});
 var NoSticker = styled.div(templateObject_6$3 || (templateObject_6$3 = __makeTemplateObject(["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"], ["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"])));
 var StickerImg$1 = styled.img(templateObject_7$2 || (templateObject_7$2 = __makeTemplateObject(["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"], ["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"])), function (props) {
     return props.size && props.size.imgSize ? "".concat(props.size.imgSize, "%") : '60%';
@@ -6182,7 +6188,9 @@ var StoreWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemp
         ? props.border.border
         : '1px solid lightgray';
 }, function (props) {
-    return props.border && props.border.radius ? "".concat(props.border.radius, "px") : '8px';
+    return props.border && (props.border.radius || props.border.radius == 0)
+        ? "".concat(props.border.radius, "px")
+        : '8px';
 }, function (props) {
     return props.color && props.color.backgroundColor
         ? props.color.backgroundColor
@@ -6196,9 +6204,13 @@ var PackageContainer = styled.div(templateObject_5 || (templateObject_5 = __make
         ? props.color.backgroundColor
         : '#fff';
 }, function (props) {
-    return props.border && props.border.radius ? "".concat(props.border.radius, "px") : '8px';
+    return props.border && (props.border.radius || props.border.radius == 0)
+        ? "".concat(props.border.radius, "px")
+        : '8px';
 }, function (props) {
-    return props.border && props.border.radius ? "".concat(props.border.radius, "px") : '8px';
+    return props.border && (props.border.radius || props.border.radius == 0)
+        ? "".concat(props.border.radius, "px")
+        : '8px';
 });
 var DetailWrapper = styled.div(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n"], ["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n"])));
 var DetailBox = styled.div(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  display: flex;\n  padding: 0 68px 0 45px;\n  align-items: center;\n  position: relative;\n  margin-bottom: 12px;\n"], ["\n  display: flex;\n  padding: 0 68px 0 45px;\n  align-items: center;\n  position: relative;\n  margin-bottom: 12px;\n"])));
@@ -6211,20 +6223,28 @@ var DetailStickerWrapper = styled.div(templateObject_10 || (templateObject_10 = 
         ? props.color.backgroundColor
         : '#fff';
 }, function (props) {
-    return props.border && props.border.radius ? "".concat(props.border.radius, "px") : '8px';
+    return props.border && (props.border.radius || props.border.radius == 0)
+        ? "".concat(props.border.radius, "px")
+        : '8px';
 }, function (props) {
     return props.size && props.size.detailImg ? "".concat(props.size.detailImg, "%") : '70%';
 });
 var PackageWrapper = styled.div(templateObject_11 || (templateObject_11 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  display: block;\n  overflow-y: auto;\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    width: 9px;\n  }\n  &::-webkit-scrollbar-track {\n    background-color: ", ";\n    border-bottom-right-radius: ", ";\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: #6d7072;\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  width: 100%;\n  height: 100%;\n  display: block;\n  overflow-y: auto;\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    width: 9px;\n  }\n  &::-webkit-scrollbar-track {\n    background-color: ", ";\n    border-bottom-right-radius: ", ";\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: #6d7072;\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) {
-    return props.border && props.border.radius ? "".concat(props.border.radius, "px") : '8px';
+    return props.border && (props.border.radius || props.border.radius == 0)
+        ? "".concat(props.border.radius, "px")
+        : '8px';
 }, function (props) {
-    return props.border && props.border.radius ? "".concat(props.border.radius, "px") : '8px';
+    return props.border && (props.border.radius || props.border.radius == 0)
+        ? "".concat(props.border.radius, "px")
+        : '8px';
 }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) {
     return props.color && props.color.backgroundColor
         ? props.color.backgroundColor
         : '#fff';
 }, function (props) {
-    return props.border && props.border.radius ? "".concat(props.border.radius, "px") : '8px';
+    return props.border && (props.border.radius || props.border.radius == 0)
+        ? "".concat(props.border.radius, "px")
+        : '8px';
 });
 var PackageBox = styled.div(templateObject_12 || (templateObject_12 = __makeTemplateObject(["\n  width: 100%;\n  height: ", ";\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  padding: 0 32px;\n  box-sizing: border-box;\n  background-color: ", ";\n  position: relative;\n  border-bottom: 0.5px solid #e6e6e6;\n\n  &:hover {\n    background-color: ", ";\n    cursor: pointer;\n  }\n"], ["\n  width: 100%;\n  height: ", ";\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  padding: 0 32px;\n  box-sizing: border-box;\n  background-color: ", ";\n  position: relative;\n  border-bottom: 0.5px solid #e6e6e6;\n\n  &:hover {\n    background-color: ", ";\n    cursor: pointer;\n  }\n"])), function (props) {
     return props.size && props.size.packageHeight

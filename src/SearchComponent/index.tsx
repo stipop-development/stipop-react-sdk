@@ -55,7 +55,7 @@ const SearchComponent: React.FC<SearchProps> = ({
   // }, [keyword, params.lang, params.pageNumber, params.limit])
 
   useEffect(() => {
-    console.log(keyword)
+    // console.log(keyword)
     const searchParams = {
       userId: params.userId,
       q: keyword,
@@ -68,7 +68,7 @@ const SearchComponent: React.FC<SearchProps> = ({
       const data = client.getSearch(searchParams)
 
       data.then(({ body }) => {
-        console.log(body)
+        // console.log(body)
         setStickerList(
           body && body.stickerList
             ? body.stickerList.map(sticker => sticker.stickerImg)
@@ -102,7 +102,12 @@ const SearchComponent: React.FC<SearchProps> = ({
         </InputHolder>
       </SearchForm>
       {stickerList.length > 0 ? (
-        <StickerWrapper column={column} scroll={scroll}>
+        <StickerWrapper
+          column={column}
+          scroll={scroll}
+          border={border}
+          backgroundColor={backgroundColor}
+        >
           {stickerList.map((sticker, index) => (
             <StickerImg
               src={sticker}
@@ -251,7 +256,27 @@ const StickerWrapper = styled.div`
 
   &::-webkit-scrollbar {
     display: ${props => (props.scroll === false ? 'none' : '')};
+    width: 9px;
   }
+  &::-webkit-scrollbar-track {
+    background-color: ${props =>
+      props.backgroundColor ? props.backgroundColor : '#fff'};
+    border-bottom-right-radius: ${props =>
+      props.border && (props.border.radius || props.border.radius == 0)
+        ? `${props.border.radius}px`
+        : '8px'};
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #bcc0c4;
+    border-radius: 5px;
+    &:hover {
+      background: #6d7072;
+    }
+  }
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
 `
 const NoSticker = styled.div`
   width: 100%;

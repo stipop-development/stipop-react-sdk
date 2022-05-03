@@ -362,7 +362,9 @@ const StoreWrapper = styled.div`
       ? props.border.border
       : '1px solid lightgray'};
   border-radius: ${props =>
-    props.border && props.border.radius ? `${props.border.radius}px` : '8px'};
+    props.border && (props.border.radius || props.border.radius == 0)
+      ? `${props.border.radius}px`
+      : '8px'};
   box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);
   background-color: ${props =>
     props.color && props.color.backgroundColor
@@ -440,9 +442,13 @@ const PackageContainer = styled.div`
       ? props.color.backgroundColor
       : '#fff'};
   border-bottom-left-radius: ${props =>
-    props.border && props.border.radius ? `${props.border.radius}px` : '8px'};
+    props.border && (props.border.radius || props.border.radius == 0)
+      ? `${props.border.radius}px`
+      : '8px'};
   border-bottom-right-radius: ${props =>
-    props.border && props.border.radius ? `${props.border.radius}px` : '8px'};
+    props.border && (props.border.radius || props.border.radius == 0)
+      ? `${props.border.radius}px`
+      : '8px'};
 `
 const DetailWrapper = styled.div`
   width: 100%;
@@ -495,7 +501,9 @@ const DetailStickerWrapper = styled.div`
         ? props.color.backgroundColor
         : '#fff'};
     border-bottom-right-radius: ${props =>
-      props.border && props.border.radius ? `${props.border.radius}px` : '8px'};
+      props.border && (props.border.radius || props.border.radius == 0)
+        ? `${props.border.radius}px`
+        : '8px'};
   }
   &::-webkit-scrollbar-thumb {
     background: #bcc0c4;
@@ -523,9 +531,13 @@ const PackageWrapper = styled.div`
   display: block;
   overflow-y: auto;
   border-bottom-left-radius: ${props =>
-    props.border && props.border.radius ? `${props.border.radius}px` : '8px'};
+    props.border && (props.border.radius || props.border.radius == 0)
+      ? `${props.border.radius}px`
+      : '8px'};
   border-bottom-right-radius: ${props =>
-    props.border && props.border.radius ? `${props.border.radius}px` : '8px'};
+    props.border && (props.border.radius || props.border.radius == 0)
+      ? `${props.border.radius}px`
+      : '8px'};
   -ms-overflow-style: ${props => (props.scroll === false ? 'none' : '')};
   scrollbar-width: ${props => (props.scroll === false ? 'none' : '')};
 
@@ -539,7 +551,9 @@ const PackageWrapper = styled.div`
         ? props.color.backgroundColor
         : '#fff'};
     border-bottom-right-radius: ${props =>
-      props.border && props.border.radius ? `${props.border.radius}px` : '8px'};
+      props.border && (props.border.radius || props.border.radius == 0)
+        ? `${props.border.radius}px`
+        : '8px'};
   }
   &::-webkit-scrollbar-thumb {
     background: #bcc0c4;
