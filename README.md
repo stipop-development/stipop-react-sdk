@@ -18,6 +18,14 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 ## Get started
 
+| Component                           |
+| ----------------------------------- |
+| [SearchComponent](#searchcomponent) |
+| [PickerComponent](#pickercomponent) |
+| [StoreComponent](#storecomponent)   |
+
+
+
 ### SearchComponent
 
 > Sticker Search Component
@@ -322,8 +330,6 @@ const App = () => {
 export default App
 ```
 
-------
-
 
 
 ### PickerComponent
@@ -349,269 +355,283 @@ export default App
 
 #### List of Params
 
-- #### params
+| Parameters                          | Type     |
+| ----------------------------------- | -------- |
+| [params](#params)                   | Object   |
+| [size](#size)                       | Object   |
+| [border](#border)                   | Object   |
+| [menu](#menu)                       | Object   |
+| [backgroundColor](#backgroundcolor) | String   |
+| [column](#column)                   | Number   |
+| [scroll](#scroll)                   | Boolean  |
+| [stickerClick](#stickerclick)       | Function |
+| [storeClick](#storeclick)           | Function |
 
-  ##### Parameters
+--------
 
-  | Name   | Type   | Required | Default |
-  | ------ | ------ | -------- | ------- |
-  | apikey | string | required |         |
-  | userId | string | required |         |
+#### params
 
-  ```react
-  import { PickerComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-    	<PickerComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-      />
-    )
-  }
-  
-  export default App
-  ```
+##### Parameters
 
-  
+| Name   | Type   | Required | Default |
+| ------ | ------ | -------- | ------- |
+| apikey | string | required |         |
+| userId | string | required |         |
 
-- #### size
+```react
+import { PickerComponent } from 'stipop-react-sdk'
 
-  ##### Parameters
+const App = () => {
+  return (
+  	<PickerComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+      }}
+    />
+  )
+}
 
-  | Name    | Type   | Required | Default |
-  | ------- | ------ | -------- | ------- |
-  | width   | number | optional | 360     |
-  | height  | number | optional | 300     |
-  | imgSize | number | optional | 70      |
+export default App
+```
 
-  ```react
-  import { PickerComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-    	<PickerComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        size={{
-          width: 360,
-          height: 300,
-          imgSize: 70,
-        }}
-      />
-    )
-  }
-  
-  export default App
-  ```
+-------
+
+#### size
+
+##### Parameters
+
+| Name    | Type   | Required | Default |
+| ------- | ------ | -------- | ------- |
+| width   | number | optional | 360     |
+| height  | number | optional | 300     |
+| imgSize | number | optional | 70      |
+
+```react
+import { PickerComponent } from 'stipop-react-sdk'
+
+const App = () => {
+  return (
+  	<PickerComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+      }}
+      size={{
+        width: 360,
+        height: 300,
+        imgSize: 70,
+      }}
+    />
+  )
+}
+
+export default App
+```
+
+--------
+
+#### border
+
+##### Parameters
+
+| Name   | Type   | Required | Default             |
+| ------ | ------ | -------- | ------------------- |
+| border | string | optional | 1px solid lightgray |
+| radius | number | optional | 10                  |
+
+```react
+import { PickerComponent } from 'stipop-react-sdk'
+
+const App = () => {
+  return (
+  	<PickerComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+      }}
+      border={{
+        border: '1px solid lightgray',
+        radius: 10,
+      }}
+    />
+  )
+}
+
+export default App
+```
+
+---------
+
+#### menu
+
+##### Parameters
+
+| Name            | Type   | Required | Default             |
+| --------------- | ------ | -------- | ------------------- |
+| height          | number | optional | 45                  |
+| backgroundColor | string | optional | #fff                |
+| bottomLine      | string | optional | 1px solid lightgray |
+| selectedLine    | string | optional | 2px solid black     |
+
+```react
+import { PickerComponent } from 'stipop-react-sdk'
+
+const App = () => {
+  return (
+  	<PickerComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+      }}
+      menu={{
+        height: 45,
+        backgroundColor: '#fff',
+        bottomLine: '1px solid lightgray',
+        selectedLine: '2px solid black',
+      }}
+    />
+  )
+}
+
+export default App
+```
+
+----------
+
+#### backgroundColor
+
+| Type   | Required | Default |
+| ------ | -------- | ------- |
+| string | optional | #fff    |
+
+```react
+import { PickerComponent } from 'stipop-react-sdk'
+
+const App = () => {
+  return (
+  	<PickerComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+      }}
+      backgroundColor={'#fff'}
+    />
+  )
+}
+
+export default App
+```
+
+--------
+
+#### column
+
+| Type   | Required | Default |
+| ------ | -------- | ------- |
+| number | optional | 4       |
+
+```react
+import { PickerComponent } from 'stipop-react-sdk'
+
+const App = () => {
+  return (
+  	<PickerComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+      }}
+      column={4}
+    />
+  )
+}
+
+export default App
+```
+
+---------
+
+#### scroll
+
+| Type    | Required | Default |
+| ------- | -------- | ------- |
+| boolean | optional | true    |
+
+```react
+import { PickerComponent } from 'stipop-react-sdk'
+
+const App = () => {
+  return (
+  	<PickerComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+      }}
+      scroll={true}
+    />
+  )
+}
+
+export default App
+```
+
+-----------
+
+#### stickerClick
+
+> Get Sticker URL Function
+
+| Type     | Required | Value       |
+| -------- | -------- | ----------- |
+| Function | optional | sticker URL |
+
+```react
+import { PickerComponent } from 'stipop-react-sdk'
+
+const App = () => {
+  return (
+  	<PickerComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+      }}
+      stickerClick={(url) => console.log(url)} //sticker URL
+    />
+  )
+}
+
+export default App
+```
+
+---------
+
+#### storeClick
+
+> Get Store Icon Click Status
+
+| Type     | Required | Value |
+| -------- | -------- | ----- |
+| Function | optional | true  |
+
+```react
+import { PickerComponent } from 'stipop-react-sdk'
+
+const App = () => {
+  return (
+  	<PickerComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+      }}
+      storeClick={(e) => console.log(e)} //true
+    />
+  )
+}
+
+export default App
+```
 
 
-
-- #### border
-
-  ##### Parameters
-
-  | Name   | Type   | Required | Default             |
-  | ------ | ------ | -------- | ------------------- |
-  | border | string | optional | 1px solid lightgray |
-  | radius | number | optional | 10                  |
-
-  ```react
-  import { PickerComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-    	<PickerComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        border={{
-          border: '1px solid lightgray',
-          radius: 10,
-        }}
-      />
-    )
-  }
-  
-  export default App
-  ```
-
-  
-
-- #### menu
-
-  ##### Parameters
-
-  | Name            | Type   | Required | Default             |
-  | --------------- | ------ | -------- | ------------------- |
-  | height          | number | optional | 45                  |
-  | backgroundColor | string | optional | #fff                |
-  | bottomLine      | string | optional | 1px solid lightgray |
-  | selectedLine    | string | optional | 2px solid black     |
-
-  ```react
-  import { PickerComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-    	<PickerComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        menu={{
-          height: 45,
-          backgroundColor: '#fff',
-          bottomLine: '1px solid lightgray',
-          selectedLine: '2px solid black',
-        }}
-      />
-    )
-  }
-  
-  export default App
-  ```
-
-  
-
-- #### backgroundColor
-
-  | Type   | Required | Default |
-  | ------ | -------- | ------- |
-  | string | optional | #fff    |
-
-  ```react
-  import { PickerComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-    	<PickerComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        backgroundColor={'#fff'}
-      />
-    )
-  }
-  
-  export default App
-  ```
-
-  
-
-- #### column
-
-  | Type   | Required | Default |
-  | ------ | -------- | ------- |
-  | number | optional | 4       |
-
-  ```react
-  import { PickerComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-    	<PickerComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        column={4}
-      />
-    )
-  }
-  
-  export default App
-  ```
-
-  
-
-- #### scroll
-
-  | Type    | Required | Default |
-  | ------- | -------- | ------- |
-  | boolean | optional | true    |
-
-  ```react
-  import { PickerComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-    	<PickerComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        scroll={true}
-      />
-    )
-  }
-  
-  export default App
-  ```
-
-  
-
-- #### stickerClick
-
-  > Get Sticker URL Function
-
-  | Type     | Required | Value       |
-  | -------- | -------- | ----------- |
-  | Function | optional | sticker URL |
-
-  ```react
-  import { PickerComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-    	<PickerComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        stickerClick={(url) => console.log(url)} //sticker URL
-      />
-    )
-  }
-  
-  export default App
-  ```
-
-
-
-- #### storeClick
-
-  > Get Store Icon Click Status
-
-  | Type     | Required | Value |
-  | -------- | -------- | ----- |
-  | Function | optional | true  |
-
-  ```react
-  import { PickerComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-    	<PickerComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        storeClick={(e) => console.log(e)} //true
-      />
-    )
-  }
-  
-  export default App
-  ```
-
-  
 
 ### StoreComponent
 
@@ -637,267 +657,278 @@ const App = () => {
 export default App
 ```
 
+#### List of Params
 
+| Parameters                        | Type     |
+| --------------------------------- | -------- |
+| [params](#params)                 | Object   |
+| [downloadParams](#downloadparams) | Object   |
+| [color](#color)                   | Object   |
+| [size](#size)                     | Object   |
+| [border](#border)                 | Object   |
+| [scroll](#scroll)                 | Boolean  |
+| [onClose](#onclose)               | Function |
 
-- #### params
+------
 
-  ##### Parameters
+#### params
 
-  | Name        | Type   | Required             | Default                                                      |
-  | ----------- | ------ | -------------------- | ------------------------------------------------------------ |
-  | apikey      | string | required             |                                                              |
-  | userId      | string | required             |                                                              |
-  | lang        | string | strongly recommended | en                                                           |
-  | countryCode | string | strongly recommended | US                                                           |
-  | animated    | string | optional             | **Y**: Look for premium stickers only<br />**N**: Look for free stickers only<br />**Empty parameter**: Look for all stickers |
-  | pageNumber  | number | optional             | 1                                                            |
-  | limit       | number | optional             | 20 (max: 50)                                                 |
+##### Parameters
 
-  ```react
-  import { StoreComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-    	<StoreComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-          lang: 'en',
-          countryCode: 'US',
-          animated: 'N',
-          pageNumber: 1,
-          limit: 20,
-        }}
-        downloadParams={{
-          isPurchase: 'N'
-        }}
-      />
-    )
-  }
-  
-  export default App
-  ```
+| Name        | Type   | Required             | Default                                                      |
+| ----------- | ------ | -------------------- | ------------------------------------------------------------ |
+| apikey      | string | required             |                                                              |
+| userId      | string | required             |                                                              |
+| lang        | string | strongly recommended | en                                                           |
+| countryCode | string | strongly recommended | US                                                           |
+| animated    | string | optional             | **Y**: Look for premium stickers only<br />**N**: Look for free stickers only<br />**Empty parameter**: Look for all stickers |
+| pageNumber  | number | optional             | 1                                                            |
+| limit       | number | optional             | 20 (max: 50)                                                 |
 
-  
+```react
+import { StoreComponent } from 'stipop-react-sdk'
 
-- #### DownloadParams
+const App = () => {
+  return (
+  	<StoreComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+        lang: 'en',
+        countryCode: 'US',
+        animated: 'N',
+        pageNumber: 1,
+        limit: 20,
+      }}
+      downloadParams={{
+        isPurchase: 'N'
+      }}
+    />
+  )
+}
 
-  ##### Parameters
+export default App
+```
 
-  | Name        | Type   | Required | Default                                                      |
-  | ----------- | ------ | -------- | ------------------------------------------------------------ |
-  | isPurchase  | string | required | **N**: Free Sticker Store <br />**Y**: Paid Sticker Store<br />**S**: Sticker Subscription |
-  | lang        | string | optional | en                                                           |
-  | countryCode | string | optional | US                                                           |
-  | price       | string | optional | if **isPurchase** is **Y**, the default price is set for stickers.<br />**Defualt Price**: Still Stickers [$0.99], Animated Stickers [$1.99] |
+---------
 
-  ```react
-  import { StoreComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-    	<StoreComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        downloadParams={{
-          isPurchase: 'N',
-          lang: 'en',
-          countryCode: 'US',
-        }}
-      />
-    )
-  }
-  
-  export default App
-  ```
+#### downloadParams
 
-  
+##### Parameters
 
-- #### color
+| Name        | Type   | Required | Default                                                      |
+| ----------- | ------ | -------- | ------------------------------------------------------------ |
+| isPurchase  | string | required | **N**: Free Sticker Store <br />**Y**: Paid Sticker Store<br />**S**: Sticker Subscription |
+| lang        | string | optional | en                                                           |
+| countryCode | string | optional | US                                                           |
+| price       | string | optional | if **isPurchase** is **Y**, the default price is set for stickers.<br />**Defualt Price**: Still Stickers [$0.99], Animated Stickers [$1.99] |
 
-  ##### Parameters
+```react
+import { StoreComponent } from 'stipop-react-sdk'
 
-  | Name                 | Type   | Required | Default |
-  | -------------------- | ------ | -------- | ------- |
-  | backgroundColor      | stirng | optional | #fff    |
-  | packageHoverColor    | string | optional | #fff    |
-  | downloadedColor      | string | optional | #f5f6f6 |
-  | downloadedHoverColor | string | optional | #f5f6f6 |
-  | downloadBtn          | string | optional | #ff4500 |
-  | downloadBtnHover     | string | optional | #ff4500 |
-  | deleteBtn            | string | optional | #b3b3b3 |
-  | deleteBtnHover       | string | optional | #b3b3b3 |
-  | recoveryBtn          | string | optional | #ff4500 |
-  | recoveryBtnHover     | string | optional | #ff4500 |
+const App = () => {
+  return (
+  	<StoreComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+      }}
+      downloadParams={{
+        isPurchase: 'N',
+        lang: 'en',
+        countryCode: 'US',
+      }}
+    />
+  )
+}
 
-  ```react
-  import { StoreComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-    	<StoreComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        downloadParams={{
-          isPurchase: 'N'
-        }}
-        color={{
-          backgroundColor: '#fff',
-          packageHoverColor: '#fff',
-          downloadedColor: '#f5f6f6',
-          downloadedHoverColor: '#f5f6f6',
-          downloadBtn: '#ff4500',
-          downloadBtnHober: '#ff4500',
-          deleteBtn: '#b3b3b3',
-          deleteBtnHover: '#b3b3b3',
-          recoveryBtn: '#ff4500',
-          recoveryBtnHover: '#ff4500'
-        }}
-      />
-    )
-  }
-  
-  export default App
-  ```
+export default App
+```
 
-  
+--------
 
-- #### size
+#### color
 
-  ##### Parameters
+##### Parameters
 
-  | Name       | Type   | Required | Default |
-  | ---------- | ------ | -------- | ------- |
-  | width      | number | optional | 600     |
-  | height     | number | optional | 400     |
-  | previewImg | number | optional | 70      |
-  | detailImg  | number | optional | 70      |
-  | mainImg    | number | optional | 100     |
+| Name                 | Type   | Required | Default |
+| -------------------- | ------ | -------- | ------- |
+| backgroundColor      | stirng | optional | #fff    |
+| packageHoverColor    | string | optional | #fff    |
+| downloadedColor      | string | optional | #f5f6f6 |
+| downloadedHoverColor | string | optional | #f5f6f6 |
+| downloadBtn          | string | optional | #ff4500 |
+| downloadBtnHover     | string | optional | #ff4500 |
+| deleteBtn            | string | optional | #b3b3b3 |
+| deleteBtnHover       | string | optional | #b3b3b3 |
+| recoveryBtn          | string | optional | #ff4500 |
+| recoveryBtnHover     | string | optional | #ff4500 |
 
-  ```react
-  import { StoreComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-    	<StoreComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        downloadParams={{
-          isPurchase: 'N'
-        }}
-        size={{
-          width: 600,
-          height: 400,
-          previewImg: 70,
-          detailImg: 70,
-          mainImg: 100,
-        }}
-      />
-    )
-  }
-  
-  export default App
-  ```
+```react
+import { StoreComponent } from 'stipop-react-sdk'
 
-  
+const App = () => {
+  return (
+  	<StoreComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+      }}
+      downloadParams={{
+        isPurchase: 'N'
+      }}
+      color={{
+        backgroundColor: '#fff',
+        packageHoverColor: '#fff',
+        downloadedColor: '#f5f6f6',
+        downloadedHoverColor: '#f5f6f6',
+        downloadBtn: '#ff4500',
+        downloadBtnHober: '#ff4500',
+        deleteBtn: '#b3b3b3',
+        deleteBtnHover: '#b3b3b3',
+        recoveryBtn: '#ff4500',
+        recoveryBtnHover: '#ff4500'
+      }}
+    />
+  )
+}
 
-- #### border
+export default App
+```
 
-  ##### Parameters
+----------
 
-  | Name   | Type   | Required | Default             |
-  | ------ | ------ | -------- | ------------------- |
-  | border | string | optional | 1px solid lightgray |
-  | radius | number | optional | 8                   |
+#### size
 
-  ```react
-  import { StoreComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-    	<StoreComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        downloadParams={{
-          isPurchase: 'N'
-        }}
-        border={{
-          border: '1px solid lightgray',
-          radius: 8,
-        }}
-      />
-    )
-  }
-  
-  export default App
-  ```
+##### Parameters
 
+| Name       | Type   | Required | Default |
+| ---------- | ------ | -------- | ------- |
+| width      | number | optional | 600     |
+| height     | number | optional | 400     |
+| previewImg | number | optional | 70      |
+| detailImg  | number | optional | 70      |
+| mainImg    | number | optional | 100     |
 
+```react
+import { StoreComponent } from 'stipop-react-sdk'
 
-- #### scroll
+const App = () => {
+  return (
+  	<StoreComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+      }}
+      downloadParams={{
+        isPurchase: 'N'
+      }}
+      size={{
+        width: 600,
+        height: 400,
+        previewImg: 70,
+        detailImg: 70,
+        mainImg: 100,
+      }}
+    />
+  )
+}
 
-  | Type    | Required | Default |
-  | ------- | -------- | ------- |
-  | boolean | optional | true    |
+export default App
+```
 
-  ```react
-  import { StoreComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-    	<StoreComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        downloadParams={{
-          isPurchase: 'N'
-        }}
-        scroll={true}
-      />
-    )
-  }
-  
-  export default App
-  ```
+---------
 
-  
+#### border
 
-- #### onClose
+##### Parameters
 
-  > Get Close Button Click Status
+| Name   | Type   | Required | Default             |
+| ------ | ------ | -------- | ------------------- |
+| border | string | optional | 1px solid lightgray |
+| radius | number | optional | 8                   |
 
-  | Type     | Required | Value |
-  | -------- | -------- | ----- |
-  | Function | optional | true  |
+```react
+import { StoreComponent } from 'stipop-react-sdk'
 
-  ```react
-  import { StoreComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-    	<StoreComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        downloadParams={{
-          isPurchase: 'N'
-        }}
-        onClose={(e) => console.log(e)} // true
-      />
-    )
-  }
-  
-  export default App
-  ```
+const App = () => {
+  return (
+  	<StoreComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+      }}
+      downloadParams={{
+        isPurchase: 'N'
+      }}
+      border={{
+        border: '1px solid lightgray',
+        radius: 8,
+      }}
+    />
+  )
+}
 
-  
+export default App
+```
+
+---------
+
+#### scroll
+
+| Type    | Required | Default |
+| ------- | -------- | ------- |
+| boolean | optional | true    |
+
+```react
+import { StoreComponent } from 'stipop-react-sdk'
+
+const App = () => {
+  return (
+  	<StoreComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+      }}
+      downloadParams={{
+        isPurchase: 'N'
+      }}
+      scroll={true}
+    />
+  )
+}
+
+export default App
+```
+
+---------
+
+#### onClose
+
+> Get Close Button Click Status
+
+| Type     | Required | Value |
+| -------- | -------- | ----- |
+| Function | optional | true  |
+
+```react
+import { StoreComponent } from 'stipop-react-sdk'
+
+const App = () => {
+  return (
+  	<StoreComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+      }}
+      downloadParams={{
+        isPurchase: 'N'
+      }}
+      onClose={(e) => console.log(e)} // true
+    />
+  )
+}
+
+export default App
+```
+
