@@ -27,7 +27,7 @@ import { SearchComponent } from 'stipop-react-sdk'
 
 const App = () => {
   return (
-  	<SearchComponent 
+    <SearchComponent 
       params={{
         apikey: 'apikey',
         userId: 'userId',
@@ -62,7 +62,7 @@ export default App
   
   const App = () => {
     return (
-    	<SearchComponent 
+      <SearchComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -97,7 +97,7 @@ export default App
   
   const App = () => {
     return (
-    	<SearchComponent 
+      <SearchComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -133,7 +133,7 @@ export default App
   
   const App = () => {
     return (
-    	<SearchComponent 
+      <SearchComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -172,7 +172,7 @@ export default App
   
   const App = () => {
     return (
-    	<SearchComponent 
+      <SearchComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -208,7 +208,7 @@ export default App
   
   const App = () => {
     return (
-    	<SearchComponent 
+      <SearchComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -237,7 +237,7 @@ export default App
   
   const App = () => {
     return (
-    	<SearchComponent 
+      <SearchComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -266,7 +266,7 @@ export default App
   
   const App = () => {
     return (
-    	<SearchComponent 
+      <SearchComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -287,7 +287,7 @@ export default App
   > Get Sticker URL Function
   
   | Type     | Required | Value       |
-| -------- | -------- | ----------- |
+  | -------- | -------- | ----------- |
   | Function | optional | sticker URL |
   
   ```react
@@ -295,7 +295,7 @@ export default App
   
   const App = () => {
     return (
-    	<SearchComponent 
+      <SearchComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
