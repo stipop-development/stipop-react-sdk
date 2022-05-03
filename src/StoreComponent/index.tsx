@@ -237,7 +237,7 @@ const StoreComponent: React.FC<StoreProps> = ({
                     </DownloadBtn>
                   )}
                 </DetailBox>
-                <DetailStickerWrapper size={size} scroll={scroll}>
+                <DetailStickerWrapper size={size} scroll={scroll} color={color}>
                   {stickers &&
                     stickers.map((sticker, index) => (
                       <img
@@ -496,14 +496,15 @@ const DetailStickerWrapper = styled.div`
     width: 9px;
   }
   &::-webkit-scrollbar-track {
-    background-color: ${props =>
+    /* background-color: ${props =>
       props.color && props.color.backgroundColor
         ? props.color.backgroundColor
         : '#fff'};
     border-bottom-right-radius: ${props =>
       props.border && (props.border.radius || props.border.radius == 0)
         ? `${props.border.radius}px`
-        : '8px'};
+        : '8px'}; */
+    display: none;
   }
   &::-webkit-scrollbar-thumb {
     background: #bcc0c4;
@@ -546,14 +547,15 @@ const PackageWrapper = styled.div`
     width: 9px;
   }
   &::-webkit-scrollbar-track {
-    background-color: ${props =>
+    /* background-color: ${props =>
       props.color && props.color.backgroundColor
         ? props.color.backgroundColor
         : '#fff'};
     border-bottom-right-radius: ${props =>
       props.border && (props.border.radius || props.border.radius == 0)
         ? `${props.border.radius}px`
-        : '8px'};
+        : '8px'}; */
+    display: none;
   }
   &::-webkit-scrollbar-thumb {
     background: #bcc0c4;

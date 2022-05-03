@@ -23,7 +23,7 @@ export const CustomPicker = () => (
     }}
     size={{
       width: 520,
-      height: 400,
+      height: 600,
       imgSize: 60,
     }}
     border={{

@@ -124,6 +124,7 @@ const SearchComponent: React.FC<SearchProps> = ({
           scroll={scroll}
           border={border}
           backgroundColor={backgroundColor}
+          size={size}
         >
           {stickerList.map((sticker, index) => (
             <StickerImg
@@ -267,7 +268,11 @@ const StickerWrapper = styled.div`
   display: grid;
   grid-template-columns: ${props =>
     props.column ? `repeat(${props.column}, 1fr)` : 'repeat(4, 1fr)'};
-  grid-template-rows: auto;
+  /* grid-template-rows: repeat(4, 1fr); */
+  grid-template-rows: ${props =>
+    props.size && props.size.imgSize
+      ? `repeat(calc(400 / ${props.size.imgSize}), 1fr)`
+      : 'repeat(calc(400 / 60), 1fr)'};
   row-gap: 8%;
   justify-items: center;
   box-sizing: border-box;
@@ -279,12 +284,13 @@ const StickerWrapper = styled.div`
     width: 9px;
   }
   &::-webkit-scrollbar-track {
-    background-color: ${props =>
+    /* background-color: ${props =>
       props.backgroundColor ? props.backgroundColor : '#fff'};
     border-bottom-right-radius: ${props =>
       props.border && (props.border.radius || props.border.radius == 0)
         ? `${props.border.radius}px`
-        : '8px'};
+        : '8px'}; */
+    display: none;
   }
   &::-webkit-scrollbar-thumb {
     background: #bcc0c4;

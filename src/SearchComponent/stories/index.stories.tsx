@@ -30,7 +30,7 @@ export const CustomSearch = () => (
     }}
     size={{
       width: 500,
-      height: 600,
+      height: 700,
       imgSize: 80,
     }}
     backgroundColor="skyblue"

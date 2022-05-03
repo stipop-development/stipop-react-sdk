@@ -271,6 +271,7 @@ const PickerComponent: React.FC<StoreProps> = ({
             border={border}
             column={column}
             scroll={scroll}
+            size={size}
             isLoading={isLoading}
           >
             <LoadingSpinner />
@@ -541,6 +542,10 @@ const StickerWrapper = styled.div`
   display: ${props => (props.isLoading ? 'block' : 'grid')};
   grid-template-columns: ${props =>
     props.column ? `repeat(${props.column}, 1fr)` : 'repeat(4, 1fr)'};
+  grid-template-rows: ${props =>
+    props.size && props.size.imgSize
+      ? `repeat(calc(400 / ${props.size.imgSize}), 1fr)`
+      : 'repeat(calc(400 / 60), 1fr)'};
   row-gap: 8%;
   justify-items: center;
   overflow-y: auto;
@@ -562,14 +567,15 @@ const StickerWrapper = styled.div`
     width: 8px;
   }
   &::-webkit-scrollbar-track {
-    background-color: ${props =>
+    /* background-color: ${props =>
       props.color && props.color.backgroundColor
         ? props.color.backgroundColor
         : '#fff'};
     border-bottom-right-radius: ${props =>
       props.border && (props.border.radius || props.border.radius == 0)
         ? `${props.border.radius}px`
-        : '10px'};
+        : '10px'}; */
+    display: none;
   }
   &::-webkit-scrollbar-thumb {
     background: #bcc0c4;
