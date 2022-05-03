@@ -42,17 +42,20 @@ export default App
 
 #### List of Params
 
-------
-
-| Parameters        | Type |
-| ----------------- | ---- |
-| [params](#params) |      |
-| [size](#size)     |      |
-|                   |      |
+| Parameters                          | Type     |
+| ----------------------------------- | -------- |
+| [params](#params)                   | Object   |
+| [size](#size)                       | Object   |
+| [border](#border)                   | Object   |
+| [input](#input)                     | Object   |
+| [backgroundColor](#backgroundcolor) | String   |
+| [column](#column)                   | Number   |
+| [scroll](#scroll)                   | Boolean  |
+| [stickerClick](#stickerclick)       | Function |
 
 -------
 
-#### Params
+#### params
 
 ##### Parameters
 
@@ -88,7 +91,7 @@ const App = () => {
 export default App
 ```
 
-
+-------
 
 #### size
 
@@ -125,199 +128,201 @@ const App = () => {
 export default App
 ```
 
+------
 
+#### border
 
-- #### border
+##### Parameters
 
-  ##### Parameters
+| Name   | Type   | Required | Default             |
+| ------ | ------ | -------- | ------------------- |
+| border | string | optional | 1px solid lightgray |
+| radius | number | optional | 10                  |
 
-  | Name   | Type   | Required | Default             |
-  | ------ | ------ | -------- | ------------------- |
-  | border | string | optional | 1px solid lightgray |
-  | radius | number | optional | 10                  |
+##### Examples
 
-  ##### Examples
+```react
+import { SearchComponent } from 'stipop-react-sdk'
 
-  ```react
-  import { SearchComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-      <SearchComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-          lang: 'en',
-        }}
-        border={{
-          border: '1px solid lightgray',
-          radius: 10,
-        }}
-      />
-    )
-  }
-  
-  export default App
-  ```
+const App = () => {
+  return (
+    <SearchComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+        lang: 'en',
+      }}
+      border={{
+        border: '1px solid lightgray',
+        radius: 10,
+      }}
+    />
+  )
+}
 
-  
+export default App
+```
 
-- #### input
+-------
 
-  ##### Parameters
+#### input
 
-  | Name            | Type   | Required | Default             |
-  | --------------- | ------ | -------- | ------------------- |
-  | width           | number | optional | 100                 |
-  | height          | number | optional | 32                  |
-  | border          | string | optional | 2px solid lightgray |
-  | radius          | number | optional | 50                  |
-  | backgroundColor | string | optional | #fff                |
-  | color           | string | optional | #000                |
+##### Parameters
 
-  ##### Examples
+| Name            | Type   | Required | Default             |
+| --------------- | ------ | -------- | ------------------- |
+| width           | number | optional | 100                 |
+| height          | number | optional | 32                  |
+| border          | string | optional | 2px solid lightgray |
+| radius          | number | optional | 50                  |
+| backgroundColor | string | optional | #fff                |
+| color           | string | optional | #000                |
 
-  ```react
-  import { SearchComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-      <SearchComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-          lang: 'en',
-        }}
-        input={{
-          width: 100,
-          height: 32,
-          border: '2px solid lightgray',
-          radius: 50,
-          backgroundColor: '#fff',
-          color: '#000',
-        }}
-      />
-    )
-  }
-  
-  export default App
-  ```
+##### Examples
 
-  
+```react
+import { SearchComponent } from 'stipop-react-sdk'
 
-- #### backgroundColor
+const App = () => {
+  return (
+    <SearchComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+        lang: 'en',
+      }}
+      input={{
+        width: 100,
+        height: 32,
+        border: '2px solid lightgray',
+        radius: 50,
+        backgroundColor: '#fff',
+        color: '#000',
+      }}
+    />
+  )
+}
 
-  | Type   | Required | Default |
-  | ------ | -------- | ------- |
-  | string | optional | #fff    |
+export default App
+```
 
-  ##### Examples
+--------
 
-  ```react
-  import { SearchComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-      <SearchComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-          lang: 'en',
-        }}
-        backgroundColor={'#fff'}
-      />
-    )
-  }
-  
-  export default App
-  ```
+#### backgroundColor
 
-  
+| Type   | Required | Default |
+| ------ | -------- | ------- |
+| string | optional | #fff    |
 
-- #### column
+##### Examples
 
-  | Type   | Required | Default |
-  | ------ | -------- | ------- |
-  | number | optional | 4       |
+```react
+import { SearchComponent } from 'stipop-react-sdk'
 
-  ##### Examples
+const App = () => {
+  return (
+    <SearchComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+        lang: 'en',
+      }}
+      backgroundColor={'#fff'}
+    />
+  )
+}
 
-  ```react
-  import { SearchComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-      <SearchComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-          lang: 'en',
-        }}
-        column={4}
-      />
-    )
-  }
-  
-  export default App
-  ```
+export default App
+```
 
-  
+------
 
-- #### scroll
+#### column
 
-  | Type    | Required | Default |
-  | ------- | -------- | ------- |
-  | boolean | optional | true    |
+| Type   | Required | Default |
+| ------ | -------- | ------- |
+| number | optional | 4       |
 
-  ##### Examples
+##### Examples
 
-  ```react
-  import { SearchComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-      <SearchComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-          lang: 'en',
-        }}
-        scroll={true}
-      />
-    )
-  }
-  
-  export default App
-  ```
+```react
+import { SearchComponent } from 'stipop-react-sdk'
 
-  
+const App = () => {
+  return (
+    <SearchComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+        lang: 'en',
+      }}
+      column={4}
+    />
+  )
+}
 
-- #### stickerClick
+export default App
+```
 
-  > Get Sticker URL Function
+------
 
-  | Type     | Required | Value       |
-  | -------- | -------- | ----------- |
-  | Function | optional | sticker URL |
+#### scroll
 
-  ```react
-  import { SearchComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-      <SearchComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-          lang: 'en',
-        }}
-        stickerClick={url => console.log(url)}
-      />
-    )
-  }
-  
-  export default App
-  ```
+| Type    | Required | Default |
+| ------- | -------- | ------- |
+| boolean | optional | true    |
+
+##### Examples
+
+```react
+import { SearchComponent } from 'stipop-react-sdk'
+
+const App = () => {
+  return (
+    <SearchComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+        lang: 'en',
+      }}
+      scroll={true}
+    />
+  )
+}
+
+export default App
+```
+
+------
+
+#### stickerClick
+
+> Get Sticker URL Function
+
+| Type     | Required | Value       |
+| -------- | -------- | ----------- |
+| Function | optional | sticker URL |
+
+```react
+import { SearchComponent } from 'stipop-react-sdk'
+
+const App = () => {
+  return (
+    <SearchComponent 
+      params={{
+        apikey: 'apikey',
+        userId: 'userId',
+        lang: 'en',
+      }}
+      stickerClick={url => console.log(url)}
+    />
+  )
+}
+
+export default App
+```
+
+------
 
 
 
