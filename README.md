@@ -345,7 +345,7 @@ import { PickerComponent } from 'stipop-react-sdk'
 
 const App = () => {
   return (
-  	<PickerComponent 
+    <PickerComponent 
       params={{
         apikey: 'apikey',
         userId: 'userId',
@@ -387,7 +387,7 @@ export default App
   
   const App = () => {
     return (
-    	<PickerComponent 
+      <PickerComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -418,7 +418,7 @@ export default App
   
   const App = () => {
     return (
-    	<PickerComponent 
+      <PickerComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -453,7 +453,7 @@ export default App
   
   const App = () => {
     return (
-    	<PickerComponent 
+      <PickerComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -489,7 +489,7 @@ export default App
   
   const App = () => {
     return (
-    	<PickerComponent 
+      <PickerComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -522,7 +522,7 @@ export default App
   
   const App = () => {
     return (
-    	<PickerComponent 
+      <PickerComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -550,7 +550,7 @@ export default App
   
   const App = () => {
     return (
-    	<PickerComponent 
+      <PickerComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -578,7 +578,7 @@ export default App
   
   const App = () => {
     return (
-    	<PickerComponent 
+      <PickerComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -608,7 +608,7 @@ export default App
   
   const App = () => {
     return (
-    	<PickerComponent 
+      <PickerComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -638,7 +638,7 @@ export default App
   
   const App = () => {
     return (
-    	<PickerComponent 
+      <PickerComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -664,7 +664,7 @@ import { StoreComponent } from 'stipop-react-sdk'
 
 const App = () => {
   return (
-  	<StoreComponent 
+    <StoreComponent 
       params={{
         apikey: 'apikey',
         userId: 'userId',
@@ -712,7 +712,7 @@ export default App
   
   const App = () => {
     return (
-    	<StoreComponent 
+      <StoreComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -752,7 +752,7 @@ export default App
   
   const App = () => {
     return (
-    	<StoreComponent 
+      <StoreComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -795,7 +795,7 @@ export default App
   
   const App = () => {
     return (
-    	<StoreComponent 
+      <StoreComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -843,7 +843,7 @@ export default App
   
   const App = () => {
     return (
-    	<StoreComponent 
+      <StoreComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -883,7 +883,7 @@ export default App
   
   const App = () => {
     return (
-    	<StoreComponent 
+      <StoreComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -917,7 +917,7 @@ export default App
   
   const App = () => {
     return (
-    	<StoreComponent 
+      <StoreComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
@@ -950,7 +950,7 @@ export default App
   
   const App = () => {
     return (
-    	<StoreComponent 
+      <StoreComponent 
         params={{
           apikey: 'apikey',
           userId: 'userId',
