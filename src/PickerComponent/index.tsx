@@ -250,7 +250,7 @@ const PickerComponent: React.FC<StoreProps> = ({
                       show={showPackage === index}
                     >
                       <PackageImg
-                        src={pack.packageImg}
+                        src={`${pack.packageImg}?d=100x100`}
                         show={showPackage === index}
                       />
                     </PackageImgWrapper>
@@ -272,7 +272,7 @@ const PickerComponent: React.FC<StoreProps> = ({
                         show={showPackage === index}
                       >
                         <PackageImg
-                          src={pack.packageImg}
+                          src={`${pack.packageImg}?d=100x100`}
                           show={showPackage === index}
                         />
                       </PackageImgWrapper>
@@ -347,7 +347,7 @@ const PickerComponent: React.FC<StoreProps> = ({
             {stickers.map((sticker, index) => (
               <StickerImg
                 size={size}
-                src={sticker.stickerImg}
+                src={`${sticker.stickerImg}?d=100x100`}
                 alt=""
                 key={index}
                 onClick={() => {
@@ -379,7 +379,7 @@ const PickerComponent: React.FC<StoreProps> = ({
           {stickers.map((sticker, index) => (
             <StickerImg
               size={size}
-              src={sticker.stickerImg}
+              src={`${sticker.stickerImg}?d=100x100`}
               alt=""
               key={index}
               onClick={() => stickerClick(sticker.stickerImg)}
@@ -602,7 +602,7 @@ const PackageImgWrapper = styled.div`
 `
 const PackageImg = styled.img`
   width: 60%;
-  filter: ${props => (props.show ? '' : 'brightness(60%)')};
+  filter: ${props => (props.show ? '' : 'saturate(0%) brightness(90%);')};
 `
 const StickerWrapper = styled.div`
   height: calc(100% - 45px);

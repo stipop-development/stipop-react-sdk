@@ -23064,14 +23064,14 @@ var PickerComponent = function (_a) {
                             clickPackage(pack.packageId);
                             setShowPackage(index);
                         }, show: showPackage === index },
-                        React__default["default"].createElement(PackageImg, { src: pack.packageImg, show: showPackage === index })));
+                        React__default["default"].createElement(PackageImg, { src: "".concat(pack.packageImg, "?d=100x100"), show: showPackage === index })));
                 })) : (React__default["default"].createElement(React__default["default"].Fragment, null,
                     myStickers.map(function (pack, index) {
                         return pack.packageId && (React__default["default"].createElement(PackageImgWrapper, { menu: menu, size: size, key: index, onClick: function () {
                                 clickPackage(pack.packageId);
                                 setShowPackage(index);
                             }, show: showPackage === index },
-                            React__default["default"].createElement(PackageImg, { src: pack.packageImg, show: showPackage === index })));
+                            React__default["default"].createElement(PackageImg, { src: "".concat(pack.packageImg, "?d=100x100"), show: showPackage === index })));
                     }),
                     dummies.map(function (item) { return (React__default["default"].createElement(PackageImgWrapper, { id: "dummies", menu: menu, size: size })); })))) : (dummies.map(function (item) { return (React__default["default"].createElement(PackageImgWrapper, { id: "dummies", menu: menu, size: size })); }))),
             React__default["default"].createElement(ArrowWrapper, { id: itemCnt - (menu && menu.listCnt ? menu.listCnt - 2 : 4) <= itemNum
@@ -23084,11 +23084,11 @@ var PickerComponent = function (_a) {
                 } }, itemCnt - (menu && menu.listCnt ? menu.listCnt - 2 : 4) <=
                 itemNum ? (React__default["default"].createElement(Icon, { type: "LEFT_ARROW" })) : (React__default["default"].createElement(Icon, { type: "RIGHT_ARROW_BLACK" })))),
         !recentView ? (stickers && isLoading ? (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, size: size, isLoading: isLoading },
-            React__default["default"].createElement(LoadingSpinner, null))) : (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: sticker.stickerImg, alt: "", key: index, onClick: function () {
+            React__default["default"].createElement(LoadingSpinner, null))) : (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () {
                 stickerClick(sticker.stickerImg);
                 clickSticker(sticker.stickerId);
             } })); })))) : isLoading ? (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading },
-            React__default["default"].createElement(LoadingSpinner, null))) : stickers.length > 0 ? (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: sticker.stickerImg, alt: "", key: index, onClick: function () { return stickerClick(sticker.stickerImg); } })); }))) : (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: recentView },
+            React__default["default"].createElement(LoadingSpinner, null))) : stickers.length > 0 ? (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () { return stickerClick(sticker.stickerImg); } })); }))) : (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: recentView },
             React__default["default"].createElement("div", { style: {
                     width: '100%',
                     height: '100%',
@@ -23194,7 +23194,7 @@ var PackageImgWrapper = styled.div(templateObject_6$1 || (templateObject_6$1 = _
             ? props.menu.bottomLine
             : '1px solid lightgray';
 });
-var PackageImg = styled.img(templateObject_7$1 || (templateObject_7$1 = __makeTemplateObject(["\n  width: 60%;\n  filter: ", ";\n"], ["\n  width: 60%;\n  filter: ", ";\n"])), function (props) { return (props.show ? '' : 'brightness(60%)'); });
+var PackageImg = styled.img(templateObject_7$1 || (templateObject_7$1 = __makeTemplateObject(["\n  width: 60%;\n  filter: ", ";\n"], ["\n  width: 60%;\n  filter: ", ";\n"])), function (props) { return (props.show ? '' : 'saturate(0%) brightness(90%);'); });
 var StickerWrapper$1 = styled.div(templateObject_8$1 || (templateObject_8$1 = __makeTemplateObject(["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  grid-template-rows: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    width: 8px;\n  }\n  &::-webkit-scrollbar-track {\n    /* background-color: ", ";\n    border-bottom-right-radius: ", "; */\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: #6d7072;\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  grid-template-rows: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: auto;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    width: 8px;\n  }\n  &::-webkit-scrollbar-track {\n    /* background-color: ", ";\n    border-bottom-right-radius: ", "; */\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: #6d7072;\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) { return (props.isLoading ? 'block' : 'grid'); }, function (props) {
     return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
 }, function (props) {
