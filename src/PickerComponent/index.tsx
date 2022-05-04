@@ -32,6 +32,9 @@ const PickerComponent: React.FC<StoreProps> = ({
   const [itemNum, setItemNum] = useState(0)
   const [scrollX, setScrollX] = useState(0)
   const menuList = document.getElementById('picker-menu')
+  const [scrolling, setScrolling] = useState(0)
+  const [currentScrollTop, setCurrentScrollTop] = useState(0)
+  const [lastScrollTop, setLastScrollTop] = useState(0)
 
   const client = new (Stipop as any)(params.apikey, 'v1')
 
@@ -161,9 +164,15 @@ const PickerComponent: React.FC<StoreProps> = ({
     }
   }, [stickers])
 
-  useEffect(() => {
-    console.log(itemNum)
-  }, [itemNum])
+  // useEffect(() => {
+  //   if (currentScrollTop - lastScrollTop !== 0) {
+  //     setScrolling(true)
+  //   }
+  //   setTimeout(() => {
+  //     setScrolling(false)
+  //     setLastScrollTop(currentScrollTop)
+  //   }, 1000)
+  // }, [currentScrollTop])
 
   return (
     <PickerWrapper size={size} border={border}>
@@ -339,10 +348,15 @@ const PickerComponent: React.FC<StoreProps> = ({
           </StickerWrapper>
         ) : (
           <StickerWrapper
+            id="sticker-wrapper"
             backgroundColor={backgroundColor}
             border={border}
             column={column}
             scroll={scroll}
+            scrolling={scrolling}
+            // onScroll={e => setCurrentScrollTop(e.target.scrollTop)}
+            onMouseEnter={() => setScrolling(1)}
+            onMouseLeave={() => setScrolling(0)}
           >
             {stickers.map((sticker, index) => (
               <StickerImg
@@ -375,6 +389,9 @@ const PickerComponent: React.FC<StoreProps> = ({
           column={column}
           scroll={scroll}
           isLoading={isLoading}
+          onScroll={e => console.log(e.target.scrollTop)}
+          onMouseEnter={() => setScrolling(1)}
+          onMouseLeave={() => setScrolling(0)}
         >
           {stickers.map((sticker, index) => (
             <StickerImg
@@ -602,7 +619,7 @@ const PackageImgWrapper = styled.div`
 `
 const PackageImg = styled.img`
   width: 60%;
-  filter: ${props => (props.show ? '' : 'saturate(0%) brightness(90%);')};
+  filter: ${props => (props.show ? '' : 'saturate(0%)')};
 `
 const StickerWrapper = styled.div`
   height: calc(100% - 45px);
@@ -614,7 +631,7 @@ const StickerWrapper = styled.div`
     props.column ? `repeat(${props.column}, 1fr)` : 'repeat(4, 1fr)'};
   row-gap: 8%;
   justify-items: center;
-  overflow-y: auto;
+  overflow-y: scroll;
   background-color: ${props =>
     props.backgroundColor ? props.backgroundColor : '#fff'};
   border-bottom-left-radius: ${props =>
@@ -630,6 +647,8 @@ const StickerWrapper = styled.div`
 
   &::-webkit-scrollbar {
     display: ${props => (props.scroll === false ? 'none' : '')};
+    /* display: ${props =>
+      props.scroll === false ? 'none' : props.scrolling ? '' : 'none'}; */
     width: 8px;
   }
   &::-webkit-scrollbar-track {

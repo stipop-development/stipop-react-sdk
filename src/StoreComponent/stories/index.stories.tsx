@@ -18,6 +18,7 @@ export const Store = () => (
       isPurchase: 'N',
     }}
     scroll={true}
+    size={{ packageListHeight: 33 }}
   />
 )
 

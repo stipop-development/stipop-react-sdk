@@ -127,7 +127,7 @@ const SearchComponent: React.FC<SearchProps> = ({
         >
           {stickerList.map((sticker, index) => (
             <StickerImg
-              src={sticker.stickerImg}
+              src={`${sticker.stickerImg}?d=100x100`}
               key={index}
               onClick={() => {
                 stickerClick(sticker.stickerImg)

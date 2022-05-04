@@ -27,6 +27,8 @@ const StoreComponent: React.FC<StoreProps> = ({
   const [btnHover, setBtnHover] = useState(0)
   const [endPage, setEndPage] = useState(1)
 
+  const [scrolling, setScrolling] = useState(0)
+
   const client = new (Stipop as any)(params.apikey, 'v1')
   const packInfo = new Array()
 
@@ -305,7 +307,10 @@ const StoreComponent: React.FC<StoreProps> = ({
                 scroll={scroll}
                 border={border}
                 color={color}
+                scrolling={scrolling}
                 onScroll={e => setCurrentScroll(e.target.scrollTop)}
+                onMouseEnter={() => setScrolling(1)}
+                onMouseLeave={() => setScrolling(0)}
               >
                 {packages.map((pack, index) => (
                   <PackageBox
@@ -579,7 +584,7 @@ const PackageWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: block;
-  overflow-y: auto;
+  overflow-y: scroll;
   border-bottom-left-radius: ${props =>
     props.border && (props.border.radius || props.border.radius == 0)
       ? `${props.border.radius}px`
@@ -588,22 +593,17 @@ const PackageWrapper = styled.div`
     props.border && (props.border.radius || props.border.radius == 0)
       ? `${props.border.radius}px`
       : '8px'};
+  box-sizing: border-box;
   -ms-overflow-style: ${props => (props.scroll === false ? 'none' : '')};
   scrollbar-width: ${props => (props.scroll === false ? 'none' : '')};
 
   &::-webkit-scrollbar {
     display: ${props => (props.scroll === false ? 'none' : '')};
+    /* display: ${props =>
+      props.scroll === false ? 'none' : props.scrolling ? '' : 'none'}; */
     width: 9px;
   }
   &::-webkit-scrollbar-track {
-    /* background-color: ${props =>
-      props.color && props.color.backgroundColor
-        ? props.color.backgroundColor
-        : '#fff'};
-    border-bottom-right-radius: ${props =>
-      props.border && (props.border.radius || props.border.radius == 0)
-        ? `${props.border.radius}px`
-        : '8px'}; */
     display: none;
   }
   &::-webkit-scrollbar-thumb {
@@ -619,7 +619,7 @@ const PackageWrapper = styled.div`
   -ms-user-select: none;
 `
 const PackageBox = styled.div`
-  width: 100%;
+  width: calc(100% - 64px);
   height: ${props =>
     props.size && props.size.packageListHeight
       ? `${props.size.packageListHeight}%`
@@ -627,7 +627,7 @@ const PackageBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 32px;
+  margin: 0 23px 0 32px;
   box-sizing: border-box;
   background-color: ${props =>
     props.isDownload
@@ -637,8 +637,8 @@ const PackageBox = styled.div`
       : props.color && props.color.backgroundColor
       ? props.color.backgroundColor
       : '#fff'};
-  position: relative;
   border-bottom: 0.5px solid #e6e6e6;
+  position: relative;
 
   &:hover {
     background-color: ${props =>
@@ -688,7 +688,7 @@ const DownloadBtn = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
-  right: 32px;
+  right: 20px;
 
   .stipop-icon {
     width: 32px;
@@ -719,7 +719,7 @@ const BtnWrapper = styled.div`
   height: 32px;
   border-radius: 50%;
   position: absolute;
-  right: 32px;
+  right: 20px;
 
   &:hover {
     cursor: pointer;
@@ -727,12 +727,13 @@ const BtnWrapper = styled.div`
 `
 
 const PackageTitle = styled.div`
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   margin-bottom: 10px;
+  margin-left: 5px;
 
   span {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: normal;
     color: #a9a9a9;
     margin-left: 12px;
@@ -742,7 +743,9 @@ const PackageItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 85%;
+  width: 75%;
+  height: 50%;
+  padding-left: 20px;
 `
 const StickerWrapper = styled.div`
   width: 100%;
@@ -751,5 +754,5 @@ const StickerWrapper = styled.div`
 `
 const Sticker = styled.img`
   width: ${props =>
-    props.size && props.size.previewImg ? `${props.size.previewImg}%` : '70%'};
+    props.size && props.size.previewImg ? `${props.size.previewImg}%` : '75%'};
 `
