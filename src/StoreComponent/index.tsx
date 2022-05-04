@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Stipop from 'stipop-js-sdk'
 
@@ -25,6 +25,7 @@ const StoreComponent: React.FC<StoreProps> = ({
   const [currentScroll, setCurrentScroll] = useState(0)
   const [btnLoading, setBtnLoading] = useState(0)
   const [btnHover, setBtnHover] = useState(0)
+  const [endPage, setEndPage] = useState(1)
 
   const client = new (Stipop as any)(params.apikey, 'v1')
   const packInfo = new Array()
@@ -70,9 +71,38 @@ const StoreComponent: React.FC<StoreProps> = ({
 
     const hideData = client.myStickerHideList(hideParams)
     hideData.then(({ body }) => {
-      setHideList(hideList.concat(body.packageList.map(pack => pack.packageId)))
+      setEndPage(body.pageMap.endPage)
     })
   }, [])
+
+  useEffect(() => {
+    if (endPage > 1) {
+      for (var i = 2; i <= endPage; i++) {
+        const hideParams = {
+          userId: params.userId,
+          limit: 50,
+          pageNumber: i,
+        }
+        const hideData = client.myStickerHideList(hideParams)
+        hideData.then(({ body }) => {
+          body.packageList.map(pack => {
+            setHideList(hideList => hideList.concat(pack.packageId))
+          })
+        })
+      }
+    } else {
+      const hideParams = {
+        userId: params.userId,
+        limit: 50,
+      }
+      const hideData = client.myStickerHideList(hideParams)
+      hideData.then(({ body }) => {
+        body.packageList.map(pack => {
+          setHideList(hideList => hideList.concat(pack.packageId))
+        })
+      })
+    }
+  }, [endPage])
 
   useEffect(() => {
     if (packages && packages.length > 0) {
@@ -134,6 +164,25 @@ const StoreComponent: React.FC<StoreProps> = ({
         setHideList(hideList.concat(packageId))
       } else {
         setHideList(hideList.filter(item => item !== packageId))
+        const myParams = {
+          userId: params.userId,
+        }
+        const myData = client.mySticker(myParams)
+        myData.then(({ body }) => {
+          const firstOrder =
+            body && body.packageList && body.packageList[0].order
+          const currentOrder = body.packageList.filter(
+            pack => pack.packageId === packageId
+          )[0].order
+
+          const orderParams = {
+            userId: params.userId,
+            currentOrder: currentOrder,
+            newOrder: firstOrder + 1,
+          }
+
+          client.myStickerOrder(orderParams)
+        })
       }
       setBtnLoading(0)
     })

@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
+import _ from 'lodash'
 
 import Stipop from 'stipop-js-sdk'
 
@@ -8,7 +9,6 @@ import { StoreProps } from './index.types'
 
 import Icon from '../Icon'
 import LoadingSpinner from '../LoadingSpinner'
-import { request } from 'http'
 
 const PickerComponent: React.FC<StoreProps> = ({
   params,
@@ -35,6 +35,12 @@ const PickerComponent: React.FC<StoreProps> = ({
 
   const client = new (Stipop as any)(params.apikey, 'v1')
 
+  const dummies = []
+  _.times(
+    menu && menu.listCnt ? menu.listCnt - (2 + itemCnt) : 6 - (2 + itemCnt),
+    n => dummies.push({ index: n.toString(36) })
+  )
+
   const itemWidth =
     size && size.width
       ? menu && menu.listCnt
@@ -51,21 +57,35 @@ const PickerComponent: React.FC<StoreProps> = ({
     const data = client.mySticker(storeParams)
 
     data.then(({ body }) => {
-      setItemCnt(body && body.packageList ? body.packageList.length : 0)
-      setMyStickers(body && body.packageList ? body.packageList : [])
-      const packageParams = {
-        userId: params.userId,
-        packId: body.packageList[0].packageId,
-      }
+      setItemCnt(
+        body && body.packageList
+          ? body.packageList.filter(pack => pack.packageId !== null).length
+          : 0
+      )
+      setMyStickers(
+        body && body.packageList
+          ? body.packageList.filter(pack => pack.packageId !== null)
+          : []
+      )
 
-      const packageData = client.getPackInfo(packageParams)
-      packageData.then(({ body }) => {
-        setStickers(
-          body && body.package && body.package.stickers
-            ? body.package.stickers
-            : []
-        )
-      })
+      if (body.packageList.filter(pack => pack.packageId !== null).length > 0) {
+        const packageParams = {
+          userId: params.userId,
+          packId: body.packageList[0].packageId,
+        }
+
+        const packageData = client.getPackInfo(packageParams)
+        packageData.then(({ body }) => {
+          setStickers(
+            body && body.package && body.package.stickers
+              ? body.package.stickers
+              : []
+          )
+        })
+      } else {
+        setShowPackage(-1)
+        clickTime()
+      }
     })
   }, [])
 
@@ -130,8 +150,6 @@ const PickerComponent: React.FC<StoreProps> = ({
   }
 
   useEffect(() => {
-    // console.log(stickers)
-    // console.log(recentView)
     if (stickers && stickers.length > 0) {
       setIsLoading(false)
     } else {
@@ -143,9 +161,9 @@ const PickerComponent: React.FC<StoreProps> = ({
     }
   }, [stickers])
 
-  // useEffect(() => {
-  //   console.log(isLoading)
-  // }, [isLoading])
+  useEffect(() => {
+    console.log(itemNum)
+  }, [itemNum])
 
   return (
     <PickerWrapper size={size} border={border}>
@@ -177,9 +195,10 @@ const PickerComponent: React.FC<StoreProps> = ({
           backgroundColor={backgroundColor}
           border={border}
           menu={menu}
+          size={size}
           onScroll={e => {
             setItemNum(
-              Math.trunc(
+              Math.round(
                 e.target.scrollLeft /
                   (size && size.width
                     ? menu && menu.listCnt
@@ -214,8 +233,10 @@ const PickerComponent: React.FC<StoreProps> = ({
           >
             <Icon type="STORE" onClick={() => storeClick(true)} />
           </IconWrapper>
-          {myStickers.length > 0
-            ? myStickers.map(
+          {myStickers.length > 0 ? (
+            myStickers.length >
+            (menu && menu.listCnt ? menu.listCnt - 2 : 4) ? (
+              myStickers.map(
                 (pack, index) =>
                   pack.packageId && (
                     <PackageImgWrapper
@@ -228,20 +249,53 @@ const PickerComponent: React.FC<StoreProps> = ({
                       }}
                       show={showPackage === index}
                     >
-                      <PackageImg
-                        src={pack.packageImg}
-                        show={showPackage === index}
-                      />
+                      <PackageImg src={pack.packageImg} />
                     </PackageImgWrapper>
                   )
               )
-            : ''}
+            ) : (
+              <>
+                {myStickers.map(
+                  (pack, index) =>
+                    pack.packageId && (
+                      <PackageImgWrapper
+                        menu={menu}
+                        size={size}
+                        key={index}
+                        onClick={() => {
+                          clickPackage(pack.packageId)
+                          setShowPackage(index)
+                        }}
+                        show={showPackage === index}
+                      >
+                        <PackageImg src={pack.packageImg} />
+                      </PackageImgWrapper>
+                    )
+                )}
+                {dummies.map(item => (
+                  <PackageImgWrapper
+                    id="dummies"
+                    menu={menu}
+                    size={size}
+                  ></PackageImgWrapper>
+                ))}
+              </>
+            )
+          ) : (
+            dummies.map(item => (
+              <PackageImgWrapper
+                id="dummies"
+                menu={menu}
+                size={size}
+              ></PackageImgWrapper>
+            ))
+          )}
         </PickerMenu>
         <ArrowWrapper
           id={
-            itemCnt - (menu && menu.listCnt ? menu.listCnt : 6) > itemNum
-              ? 'right-black'
-              : 'right'
+            itemCnt - (menu && menu.listCnt ? menu.listCnt - 2 : 4) <= itemNum
+              ? 'right'
+              : 'right-black'
           }
           backgroundColor={backgroundColor}
           border={border}
@@ -257,10 +311,11 @@ const PickerComponent: React.FC<StoreProps> = ({
             )
           }}
         >
-          {itemCnt - (menu && menu.listCnt ? menu.listCnt : 6) > itemNum ? (
-            <Icon type="RIGHT_ARROW_BLACK" />
-          ) : (
+          {itemCnt - (menu && menu.listCnt ? menu.listCnt - 2 : 4) <=
+          itemNum ? (
             <Icon type="LEFT_ARROW" />
+          ) : (
+            <Icon type="RIGHT_ARROW_BLACK" />
           )}
         </ArrowWrapper>
       </MenuBox>
@@ -416,6 +471,7 @@ const ArrowWrapper = styled.div`
 
   &#left {
     padding-left: 10px;
+    cursor: initial;
   }
   &#left-black {
     padding-left: 10px;
@@ -438,6 +494,8 @@ const ArrowWrapper = styled.div`
       props.border && (props.border.radius || props.border.radius == 0)
         ? `${props.border.radius}px`
         : '10px'};
+    cursor: initial;
+
     .stipop-icon {
       transform: rotateY(180deg);
     }
@@ -482,6 +540,8 @@ const IconWrapper = styled.div`
   }
 `
 const PickerMenu = styled.div`
+  width: ${props =>
+    props.size && props.size.width ? `${props.size.width}px` : '360px'};
   height: ${props =>
     props.menu && props.menu.height ? `${props.menu.height}px` : '45px'};
   display: flex;
@@ -528,8 +588,10 @@ const PackageImgWrapper = styled.div`
       ? props.menu.bottomLine
       : '1px solid lightgray'};
   box-sizing: border-box;
-  &:hover {
-    cursor: pointer;
+  cursor: pointer;
+
+  &#dummies {
+    cursor: initial;
   }
 `
 const PackageImg = styled.img`
