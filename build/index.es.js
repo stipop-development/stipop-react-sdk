@@ -23522,7 +23522,7 @@ var PackageContainer = styled.div(templateObject_5 || (templateObject_5 = __make
         : '8px';
 });
 var DetailWrapper = styled.div(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n"], ["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n"])));
-var DetailBox = styled.div(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  display: flex;\n  padding: 0 68px 0 45px;\n  align-items: center;\n  position: relative;\n  margin-bottom: 12px;\n"], ["\n  display: flex;\n  padding: 0 68px 0 45px;\n  align-items: center;\n  position: relative;\n  margin-bottom: 12px;\n"])));
+var DetailBox = styled.div(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  display: flex;\n  padding: 0 68px 0 45px;\n  align-items: center;\n  position: relative;\n  margin-bottom: 5%;\n"], ["\n  display: flex;\n  padding: 0 68px 0 45px;\n  align-items: center;\n  position: relative;\n  margin-bottom: 5%;\n"])));
 var MainImg = styled.img(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n  width: ", ";\n  margin-right: 12px;\n"], ["\n  width: ", ";\n  margin-right: 12px;\n"])), function (props) {
     return props.size && props.size.mainImg ? "".concat(props.size.mainImg, "px") : '100px';
 });

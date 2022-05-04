@@ -515,7 +515,7 @@ const DetailBox = styled.div`
   padding: 0 68px 0 45px;
   align-items: center;
   position: relative;
-  margin-bottom: 12px;
+  margin-bottom: 5%;
 `
 const MainImg = styled.img`
   width: ${props =>
