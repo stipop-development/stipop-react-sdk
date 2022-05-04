@@ -249,7 +249,10 @@ const PickerComponent: React.FC<StoreProps> = ({
                       }}
                       show={showPackage === index}
                     >
-                      <PackageImg src={pack.packageImg} />
+                      <PackageImg
+                        src={pack.packageImg}
+                        show={showPackage === index}
+                      />
                     </PackageImgWrapper>
                   )
               )
@@ -268,7 +271,10 @@ const PickerComponent: React.FC<StoreProps> = ({
                         }}
                         show={showPackage === index}
                       >
-                        <PackageImg src={pack.packageImg} />
+                        <PackageImg
+                          src={pack.packageImg}
+                          show={showPackage === index}
+                        />
                       </PackageImgWrapper>
                     )
                 )}

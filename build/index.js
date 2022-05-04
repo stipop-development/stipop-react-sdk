@@ -23064,14 +23064,14 @@ var PickerComponent = function (_a) {
                             clickPackage(pack.packageId);
                             setShowPackage(index);
                         }, show: showPackage === index },
-                        React__default["default"].createElement(PackageImg, { src: pack.packageImg })));
+                        React__default["default"].createElement(PackageImg, { src: pack.packageImg, show: showPackage === index })));
                 })) : (React__default["default"].createElement(React__default["default"].Fragment, null,
                     myStickers.map(function (pack, index) {
                         return pack.packageId && (React__default["default"].createElement(PackageImgWrapper, { menu: menu, size: size, key: index, onClick: function () {
                                 clickPackage(pack.packageId);
                                 setShowPackage(index);
                             }, show: showPackage === index },
-                            React__default["default"].createElement(PackageImg, { src: pack.packageImg })));
+                            React__default["default"].createElement(PackageImg, { src: pack.packageImg, show: showPackage === index })));
                     }),
                     dummies.map(function (item) { return (React__default["default"].createElement(PackageImgWrapper, { id: "dummies", menu: menu, size: size })); })))) : (dummies.map(function (item) { return (React__default["default"].createElement(PackageImgWrapper, { id: "dummies", menu: menu, size: size })); }))),
             React__default["default"].createElement(ArrowWrapper, { id: itemCnt - (menu && menu.listCnt ? menu.listCnt - 2 : 4) <= itemNum
