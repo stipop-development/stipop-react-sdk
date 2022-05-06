@@ -169,14 +169,15 @@ const SearchWrapper = styled.div`
   border-radius: ${props =>
     props.border && (props.border.radius || props.border.radius == 0)
       ? `${props.border.radius}px`
-      : '10px'};
+      : '6px'};
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   position: relative;
-  padding: 15px 20px 20px 20px;
+  padding: 10px 0;
   box-sizing: border-box;
+  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);
 `
 const SearchForm = styled.div`
   width: 100%;
@@ -266,6 +267,7 @@ const InputHolder = styled.div`
 const StickerWrapper = styled.div`
   width: 100%;
   height: 90%;
+  padding-top: 5px;
   overflow-y: auto;
   display: grid;
   grid-template-columns: ${props =>
