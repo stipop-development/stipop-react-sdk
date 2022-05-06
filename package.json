@@ -1,6 +1,6 @@
 {
   "name": "stipop-sdk-test",
-  "version": "0.1.84",
+  "version": "0.1.85",
   "description": "",
   "main": "build/index.js",
   "module": "build/index.es.js",
