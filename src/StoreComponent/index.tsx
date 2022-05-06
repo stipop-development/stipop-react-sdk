@@ -132,24 +132,26 @@ const StoreComponent: React.FC<StoreProps> = ({
     }
     const data = client.download(dParams)
     data.then(() => {
-      setPackages(
-        packages.map(pack => {
-          if (pack.packageId === packageId) {
-            pack.isDownload = 'Y'
-          }
-          return pack
-        })
-      )
-      if (main) {
-        setMain({
-          packageId: main.packageId,
-          packageImg: main.packageImg,
-          packageName: main.packageName,
-          artistName: main.artistName,
-          isDownload: 'Y',
-        })
-      }
-      setBtnLoading(0)
+      setTimeout(() => {
+        setPackages(
+          packages.map(pack => {
+            if (pack.packageId === packageId) {
+              pack.isDownload = 'Y'
+            }
+            return pack
+          })
+        )
+        if (main) {
+          setMain({
+            packageId: main.packageId,
+            packageImg: main.packageImg,
+            packageName: main.packageName,
+            artistName: main.artistName,
+            isDownload: 'Y',
+          })
+        }
+        setBtnLoading(0)
+      }, 500)
     })
   }
 
@@ -162,31 +164,33 @@ const StoreComponent: React.FC<StoreProps> = ({
 
     const data = client.myStickerHide(hideParams)
     data.then(() => {
-      if (hideList.indexOf(packageId) < 0) {
-        setHideList(hideList.concat(packageId))
-      } else {
-        setHideList(hideList.filter(item => item !== packageId))
-        const myParams = {
-          userId: params.userId,
-        }
-        const myData = client.mySticker(myParams)
-        myData.then(({ body }) => {
-          const firstOrder =
-            body && body.packageList && body.packageList[0].order
-          const currentOrder = body.packageList.filter(
-            pack => pack.packageId === packageId
-          )[0].order
-
-          const orderParams = {
+      setTimeout(() => {
+        if (hideList.indexOf(packageId) < 0) {
+          setHideList(hideList.concat(packageId))
+        } else {
+          setHideList(hideList.filter(item => item !== packageId))
+          const myParams = {
             userId: params.userId,
-            currentOrder: currentOrder,
-            newOrder: firstOrder + 1,
           }
+          const myData = client.mySticker(myParams)
+          myData.then(({ body }) => {
+            const firstOrder =
+              body && body.packageList && body.packageList[0].order
+            const currentOrder = body.packageList.filter(
+              pack => pack.packageId === packageId
+            )[0].order
 
-          client.myStickerOrder(orderParams)
-        })
-      }
-      setBtnLoading(0)
+            const orderParams = {
+              userId: params.userId,
+              currentOrder: currentOrder,
+              newOrder: firstOrder + 1,
+            }
+
+            client.myStickerOrder(orderParams)
+          })
+        }
+        setBtnLoading(0)
+      }, 500)
     })
   }
 

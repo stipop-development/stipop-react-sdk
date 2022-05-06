@@ -23337,22 +23337,24 @@ var StoreComponent = function (_a) {
         };
         var data = client.download(dParams);
         data.then(function () {
-            setPackages(packages.map(function (pack) {
-                if (pack.packageId === packageId) {
-                    pack.isDownload = 'Y';
+            setTimeout(function () {
+                setPackages(packages.map(function (pack) {
+                    if (pack.packageId === packageId) {
+                        pack.isDownload = 'Y';
+                    }
+                    return pack;
+                }));
+                if (main) {
+                    setMain({
+                        packageId: main.packageId,
+                        packageImg: main.packageImg,
+                        packageName: main.packageName,
+                        artistName: main.artistName,
+                        isDownload: 'Y',
+                    });
                 }
-                return pack;
-            }));
-            if (main) {
-                setMain({
-                    packageId: main.packageId,
-                    packageImg: main.packageImg,
-                    packageName: main.packageName,
-                    artistName: main.artistName,
-                    isDownload: 'Y',
-                });
-            }
-            setBtnLoading(0);
+                setBtnLoading(0);
+            }, 500);
         });
     };
     var clickHide = function (packageId) {
@@ -23363,28 +23365,30 @@ var StoreComponent = function (_a) {
         };
         var data = client.myStickerHide(hideParams);
         data.then(function () {
-            if (hideList.indexOf(packageId) < 0) {
-                setHideList(hideList.concat(packageId));
-            }
-            else {
-                setHideList(hideList.filter(function (item) { return item !== packageId; }));
-                var myParams = {
-                    userId: params.userId,
-                };
-                var myData = client.mySticker(myParams);
-                myData.then(function (_a) {
-                    var body = _a.body;
-                    var firstOrder = body && body.packageList && body.packageList[0].order;
-                    var currentOrder = body.packageList.filter(function (pack) { return pack.packageId === packageId; })[0].order;
-                    var orderParams = {
+            setTimeout(function () {
+                if (hideList.indexOf(packageId) < 0) {
+                    setHideList(hideList.concat(packageId));
+                }
+                else {
+                    setHideList(hideList.filter(function (item) { return item !== packageId; }));
+                    var myParams = {
                         userId: params.userId,
-                        currentOrder: currentOrder,
-                        newOrder: firstOrder + 1,
                     };
-                    client.myStickerOrder(orderParams);
-                });
-            }
-            setBtnLoading(0);
+                    var myData = client.mySticker(myParams);
+                    myData.then(function (_a) {
+                        var body = _a.body;
+                        var firstOrder = body && body.packageList && body.packageList[0].order;
+                        var currentOrder = body.packageList.filter(function (pack) { return pack.packageId === packageId; })[0].order;
+                        var orderParams = {
+                            userId: params.userId,
+                            currentOrder: currentOrder,
+                            newOrder: firstOrder + 1,
+                        };
+                        client.myStickerOrder(orderParams);
+                    });
+                }
+                setBtnLoading(0);
+            }, 500);
         });
     };
     useEffect(function () {
