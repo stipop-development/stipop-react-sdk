@@ -216,7 +216,11 @@ const StoreComponent: React.FC<StoreProps> = ({
     <>
       {isLoading ? (
         <StoreWrapper color={color} size={size} border={border}>
-          <LoadingSpinner />
+          <LoadingSpinner
+            color={
+              color && color.backgroundColor ? color.backgroundColor : '#ff4500'
+            }
+          />
         </StoreWrapper>
       ) : (
         <StoreWrapper color={color} size={size} border={border}>
@@ -258,8 +262,24 @@ const StoreComponent: React.FC<StoreProps> = ({
                     <div className="artistName">©{main.artistName}</div>
                   </DetailName>
                   {btnLoading ? (
-                    <DownloadBtn style={{ right: '64px' }}>
-                      <LoadingSpinner />
+                    <DownloadBtn
+                      style={{
+                        right: '64px',
+                        backgroundColor: 'rgba(0, 0, 0, 0)',
+                      }}
+                    >
+                      <LoadingSpinner
+                        color={
+                          main.isDownload === 'Y' &&
+                          hideList.indexOf(main.packageId) === -1
+                            ? color && color.deleteBtn
+                              ? color.deleteBtn
+                              : '#b3b3b3'
+                            : color && color.downloadBtn
+                            ? color.downloadBtn
+                            : '#ff4500'
+                        }
+                      />
                     </DownloadBtn>
                   ) : (
                     <DownloadBtn
@@ -356,8 +376,21 @@ const StoreComponent: React.FC<StoreProps> = ({
                       )}
                     </PackageItem>
                     {btnLoading && btnLoading === pack.packageId ? (
-                      <DownloadBtn>
-                        <LoadingSpinner />
+                      <DownloadBtn
+                        style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
+                      >
+                        <LoadingSpinner
+                          color={
+                            pack.isDownload === 'Y' &&
+                            hideList.indexOf(pack.packageId) === -1
+                              ? color && color.deleteBtn
+                                ? color.deleteBtn
+                                : '#b3b3b3'
+                              : color && color.downloadBtn
+                              ? color.downloadBtn
+                              : '#ff4500'
+                          }
+                        />
                       </DownloadBtn>
                     ) : (
                       <DownloadBtn
@@ -633,6 +666,8 @@ const PackageBox = styled.div`
     props.isDownload
       ? props.color && props.color.downloadedColor
         ? props.color.downloadedColor
+        : props.color && props.color.backgroundColor
+        ? props.color.backgroundColor
         : '#fff'
       : props.color && props.color.backgroundColor
       ? props.color.backgroundColor
@@ -672,7 +707,7 @@ const DownloadBtn = styled.div`
         : props.btnHover
         ? props.color && props.color.deleteBtnHover
           ? props.color.deleteBtnHover
-          : '#b3b3b3'
+          : '#a1a1a1'
         : props.color && props.color.deleteBtn
         ? props.color.deleteBtn
         : '#b3b3b3'
@@ -708,7 +743,7 @@ const DownloadBtn = styled.div`
             : '#d13900'
           : props.color && props.color.deleteBtnHover
           ? props.color.deleteBtnHover
-          : '#b3b3b3'
+          : '#a1a1a1'
         : props.color && props.color.downloadBtnHover
         ? props.color.downloadBtnHover
         : '#d13900'};

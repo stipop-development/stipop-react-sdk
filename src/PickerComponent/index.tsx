@@ -133,7 +133,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   }
   const clickTime = () => {
     setIsLoading(true)
-    const requestUrl = `https://messenger.stipop.io/v1/package/send/${params.userId}?limit=50`
+    const requestUrl = `https://messenger.stipop.io/v1/package/send/${params.userId}?limit=28`
     axios
       .get(requestUrl, {
         headers: {
@@ -344,7 +344,9 @@ const PickerComponent: React.FC<StoreProps> = ({
             size={size}
             isLoading={isLoading}
           >
-            <LoadingSpinner />
+            <LoadingSpinner
+              color={backgroundColor ? backgroundColor : '#ff4500'}
+            />
           </StickerWrapper>
         ) : (
           <StickerWrapper
@@ -380,7 +382,9 @@ const PickerComponent: React.FC<StoreProps> = ({
           scroll={scroll}
           isLoading={isLoading}
         >
-          <LoadingSpinner />
+          <LoadingSpinner
+            color={backgroundColor ? backgroundColor : '#ff4500'}
+          />
         </StickerWrapper>
       ) : stickers.length > 0 ? (
         <StickerWrapper

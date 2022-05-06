@@ -18,6 +18,7 @@ const SearchComponent: React.FC<SearchProps> = ({
 }) => {
   const [keyword, setKeyword] = useState(params.default ? params.default : 'hi')
   const [stickerList, setStickerList] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
   // const baseUrl = 'https://messenger.stipop.io/v1/search'
   // const Stipop = require('stipop-js-sdk')
   const client = new (Stipop as any)(params.apikey, 'v1')
@@ -54,6 +55,7 @@ const SearchComponent: React.FC<SearchProps> = ({
   // }, [keyword, params.lang, params.pageNumber, params.limit])
 
   useEffect(() => {
+    setIsLoading(true)
     // console.log(keyword)
     const searchParams = {
       userId: params.userId,
@@ -69,6 +71,7 @@ const SearchComponent: React.FC<SearchProps> = ({
       data.then(({ body }) => {
         // console.log(body)
         setStickerList(body && body.stickerList ? body.stickerList : [])
+        setIsLoading(false)
       })
     } else {
       setKeyword(params.default ? params.default : 'hi')
@@ -117,7 +120,7 @@ const SearchComponent: React.FC<SearchProps> = ({
           </div>
         </InputHolder>
       </SearchForm>
-      {stickerList.length > 0 ? (
+      {!isLoading && stickerList.length > 0 ? (
         <StickerWrapper
           column={column}
           scroll={scroll}

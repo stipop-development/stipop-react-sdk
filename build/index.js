@@ -3682,6 +3682,7 @@ var SearchComponent = function (_a) {
     var params = _a.params, size = _a.size, backgroundColor = _a.backgroundColor, column = _a.column, border = _a.border, input = _a.input, scroll = _a.scroll, stickerClick = _a.stickerClick;
     var _b = React.useState(params.default ? params.default : 'hi'), keyword = _b[0], setKeyword = _b[1];
     var _c = React.useState([]), stickerList = _c[0], setStickerList = _c[1];
+    var _d = React.useState(false), isLoading = _d[0], setIsLoading = _d[1];
     // const baseUrl = 'https://messenger.stipop.io/v1/search'
     // const Stipop = require('stipop-js-sdk')
     var client = new Stipop$1(params.apikey, 'v1');
@@ -3716,6 +3717,7 @@ var SearchComponent = function (_a) {
     //   }
     // }, [keyword, params.lang, params.pageNumber, params.limit])
     React.useEffect(function () {
+        setIsLoading(true);
         // console.log(keyword)
         var searchParams = {
             userId: params.userId,
@@ -3730,6 +3732,7 @@ var SearchComponent = function (_a) {
                 var body = _a.body;
                 // console.log(body)
                 setStickerList(body && body.stickerList ? body.stickerList : []);
+                setIsLoading(false);
             });
         }
         else {
@@ -3764,7 +3767,7 @@ var SearchComponent = function (_a) {
                 React__default["default"].createElement("div", null,
                     React__default["default"].createElement("span", null, "POWERED BY"),
                     React__default["default"].createElement(Icon, { type: "LOGO" })))),
-        stickerList.length > 0 ? (React__default["default"].createElement(StickerWrapper$2, { column: column, scroll: scroll, border: border, backgroundColor: backgroundColor, size: size }, stickerList.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg$1, { src: "".concat(sticker.stickerImg, "?d=100x100"), key: index, onClick: function () {
+        !isLoading && stickerList.length > 0 ? (React__default["default"].createElement(StickerWrapper$2, { column: column, scroll: scroll, border: border, backgroundColor: backgroundColor, size: size }, stickerList.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg$1, { src: "".concat(sticker.stickerImg, "?d=100x100"), key: index, onClick: function () {
                 stickerClick(sticker.stickerImg);
                 clickSticker(sticker.stickerId);
             }, size: size })); }))) : (React__default["default"].createElement(NoSticker, null,
@@ -22889,12 +22892,23 @@ var lodash = {exports: {}};
 
 var _ = lodash.exports;
 
-var LoadingSpinner = function () {
+var LoadingSpinner = function (_a) {
+    var color = _a.color, size = _a.size, border = _a.border;
     return (React__default["default"].createElement(SpinnerContainer, null,
-        React__default["default"].createElement(Spinner, null)));
+        React__default["default"].createElement(Spinner, { color: color, size: size, border: border })));
 };
 var SpinnerContainer = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n"], ["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n"])));
-var Spinner = styled.div(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  width: 20px;\n  height: 20px;\n  border: 5px solid #f3f3f3;\n  border-top: 5px solid #383636;\n  border-radius: 50%;\n\n  @keyframes spinner {\n    0% {\n      transform: rotate(0deg);\n    }\n    100% {\n      transform: rotate(360deg);\n    }\n  }\n\n  animation: spinner 1s linear infinite;\n"], ["\n  width: 20px;\n  height: 20px;\n  border: 5px solid #f3f3f3;\n  border-top: 5px solid #383636;\n  border-radius: 50%;\n\n  @keyframes spinner {\n    0% {\n      transform: rotate(0deg);\n    }\n    100% {\n      transform: rotate(360deg);\n    }\n  }\n\n  animation: spinner 1s linear infinite;\n"])));
+var Spinner = styled.div(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-top: ", ";\n  border-radius: 50%;\n\n  @keyframes spinner {\n    0% {\n      transform: rotate(0deg);\n    }\n    100% {\n      transform: rotate(360deg);\n    }\n  }\n\n  animation: spinner 1s linear infinite;\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-top: ", ";\n  border-radius: 50%;\n\n  @keyframes spinner {\n    0% {\n      transform: rotate(0deg);\n    }\n    100% {\n      transform: rotate(360deg);\n    }\n  }\n\n  animation: spinner 1s linear infinite;\n"])), function (props) { return (props.size ? "".concat(props.size, "px") : '20px'); }, function (props) { return (props.size ? "".concat(props.size, "px") : '20px'); }, function (props) {
+    return props.border ? "".concat(props.border, "px solid #f3f3f3") : '4px solid #f3f3f3';
+}, function (props) {
+    return props.border
+        ? props.color
+            ? "".concat(props.border, "px solid ").concat(props.color)
+            : "".concat(props.border, "px solid #ff4500")
+        : props.color
+            ? "4px solid ".concat(props.color)
+            : '4px solid #ff4500';
+});
 var templateObject_1$2, templateObject_2$2;
 
 var PickerComponent = function (_a) {
@@ -23002,7 +23016,7 @@ var PickerComponent = function (_a) {
     };
     var clickTime = function () {
         setIsLoading(true);
-        var requestUrl = "https://messenger.stipop.io/v1/package/send/".concat(params.userId, "?limit=50");
+        var requestUrl = "https://messenger.stipop.io/v1/package/send/".concat(params.userId, "?limit=28");
         axios
             .get(requestUrl, {
             headers: {
@@ -23093,13 +23107,13 @@ var PickerComponent = function (_a) {
                 } }, itemCnt - (menu && menu.listCnt ? menu.listCnt - 2 : 4) <=
                 itemNum ? (React__default["default"].createElement(Icon, { type: "LEFT_ARROW" })) : (React__default["default"].createElement(Icon, { type: "RIGHT_ARROW_BLACK" })))),
         !recentView ? (stickers && isLoading ? (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, size: size, isLoading: isLoading },
-            React__default["default"].createElement(LoadingSpinner, null))) : (React__default["default"].createElement(StickerWrapper$1, { id: "sticker-wrapper", backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrolling: scrolling, 
+            React__default["default"].createElement(LoadingSpinner, { color: backgroundColor ? backgroundColor : '#ff4500' }))) : (React__default["default"].createElement(StickerWrapper$1, { id: "sticker-wrapper", backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrolling: scrolling, 
             // onScroll={e => setCurrentScrollTop(e.target.scrollTop)}
             onMouseEnter: function () { return setScrolling(1); }, onMouseLeave: function () { return setScrolling(0); } }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () {
                 stickerClick(sticker.stickerImg);
                 clickSticker(sticker.stickerId);
             } })); })))) : isLoading ? (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading },
-            React__default["default"].createElement(LoadingSpinner, null))) : stickers.length > 0 ? (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading, onScroll: function (e) { return console.log(e.target.scrollTop); }, onMouseEnter: function () { return setScrolling(1); }, onMouseLeave: function () { return setScrolling(0); } }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () { return stickerClick(sticker.stickerImg); } })); }))) : (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: recentView },
+            React__default["default"].createElement(LoadingSpinner, { color: backgroundColor ? backgroundColor : '#ff4500' }))) : stickers.length > 0 ? (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading, onScroll: function (e) { return console.log(e.target.scrollTop); }, onMouseEnter: function () { return setScrolling(1); }, onMouseLeave: function () { return setScrolling(0); } }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () { return stickerClick(sticker.stickerImg); } })); }))) : (React__default["default"].createElement(StickerWrapper$1, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: recentView },
             React__default["default"].createElement("div", { style: {
                     width: '100%',
                     height: '100%',
@@ -23440,7 +23454,7 @@ var StoreComponent = function (_a) {
         });
     }); };
     return (React__default["default"].createElement(React__default["default"].Fragment, null, isLoading ? (React__default["default"].createElement(StoreWrapper, { color: color, size: size, border: border },
-        React__default["default"].createElement(LoadingSpinner, null))) : (React__default["default"].createElement(StoreWrapper, { color: color, size: size, border: border },
+        React__default["default"].createElement(LoadingSpinner, { color: color && color.backgroundColor ? color.backgroundColor : '#ff4500' }))) : (React__default["default"].createElement(StoreWrapper, { color: color, size: size, border: border },
         React__default["default"].createElement(StoreTitle, null,
             detail ? (React__default["default"].createElement("div", { className: "title-text" },
                 React__default["default"].createElement(PreviousBtn, null,
@@ -23460,8 +23474,18 @@ var StoreComponent = function (_a) {
                     React__default["default"].createElement("div", { className: "artistName" },
                         "\u00A9",
                         main.artistName)),
-                btnLoading ? (React__default["default"].createElement(DownloadBtn, { style: { right: '64px' } },
-                    React__default["default"].createElement(LoadingSpinner, null))) : (React__default["default"].createElement(DownloadBtn, { color: color, isDownload: main.isDownload === 'Y', isRecovery: main.isDownload === 'Y' &&
+                btnLoading ? (React__default["default"].createElement(DownloadBtn, { style: {
+                        right: '64px',
+                        backgroundColor: 'rgba(0, 0, 0, 0)',
+                    } },
+                    React__default["default"].createElement(LoadingSpinner, { color: main.isDownload === 'Y' &&
+                            hideList.indexOf(main.packageId) === -1
+                            ? color && color.deleteBtn
+                                ? color.deleteBtn
+                                : '#b3b3b3'
+                            : color && color.downloadBtn
+                                ? color.downloadBtn
+                                : '#ff4500' }))) : (React__default["default"].createElement(DownloadBtn, { color: color, isDownload: main.isDownload === 'Y', isRecovery: main.isDownload === 'Y' &&
                         hideList.indexOf(main.packageId) !== -1, style: { right: '64px' }, onClick: function () {
                         main.isDownload === 'Y'
                             ? clickHide(main.packageId)
@@ -23500,8 +23524,15 @@ var StoreComponent = function (_a) {
                             alt: "", size: size })));
                 }
             })) : (React__default["default"].createElement("div", null))),
-            btnLoading && btnLoading === pack.packageId ? (React__default["default"].createElement(DownloadBtn, null,
-                React__default["default"].createElement(LoadingSpinner, null))) : (React__default["default"].createElement(DownloadBtn, { color: color, isDownload: pack.isDownload === 'Y', btnHover: btnHover === pack.packageId, isRecovery: pack.isDownload === 'Y' &&
+            btnLoading && btnLoading === pack.packageId ? (React__default["default"].createElement(DownloadBtn, { style: { backgroundColor: 'rgba(0, 0, 0, 0)' } },
+                React__default["default"].createElement(LoadingSpinner, { color: pack.isDownload === 'Y' &&
+                        hideList.indexOf(pack.packageId) === -1
+                        ? color && color.deleteBtn
+                            ? color.deleteBtn
+                            : '#b3b3b3'
+                        : color && color.downloadBtn
+                            ? color.downloadBtn
+                            : '#ff4500' }))) : (React__default["default"].createElement(DownloadBtn, { color: color, isDownload: pack.isDownload === 'Y', btnHover: btnHover === pack.packageId, isRecovery: pack.isDownload === 'Y' &&
                     hideList.indexOf(pack.packageId) !== -1 },
                 React__default["default"].createElement(Icon, { type: pack.isDownload === 'Y'
                         ? hideList.indexOf(pack.packageId) < 0
@@ -23583,7 +23614,9 @@ var PackageBox = styled.div(templateObject_12 || (templateObject_12 = __makeTemp
     return props.isDownload
         ? props.color && props.color.downloadedColor
             ? props.color.downloadedColor
-            : '#fff'
+            : props.color && props.color.backgroundColor
+                ? props.color.backgroundColor
+                : '#fff'
         : props.color && props.color.backgroundColor
             ? props.color.backgroundColor
             : '#fff';
@@ -23613,7 +23646,7 @@ var DownloadBtn = styled.div(templateObject_13 || (templateObject_13 = __makeTem
             : props.btnHover
                 ? props.color && props.color.deleteBtnHover
                     ? props.color.deleteBtnHover
-                    : '#b3b3b3'
+                    : '#a1a1a1'
                 : props.color && props.color.deleteBtn
                     ? props.color.deleteBtn
                     : '#b3b3b3'
@@ -23632,7 +23665,7 @@ var DownloadBtn = styled.div(templateObject_13 || (templateObject_13 = __makeTem
                 : '#d13900'
             : props.color && props.color.deleteBtnHover
                 ? props.color.deleteBtnHover
-                : '#b3b3b3'
+                : '#a1a1a1'
         : props.color && props.color.downloadBtnHover
             ? props.color.downloadBtnHover
             : '#d13900';

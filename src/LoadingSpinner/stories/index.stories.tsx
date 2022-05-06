@@ -5,4 +5,4 @@ export default {
   title: 'LoadingSpinner',
 }
 
-export const Spinner = () => <LoadingSpinner />
+export const Spinner = () => <LoadingSpinner border={3} />
