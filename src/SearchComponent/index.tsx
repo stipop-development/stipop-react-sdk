@@ -268,6 +268,7 @@ const StickerWrapper = styled.div`
   width: 100%;
   height: 90%;
   padding-top: 5px;
+  padding-left: 8px;
   overflow-y: auto;
   display: grid;
   grid-template-columns: ${props =>
@@ -283,7 +284,7 @@ const StickerWrapper = styled.div`
 
   &::-webkit-scrollbar {
     display: ${props => (props.scroll === false ? 'none' : '')};
-    width: 9px;
+    width: 8px;
   }
   &::-webkit-scrollbar-track {
     /* background-color: ${props =>
