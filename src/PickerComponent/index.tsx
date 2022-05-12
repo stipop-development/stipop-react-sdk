@@ -287,21 +287,23 @@ const PickerComponent: React.FC<StoreProps> = ({
                       </PackageImgWrapper>
                     )
                 )}
-                {dummies.map(item => (
+                {dummies.map((item, index) => (
                   <PackageImgWrapper
                     id="dummies"
                     menu={menu}
                     size={size}
+                    key={index}
                   ></PackageImgWrapper>
                 ))}
               </>
             )
           ) : (
-            dummies.map(item => (
+            dummies.map((item, index) => (
               <PackageImgWrapper
                 id="dummies"
                 menu={menu}
                 size={size}
+                key={index}
               ></PackageImgWrapper>
             ))
           )}
@@ -393,7 +395,7 @@ const PickerComponent: React.FC<StoreProps> = ({
           column={column}
           scroll={scroll}
           isLoading={isLoading}
-          onScroll={e => console.log(e.target.scrollTop)}
+          // onScroll={e => console.log(e.target.scrollTop)}
           onMouseEnter={() => setScrolling(1)}
           onMouseLeave={() => setScrolling(0)}
         >

@@ -8,8 +8,8 @@ export default {
 export const Search = () => (
   <SearchComponent
     params={{
-      apikey: '3bbe419e29e0e4728474e52a965154fb',
-      userId: 'david@stipop.io',
+      apikey: process.env.API_KEY,
+      userId: process.env.USER_ID,
       lang: 'en',
       pageNumber: 1,
       limit: 100,
@@ -21,8 +21,8 @@ export const Search = () => (
 export const CustomSearch = () => (
   <SearchComponent
     params={{
-      apikey: '3bbe419e29e0e4728474e52a965154fb',
-      userId: 'david@stipop.io',
+      apikey: process.env.API_KEY,
+      userId: process.env.USER_ID,
       lang: 'en',
       pageNumber: 1,
       limit: 50,
