@@ -8,8 +8,8 @@ export default {
 export const Store = () => (
   <StoreComponent
     params={{
-      apikey: '3bbe419e29e0e4728474e52a965154fb',
-      userId: 'david@stipop.io',
+      apikey: process.env.API_KEY,
+      userId: process.env.USER_ID,
       lang: 'en',
       pageNumber: 10,
       limit: 50,
@@ -25,8 +25,8 @@ export const Store = () => (
 export const CustomStore = () => (
   <StoreComponent
     params={{
-      apikey: '3bbe419e29e0e4728474e52a965154fb',
-      userId: 'david@stipop.io',
+      apikey: process.env.API_KEY,
+      userId: process.env.USER_ID,
       lang: 'en',
       limit: 20,
       pageNumber: 5,

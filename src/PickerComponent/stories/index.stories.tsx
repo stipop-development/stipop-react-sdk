@@ -8,8 +8,8 @@ export default {
 export const Picker = () => (
   <PickerComponent
     params={{
-      apikey: '3bbe419e29e0e4728474e52a965154fb',
-      userId: 'david@stipop.io',
+      apikey: process.env.API_KEY,
+      userId: process.env.USER_ID,
     }}
     stickerClick={url => console.log(url)}
   />
@@ -18,8 +18,8 @@ export const Picker = () => (
 export const CustomPicker = () => (
   <PickerComponent
     params={{
-      apikey: '3bbe419e29e0e4728474e52a965154fb',
-      userId: 'david@stipop.io',
+      apikey: process.env.API_KEY,
+      userId: process.env.USER_ID,
     }}
     size={{
       width: 520,

@@ -287,21 +287,23 @@ const PickerComponent: React.FC<StoreProps> = ({
                       </PackageImgWrapper>
                     )
                 )}
-                {dummies.map(item => (
+                {dummies.map((item, index) => (
                   <PackageImgWrapper
                     id="dummies"
                     menu={menu}
                     size={size}
+                    key={index}
                   ></PackageImgWrapper>
                 ))}
               </>
             )
           ) : (
-            dummies.map(item => (
+            dummies.map((item, index) => (
               <PackageImgWrapper
                 id="dummies"
                 menu={menu}
                 size={size}
+                key={index}
               ></PackageImgWrapper>
             ))
           )}
