@@ -8,15 +8,22 @@ import svgr from '@svgr/rollup'
 const packageJson = require('./package.json')
 
 export default {
-  input: 'src/index.ts',
+  input: {
+    index: 'src/index.ts',
+    SearchComponent: 'src/SearchComponent/index.tsx',
+    PickerComponent: 'src/PickerComponent/index.tsx',
+    StoreComponent: 'src/StoreComponent/index.tsx',
+    Icon: 'src/Icon/index.tsx',
+    LoadingSpinner: 'src/LoadingSpinner/index.tsx',
+  },
   output: [
     {
-      file: packageJson.main,
+      dir: 'dist/cjs',
       format: 'cjs',
       sourcemap: true,
     },
     {
-      file: packageJson.module,
+      dir: 'dist',
       format: 'esm',
       sourcemap: true,
     },
