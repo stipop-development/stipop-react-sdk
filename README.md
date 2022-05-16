@@ -32,23 +32,53 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 > Sticker Search Component
 
-```react
-import { SearchComponent } from 'stipop-react-sdk'
+- React
 
-const App = () => {
-  return (
-    <SearchComponent 
-      params={{
-        apikey: 'apikey',
-        userId: 'userId',
-        lang: 'en',
-      }}
-    />
-  )
-}
+  ```react
+  import { SearchComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <SearchComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+          lang: 'en',
+        }}
+      />
+    )
+  }
+  
+  export default App
+  ```
 
-export default App
-```
+- Next.js
+
+  ```react
+  import dynamic from 'next/dynamic'
+  
+  const App = () => {
+    const SearchComponent = dynamic(
+      () => import('stipop-react-sdk/dist/SearchComponent'),
+      {
+        ssr: false,
+      })
+    
+    return (
+      <SearchComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+          lang: 'en',
+        }}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+  
 
 #### List of Params
 
@@ -340,22 +370,51 @@ export default App
 
 > Sticker Picker Component
 
-```react
-import { PickerComponent } from 'stipop-react-sdk'
+- React
 
-const App = () => {
-  return (
-    <PickerComponent 
-      params={{
-        apikey: 'apikey',
-        userId: 'userId',
-      }}
-    />
-  )
-}
+  ```react
+  import { PickerComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <PickerComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+      />
+    )
+  }
+  
+  export default App
+  ```
 
-export default App
-```
+- Next.js
+
+  ```react
+  import dynamic from 'next/dynamic'
+  
+  const App = () => {
+    const PickerComponent = dynamic(
+      () => import('stipop-react-sdk/dist/PickerComponent'),
+      {
+        ssr: false,
+      })
+    
+    return (
+      <PickerComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+  
 
 #### List of Params
 
@@ -661,25 +720,57 @@ export default App
 
 > Sticker Store Component
 
-```react
-import { StoreComponent } from 'stipop-react-sdk'
+- React
 
-const App = () => {
-  return (
-    <StoreComponent 
-      params={{
-        apikey: 'apikey',
-        userId: 'userId',
-      }}
-      downloadParams={{
-        isPurchase: 'N'
-      }}
-    />
-  )
-}
+  ```react
+  import { StoreComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <StoreComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        downloadParams={{
+          isPurchase: 'N'
+        }}
+      />
+    )
+  }
+  
+  export default App
+  ```
 
-export default App
-```
+- Next.js
+
+  ```react
+  import dynamic from 'next/dynamic'
+  
+  const App = () => {
+    const StoreComponent = dynamic(
+      () => import('stipop-react-sdk/dist/StoreComponent'),
+      {
+        ssr: false,
+      })
+    
+    return (
+      <StoreComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        downloadParams={{
+          isPurchase: 'N'
+        }}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+  
 
 #### List of Params
 
