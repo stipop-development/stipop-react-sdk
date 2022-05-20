@@ -73,7 +73,7 @@ const StoreComponent: React.FC<StoreProps> = ({
 
     const hideData = client.myStickerHideList(hideParams)
     hideData.then(({ body }) => {
-      setEndPage(body.pageMap.endPage)
+      setEndPage(body && body.pageMap ? body.pageMap.endPage : 1)
     })
   }, [])
 
@@ -87,9 +87,11 @@ const StoreComponent: React.FC<StoreProps> = ({
         }
         const hideData = client.myStickerHideList(hideParams)
         hideData.then(({ body }) => {
-          body.packageList.map(pack => {
-            setHideList(hideList => hideList.concat(pack.packageId))
-          })
+          body && body.packageList
+            ? body.packageList.map(pack => {
+                setHideList(hideList => hideList.concat(pack.packageId))
+              })
+            : setHideList(hideList)
         })
       }
     } else {
@@ -99,9 +101,11 @@ const StoreComponent: React.FC<StoreProps> = ({
       }
       const hideData = client.myStickerHideList(hideParams)
       hideData.then(({ body }) => {
-        body.packageList.map(pack => {
-          setHideList(hideList => hideList.concat(pack.packageId))
-        })
+        body && body.packageList
+          ? body.packageList.map(pack => {
+              setHideList(hideList => hideList.concat(pack.packageId))
+            })
+          : setHideList(hideList)
       })
     }
   }, [endPage])
