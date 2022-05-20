@@ -58,7 +58,7 @@ var StoreComponent = function (_a) {
         var hideData = client.myStickerHideList(hideParams);
         hideData.then(function (_a) {
             var body = _a.body;
-            setEndPage(body.pageMap.endPage);
+            setEndPage(body && body.pageMap ? body.pageMap.endPage : 1);
         });
     }, []);
     useEffect(function () {
@@ -72,9 +72,11 @@ var StoreComponent = function (_a) {
                 var hideData = client.myStickerHideList(hideParams);
                 hideData.then(function (_a) {
                     var body = _a.body;
-                    body.packageList.map(function (pack) {
-                        setHideList(function (hideList) { return hideList.concat(pack.packageId); });
-                    });
+                    body && body.packageList
+                        ? body.packageList.map(function (pack) {
+                            setHideList(function (hideList) { return hideList.concat(pack.packageId); });
+                        })
+                        : setHideList(hideList);
                 });
             }
         }
@@ -86,9 +88,11 @@ var StoreComponent = function (_a) {
             var hideData = client.myStickerHideList(hideParams);
             hideData.then(function (_a) {
                 var body = _a.body;
-                body.packageList.map(function (pack) {
-                    setHideList(function (hideList) { return hideList.concat(pack.packageId); });
-                });
+                body && body.packageList
+                    ? body.packageList.map(function (pack) {
+                        setHideList(function (hideList) { return hideList.concat(pack.packageId); });
+                    })
+                    : setHideList(hideList);
             });
         }
     }, [endPage]);
