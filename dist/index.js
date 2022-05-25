@@ -6,6 +6,7 @@ export { default as Icon } from './Icon.js';
 export { default as PickerComponent } from './PickerComponent.js';
 export { default as StoreComponent } from './StoreComponent.js';
 import './index-e5177013.js';
+import './index.esm-81c74461.js';
 import './LoadingSpinner.js';
 
 var ChattingComponent = function (_a) {

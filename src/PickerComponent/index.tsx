@@ -9,6 +9,7 @@ import { StoreProps } from './index.types'
 
 import Icon from '../Icon'
 import LoadingSpinner from '../LoadingSpinner'
+import { FiX } from 'react-icons/fi'
 
 const PickerComponent: React.FC<StoreProps> = ({
   params,
@@ -20,6 +21,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   scroll,
   stickerClick,
   storeClick,
+  preview,
 }) => {
   const [myStickers, setMyStickers] = useState([])
   const [stickers, setStickers] = useState([])
@@ -33,8 +35,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   const [scrollX, setScrollX] = useState(0)
   const menuList = document.getElementById('picker-menu')
   const [scrolling, setScrolling] = useState(0)
-  const [currentScrollTop, setCurrentScrollTop] = useState(0)
-  const [lastScrollTop, setLastScrollTop] = useState(0)
+  const [tempSticker, setTempSticker] = useState('')
 
   const client = new (Stipop as any)(params.apikey, 'v1')
 
@@ -112,14 +113,16 @@ const PickerComponent: React.FC<StoreProps> = ({
   }
 
   const clickSticker = stickerId => {
-    const requestUrl = `https://messenger.stipop.io/v1/analytics/send/${stickerId}?userId=${params.userId}`
-    fetch(requestUrl, {
-      method: 'POST',
-      headers: {
-        apikey: params.apikey,
-        'Content-Type': 'application/json',
-      },
-    })
+    if (!preview) {
+      const requestUrl = `https://messenger.stipop.io/v1/analytics/send/${stickerId}?userId=${params.userId}`
+      fetch(requestUrl, {
+        method: 'POST',
+        headers: {
+          apikey: params.apikey,
+          'Content-Type': 'application/json',
+        },
+      })
+    }
     // axios
     //   .post(requestUrl, {
     //     headers: {
@@ -164,18 +167,26 @@ const PickerComponent: React.FC<StoreProps> = ({
     }
   }, [stickers])
 
-  // useEffect(() => {
-  //   if (currentScrollTop - lastScrollTop !== 0) {
-  //     setScrolling(true)
-  //   }
-  //   setTimeout(() => {
-  //     setScrolling(false)
-  //     setLastScrollTop(currentScrollTop)
-  //   }, 1000)
-  // }, [currentScrollTop])
-
   return (
     <PickerWrapper size={size} border={border}>
+      {preview && tempSticker && (
+        <PreviewWrapper>
+          <FiX
+            size={25}
+            color={'#000'}
+            style={{
+              position: 'absolute',
+              right: '15px',
+              top: '15px',
+              cursor: 'pointer',
+            }}
+            onClick={() => {
+              setTempSticker('')
+            }}
+          />
+          <ChatSticker src={tempSticker} />
+        </PreviewWrapper>
+      )}
       <MenuBox>
         <ArrowWrapper
           id={itemNum ? 'left-black' : 'left'}
@@ -371,6 +382,7 @@ const PickerComponent: React.FC<StoreProps> = ({
                 onClick={() => {
                   stickerClick(sticker.stickerImg)
                   clickSticker(sticker.stickerId)
+                  setTempSticker(sticker.stickerImg)
                 }}
               />
             ))}
@@ -395,7 +407,6 @@ const PickerComponent: React.FC<StoreProps> = ({
           column={column}
           scroll={scroll}
           isLoading={isLoading}
-          // onScroll={e => console.log(e.target.scrollTop)}
           onMouseEnter={() => setScrolling(1)}
           onMouseLeave={() => setScrolling(0)}
         >
@@ -405,7 +416,10 @@ const PickerComponent: React.FC<StoreProps> = ({
               src={`${sticker.stickerImg}?d=100x100`}
               alt=""
               key={index}
-              onClick={() => stickerClick(sticker.stickerImg)}
+              onClick={() => {
+                stickerClick(sticker.stickerImg)
+                setTempSticker(sticker.stickerImg)
+              }}
             />
           ))}
         </StickerWrapper>
@@ -456,6 +470,7 @@ const PickerWrapper = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
 `
 const MenuBox = styled.div`
   width: 100%;
@@ -684,4 +699,24 @@ const StickerImg = styled.img`
   width: ${props =>
     props.size && props.size.imgSize ? `${props.size.imgSize}%` : '70%'};
   cursor: pointer;
+`
+const PreviewWrapper = styled.div`
+  width: 60%;
+  height: 150px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  margin-left: 40%;
+  margin-bottom: 5px;
+  padding: 0 24px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 100%;
+`
+const ChatSticker = styled.img`
+  width: 100px;
+  height: 100px;
+  margin-bottom: 5px;
 `

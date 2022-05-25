@@ -5,6 +5,7 @@ import Stipop from 'stipop-js-sdk'
 import { SearchProps } from './index.types'
 
 import Icon from '../Icon/index'
+import { FiX } from 'react-icons/fi'
 
 const SearchComponent: React.FC<SearchProps> = ({
   params,
@@ -15,44 +16,14 @@ const SearchComponent: React.FC<SearchProps> = ({
   input,
   scroll,
   stickerClick,
+  preview,
 }) => {
   const [keyword, setKeyword] = useState(params.default ? params.default : 'hi')
   const [stickerList, setStickerList] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-  // const baseUrl = 'https://messenger.stipop.io/v1/search'
-  // const Stipop = require('stipop-js-sdk')
-  const client = new (Stipop as any)(params.apikey, 'v1')
+  const [tempSticker, setTempSticker] = useState('')
 
-  // useEffect(() => {
-  //   let query = `?userId=${params.userId}&q=${keyword}`
-  //   if (params.lang) {
-  //     query += `&lang=${params.lang}`
-  //   }
-  //   if (params.pageNumber) {
-  //     query += `&pageNumber=${params.pageNumber}`
-  //   }
-  //   if (params.limit) {
-  //     query += `&limit=${params.limit}`
-  //   }
-  //   if (keyword) {
-  //     axios
-  //       .get(`${baseUrl}${query}`, {
-  //         headers: {
-  //           apikey: params.apikey,
-  //           'Content-Type': 'application/json',
-  //         },
-  //       })
-  //       .then(({ data }) => {
-  //         setStickerList(
-  //           data.body.stickerList
-  //             ? data.body.stickerList.map(sticker => sticker.stickerImg)
-  //             : []
-  //         )
-  //       })
-  //   } else {
-  //     setKeyword(params.default)
-  //   }
-  // }, [keyword, params.lang, params.pageNumber, params.limit])
+  const client = new (Stipop as any)(params.apikey, 'v1')
 
   useEffect(() => {
     setIsLoading(true)
@@ -79,24 +50,16 @@ const SearchComponent: React.FC<SearchProps> = ({
   }, [keyword, params.lang, params.pageNumber, params.limit])
 
   const clickSticker = stickerId => {
-    const requestUrl = `https://messenger.stipop.io/v1/analytics/send/${stickerId}?userId=${params.userId}`
-    fetch(requestUrl, {
-      method: 'POST',
-      headers: {
-        apikey: params.apikey,
-        'Content-Type': 'application/json',
-      },
-    })
-    // axios
-    //   .post(requestUrl, {
-    //     headers: {
-    //       apikey: params.apikey,
-    //       'Content-Type': 'application/json',
-    //     },
-    //   })
-    //   .then(res => {
-    //     console.log(res.data.headers)
-    //   })
+    if (!preview) {
+      const requestUrl = `https://messenger.stipop.io/v1/analytics/send/${stickerId}?userId=${params.userId}`
+      fetch(requestUrl, {
+        method: 'POST',
+        headers: {
+          apikey: params.apikey,
+          'Content-Type': 'application/json',
+        },
+      })
+    }
   }
 
   return (
@@ -105,6 +68,24 @@ const SearchComponent: React.FC<SearchProps> = ({
       backgroundColor={backgroundColor}
       border={border}
     >
+      {preview && tempSticker && (
+        <PreviewWrapper>
+          <FiX
+            size={25}
+            color={'#000'}
+            style={{
+              position: 'absolute',
+              right: '15px',
+              top: '15px',
+              cursor: 'pointer',
+            }}
+            onClick={() => {
+              setTempSticker('')
+            }}
+          />
+          <ChatSticker src={tempSticker} />
+        </PreviewWrapper>
+      )}
       <SearchForm>
         <SearchInput
           type="text"
@@ -135,6 +116,7 @@ const SearchComponent: React.FC<SearchProps> = ({
               onClick={() => {
                 stickerClick(sticker.stickerImg)
                 clickSticker(sticker.stickerId)
+                setTempSticker(sticker.stickerImg)
               }}
               size={size}
             />
@@ -330,4 +312,24 @@ const StickerImg = styled.img`
   &:hover {
     cursor: pointer;
   }
+`
+const PreviewWrapper = styled.div`
+  width: 60%;
+  height: 150px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  margin-left: 40%;
+  margin-bottom: 5px;
+  padding: 0 24px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 100%;
+`
+const ChatSticker = styled.img`
+  width: 100px;
+  height: 100px;
+  margin-bottom: 5px;
 `

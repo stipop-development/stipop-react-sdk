@@ -3,45 +3,15 @@ import React__default, { useState, useEffect } from 'react';
 import { s as styled } from './styled-components.browser.esm-500d8596.js';
 import { S as Stipop } from './index-e5177013.js';
 import Icon from './Icon.js';
+import { F as FiX } from './index.esm-81c74461.js';
 
 var SearchComponent = function (_a) {
-    var params = _a.params, size = _a.size, backgroundColor = _a.backgroundColor, column = _a.column, border = _a.border, input = _a.input, scroll = _a.scroll, stickerClick = _a.stickerClick;
+    var params = _a.params, size = _a.size, backgroundColor = _a.backgroundColor, column = _a.column, border = _a.border, input = _a.input, scroll = _a.scroll, stickerClick = _a.stickerClick, preview = _a.preview;
     var _b = useState(params.default ? params.default : 'hi'), keyword = _b[0], setKeyword = _b[1];
     var _c = useState([]), stickerList = _c[0], setStickerList = _c[1];
     var _d = useState(false), isLoading = _d[0], setIsLoading = _d[1];
-    // const baseUrl = 'https://messenger.stipop.io/v1/search'
-    // const Stipop = require('stipop-js-sdk')
+    var _e = useState(''), tempSticker = _e[0], setTempSticker = _e[1];
     var client = new Stipop(params.apikey, 'v1');
-    // useEffect(() => {
-    //   let query = `?userId=${params.userId}&q=${keyword}`
-    //   if (params.lang) {
-    //     query += `&lang=${params.lang}`
-    //   }
-    //   if (params.pageNumber) {
-    //     query += `&pageNumber=${params.pageNumber}`
-    //   }
-    //   if (params.limit) {
-    //     query += `&limit=${params.limit}`
-    //   }
-    //   if (keyword) {
-    //     axios
-    //       .get(`${baseUrl}${query}`, {
-    //         headers: {
-    //           apikey: params.apikey,
-    //           'Content-Type': 'application/json',
-    //         },
-    //       })
-    //       .then(({ data }) => {
-    //         setStickerList(
-    //           data.body.stickerList
-    //             ? data.body.stickerList.map(sticker => sticker.stickerImg)
-    //             : []
-    //         )
-    //       })
-    //   } else {
-    //     setKeyword(params.default)
-    //   }
-    // }, [keyword, params.lang, params.pageNumber, params.limit])
     useEffect(function () {
         setIsLoading(true);
         // console.log(keyword)
@@ -66,26 +36,28 @@ var SearchComponent = function (_a) {
         }
     }, [keyword, params.lang, params.pageNumber, params.limit]);
     var clickSticker = function (stickerId) {
-        var requestUrl = "https://messenger.stipop.io/v1/analytics/send/".concat(stickerId, "?userId=").concat(params.userId);
-        fetch(requestUrl, {
-            method: 'POST',
-            headers: {
-                apikey: params.apikey,
-                'Content-Type': 'application/json',
-            },
-        });
-        // axios
-        //   .post(requestUrl, {
-        //     headers: {
-        //       apikey: params.apikey,
-        //       'Content-Type': 'application/json',
-        //     },
-        //   })
-        //   .then(res => {
-        //     console.log(res.data.headers)
-        //   })
+        if (!preview) {
+            var requestUrl = "https://messenger.stipop.io/v1/analytics/send/".concat(stickerId, "?userId=").concat(params.userId);
+            fetch(requestUrl, {
+                method: 'POST',
+                headers: {
+                    apikey: params.apikey,
+                    'Content-Type': 'application/json',
+                },
+            });
+        }
     };
     return (React__default.createElement(SearchWrapper, { size: size, backgroundColor: backgroundColor, border: border },
+        preview && tempSticker && (React__default.createElement(PreviewWrapper, null,
+            React__default.createElement(FiX, { size: 25, color: '#000', style: {
+                    position: 'absolute',
+                    right: '15px',
+                    top: '15px',
+                    cursor: 'pointer',
+                }, onClick: function () {
+                    setTempSticker('');
+                } }),
+            React__default.createElement(ChatSticker, { src: tempSticker }))),
         React__default.createElement(SearchForm, null,
             React__default.createElement(SearchInput, { type: "text", onChange: function (e) { return setKeyword(e.target.value); }, placeholder: "Search sticker...", input: input }),
             React__default.createElement(InputHolder, { input: input },
@@ -96,6 +68,7 @@ var SearchComponent = function (_a) {
         !isLoading && stickerList.length > 0 ? (React__default.createElement(StickerWrapper, { column: column, scroll: scroll, border: border, backgroundColor: backgroundColor, size: size }, stickerList.map(function (sticker, index) { return (React__default.createElement(StickerImg, { src: "".concat(sticker.stickerImg, "?d=100x100"), key: index, onClick: function () {
                 stickerClick(sticker.stickerImg);
                 clickSticker(sticker.stickerId);
+                setTempSticker(sticker.stickerImg);
             }, size: size })); }))) : (React__default.createElement(NoSticker, null,
             React__default.createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker" }),
             React__default.createElement("span", { className: "no-sticker-text" }, "No Stickers to Show")))));
@@ -167,7 +140,9 @@ var NoSticker = styled.div(templateObject_6 || (templateObject_6 = __makeTemplat
 var StickerImg = styled.img(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"], ["\n  width: ", ";\n  height: auto;\n  &:hover {\n    cursor: pointer;\n  }\n"])), function (props) {
     return props.size && props.size.imgSize ? "".concat(props.size.imgSize, "%") : '60%';
 });
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7;
+var PreviewWrapper = styled.div(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n  width: 60%;\n  height: 150px;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 10px;\n  margin-left: 40%;\n  margin-bottom: 5px;\n  padding: 0 24px;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  bottom: 100%;\n"], ["\n  width: 60%;\n  height: 150px;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 10px;\n  margin-left: 40%;\n  margin-bottom: 5px;\n  padding: 0 24px;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  bottom: 100%;\n"])));
+var ChatSticker = styled.img(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n  width: 100px;\n  height: 100px;\n  margin-bottom: 5px;\n"], ["\n  width: 100px;\n  height: 100px;\n  margin-bottom: 5px;\n"])));
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9;
 
 export { SearchComponent as default };
 //# sourceMappingURL=SearchComponent.js.map

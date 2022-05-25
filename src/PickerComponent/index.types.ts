@@ -8,6 +8,7 @@ export interface StoreProps {
   scroll?: boolean
   stickerClick?: Function
   storeClick?: Function
+  preview?: boolean
 }
 
 interface Params {

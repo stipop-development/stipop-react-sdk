@@ -6,6 +6,7 @@ var styledComponents_browser_esm = require('./styled-components.browser.esm-5ad5
 var index = require('./index-531cfe3e.js');
 var Icon = require('./Icon.js');
 var LoadingSpinner = require('./LoadingSpinner.js');
+var index_esm = require('./index.esm-f4fc32bf.js');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -19027,7 +19028,7 @@ var lodash = {exports: {}};
 var _ = lodash.exports;
 
 var PickerComponent = function (_a) {
-    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, stickerClick = _a.stickerClick, storeClick = _a.storeClick;
+    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, stickerClick = _a.stickerClick, storeClick = _a.storeClick, preview = _a.preview;
     var _b = React.useState([]), myStickers = _b[0], setMyStickers = _b[1];
     var _c = React.useState([]), stickers = _c[0], setStickers = _c[1];
     var _d = React.useState(0), showPackage = _d[0], setShowPackage = _d[1];
@@ -19038,8 +19039,7 @@ var PickerComponent = function (_a) {
     var _j = React.useState(0), scrollX = _j[0], setScrollX = _j[1];
     var menuList = document.getElementById('picker-menu');
     var _k = React.useState(0), scrolling = _k[0], setScrolling = _k[1];
-    var _l = React.useState(0); _l[0]; _l[1];
-    var _m = React.useState(0); _m[0]; _m[1];
+    var _l = React.useState(''), tempSticker = _l[0], setTempSticker = _l[1];
     var client = new index.Stipop(params.apikey, 'v1');
     var dummies = [];
     _.times(menu && menu.listCnt ? menu.listCnt - (2 + itemCnt) : 6 - (2 + itemCnt), function (n) { return dummies.push({ index: n.toString(36) }); });
@@ -19110,14 +19110,16 @@ var PickerComponent = function (_a) {
         });
     }); };
     var clickSticker = function (stickerId) {
-        var requestUrl = "https://messenger.stipop.io/v1/analytics/send/".concat(stickerId, "?userId=").concat(params.userId);
-        fetch(requestUrl, {
-            method: 'POST',
-            headers: {
-                apikey: params.apikey,
-                'Content-Type': 'application/json',
-            },
-        });
+        if (!preview) {
+            var requestUrl = "https://messenger.stipop.io/v1/analytics/send/".concat(stickerId, "?userId=").concat(params.userId);
+            fetch(requestUrl, {
+                method: 'POST',
+                headers: {
+                    apikey: params.apikey,
+                    'Content-Type': 'application/json',
+                },
+            });
+        }
         // axios
         //   .post(requestUrl, {
         //     headers: {
@@ -19161,16 +19163,17 @@ var PickerComponent = function (_a) {
             }
         }
     }, [stickers]);
-    // useEffect(() => {
-    //   if (currentScrollTop - lastScrollTop !== 0) {
-    //     setScrolling(true)
-    //   }
-    //   setTimeout(() => {
-    //     setScrolling(false)
-    //     setLastScrollTop(currentScrollTop)
-    //   }, 1000)
-    // }, [currentScrollTop])
     return (React__default["default"].createElement(PickerWrapper, { size: size, border: border },
+        preview && tempSticker && (React__default["default"].createElement(PreviewWrapper, null,
+            React__default["default"].createElement(index_esm.FiX, { size: 25, color: '#000', style: {
+                    position: 'absolute',
+                    right: '15px',
+                    top: '15px',
+                    cursor: 'pointer',
+                }, onClick: function () {
+                    setTempSticker('');
+                } }),
+            React__default["default"].createElement(ChatSticker, { src: tempSticker }))),
         React__default["default"].createElement(MenuBox, null,
             React__default["default"].createElement(ArrowWrapper, { id: itemNum ? 'left-black' : 'left', backgroundColor: backgroundColor, border: border, menu: menu, size: size, onClick: function () {
                     menuList.scrollTo(scrollX -
@@ -19227,10 +19230,12 @@ var PickerComponent = function (_a) {
             onMouseEnter: function () { return setScrolling(1); }, onMouseLeave: function () { return setScrolling(0); } }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () {
                 stickerClick(sticker.stickerImg);
                 clickSticker(sticker.stickerId);
+                setTempSticker(sticker.stickerImg);
             } })); })))) : isLoading ? (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading },
-            React__default["default"].createElement(LoadingSpinner, { color: backgroundColor ? backgroundColor : '#ff4500' }))) : stickers.length > 0 ? (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading, 
-            // onScroll={e => console.log(e.target.scrollTop)}
-            onMouseEnter: function () { return setScrolling(1); }, onMouseLeave: function () { return setScrolling(0); } }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () { return stickerClick(sticker.stickerImg); } })); }))) : (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: recentView },
+            React__default["default"].createElement(LoadingSpinner, { color: backgroundColor ? backgroundColor : '#ff4500' }))) : stickers.length > 0 ? (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading, onMouseEnter: function () { return setScrolling(1); }, onMouseLeave: function () { return setScrolling(0); } }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () {
+                stickerClick(sticker.stickerImg);
+                setTempSticker(sticker.stickerImg);
+            } })); }))) : (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: recentView },
             React__default["default"].createElement("div", { style: {
                     width: '100%',
                     height: '100%',
@@ -19240,7 +19245,7 @@ var PickerComponent = function (_a) {
                 } },
                 React__default["default"].createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker", style: { width: '40%' } }))))));
 };
-var PickerWrapper = styledComponents_browser_esm.styled.div(templateObject_1 || (templateObject_1 = tslib_es6.__makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n"])), function (props) {
+var PickerWrapper = styledComponents_browser_esm.styled.div(templateObject_1 || (templateObject_1 = tslib_es6.__makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  position: relative;\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  position: relative;\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
 }, function (props) {
     return props.size && props.size.height ? "".concat(props.size.height, "px") : '300px';
@@ -19365,7 +19370,9 @@ var StickerWrapper = styledComponents_browser_esm.styled.div(templateObject_8 ||
 var StickerImg = styledComponents_browser_esm.styled.img(templateObject_9 || (templateObject_9 = tslib_es6.__makeTemplateObject(["\n  width: ", ";\n  cursor: pointer;\n"], ["\n  width: ", ";\n  cursor: pointer;\n"])), function (props) {
     return props.size && props.size.imgSize ? "".concat(props.size.imgSize, "%") : '70%';
 });
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9;
+var PreviewWrapper = styledComponents_browser_esm.styled.div(templateObject_10 || (templateObject_10 = tslib_es6.__makeTemplateObject(["\n  width: 60%;\n  height: 150px;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 10px;\n  margin-left: 40%;\n  margin-bottom: 5px;\n  padding: 0 24px;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  bottom: 100%;\n"], ["\n  width: 60%;\n  height: 150px;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 10px;\n  margin-left: 40%;\n  margin-bottom: 5px;\n  padding: 0 24px;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  bottom: 100%;\n"])));
+var ChatSticker = styledComponents_browser_esm.styled.img(templateObject_11 || (templateObject_11 = tslib_es6.__makeTemplateObject(["\n  width: 100px;\n  height: 100px;\n  margin-bottom: 5px;\n"], ["\n  width: 100px;\n  height: 100px;\n  margin-bottom: 5px;\n"])));
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10, templateObject_11;
 
 module.exports = PickerComponent;
 //# sourceMappingURL=PickerComponent.js.map

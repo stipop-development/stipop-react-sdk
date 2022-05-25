@@ -10,6 +10,7 @@ var Icon = require('./Icon.js');
 var PickerComponent = require('./PickerComponent.js');
 var StoreComponent = require('./StoreComponent.js');
 require('./index-531cfe3e.js');
+require('./index.esm-f4fc32bf.js');
 require('./LoadingSpinner.js');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
