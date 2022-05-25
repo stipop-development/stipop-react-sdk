@@ -7,6 +7,7 @@ export interface SearchProps {
   input?: Input
   scroll?: boolean
   stickerClick?: Function
+  preview?: boolean
 }
 
 interface Params {
