@@ -5,7 +5,8 @@ import Stipop from 'stipop-js-sdk'
 import { SearchProps } from './index.types'
 
 import Icon from '../Icon/index'
-import { FiX } from 'react-icons/fi'
+import { FiX, FiSearch } from 'react-icons/fi'
+import LoadingSpinner from '../LoadingSpinner'
 
 const SearchComponent: React.FC<SearchProps> = ({
   params,
@@ -15,6 +16,7 @@ const SearchComponent: React.FC<SearchProps> = ({
   border,
   input,
   scroll,
+  scrollHover,
   stickerClick,
   preview,
 }) => {
@@ -22,6 +24,7 @@ const SearchComponent: React.FC<SearchProps> = ({
   const [stickerList, setStickerList] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [tempSticker, setTempSticker] = useState('')
+  const [inputFocus, setInputFocus] = useState(false)
 
   const client = new (Stipop as any)(params.apikey, 'v1')
 
@@ -38,11 +41,12 @@ const SearchComponent: React.FC<SearchProps> = ({
 
     if (keyword) {
       const data = client.getSearch(searchParams)
-
       data.then(({ body }) => {
         // console.log(body)
         setStickerList(body && body.stickerList ? body.stickerList : [])
-        setIsLoading(false)
+        setTimeout(() => {
+          setIsLoading(false)
+        }, 500)
       })
     } else {
       setKeyword(params.default ? params.default : 'hi')
@@ -89,47 +93,72 @@ const SearchComponent: React.FC<SearchProps> = ({
       <SearchForm>
         <SearchInput
           type="text"
+          onFocus={() => setInputFocus(true)}
+          onBlur={() => setInputFocus(false)}
           onChange={e => setKeyword(e.target.value)}
           placeholder="Search sticker..."
           input={input}
         />
         <InputHolder input={input}>
-          <Icon type="SEARCH" />
+          <FiSearch
+            size={18}
+            color={
+              inputFocus
+                ? input && input.focus
+                  ? input.focus
+                  : '#d5d5d5'
+                : input && input.search
+                ? input.search
+                : '#d5d5d5'
+            }
+          />
           <div>
             <span>POWERED BY</span>
             <Icon type="LOGO" />
           </div>
         </InputHolder>
       </SearchForm>
-      {!isLoading && stickerList.length > 0 ? (
-        <StickerWrapper
-          column={column}
-          scroll={scroll}
-          border={border}
-          backgroundColor={backgroundColor}
-          size={size}
-        >
-          {stickerList.map((sticker, index) => (
-            <StickerImg
-              src={`${sticker.stickerImg}?d=100x100`}
-              key={index}
-              onClick={() => {
-                stickerClick(sticker.stickerImg)
-                clickSticker(sticker.stickerId)
-                setTempSticker(sticker.stickerImg)
-              }}
-              size={size}
-            />
-          ))}
-        </StickerWrapper>
+      {!isLoading ? (
+        stickerList.length > 0 ? (
+          <StickerWrapper
+            column={column}
+            scroll={scroll}
+            scrollHover={scrollHover}
+            border={border}
+            backgroundColor={backgroundColor}
+            size={size}
+          >
+            {stickerList.map((sticker, index) => (
+              <StickerImg
+                src={`${sticker.stickerImg}?d=100x100`}
+                key={index}
+                onClick={() => {
+                  if (preview) {
+                    stickerClick({
+                      url: sticker.stickerImg,
+                      id: sticker.stickerId,
+                    })
+                  } else {
+                    stickerClick(sticker.stickerImg)
+                  }
+                  clickSticker(sticker.stickerId)
+                  setTempSticker(sticker.stickerImg)
+                }}
+                size={size}
+              />
+            ))}
+          </StickerWrapper>
+        ) : (
+          <NoSticker>
+            <img
+              src="https://img.stipop.io/image/sdk/no-sticker.png"
+              className="no-sticker"
+            ></img>
+            <span className="no-sticker-text">No Stickers to Show</span>
+          </NoSticker>
+        )
       ) : (
-        <NoSticker>
-          <img
-            src="https://img.stipop.io/image/sdk/no-sticker.png"
-            className="no-sticker"
-          ></img>
-          <span className="no-sticker-text">No Stickers to Show</span>
-        </NoSticker>
+        <LoadingSpinner />
       )}
     </SearchWrapper>
   )
@@ -201,9 +230,15 @@ const SearchInput = styled.input`
     outline: none;
     border: ${props =>
       props.input && props.input.border
-        ? `${
-            Number(props.input.border.slice(0, 1)) + 1
-          }${props.input.border.slice(1)}`
+        ? props.input.focus
+          ? `${Number(props.input.border.slice(0, 1)) + 1}px ${
+              props.input.border.split(' ')[1]
+            } ${props.input.focus}`
+          : `${Number(props.input.border.slice(0, 1)) + 1}px ${
+              props.input.border.split(' ')[1]
+            } ${props.input.border.split(' ')[2]}`
+        : props.input && props.input.focus
+        ? `3px solid ${props.input.focus}`
         : '3px solid lightgray'};
     box-sizing: border-box;
   }
@@ -231,10 +266,6 @@ const InputHolder = styled.div`
       ? props.input.backgroundColor
       : '#fff'};
   position: absolute;
-
-  .search-icon {
-    width: 15px;
-  }
 
   div {
     display: flex;
@@ -281,7 +312,8 @@ const StickerWrapper = styled.div`
     background: #bcc0c4;
     border-radius: 5px;
     &:hover {
-      background: #6d7072;
+      background: ${props =>
+        props.scrollHover ? props.scrollHover : '#6d7072'};
     }
   }
   -webkit-user-select: none;

@@ -1,13 +1,12 @@
 export { default as SearchComponent } from './SearchComponent.js';
 import { _ as __makeTemplateObject } from './tslib.es6-a827156a.js';
 import React__default, { useState, useEffect } from 'react';
-import { s as styled } from './styled-components.browser.esm-500d8596.js';
+import { s as styled } from './index-6a59c9f1.js';
 export { default as Icon } from './Icon.js';
 export { default as PickerComponent } from './PickerComponent.js';
 export { default as StoreComponent } from './StoreComponent.js';
 import './index-e5177013.js';
-import './index.esm-81c74461.js';
-import './LoadingSpinner.js';
+import './index.esm-3315737a.js';
 
 var ChattingComponent = function (_a) {
     var width = _a.width, height = _a.height, sticker = _a.sticker;

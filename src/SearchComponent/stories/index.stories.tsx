@@ -23,7 +23,6 @@ export const Search = () => (
         pageNumber: 1,
         limit: 100,
       }}
-      stickerClick={sticker => console.log(sticker)}
     />
   </div>
 )

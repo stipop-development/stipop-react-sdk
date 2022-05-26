@@ -9,7 +9,7 @@ import { StoreProps } from './index.types'
 
 import Icon from '../Icon'
 import LoadingSpinner from '../LoadingSpinner'
-import { FiX } from 'react-icons/fi'
+import { FiX, FiChevronRight, FiChevronLeft } from 'react-icons/fi'
 
 const PickerComponent: React.FC<StoreProps> = ({
   params,
@@ -19,6 +19,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   menu,
   column,
   scroll,
+  scrollHover,
   stickerClick,
   storeClick,
   preview,
@@ -205,9 +206,12 @@ const PickerComponent: React.FC<StoreProps> = ({
           }}
         >
           {itemNum ? (
-            <Icon type="RIGHT_ARROW_BLACK" />
+            <FiChevronLeft
+              size={30}
+              color={menu && menu.arrowColor ? menu.arrowColor : '#000'}
+            />
           ) : (
-            <Icon type="LEFT_ARROW" />
+            <FiChevronLeft size={30} color={'#c1c1c1'} />
           )}
         </ArrowWrapper>
         <PickerMenu
@@ -341,9 +345,12 @@ const PickerComponent: React.FC<StoreProps> = ({
         >
           {itemCnt - (menu && menu.listCnt ? menu.listCnt - 2 : 4) <=
           itemNum ? (
-            <Icon type="LEFT_ARROW" />
+            <FiChevronRight size={30} color={'#c1c1c1'} />
           ) : (
-            <Icon type="RIGHT_ARROW_BLACK" />
+            <FiChevronRight
+              size={30}
+              color={menu && menu.arrowColor ? menu.arrowColor : '#000'}
+            />
           )}
         </ArrowWrapper>
       </MenuBox>
@@ -354,6 +361,7 @@ const PickerComponent: React.FC<StoreProps> = ({
             border={border}
             column={column}
             scroll={scroll}
+            scrollHover={scrollHover}
             size={size}
             isLoading={isLoading}
           >
@@ -368,6 +376,7 @@ const PickerComponent: React.FC<StoreProps> = ({
             border={border}
             column={column}
             scroll={scroll}
+            scrollHover={scrollHover}
             scrolling={scrolling}
             // onScroll={e => setCurrentScrollTop(e.target.scrollTop)}
             onMouseEnter={() => setScrolling(1)}
@@ -380,7 +389,14 @@ const PickerComponent: React.FC<StoreProps> = ({
                 alt=""
                 key={index}
                 onClick={() => {
-                  stickerClick(sticker.stickerImg)
+                  if (preview) {
+                    stickerClick({
+                      url: sticker.stickerImg,
+                      id: sticker.stickerId,
+                    })
+                  } else {
+                    stickerClick(sticker.stickerImg)
+                  }
                   clickSticker(sticker.stickerId)
                   setTempSticker(sticker.stickerImg)
                 }}
@@ -394,6 +410,7 @@ const PickerComponent: React.FC<StoreProps> = ({
           border={border}
           column={column}
           scroll={scroll}
+          scrollHover={scrollHover}
           isLoading={isLoading}
         >
           <LoadingSpinner
@@ -406,6 +423,7 @@ const PickerComponent: React.FC<StoreProps> = ({
           border={border}
           column={column}
           scroll={scroll}
+          scrollHover={scrollHover}
           isLoading={isLoading}
           onMouseEnter={() => setScrolling(1)}
           onMouseLeave={() => setScrolling(0)}
@@ -417,7 +435,14 @@ const PickerComponent: React.FC<StoreProps> = ({
               alt=""
               key={index}
               onClick={() => {
-                stickerClick(sticker.stickerImg)
+                if (preview) {
+                  stickerClick({
+                    url: sticker.stickerImg,
+                    id: sticker.stickerId,
+                  })
+                } else {
+                  stickerClick(sticker.stickerImg)
+                }
                 setTempSticker(sticker.stickerImg)
               }}
             />
@@ -429,6 +454,7 @@ const PickerComponent: React.FC<StoreProps> = ({
           border={border}
           column={column}
           scroll={scroll}
+          scrollHover={scrollHover}
           isLoading={recentView}
         >
           <div
@@ -687,7 +713,8 @@ const StickerWrapper = styled.div`
     background: #bcc0c4;
     border-radius: 5px;
     &:hover {
-      background: #6d7072;
+      background: ${props =>
+        props.scrollHover ? props.scrollHover : '#6d7072'};
     }
   }
   -webkit-user-select: none;

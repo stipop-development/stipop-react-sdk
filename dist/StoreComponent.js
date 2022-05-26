@@ -1,9 +1,8 @@
 import { _ as __makeTemplateObject, b as __awaiter, c as __generator } from './tslib.es6-a827156a.js';
 import React__default, { useState, useEffect } from 'react';
-import { s as styled } from './styled-components.browser.esm-500d8596.js';
+import { s as styled, L as LoadingSpinner } from './index-6a59c9f1.js';
 import { S as Stipop } from './index-e5177013.js';
 import Icon from './Icon.js';
-import LoadingSpinner from './LoadingSpinner.js';
 
 var StoreComponent = function (_a) {
     var params = _a.params, downloadParams = _a.downloadParams, color = _a.color, scroll = _a.scroll, onClose = _a.onClose, size = _a.size, border = _a.border;

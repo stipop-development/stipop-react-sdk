@@ -6,6 +6,7 @@ export interface StoreProps {
   menu?: Menu
   column?: number
   scroll?: boolean
+  scrollHover?: string
   stickerClick?: Function
   storeClick?: Function
   preview?: boolean
@@ -33,4 +34,5 @@ interface Menu {
   selectedLine?: string
   height?: number
   listCnt?: number
+  arrowColor?: string
 }
