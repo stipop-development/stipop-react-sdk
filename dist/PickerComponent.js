@@ -1,10 +1,9 @@
 import { _ as __makeTemplateObject, b as __awaiter, c as __generator } from './tslib.es6-a827156a.js';
 import React__default, { useState, useEffect } from 'react';
-import { s as styled } from './styled-components.browser.esm-500d8596.js';
+import { s as styled, L as LoadingSpinner } from './index-6a59c9f1.js';
 import { c as commonjsGlobal, S as Stipop } from './index-e5177013.js';
 import Icon from './Icon.js';
-import LoadingSpinner from './LoadingSpinner.js';
-import { F as FiX } from './index.esm-81c74461.js';
+import { F as FiX, b as FiChevronLeft, c as FiChevronRight } from './index.esm-3315737a.js';
 
 var axios$2 = {exports: {}};
 
@@ -19022,7 +19021,7 @@ var lodash = {exports: {}};
 var _ = lodash.exports;
 
 var PickerComponent = function (_a) {
-    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, stickerClick = _a.stickerClick, storeClick = _a.storeClick, preview = _a.preview;
+    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, storeClick = _a.storeClick, preview = _a.preview;
     var _b = useState([]), myStickers = _b[0], setMyStickers = _b[1];
     var _c = useState([]), stickers = _c[0], setStickers = _c[1];
     var _d = useState(0), showPackage = _d[0], setShowPackage = _d[1];
@@ -19174,7 +19173,7 @@ var PickerComponent = function (_a) {
                         (menu && menu.listCnt
                             ? itemWidth * menu.listCnt
                             : itemWidth * 6), 0);
-                } }, itemNum ? (React__default.createElement(Icon, { type: "RIGHT_ARROW_BLACK" })) : (React__default.createElement(Icon, { type: "LEFT_ARROW" }))),
+                } }, itemNum ? (React__default.createElement(FiChevronLeft, { size: 30, color: menu && menu.arrowColor ? menu.arrowColor : '#000' })) : (React__default.createElement(FiChevronLeft, { size: 30, color: '#c1c1c1' }))),
             React__default.createElement(PickerMenu, { id: "picker-menu", backgroundColor: backgroundColor, border: border, menu: menu, size: size, onScroll: function (e) {
                     setItemNum(Math.round(e.target.scrollLeft /
                         (size && size.width
@@ -19217,19 +19216,35 @@ var PickerComponent = function (_a) {
                             ? itemWidth * menu.listCnt
                             : itemWidth * 6), 0);
                 } }, itemCnt - (menu && menu.listCnt ? menu.listCnt - 2 : 4) <=
-                itemNum ? (React__default.createElement(Icon, { type: "LEFT_ARROW" })) : (React__default.createElement(Icon, { type: "RIGHT_ARROW_BLACK" })))),
-        !recentView ? (stickers && isLoading ? (React__default.createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, size: size, isLoading: isLoading },
-            React__default.createElement(LoadingSpinner, { color: backgroundColor ? backgroundColor : '#ff4500' }))) : (React__default.createElement(StickerWrapper, { id: "sticker-wrapper", backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrolling: scrolling, 
+                itemNum ? (React__default.createElement(FiChevronRight, { size: 30, color: '#c1c1c1' })) : (React__default.createElement(FiChevronRight, { size: 30, color: menu && menu.arrowColor ? menu.arrowColor : '#000' })))),
+        !recentView ? (stickers && isLoading ? (React__default.createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, size: size, isLoading: isLoading },
+            React__default.createElement(LoadingSpinner, { color: backgroundColor ? backgroundColor : '#ff4500' }))) : (React__default.createElement(StickerWrapper, { id: "sticker-wrapper", backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, scrolling: scrolling, 
             // onScroll={e => setCurrentScrollTop(e.target.scrollTop)}
             onMouseEnter: function () { return setScrolling(1); }, onMouseLeave: function () { return setScrolling(0); } }, stickers.map(function (sticker, index) { return (React__default.createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () {
-                stickerClick(sticker.stickerImg);
+                if (preview) {
+                    stickerClick({
+                        url: sticker.stickerImg,
+                        id: sticker.stickerId,
+                    });
+                }
+                else {
+                    stickerClick(sticker.stickerImg);
+                }
                 clickSticker(sticker.stickerId);
                 setTempSticker(sticker.stickerImg);
-            } })); })))) : isLoading ? (React__default.createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading },
-            React__default.createElement(LoadingSpinner, { color: backgroundColor ? backgroundColor : '#ff4500' }))) : stickers.length > 0 ? (React__default.createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading, onMouseEnter: function () { return setScrolling(1); }, onMouseLeave: function () { return setScrolling(0); } }, stickers.map(function (sticker, index) { return (React__default.createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () {
-                stickerClick(sticker.stickerImg);
+            } })); })))) : isLoading ? (React__default.createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, isLoading: isLoading },
+            React__default.createElement(LoadingSpinner, { color: backgroundColor ? backgroundColor : '#ff4500' }))) : stickers.length > 0 ? (React__default.createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, isLoading: isLoading, onMouseEnter: function () { return setScrolling(1); }, onMouseLeave: function () { return setScrolling(0); } }, stickers.map(function (sticker, index) { return (React__default.createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () {
+                if (preview) {
+                    stickerClick({
+                        url: sticker.stickerImg,
+                        id: sticker.stickerId,
+                    });
+                }
+                else {
+                    stickerClick(sticker.stickerImg);
+                }
                 setTempSticker(sticker.stickerImg);
-            } })); }))) : (React__default.createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: recentView },
+            } })); }))) : (React__default.createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, isLoading: recentView },
             React__default.createElement("div", { style: {
                     width: '100%',
                     height: '100%',
@@ -19336,7 +19351,7 @@ var PackageImgWrapper = styled.div(templateObject_6 || (templateObject_6 = __mak
             : '1px solid lightgray';
 });
 var PackageImg = styled.img(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  width: 60%;\n  filter: ", ";\n"], ["\n  width: 60%;\n  filter: ", ";\n"])), function (props) { return (props.show ? '' : 'saturate(0%)'); });
-var StickerWrapper = styled.div(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  grid-template-rows: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: scroll;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    /* display: ", "; */\n    width: 8px;\n  }\n  &::-webkit-scrollbar-track {\n    /* background-color: ", ";\n    border-bottom-right-radius: ", "; */\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: #6d7072;\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  grid-template-rows: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: scroll;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    /* display: ", "; */\n    width: 8px;\n  }\n  &::-webkit-scrollbar-track {\n    /* background-color: ", ";\n    border-bottom-right-radius: ", "; */\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: #6d7072;\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) { return (props.isLoading ? 'block' : 'grid'); }, function (props) {
+var StickerWrapper = styled.div(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  grid-template-rows: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: scroll;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    /* display: ", "; */\n    width: 8px;\n  }\n  &::-webkit-scrollbar-track {\n    /* background-color: ", ";\n    border-bottom-right-radius: ", "; */\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: ", ";\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  grid-template-rows: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: scroll;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    /* display: ", "; */\n    width: 8px;\n  }\n  &::-webkit-scrollbar-track {\n    /* background-color: ", ";\n    border-bottom-right-radius: ", "; */\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: ", ";\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) { return (props.isLoading ? 'block' : 'grid'); }, function (props) {
     return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
 }, function (props) {
     return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
@@ -19360,6 +19375,8 @@ var StickerWrapper = styled.div(templateObject_8 || (templateObject_8 = __makeTe
     return props.border && (props.border.radius || props.border.radius == 0)
         ? "".concat(props.border.radius, "px")
         : '10px';
+}, function (props) {
+    return props.scrollHover ? props.scrollHover : '#6d7072';
 });
 var StickerImg = styled.img(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n  width: ", ";\n  cursor: pointer;\n"], ["\n  width: ", ";\n  cursor: pointer;\n"])), function (props) {
     return props.size && props.size.imgSize ? "".concat(props.size.imgSize, "%") : '70%';

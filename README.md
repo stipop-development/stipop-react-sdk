@@ -91,7 +91,9 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [backgroundColor](#backgroundcolor) | String   |
 | [column](#column)                   | Number   |
 | [scroll](#scroll)                   | Boolean  |
+| [scrollHover](#scrollHover)         | String   |
 | [stickerClick](#stickerclick)       | Function |
+| [preview](#preview)                 | Boolean  |
 
 - #### params
 
@@ -215,6 +217,8 @@ You can get the api key by signing up and creating an application in Stipop Dash
   | radius          | number | optional | 50                  |
   | backgroundColor | string | optional | #fff                |
   | color           | string | optional | #000                |
+  | focus           | string | optional | lightgray           |
+  | search          | string | optional | #d5d5d5             |
 
   ##### Example
 
@@ -236,6 +240,8 @@ You can get the api key by signing up and creating an application in Stipop Dash
           radius: 50,
           backgroundColor: '#fff',
           color: '#000',
+          focus: 'lightgray',
+          search: '#d5d5d5',
         }}
       />
     )
@@ -331,6 +337,37 @@ You can get the api key by signing up and creating an application in Stipop Dash
   export default App
   ```
 
+
+
+
+- #### scrollHover
+
+  | Type   | Required | Default |
+  | ------ | -------- | ------- |
+  | string | optional | #6d7072 |
+
+  ##### Examples
+
+  ```react
+  import { SearchComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <SearchComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+          lang: 'en',
+        }}
+        scroll={true}
+        scrollHover={'#6d7072'}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
   
 
 - #### stickerClick
@@ -355,6 +392,35 @@ You can get the api key by signing up and creating an application in Stipop Dash
           lang: 'en',
         }}
         stickerClick={url => console.log(url)}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
+
+- #### preview
+
+  | Type    | Required | Default |
+  | ------- | -------- | ------- |
+  | boolean | optional | false   |
+
+  ##### Example
+
+  ```react
+  import { SearchComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <SearchComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+          lang: 'en',
+        }}
+        preview={false}
       />
     )
   }
@@ -429,6 +495,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [scroll](#scroll-1)                   | Boolean  |
 | [stickerClick](#stickerclick-1)       | Function |
 | [storeClick](#storeclick)             | Function |
+| [preview](#preview-1)                 | Boolean  |
 
 - #### params
 
@@ -541,6 +608,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
   | bottomLine      | string | optional | 1px solid lightgray |
   | selectedLine    | string | optional | 2px solid black     |
   | listCnt         | number | optional | 6                   |
+  | arrowColor      | string | optional | #000                |
 
   ##### Example
 
@@ -560,6 +628,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
           bottomLine: '1px solid lightgray',
           selectedLine: '2px solid black',
           listCnt: 6,
+          arrowColor: '#000',
         }}
       />
     )
@@ -705,6 +774,36 @@ You can get the api key by signing up and creating an application in Stipop Dash
           userId: 'userId',
         }}
         storeClick={(e) => console.log(e)} //true
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
+
+- #### stickerClick
+
+  > Get Sticker URL Function
+
+  | Type    | Required | Default |
+  | ------- | -------- | ------- |
+  | boolean | optional | false   |
+
+  ##### Example
+
+  ```react
+  import { PickerComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <PickerComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        preview={false}
       />
     )
   }

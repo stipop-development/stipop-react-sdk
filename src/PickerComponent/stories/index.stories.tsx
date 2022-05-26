@@ -20,7 +20,6 @@ export const Picker = () => (
         apikey: process.env.API_KEY,
         userId: process.env.USER_ID,
       }}
-      stickerClick={url => console.log(url)}
     />
   </div>
 )

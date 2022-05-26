@@ -2,11 +2,10 @@
 
 var tslib_es6 = require('./tslib.es6-667f4605.js');
 var React = require('react');
-var styledComponents_browser_esm = require('./styled-components.browser.esm-5ad5aa35.js');
+var LoadingSpinner = require('./index-704b1ded.js');
 var index = require('./index-531cfe3e.js');
 var Icon = require('./Icon.js');
-var LoadingSpinner = require('./LoadingSpinner.js');
-var index_esm = require('./index.esm-f4fc32bf.js');
+var index_esm = require('./index.esm-dd03e45b.js');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -19028,7 +19027,7 @@ var lodash = {exports: {}};
 var _ = lodash.exports;
 
 var PickerComponent = function (_a) {
-    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, stickerClick = _a.stickerClick, storeClick = _a.storeClick, preview = _a.preview;
+    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, storeClick = _a.storeClick, preview = _a.preview;
     var _b = React.useState([]), myStickers = _b[0], setMyStickers = _b[1];
     var _c = React.useState([]), stickers = _c[0], setStickers = _c[1];
     var _d = React.useState(0), showPackage = _d[0], setShowPackage = _d[1];
@@ -19180,7 +19179,7 @@ var PickerComponent = function (_a) {
                         (menu && menu.listCnt
                             ? itemWidth * menu.listCnt
                             : itemWidth * 6), 0);
-                } }, itemNum ? (React__default["default"].createElement(Icon["default"], { type: "RIGHT_ARROW_BLACK" })) : (React__default["default"].createElement(Icon["default"], { type: "LEFT_ARROW" }))),
+                } }, itemNum ? (React__default["default"].createElement(index_esm.FiChevronLeft, { size: 30, color: menu && menu.arrowColor ? menu.arrowColor : '#000' })) : (React__default["default"].createElement(index_esm.FiChevronLeft, { size: 30, color: '#c1c1c1' }))),
             React__default["default"].createElement(PickerMenu, { id: "picker-menu", backgroundColor: backgroundColor, border: border, menu: menu, size: size, onScroll: function (e) {
                     setItemNum(Math.round(e.target.scrollLeft /
                         (size && size.width
@@ -19223,19 +19222,35 @@ var PickerComponent = function (_a) {
                             ? itemWidth * menu.listCnt
                             : itemWidth * 6), 0);
                 } }, itemCnt - (menu && menu.listCnt ? menu.listCnt - 2 : 4) <=
-                itemNum ? (React__default["default"].createElement(Icon["default"], { type: "LEFT_ARROW" })) : (React__default["default"].createElement(Icon["default"], { type: "RIGHT_ARROW_BLACK" })))),
-        !recentView ? (stickers && isLoading ? (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, size: size, isLoading: isLoading },
-            React__default["default"].createElement(LoadingSpinner, { color: backgroundColor ? backgroundColor : '#ff4500' }))) : (React__default["default"].createElement(StickerWrapper, { id: "sticker-wrapper", backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrolling: scrolling, 
+                itemNum ? (React__default["default"].createElement(index_esm.FiChevronRight, { size: 30, color: '#c1c1c1' })) : (React__default["default"].createElement(index_esm.FiChevronRight, { size: 30, color: menu && menu.arrowColor ? menu.arrowColor : '#000' })))),
+        !recentView ? (stickers && isLoading ? (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, size: size, isLoading: isLoading },
+            React__default["default"].createElement(LoadingSpinner.LoadingSpinner, { color: backgroundColor ? backgroundColor : '#ff4500' }))) : (React__default["default"].createElement(StickerWrapper, { id: "sticker-wrapper", backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, scrolling: scrolling, 
             // onScroll={e => setCurrentScrollTop(e.target.scrollTop)}
             onMouseEnter: function () { return setScrolling(1); }, onMouseLeave: function () { return setScrolling(0); } }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () {
-                stickerClick(sticker.stickerImg);
+                if (preview) {
+                    stickerClick({
+                        url: sticker.stickerImg,
+                        id: sticker.stickerId,
+                    });
+                }
+                else {
+                    stickerClick(sticker.stickerImg);
+                }
                 clickSticker(sticker.stickerId);
                 setTempSticker(sticker.stickerImg);
-            } })); })))) : isLoading ? (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading },
-            React__default["default"].createElement(LoadingSpinner, { color: backgroundColor ? backgroundColor : '#ff4500' }))) : stickers.length > 0 ? (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: isLoading, onMouseEnter: function () { return setScrolling(1); }, onMouseLeave: function () { return setScrolling(0); } }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () {
-                stickerClick(sticker.stickerImg);
+            } })); })))) : isLoading ? (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, isLoading: isLoading },
+            React__default["default"].createElement(LoadingSpinner.LoadingSpinner, { color: backgroundColor ? backgroundColor : '#ff4500' }))) : stickers.length > 0 ? (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, isLoading: isLoading, onMouseEnter: function () { return setScrolling(1); }, onMouseLeave: function () { return setScrolling(0); } }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () {
+                if (preview) {
+                    stickerClick({
+                        url: sticker.stickerImg,
+                        id: sticker.stickerId,
+                    });
+                }
+                else {
+                    stickerClick(sticker.stickerImg);
+                }
                 setTempSticker(sticker.stickerImg);
-            } })); }))) : (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, isLoading: recentView },
+            } })); }))) : (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, isLoading: recentView },
             React__default["default"].createElement("div", { style: {
                     width: '100%',
                     height: '100%',
@@ -19245,7 +19260,7 @@ var PickerComponent = function (_a) {
                 } },
                 React__default["default"].createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker", style: { width: '40%' } }))))));
 };
-var PickerWrapper = styledComponents_browser_esm.styled.div(templateObject_1 || (templateObject_1 = tslib_es6.__makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  position: relative;\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  position: relative;\n"])), function (props) {
+var PickerWrapper = LoadingSpinner.styled.div(templateObject_1 || (templateObject_1 = tslib_es6.__makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  position: relative;\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  position: relative;\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
 }, function (props) {
     return props.size && props.size.height ? "".concat(props.size.height, "px") : '300px';
@@ -19258,8 +19273,8 @@ var PickerWrapper = styledComponents_browser_esm.styled.div(templateObject_1 || 
         ? "".concat(props.border.radius, "px")
         : '10px';
 });
-var MenuBox = styledComponents_browser_esm.styled.div(templateObject_2 || (templateObject_2 = tslib_es6.__makeTemplateObject(["\n  width: 100%;\n  display: flex;\n"], ["\n  width: 100%;\n  display: flex;\n"])));
-var ArrowWrapper = styledComponents_browser_esm.styled.div(templateObject_3 || (templateObject_3 = tslib_es6.__makeTemplateObject(["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-bottom: ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n\n  .stipop-icon {\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  }\n\n  &#left {\n    padding-left: 10px;\n    cursor: initial;\n  }\n  &#left-black {\n    padding-left: 10px;\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n  &#right-black {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n  }\n  &#right {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n    cursor: initial;\n\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n"], ["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-bottom: ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n\n  .stipop-icon {\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  }\n\n  &#left {\n    padding-left: 10px;\n    cursor: initial;\n  }\n  &#left-black {\n    padding-left: 10px;\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n  &#right-black {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n  }\n  &#right {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n    cursor: initial;\n\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n"])), function (props) {
+var MenuBox = LoadingSpinner.styled.div(templateObject_2 || (templateObject_2 = tslib_es6.__makeTemplateObject(["\n  width: 100%;\n  display: flex;\n"], ["\n  width: 100%;\n  display: flex;\n"])));
+var ArrowWrapper = LoadingSpinner.styled.div(templateObject_3 || (templateObject_3 = tslib_es6.__makeTemplateObject(["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-bottom: ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n\n  .stipop-icon {\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  }\n\n  &#left {\n    padding-left: 10px;\n    cursor: initial;\n  }\n  &#left-black {\n    padding-left: 10px;\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n  &#right-black {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n  }\n  &#right {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n    cursor: initial;\n\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n"], ["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-bottom: ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n\n  .stipop-icon {\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  }\n\n  &#left {\n    padding-left: 10px;\n    cursor: initial;\n  }\n  &#left-black {\n    padding-left: 10px;\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n  &#right-black {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n  }\n  &#right {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n    cursor: initial;\n\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n"])), function (props) {
     return props.size && props.size.width
         ? props.menu && props.menu.listCnt
             ? "".concat(props.size.width / (props.menu.listCnt + 2), "px")
@@ -19290,7 +19305,7 @@ var ArrowWrapper = styledComponents_browser_esm.styled.div(templateObject_3 || (
         ? "".concat(props.border.radius, "px")
         : '10px';
 });
-var IconWrapper = styledComponents_browser_esm.styled.div(templateObject_4 || (templateObject_4 = tslib_es6.__makeTemplateObject(["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n\n  .stipop-icon {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    border-bottom: ", ";\n    box-sizing: border-box;\n  }\n"], ["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n\n  .stipop-icon {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    border-bottom: ", ";\n    box-sizing: border-box;\n  }\n"])), function (props) {
+var IconWrapper = LoadingSpinner.styled.div(templateObject_4 || (templateObject_4 = tslib_es6.__makeTemplateObject(["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n\n  .stipop-icon {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    border-bottom: ", ";\n    box-sizing: border-box;\n  }\n"], ["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n\n  .stipop-icon {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    border-bottom: ", ";\n    box-sizing: border-box;\n  }\n"])), function (props) {
     return props.size && props.size.width
         ? props.menu && props.menu.listCnt
             ? "".concat(props.size.width / (props.menu.listCnt + 2), "px")
@@ -19313,7 +19328,7 @@ var IconWrapper = styledComponents_browser_esm.styled.div(templateObject_4 || (t
             ? props.menu.bottomLine
             : '1px solid lightgray';
 });
-var PickerMenu = styledComponents_browser_esm.styled.div(templateObject_5 || (templateObject_5 = tslib_es6.__makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  width: ", ";\n  height: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) {
+var PickerMenu = LoadingSpinner.styled.div(templateObject_5 || (templateObject_5 = tslib_es6.__makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  width: ", ";\n  height: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
 }, function (props) {
     return props.menu && props.menu.height ? "".concat(props.menu.height, "px") : '45px';
@@ -19322,7 +19337,7 @@ var PickerMenu = styledComponents_browser_esm.styled.div(templateObject_5 || (te
         ? props.menu.backgroundColor
         : '#fff';
 });
-var PackageImgWrapper = styledComponents_browser_esm.styled.div(templateObject_6 || (templateObject_6 = tslib_es6.__makeTemplateObject(["\n  /* flex-basis: ", "; */\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: 100%;\n  /* padding: 0 10px; */\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-bottom: ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n\n  &#dummies {\n    cursor: initial;\n  }\n"], ["\n  /* flex-basis: ", "; */\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: 100%;\n  /* padding: 0 10px; */\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-bottom: ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n\n  &#dummies {\n    cursor: initial;\n  }\n"])), function (props) {
+var PackageImgWrapper = LoadingSpinner.styled.div(templateObject_6 || (templateObject_6 = tslib_es6.__makeTemplateObject(["\n  /* flex-basis: ", "; */\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: 100%;\n  /* padding: 0 10px; */\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-bottom: ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n\n  &#dummies {\n    cursor: initial;\n  }\n"], ["\n  /* flex-basis: ", "; */\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: 100%;\n  /* padding: 0 10px; */\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-bottom: ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n\n  &#dummies {\n    cursor: initial;\n  }\n"])), function (props) {
     return props.menu && props.menu.height ? "".concat(props.menu.height, "px") : '45px';
 }, function (props) {
     return props.size && props.size.width
@@ -19341,8 +19356,8 @@ var PackageImgWrapper = styledComponents_browser_esm.styled.div(templateObject_6
             ? props.menu.bottomLine
             : '1px solid lightgray';
 });
-var PackageImg = styledComponents_browser_esm.styled.img(templateObject_7 || (templateObject_7 = tslib_es6.__makeTemplateObject(["\n  width: 60%;\n  filter: ", ";\n"], ["\n  width: 60%;\n  filter: ", ";\n"])), function (props) { return (props.show ? '' : 'saturate(0%)'); });
-var StickerWrapper = styledComponents_browser_esm.styled.div(templateObject_8 || (templateObject_8 = tslib_es6.__makeTemplateObject(["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  grid-template-rows: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: scroll;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    /* display: ", "; */\n    width: 8px;\n  }\n  &::-webkit-scrollbar-track {\n    /* background-color: ", ";\n    border-bottom-right-radius: ", "; */\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: #6d7072;\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  grid-template-rows: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: scroll;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    /* display: ", "; */\n    width: 8px;\n  }\n  &::-webkit-scrollbar-track {\n    /* background-color: ", ";\n    border-bottom-right-radius: ", "; */\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: #6d7072;\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) { return (props.isLoading ? 'block' : 'grid'); }, function (props) {
+var PackageImg = LoadingSpinner.styled.img(templateObject_7 || (templateObject_7 = tslib_es6.__makeTemplateObject(["\n  width: 60%;\n  filter: ", ";\n"], ["\n  width: 60%;\n  filter: ", ";\n"])), function (props) { return (props.show ? '' : 'saturate(0%)'); });
+var StickerWrapper = LoadingSpinner.styled.div(templateObject_8 || (templateObject_8 = tslib_es6.__makeTemplateObject(["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  grid-template-rows: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: scroll;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    /* display: ", "; */\n    width: 8px;\n  }\n  &::-webkit-scrollbar-track {\n    /* background-color: ", ";\n    border-bottom-right-radius: ", "; */\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: ", ";\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  grid-template-rows: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: scroll;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    /* display: ", "; */\n    width: 8px;\n  }\n  &::-webkit-scrollbar-track {\n    /* background-color: ", ";\n    border-bottom-right-radius: ", "; */\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: ", ";\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) { return (props.isLoading ? 'block' : 'grid'); }, function (props) {
     return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
 }, function (props) {
     return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
@@ -19366,12 +19381,14 @@ var StickerWrapper = styledComponents_browser_esm.styled.div(templateObject_8 ||
     return props.border && (props.border.radius || props.border.radius == 0)
         ? "".concat(props.border.radius, "px")
         : '10px';
+}, function (props) {
+    return props.scrollHover ? props.scrollHover : '#6d7072';
 });
-var StickerImg = styledComponents_browser_esm.styled.img(templateObject_9 || (templateObject_9 = tslib_es6.__makeTemplateObject(["\n  width: ", ";\n  cursor: pointer;\n"], ["\n  width: ", ";\n  cursor: pointer;\n"])), function (props) {
+var StickerImg = LoadingSpinner.styled.img(templateObject_9 || (templateObject_9 = tslib_es6.__makeTemplateObject(["\n  width: ", ";\n  cursor: pointer;\n"], ["\n  width: ", ";\n  cursor: pointer;\n"])), function (props) {
     return props.size && props.size.imgSize ? "".concat(props.size.imgSize, "%") : '70%';
 });
-var PreviewWrapper = styledComponents_browser_esm.styled.div(templateObject_10 || (templateObject_10 = tslib_es6.__makeTemplateObject(["\n  width: 60%;\n  height: 150px;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 10px;\n  margin-left: 40%;\n  margin-bottom: 5px;\n  padding: 0 24px;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  bottom: 100%;\n"], ["\n  width: 60%;\n  height: 150px;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 10px;\n  margin-left: 40%;\n  margin-bottom: 5px;\n  padding: 0 24px;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  bottom: 100%;\n"])));
-var ChatSticker = styledComponents_browser_esm.styled.img(templateObject_11 || (templateObject_11 = tslib_es6.__makeTemplateObject(["\n  width: 100px;\n  height: 100px;\n  margin-bottom: 5px;\n"], ["\n  width: 100px;\n  height: 100px;\n  margin-bottom: 5px;\n"])));
+var PreviewWrapper = LoadingSpinner.styled.div(templateObject_10 || (templateObject_10 = tslib_es6.__makeTemplateObject(["\n  width: 60%;\n  height: 150px;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 10px;\n  margin-left: 40%;\n  margin-bottom: 5px;\n  padding: 0 24px;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  bottom: 100%;\n"], ["\n  width: 60%;\n  height: 150px;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 10px;\n  margin-left: 40%;\n  margin-bottom: 5px;\n  padding: 0 24px;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  bottom: 100%;\n"])));
+var ChatSticker = LoadingSpinner.styled.img(templateObject_11 || (templateObject_11 = tslib_es6.__makeTemplateObject(["\n  width: 100px;\n  height: 100px;\n  margin-bottom: 5px;\n"], ["\n  width: 100px;\n  height: 100px;\n  margin-bottom: 5px;\n"])));
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10, templateObject_11;
 
 module.exports = PickerComponent;

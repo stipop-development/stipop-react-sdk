@@ -6,6 +6,7 @@ export interface SearchProps {
   border?: Border
   input?: Input
   scroll?: boolean
+  scrollHover?: string
   stickerClick?: Function
   preview?: boolean
 }
@@ -37,4 +38,6 @@ interface Input {
   color?: string
   width?: number
   height?: number
+  focus?: string
+  search?: string
 }
