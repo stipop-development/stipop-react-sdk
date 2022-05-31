@@ -19087,35 +19087,42 @@ var PickerComponent = function (_a) {
         });
     };
     React.useEffect(function () {
+        console.log(myStickers);
+    }, [myStickers]);
+    React.useEffect(function () {
+        setIsLoading(true);
         var pickerParams = {
             userId: params.userId,
         };
         var data = client.mySticker(pickerParams);
         data.then(function (_a) {
             var body = _a.body;
-            if (body.packageList === null) {
+            if (body && body.packageList === null) {
                 getInit();
             }
-            setItemCnt(body && body.packageList
-                ? body.packageList.filter(function (pack) { return pack.packageId !== null; }).length
-                : 0);
-            setMyStickers(body && body.packageList
-                ? body.packageList.filter(function (pack) { return pack.packageId !== null; })
-                : []);
-            if (body &&
-                body.packageList &&
-                body.packageList.filter(function (pack) { return pack.packageId !== null; }).length > 0) {
-                var packageParams = {
-                    userId: params.userId,
-                    packId: body.packageList[0].packageId,
-                };
-                var packageData = client.getPackInfo(packageParams);
-                packageData.then(function (_a) {
-                    var body = _a.body;
-                    setStickers(body && body.package && body.package.stickers
-                        ? body.package.stickers
-                        : []);
-                });
+            else {
+                setItemCnt(body && body.packageList
+                    ? body.packageList.filter(function (pack) { return pack.packageId !== null; }).length
+                    : 0);
+                setMyStickers(body && body.packageList
+                    ? body.packageList.filter(function (pack) { return pack.packageId !== null; })
+                    : []);
+                if (body &&
+                    body.packageList &&
+                    body.packageList.filter(function (pack) { return pack.packageId !== null; }).length > 0) {
+                    var packageParams = {
+                        userId: params.userId,
+                        packId: body.packageList[0].packageId,
+                    };
+                    var packageData = client.getPackInfo(packageParams);
+                    packageData.then(function (_a) {
+                        var body = _a.body;
+                        setStickers(body && body.package && body.package.stickers
+                            ? body.package.stickers
+                            : []);
+                    });
+                }
+                setIsLoading(false);
             }
         });
     }, []);
