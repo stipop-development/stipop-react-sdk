@@ -10,9 +10,6 @@ export const Store = () => (
     params={{
       apikey: process.env.API_KEY,
       userId: process.env.USER_ID,
-      lang: 'en',
-      pageNumber: 10,
-      limit: 50,
     }}
     downloadParams={{
       isPurchase: 'N',

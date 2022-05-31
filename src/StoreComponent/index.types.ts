@@ -36,6 +36,7 @@ interface Color {
     deleteBtnHover?: string
     recoveryBtn?: string
     recoveryBtnHover?: string
+    loadingColor?: string
 }
 
 interface Size {

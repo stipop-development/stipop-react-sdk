@@ -6,7 +6,7 @@ import Icon from './Icon.js';
 import { F as FiX, a as FiSearch } from './index.esm-3315737a.js';
 
 var SearchComponent = function (_a) {
-    var params = _a.params, size = _a.size, backgroundColor = _a.backgroundColor, column = _a.column, border = _a.border, input = _a.input, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, preview = _a.preview;
+    var params = _a.params, size = _a.size, backgroundColor = _a.backgroundColor, column = _a.column, border = _a.border, input = _a.input, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, preview = _a.preview, loadingColor = _a.loadingColor;
     var _b = useState(params.default ? params.default : 'hi'), keyword = _b[0], setKeyword = _b[1];
     var _c = useState([]), stickerList = _c[0], setStickerList = _c[1];
     var _d = useState(false), isLoading = _d[0], setIsLoading = _d[1];
@@ -19,9 +19,10 @@ var SearchComponent = function (_a) {
         var searchParams = {
             userId: params.userId,
             q: keyword,
-            lang: params.lang,
-            pageNumber: params.pageNumber,
-            limit: params.limit,
+            lang: params.lang ? params.lang : 'en',
+            countryCode: params.countryCode ? params.countryCode : 'US',
+            pageNumber: params.pageNumber ? params.pageNumber : 1,
+            limit: params.limit ? params.limit : 20,
         };
         if (keyword) {
             var data = client.getSearch(searchParams);
@@ -88,7 +89,7 @@ var SearchComponent = function (_a) {
                 setTempSticker(sticker.stickerImg);
             }, size: size })); }))) : (React__default.createElement(NoSticker, null,
             React__default.createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker" }),
-            React__default.createElement("span", { className: "no-sticker-text" }, "No Stickers to Show")))) : (React__default.createElement(LoadingSpinner, null))));
+            React__default.createElement("span", { className: "no-sticker-text" }, "No Stickers to Show")))) : (React__default.createElement(LoadingSpinner, { color: loadingColor ? loadingColor : '#ff4500' }))));
 };
 var SearchWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 10px 0;\n  box-sizing: border-box;\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 10px 0;\n  box-sizing: border-box;\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';

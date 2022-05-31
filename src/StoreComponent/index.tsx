@@ -225,9 +225,7 @@ const StoreComponent: React.FC<StoreProps> = ({
       {isLoading ? (
         <StoreWrapper color={color} size={size} border={border}>
           <LoadingSpinner
-            color={
-              color && color.backgroundColor ? color.backgroundColor : '#ff4500'
-            }
+            color={color && color.loadingColor ? color.loadingColor : '#ff4500'}
           />
         </StoreWrapper>
       ) : (

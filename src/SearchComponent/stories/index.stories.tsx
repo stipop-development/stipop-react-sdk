@@ -19,9 +19,6 @@ export const Search = () => (
       params={{
         apikey: process.env.API_KEY,
         userId: process.env.USER_ID,
-        lang: 'en',
-        pageNumber: 1,
-        limit: 100,
       }}
     />
   </div>

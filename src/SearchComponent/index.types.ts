@@ -9,12 +9,14 @@ export interface SearchProps {
   scrollHover?: string
   stickerClick?: Function
   preview?: boolean
+  loadingColor?: string
 }
 
 interface Params {
   apikey: string
   userId: string
   lang?: string
+  countryCode?: string
   pageNumber?: number
   limit?: number
   default?: string

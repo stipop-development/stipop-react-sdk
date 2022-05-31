@@ -19,6 +19,7 @@ const SearchComponent: React.FC<SearchProps> = ({
   scrollHover,
   stickerClick,
   preview,
+  loadingColor,
 }) => {
   const [keyword, setKeyword] = useState(params.default ? params.default : 'hi')
   const [stickerList, setStickerList] = useState([])
@@ -34,9 +35,10 @@ const SearchComponent: React.FC<SearchProps> = ({
     const searchParams = {
       userId: params.userId,
       q: keyword,
-      lang: params.lang,
-      pageNumber: params.pageNumber,
-      limit: params.limit,
+      lang: params.lang ? params.lang : 'en',
+      countryCode: params.countryCode ? params.countryCode : 'US',
+      pageNumber: params.pageNumber ? params.pageNumber : 1,
+      limit: params.limit ? params.limit : 20,
     }
 
     if (keyword) {
@@ -158,7 +160,7 @@ const SearchComponent: React.FC<SearchProps> = ({
           </NoSticker>
         )
       ) : (
-        <LoadingSpinner />
+        <LoadingSpinner color={loadingColor ? loadingColor : '#ff4500'} />
       )}
     </SearchWrapper>
   )

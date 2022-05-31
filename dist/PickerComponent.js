@@ -19021,7 +19021,7 @@ var lodash = {exports: {}};
 var _ = lodash.exports;
 
 var PickerComponent = function (_a) {
-    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, storeClick = _a.storeClick, preview = _a.preview;
+    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, storeClick = _a.storeClick, preview = _a.preview, loadingColor = _a.loadingColor;
     var _b = useState([]), myStickers = _b[0], setMyStickers = _b[1];
     var _c = useState([]), stickers = _c[0], setStickers = _c[1];
     var _d = useState(0), showPackage = _d[0], setShowPackage = _d[1];
@@ -19043,20 +19043,62 @@ var PickerComponent = function (_a) {
         : menu && menu.listCnt
             ? 360 / (menu.listCnt + 2)
             : 45;
+    var getInit = function () {
+        setIsLoading(true);
+        client
+            .init({
+            userId: params.userId,
+            lang: 'en',
+        })
+            .then(function () {
+            var pickerParams = {
+                userId: params.userId,
+            };
+            var data = client.mySticker(pickerParams);
+            data.then(function (_a) {
+                var body = _a.body;
+                setItemCnt(body && body.packageList
+                    ? body.packageList.filter(function (pack) { return pack.packageId !== null; }).length
+                    : 0);
+                setMyStickers(body && body.packageList
+                    ? body.packageList.filter(function (pack) { return pack.packageId !== null; })
+                    : []);
+                var packageParams = {
+                    userId: params.userId,
+                    packId: body.packageList[0].packageId,
+                };
+                var packageData = client.getPackInfo(packageParams);
+                packageData.then(function (_a) {
+                    var body = _a.body;
+                    setStickers(body &&
+                        body.package &&
+                        body.package.stickers &&
+                        body.package.stickers);
+                    setShowPackage(0);
+                    setIsLoading(false);
+                });
+            });
+        });
+    };
     useEffect(function () {
-        var storeParams = {
+        var pickerParams = {
             userId: params.userId,
         };
-        var data = client.mySticker(storeParams);
+        var data = client.mySticker(pickerParams);
         data.then(function (_a) {
             var body = _a.body;
+            if (body.packageList === null) {
+                getInit();
+            }
             setItemCnt(body && body.packageList
                 ? body.packageList.filter(function (pack) { return pack.packageId !== null; }).length
                 : 0);
             setMyStickers(body && body.packageList
                 ? body.packageList.filter(function (pack) { return pack.packageId !== null; })
                 : []);
-            if (body.packageList.filter(function (pack) { return pack.packageId !== null; }).length > 0) {
+            if (body &&
+                body.packageList &&
+                body.packageList.filter(function (pack) { return pack.packageId !== null; }).length > 0) {
                 var packageParams = {
                     userId: params.userId,
                     packId: body.packageList[0].packageId,
@@ -19068,10 +19110,6 @@ var PickerComponent = function (_a) {
                         ? body.package.stickers
                         : []);
                 });
-            }
-            else {
-                setShowPackage(-1);
-                clickTime();
             }
         });
     }, []);
@@ -19218,7 +19256,7 @@ var PickerComponent = function (_a) {
                 } }, itemCnt - (menu && menu.listCnt ? menu.listCnt - 2 : 4) <=
                 itemNum ? (React__default.createElement(FiChevronRight, { size: 30, color: '#c1c1c1' })) : (React__default.createElement(FiChevronRight, { size: 30, color: menu && menu.arrowColor ? menu.arrowColor : '#000' })))),
         !recentView ? (stickers && isLoading ? (React__default.createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, size: size, isLoading: isLoading },
-            React__default.createElement(LoadingSpinner, { color: backgroundColor ? backgroundColor : '#ff4500' }))) : (React__default.createElement(StickerWrapper, { id: "sticker-wrapper", backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, scrolling: scrolling, 
+            React__default.createElement(LoadingSpinner, { color: loadingColor ? loadingColor : '#ff4500' }))) : (React__default.createElement(StickerWrapper, { id: "sticker-wrapper", backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, scrolling: scrolling, 
             // onScroll={e => setCurrentScrollTop(e.target.scrollTop)}
             onMouseEnter: function () { return setScrolling(1); }, onMouseLeave: function () { return setScrolling(0); } }, stickers.map(function (sticker, index) { return (React__default.createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () {
                 if (preview) {
@@ -19233,7 +19271,7 @@ var PickerComponent = function (_a) {
                 clickSticker(sticker.stickerId);
                 setTempSticker(sticker.stickerImg);
             } })); })))) : isLoading ? (React__default.createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, isLoading: isLoading },
-            React__default.createElement(LoadingSpinner, { color: backgroundColor ? backgroundColor : '#ff4500' }))) : stickers.length > 0 ? (React__default.createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, isLoading: isLoading, onMouseEnter: function () { return setScrolling(1); }, onMouseLeave: function () { return setScrolling(0); } }, stickers.map(function (sticker, index) { return (React__default.createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () {
+            React__default.createElement(LoadingSpinner, { color: loadingColor ? loadingColor : '#ff4500' }))) : stickers.length > 0 ? (React__default.createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, isLoading: isLoading, onMouseEnter: function () { return setScrolling(1); }, onMouseLeave: function () { return setScrolling(0); } }, stickers.map(function (sticker, index) { return (React__default.createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () {
                 if (preview) {
                     stickerClick({
                         url: sticker.stickerImg,

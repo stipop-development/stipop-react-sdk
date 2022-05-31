@@ -23,6 +23,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   stickerClick,
   storeClick,
   preview,
+  loadingColor,
 }) => {
   const [myStickers, setMyStickers] = useState([])
   const [stickers, setStickers] = useState([])
@@ -55,13 +56,64 @@ const PickerComponent: React.FC<StoreProps> = ({
       ? 360 / (menu.listCnt + 2)
       : 45
 
+  const getInit = () => {
+    setIsLoading(true)
+    client
+      .init({
+        userId: params.userId,
+        lang: 'en',
+      })
+      .then(() => {
+        const pickerParams = {
+          userId: params.userId,
+        }
+
+        const data = client.mySticker(pickerParams)
+
+        data.then(({ body }) => {
+          setItemCnt(
+            body && body.packageList
+              ? body.packageList.filter(pack => pack.packageId !== null).length
+              : 0
+          )
+          setMyStickers(
+            body && body.packageList
+              ? body.packageList.filter(pack => pack.packageId !== null)
+              : []
+          )
+
+          const packageParams = {
+            userId: params.userId,
+            packId: body.packageList[0].packageId,
+          }
+
+          const packageData = client.getPackInfo(packageParams)
+          packageData.then(({ body }) => {
+            setStickers(
+              body &&
+                body.package &&
+                body.package.stickers &&
+                body.package.stickers
+            )
+            setShowPackage(0)
+            setIsLoading(false)
+          })
+        })
+      })
+  }
+
   useEffect(() => {
-    const storeParams = {
+    const pickerParams = {
       userId: params.userId,
     }
-    const data = client.mySticker(storeParams)
+
+    const data = client.mySticker(pickerParams)
 
     data.then(({ body }) => {
+      if (body.packageList === null) {
+        getInit()
+      }
+
       setItemCnt(
         body && body.packageList
           ? body.packageList.filter(pack => pack.packageId !== null).length
@@ -73,7 +125,11 @@ const PickerComponent: React.FC<StoreProps> = ({
           : []
       )
 
-      if (body.packageList.filter(pack => pack.packageId !== null).length > 0) {
+      if (
+        body &&
+        body.packageList &&
+        body.packageList.filter(pack => pack.packageId !== null).length > 0
+      ) {
         const packageParams = {
           userId: params.userId,
           packId: body.packageList[0].packageId,
@@ -88,8 +144,8 @@ const PickerComponent: React.FC<StoreProps> = ({
           )
         })
       } else {
-        setShowPackage(-1)
-        clickTime()
+        // setShowPackage(-1)
+        // clickTime()
       }
     })
   }, [])
@@ -365,9 +421,7 @@ const PickerComponent: React.FC<StoreProps> = ({
             size={size}
             isLoading={isLoading}
           >
-            <LoadingSpinner
-              color={backgroundColor ? backgroundColor : '#ff4500'}
-            />
+            <LoadingSpinner color={loadingColor ? loadingColor : '#ff4500'} />
           </StickerWrapper>
         ) : (
           <StickerWrapper
@@ -413,9 +467,7 @@ const PickerComponent: React.FC<StoreProps> = ({
           scrollHover={scrollHover}
           isLoading={isLoading}
         >
-          <LoadingSpinner
-            color={backgroundColor ? backgroundColor : '#ff4500'}
-          />
+          <LoadingSpinner color={loadingColor ? loadingColor : '#ff4500'} />
         </StickerWrapper>
       ) : stickers.length > 0 ? (
         <StickerWrapper
