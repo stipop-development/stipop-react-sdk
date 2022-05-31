@@ -1,5 +1,7 @@
 'use strict';
 
+Object.defineProperty(exports, '__esModule', { value: true });
+
 var tslib_es6 = require('./tslib.es6-667f4605.js');
 var React = require('react');
 var LoadingSpinner = require('./index-704b1ded.js');
@@ -447,5 +449,5 @@ var Sticker = LoadingSpinner.styled.img(templateObject_18 || (templateObject_18 
 });
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10, templateObject_11, templateObject_12, templateObject_13, templateObject_14, templateObject_15, templateObject_16, templateObject_17, templateObject_18;
 
-module.exports = StoreComponent;
+exports["default"] = StoreComponent;
 //# sourceMappingURL=StoreComponent.js.map

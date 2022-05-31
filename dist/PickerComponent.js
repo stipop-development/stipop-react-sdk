@@ -19033,6 +19033,7 @@ var PickerComponent = function (_a) {
     var menuList = document.getElementById('picker-menu');
     var _k = useState(0), scrolling = _k[0], setScrolling = _k[1];
     var _l = useState(''), tempSticker = _l[0], setTempSticker = _l[1];
+    var _m = useState(false), init = _m[0], setInit = _m[1];
     var client = new Stipop(params.apikey, 'v1');
     var dummies = [];
     _.times(menu && menu.listCnt ? menu.listCnt - (2 + itemCnt) : 6 - (2 + itemCnt), function (n) { return dummies.push({ index: n.toString(36) }); });
@@ -19043,46 +19044,45 @@ var PickerComponent = function (_a) {
         : menu && menu.listCnt
             ? 360 / (menu.listCnt + 2)
             : 45;
-    var getInit = function () {
-        setIsLoading(true);
-        client
-            .init({
-            userId: params.userId,
-            lang: 'en',
-        })
-            .then(function () {
-            var pickerParams = {
+    useEffect(function () {
+        if (init) {
+            setIsLoading(true);
+            var initParams = {
                 userId: params.userId,
+                lang: 'en',
             };
-            var data = client.mySticker(pickerParams);
-            data.then(function (_a) {
-                var body = _a.body;
-                setItemCnt(body && body.packageList
-                    ? body.packageList.filter(function (pack) { return pack.packageId !== null; }).length
-                    : 0);
-                setMyStickers(body && body.packageList
-                    ? body.packageList.filter(function (pack) { return pack.packageId !== null; })
-                    : []);
-                var packageParams = {
+            var initData = client.init(initParams);
+            initData.then(function () {
+                var pickerParams = {
                     userId: params.userId,
-                    packId: body.packageList[0].packageId,
                 };
-                var packageData = client.getPackInfo(packageParams);
-                packageData.then(function (_a) {
+                var data = client.mySticker(pickerParams);
+                data.then(function (_a) {
                     var body = _a.body;
-                    setStickers(body &&
-                        body.package &&
-                        body.package.stickers &&
-                        body.package.stickers);
-                    setShowPackage(0);
-                    setIsLoading(false);
+                    setInit(body && body.packageList === null ? true : false);
+                    if (body && body.packageList) {
+                        setItemCnt(body.packageList.filter(function (pack) { return pack.packageId !== null; }).length);
+                        setMyStickers(body.packageList.filter(function (pack) { return pack.packageId !== null; }));
+                        if (body.packageList.filter(function (pack) { return pack.packageId !== null; }).length >
+                            0) {
+                            var packageParams = {
+                                userId: params.userId,
+                                packId: body.packageList[0].packageId,
+                            };
+                            var packageData = client.getPackInfo(packageParams);
+                            packageData.then(function (_a) {
+                                var body = _a.body;
+                                setStickers(body && body.package && body.package.stickers
+                                    ? body.package.stickers
+                                    : []);
+                            });
+                        }
+                        setIsLoading(false);
+                    }
                 });
             });
-        });
-    };
-    useEffect(function () {
-        console.log(myStickers);
-    }, [myStickers]);
+        }
+    }, [init]);
     useEffect(function () {
         setIsLoading(true);
         var pickerParams = {
@@ -19091,19 +19091,11 @@ var PickerComponent = function (_a) {
         var data = client.mySticker(pickerParams);
         data.then(function (_a) {
             var body = _a.body;
-            if (body && body.packageList === null) {
-                getInit();
-            }
-            else {
-                setItemCnt(body && body.packageList
-                    ? body.packageList.filter(function (pack) { return pack.packageId !== null; }).length
-                    : 0);
-                setMyStickers(body && body.packageList
-                    ? body.packageList.filter(function (pack) { return pack.packageId !== null; })
-                    : []);
-                if (body &&
-                    body.packageList &&
-                    body.packageList.filter(function (pack) { return pack.packageId !== null; }).length > 0) {
+            setInit(body && body.packageList === null ? true : false);
+            if (body && body.packageList) {
+                setItemCnt(body.packageList.filter(function (pack) { return pack.packageId !== null; }).length);
+                setMyStickers(body.packageList.filter(function (pack) { return pack.packageId !== null; }));
+                if (body.packageList.filter(function (pack) { return pack.packageId !== null; }).length > 0) {
                     var packageParams = {
                         userId: params.userId,
                         packId: body.packageList[0].packageId,

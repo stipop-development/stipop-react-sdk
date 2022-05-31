@@ -1,6 +1,6 @@
 {
   "name": "stipop-react-sdk",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/index.es.js",
@@ -15,15 +15,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/seokhwandan/stipop-sdk-test.git"
+    "url": "git+https://github.com/stipop-development/stipop-react-sdk"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/seokhwandan/stipop-sdk-test/issues"
+    "url": "https://github.com/stipop-development/stipop-react-sdk/issues"
   },
-  "homepage": "https://github.com/seokhwandan/stipop-sdk-test#readme",
+  "homepage": "https://github.com/stipop-development/stipop-react-sdk#readme",
   "devDependencies": {
     "@babel/core": "^7.17.9",
     "@rollup/plugin-commonjs": "^21.1.0",

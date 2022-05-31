@@ -38,6 +38,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   const menuList = document.getElementById('picker-menu')
   const [scrolling, setScrolling] = useState(0)
   const [tempSticker, setTempSticker] = useState('')
+  const [init, setInit] = useState(false)
 
   const client = new (Stipop as any)(params.apikey, 'v1')
 
@@ -56,14 +57,16 @@ const PickerComponent: React.FC<StoreProps> = ({
       ? 360 / (menu.listCnt + 2)
       : 45
 
-  const getInit = () => {
-    setIsLoading(true)
-    client
-      .init({
+  useEffect(() => {
+    if (init) {
+      setIsLoading(true)
+      const initParams = {
         userId: params.userId,
         lang: 'en',
-      })
-      .then(() => {
+      }
+      const initData = client.init(initParams)
+
+      initData.then(() => {
         const pickerParams = {
           userId: params.userId,
         }
@@ -71,40 +74,39 @@ const PickerComponent: React.FC<StoreProps> = ({
         const data = client.mySticker(pickerParams)
 
         data.then(({ body }) => {
-          setItemCnt(
-            body && body.packageList
-              ? body.packageList.filter(pack => pack.packageId !== null).length
-              : 0
-          )
-          setMyStickers(
-            body && body.packageList
-              ? body.packageList.filter(pack => pack.packageId !== null)
-              : []
-          )
-
-          const packageParams = {
-            userId: params.userId,
-            packId: body.packageList[0].packageId,
-          }
-
-          const packageData = client.getPackInfo(packageParams)
-          packageData.then(({ body }) => {
-            setStickers(
-              body &&
-                body.package &&
-                body.package.stickers &&
-                body.package.stickers
+          setInit(body && body.packageList === null ? true : false)
+          if (body && body.packageList) {
+            setItemCnt(
+              body.packageList.filter(pack => pack.packageId !== null).length
             )
-            setShowPackage(0)
+            setMyStickers(
+              body.packageList.filter(pack => pack.packageId !== null)
+            )
+
+            if (
+              body.packageList.filter(pack => pack.packageId !== null).length >
+              0
+            ) {
+              const packageParams = {
+                userId: params.userId,
+                packId: body.packageList[0].packageId,
+              }
+
+              const packageData = client.getPackInfo(packageParams)
+              packageData.then(({ body }) => {
+                setStickers(
+                  body && body.package && body.package.stickers
+                    ? body.package.stickers
+                    : []
+                )
+              })
+            }
             setIsLoading(false)
-          })
+          }
         })
       })
-  }
-
-  useEffect(() => {
-    console.log(myStickers)
-  }, [myStickers])
+    }
+  }, [init])
 
   useEffect(() => {
     setIsLoading(true)
@@ -115,23 +117,14 @@ const PickerComponent: React.FC<StoreProps> = ({
     const data = client.mySticker(pickerParams)
 
     data.then(({ body }) => {
-      if (body && body.packageList === null) {
-        getInit()
-      } else {
+      setInit(body && body.packageList === null ? true : false)
+      if (body && body.packageList) {
         setItemCnt(
-          body && body.packageList
-            ? body.packageList.filter(pack => pack.packageId !== null).length
-            : 0
+          body.packageList.filter(pack => pack.packageId !== null).length
         )
-        setMyStickers(
-          body && body.packageList
-            ? body.packageList.filter(pack => pack.packageId !== null)
-            : []
-        )
+        setMyStickers(body.packageList.filter(pack => pack.packageId !== null))
 
         if (
-          body &&
-          body.packageList &&
           body.packageList.filter(pack => pack.packageId !== null).length > 0
         ) {
           const packageParams = {

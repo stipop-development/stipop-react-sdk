@@ -50,9 +50,13 @@ var ChattingFrom = LoadingSpinner.styled.div(templateObject_5 || (templateObject
 var ChattingInput = LoadingSpinner.styled.input(templateObject_6 || (templateObject_6 = tslib_es6.__makeTemplateObject(["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"], ["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"])));
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
 
-exports.SearchComponent = SearchComponent;
-exports.Icon = Icon["default"];
-exports.PickerComponent = PickerComponent;
-exports.StoreComponent = StoreComponent;
-exports.ChattingComponent = ChattingComponent;
+var index = {
+    SearchComponent: SearchComponent["default"],
+    ChattingComponent: ChattingComponent,
+    PickerComponent: PickerComponent["default"],
+    StoreComponent: StoreComponent["default"],
+    Icon: Icon["default"],
+};
+
+exports["default"] = index;
 //# sourceMappingURL=index.js.map

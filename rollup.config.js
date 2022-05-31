@@ -21,11 +21,13 @@ export default {
       dir: 'dist/cjs',
       format: 'cjs',
       sourcemap: true,
+      exports: 'named',
     },
     {
       dir: 'dist',
       format: 'esm',
       sourcemap: true,
+      exports: 'named',
     },
   ],
   plugins: [
