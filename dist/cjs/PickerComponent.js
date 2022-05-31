@@ -19051,40 +19051,43 @@ var PickerComponent = function (_a) {
             : 45;
     var getInit = function () {
         setIsLoading(true);
-        client
-            .init({
-            userId: params.userId,
-            lang: 'en',
-        })
-            .then(function () {
-            var pickerParams = {
+        if (myStickers.length < 1) {
+            client
+                .init({
                 userId: params.userId,
-            };
-            var data = client.mySticker(pickerParams);
-            data.then(function (_a) {
-                var body = _a.body;
-                setItemCnt(body && body.packageList
-                    ? body.packageList.filter(function (pack) { return pack.packageId !== null; }).length
-                    : 0);
-                setMyStickers(body && body.packageList
-                    ? body.packageList.filter(function (pack) { return pack.packageId !== null; })
-                    : []);
-                var packageParams = {
+                lang: 'en',
+            })
+                .then(function () {
+                var pickerParams = {
                     userId: params.userId,
-                    packId: body.packageList[0].packageId,
                 };
-                var packageData = client.getPackInfo(packageParams);
-                packageData.then(function (_a) {
+                var data = client.mySticker(pickerParams);
+                data.then(function (_a) {
                     var body = _a.body;
-                    setStickers(body &&
-                        body.package &&
-                        body.package.stickers &&
-                        body.package.stickers);
-                    setShowPackage(0);
-                    setIsLoading(false);
+                    setItemCnt(body && body.packageList
+                        ? body.packageList.filter(function (pack) { return pack.packageId !== null; })
+                            .length
+                        : 0);
+                    setMyStickers(body && body.packageList
+                        ? body.packageList.filter(function (pack) { return pack.packageId !== null; })
+                        : []);
+                    var packageParams = {
+                        userId: params.userId,
+                        packId: body.packageList[0].packageId,
+                    };
+                    var packageData = client.getPackInfo(packageParams);
+                    packageData.then(function (_a) {
+                        var body = _a.body;
+                        setStickers(body &&
+                            body.package &&
+                            body.package.stickers &&
+                            body.package.stickers);
+                        setShowPackage(0);
+                        setIsLoading(false);
+                    });
                 });
             });
-        });
+        }
     };
     React.useEffect(function () {
         var pickerParams = {
