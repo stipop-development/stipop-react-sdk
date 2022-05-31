@@ -58,54 +58,56 @@ const PickerComponent: React.FC<StoreProps> = ({
 
   const getInit = () => {
     setIsLoading(true)
-    if (myStickers.length < 1) {
-      client
-        .init({
+    client
+      .init({
+        userId: params.userId,
+        lang: 'en',
+      })
+      .then(() => {
+        const pickerParams = {
           userId: params.userId,
-          lang: 'en',
-        })
-        .then(() => {
-          const pickerParams = {
+        }
+
+        const data = client.mySticker(pickerParams)
+
+        data.then(({ body }) => {
+          setItemCnt(
+            body && body.packageList
+              ? body.packageList.filter(pack => pack.packageId !== null).length
+              : 0
+          )
+          setMyStickers(
+            body && body.packageList
+              ? body.packageList.filter(pack => pack.packageId !== null)
+              : []
+          )
+
+          const packageParams = {
             userId: params.userId,
+            packId: body.packageList[0].packageId,
           }
 
-          const data = client.mySticker(pickerParams)
-
-          data.then(({ body }) => {
-            setItemCnt(
-              body && body.packageList
-                ? body.packageList.filter(pack => pack.packageId !== null)
-                    .length
-                : 0
+          const packageData = client.getPackInfo(packageParams)
+          packageData.then(({ body }) => {
+            setStickers(
+              body &&
+                body.package &&
+                body.package.stickers &&
+                body.package.stickers
             )
-            setMyStickers(
-              body && body.packageList
-                ? body.packageList.filter(pack => pack.packageId !== null)
-                : []
-            )
-
-            const packageParams = {
-              userId: params.userId,
-              packId: body.packageList[0].packageId,
-            }
-
-            const packageData = client.getPackInfo(packageParams)
-            packageData.then(({ body }) => {
-              setStickers(
-                body &&
-                  body.package &&
-                  body.package.stickers &&
-                  body.package.stickers
-              )
-              setShowPackage(0)
-              setIsLoading(false)
-            })
+            setShowPackage(0)
+            setIsLoading(false)
           })
         })
-    }
+      })
   }
 
   useEffect(() => {
+    console.log(myStickers)
+  }, [myStickers])
+
+  useEffect(() => {
+    setIsLoading(true)
     const pickerParams = {
       userId: params.userId,
     }
@@ -113,42 +115,40 @@ const PickerComponent: React.FC<StoreProps> = ({
     const data = client.mySticker(pickerParams)
 
     data.then(({ body }) => {
-      if (body.packageList === null) {
+      if (body && body.packageList === null) {
         getInit()
-      }
-
-      setItemCnt(
-        body && body.packageList
-          ? body.packageList.filter(pack => pack.packageId !== null).length
-          : 0
-      )
-      setMyStickers(
-        body && body.packageList
-          ? body.packageList.filter(pack => pack.packageId !== null)
-          : []
-      )
-
-      if (
-        body &&
-        body.packageList &&
-        body.packageList.filter(pack => pack.packageId !== null).length > 0
-      ) {
-        const packageParams = {
-          userId: params.userId,
-          packId: body.packageList[0].packageId,
-        }
-
-        const packageData = client.getPackInfo(packageParams)
-        packageData.then(({ body }) => {
-          setStickers(
-            body && body.package && body.package.stickers
-              ? body.package.stickers
-              : []
-          )
-        })
       } else {
-        // setShowPackage(-1)
-        // clickTime()
+        setItemCnt(
+          body && body.packageList
+            ? body.packageList.filter(pack => pack.packageId !== null).length
+            : 0
+        )
+        setMyStickers(
+          body && body.packageList
+            ? body.packageList.filter(pack => pack.packageId !== null)
+            : []
+        )
+
+        if (
+          body &&
+          body.packageList &&
+          body.packageList.filter(pack => pack.packageId !== null).length > 0
+        ) {
+          const packageParams = {
+            userId: params.userId,
+            packId: body.packageList[0].packageId,
+          }
+
+          const packageData = client.getPackInfo(packageParams)
+          packageData.then(({ body }) => {
+            setStickers(
+              body && body.package && body.package.stickers
+                ? body.package.stickers
+                : []
+            )
+          })
+        }
+        setIsLoading(false)
       }
     })
   }, [])
