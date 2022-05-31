@@ -10,6 +10,7 @@ export interface StoreProps {
   stickerClick?: Function
   storeClick?: Function
   preview?: boolean
+  loadingColor?: string
 }
 
 interface Params {
