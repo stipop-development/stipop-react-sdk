@@ -216,7 +216,7 @@ var StoreComponent = function (_a) {
         });
     }); };
     return (React__default.createElement(React__default.Fragment, null, isLoading ? (React__default.createElement(StoreWrapper, { color: color, size: size, border: border },
-        React__default.createElement(LoadingSpinner, { color: color && color.backgroundColor ? color.backgroundColor : '#ff4500' }))) : (React__default.createElement(StoreWrapper, { color: color, size: size, border: border },
+        React__default.createElement(LoadingSpinner, { color: color && color.loadingColor ? color.loadingColor : '#ff4500' }))) : (React__default.createElement(StoreWrapper, { color: color, size: size, border: border },
         React__default.createElement(StoreTitle, null,
             detail ? (React__default.createElement("div", { className: "title-text" },
                 React__default.createElement(PreviousBtn, null,
