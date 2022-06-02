@@ -1,10 +1,10 @@
-import SearchComponent from './SearchComponent.js';
+export { default as SearchComponent } from './SearchComponent.js';
 import { _ as __makeTemplateObject } from './tslib.es6-a827156a.js';
 import React__default, { useState, useEffect } from 'react';
 import { s as styled } from './index-6a59c9f1.js';
-import Icon from './Icon.js';
-import PickerComponent from './PickerComponent.js';
-import StoreComponent from './StoreComponent.js';
+export { default as Icon } from './Icon.js';
+export { default as PickerComponent } from './PickerComponent.js';
+export { default as StoreComponent } from './StoreComponent.js';
 import './index-e5177013.js';
 import './index.esm-3315737a.js';
 
@@ -42,12 +42,4 @@ var ChattingFrom = styled.div(templateObject_5 || (templateObject_5 = __makeTemp
 var ChattingInput = styled.input(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"], ["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"])));
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
 
-var index = {
-    SearchComponent: SearchComponent,
-    ChattingComponent: ChattingComponent,
-    PickerComponent: PickerComponent,
-    StoreComponent: StoreComponent,
-    Icon: Icon,
-};
-
-export { index as default };
+export { ChattingComponent };

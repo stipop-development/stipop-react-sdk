@@ -1,57 +1,79 @@
-import * as react from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-interface StoreProps$1 {
+interface SearchProps {
     params: Params$2;
-    downloadParams: DownloadParams;
-    scroll?: boolean;
-    color?: Color;
-    onClose?: Function;
     size?: Size$2;
+    backgroundColor?: string;
+    column?: number;
     border?: Border$2;
-}
-interface DownloadParams {
-    isPurchase: string;
-    price?: string;
-    lang?: string;
-    countryCode?: string;
+    input?: Input;
+    scroll?: boolean;
+    scrollHover?: string;
+    stickerClick?: Function;
+    preview?: boolean;
+    loadingColor?: string;
 }
 interface Params$2 {
     apikey: string;
     userId: string;
     lang?: string;
     countryCode?: string;
-    animated?: string;
     pageNumber?: number;
     limit?: number;
-}
-interface Color {
-    backgroundColor?: string;
-    packageHoverColor?: string;
-    downloadedColor?: string;
-    downloadedHoverColor?: string;
-    downloadBtn?: string;
-    downloadBtnHover?: string;
-    deleteBtn?: string;
-    deleteBtnHover?: string;
-    recoveryBtn?: string;
-    recoveryBtnHover?: string;
-    loadingColor?: string;
+    default?: string;
 }
 interface Size$2 {
     width?: number;
     height?: number;
-    previewImg?: number;
-    detailImg?: number;
-    mainImg?: number;
-    packageListHeight?: number;
+    imgSize?: number;
 }
 interface Border$2 {
     border?: string;
     radius?: number;
 }
+interface Input {
+    border?: string;
+    radius?: number;
+    backgroundColor?: string;
+    color?: string;
+    width?: number;
+    height?: number;
+    focus?: string;
+    search?: string;
+}
 
-interface StoreProps {
+declare const SearchComponent: React.FC<SearchProps>;
+
+interface ChattingProps {
+    width?: number;
+    height?: number;
+    sticker?: string;
+}
+
+declare const ChattingComponent: React.FC<ChattingProps>;
+
+declare function Icon({ className, type, onClick, children }: {
+    className: any;
+    type: any;
+    onClick: any;
+    children: any;
+}): JSX.Element;
+declare namespace Icon {
+    var propTypes: {
+        className: PropTypes.Requireable<string | string[]>;
+        type: PropTypes.Validator<string>;
+        onClick: PropTypes.Requireable<(...args: any[]) => any>;
+        children: PropTypes.Requireable<PropTypes.ReactElementLike>;
+    };
+    var defaultProps: {
+        className: string;
+        onClick: () => void;
+        children: any;
+    };
+}
+
+interface StoreProps$1 {
     params: Params$1;
     size?: Size$1;
     border?: Border$1;
@@ -88,80 +110,58 @@ interface Menu {
     imgSize?: number;
 }
 
-interface ChattingProps {
-    width?: number;
-    height?: number;
-    sticker?: string;
-}
+declare const PickerComponent: React.FC<StoreProps$1>;
 
-interface SearchProps {
+interface StoreProps {
     params: Params;
-    size?: Size;
-    backgroundColor?: string;
-    column?: number;
-    border?: Border;
-    input?: Input;
+    downloadParams: DownloadParams;
     scroll?: boolean;
-    scrollHover?: string;
-    stickerClick?: Function;
-    preview?: boolean;
-    loadingColor?: string;
+    color?: Color;
+    onClose?: Function;
+    size?: Size;
+    border?: Border;
+}
+interface DownloadParams {
+    isPurchase: string;
+    price?: string;
+    lang?: string;
+    countryCode?: string;
 }
 interface Params {
     apikey: string;
     userId: string;
     lang?: string;
     countryCode?: string;
+    animated?: string;
     pageNumber?: number;
     limit?: number;
-    default?: string;
+}
+interface Color {
+    backgroundColor?: string;
+    packageHoverColor?: string;
+    downloadedColor?: string;
+    downloadedHoverColor?: string;
+    downloadBtn?: string;
+    downloadBtnHover?: string;
+    deleteBtn?: string;
+    deleteBtnHover?: string;
+    recoveryBtn?: string;
+    recoveryBtnHover?: string;
+    loadingColor?: string;
 }
 interface Size {
     width?: number;
     height?: number;
-    imgSize?: number;
+    previewImg?: number;
+    detailImg?: number;
+    mainImg?: number;
+    packageListHeight?: number;
 }
 interface Border {
     border?: string;
     radius?: number;
 }
-interface Input {
-    border?: string;
-    radius?: number;
-    backgroundColor?: string;
-    color?: string;
-    width?: number;
-    height?: number;
-    focus?: string;
-    search?: string;
-}
 
-declare function Icon({ className, type, onClick, children }: {
-    className: any;
-    type: any;
-    onClick: any;
-    children: any;
-}): JSX.Element;
-declare namespace Icon {
-    var propTypes: {
-        className: PropTypes.Requireable<string | string[]>;
-        type: PropTypes.Validator<string>;
-        onClick: PropTypes.Requireable<(...args: any[]) => any>;
-        children: PropTypes.Requireable<PropTypes.ReactElementLike>;
-    };
-    var defaultProps: {
-        className: string;
-        onClick: () => void;
-        children: any;
-    };
-}
+declare const StoreComponent: React.FC<StoreProps>;
 
-declare const _default: {
-    SearchComponent: react.FC<SearchProps>;
-    ChattingComponent: react.FC<ChattingProps>;
-    PickerComponent: react.FC<StoreProps>;
-    StoreComponent: react.FC<StoreProps$1>;
-    Icon: typeof Icon;
-};
-
-export { _default as default };
+export { ChattingComponent, Icon, PickerComponent, SearchComponent, StoreComponent };

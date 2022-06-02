@@ -1,5 +1,7 @@
 'use strict';
 
+Object.defineProperty(exports, '__esModule', { value: true });
+
 var SearchComponent = require('./SearchComponent.js');
 var tslib_es6 = require('./tslib.es6-667f4605.js');
 var React = require('react');
@@ -48,12 +50,8 @@ var ChattingFrom = LoadingSpinner.styled.div(templateObject_5 || (templateObject
 var ChattingInput = LoadingSpinner.styled.input(templateObject_6 || (templateObject_6 = tslib_es6.__makeTemplateObject(["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"], ["\n  width: 100%;\n  height: 40px;\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  padding: 0 15px;\n  box-sizing: border-box;\n"])));
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
 
-var index = {
-    SearchComponent: SearchComponent,
-    ChattingComponent: ChattingComponent,
-    PickerComponent: PickerComponent,
-    StoreComponent: StoreComponent,
-    Icon: Icon["default"],
-};
-
-module.exports = index;
+exports.SearchComponent = SearchComponent;
+exports.Icon = Icon["default"];
+exports.PickerComponent = PickerComponent;
+exports.StoreComponent = StoreComponent;
+exports.ChattingComponent = ChattingComponent;
