@@ -92,4 +92,3 @@ function FiChevronLeft (props) {
 }
 
 export { FiX as F, FiSearch as a, FiChevronLeft as b, FiChevronRight as c };
-//# sourceMappingURL=index.esm-3315737a.js.map

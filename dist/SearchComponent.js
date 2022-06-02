@@ -169,4 +169,3 @@ var ChatSticker = styled.img(templateObject_9 || (templateObject_9 = __makeTempl
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9;
 
 export { SearchComponent as default };
-//# sourceMappingURL=SearchComponent.js.map

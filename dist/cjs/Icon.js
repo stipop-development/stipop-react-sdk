@@ -1486,4 +1486,3 @@ var IconTypes = Type;
 exports.IconTypes = IconTypes;
 exports.changeTypeToIconClassName = changeTypeToIconClassName;
 exports["default"] = Icon;
-//# sourceMappingURL=Icon.js.map

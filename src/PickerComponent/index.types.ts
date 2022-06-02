@@ -36,4 +36,5 @@ interface Menu {
   height?: number
   listCnt?: number
   arrowColor?: string
+  imgSize?: number
 }
