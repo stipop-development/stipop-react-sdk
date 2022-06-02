@@ -4,7 +4,7 @@ import Icon from './Icon'
 import PickerComponent from './PickerComponent'
 import StoreComponent from './StoreComponent'
 
-export default {
+export {
   SearchComponent,
   ChattingComponent,
   PickerComponent,
