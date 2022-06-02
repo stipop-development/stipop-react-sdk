@@ -1262,4 +1262,3 @@ var Spinner = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateO
 var templateObject_1, templateObject_2;
 
 export { LoadingSpinner as L, styled as s };
-//# sourceMappingURL=index-6a59c9f1.js.map

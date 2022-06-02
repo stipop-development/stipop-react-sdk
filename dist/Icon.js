@@ -1458,4 +1458,3 @@ Icon.defaultProps = {
 var IconTypes = Type;
 
 export { IconTypes, changeTypeToIconClassName, Icon as default };
-//# sourceMappingURL=Icon.js.map

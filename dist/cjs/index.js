@@ -1,7 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
 var SearchComponent = require('./SearchComponent.js');
 var tslib_es6 = require('./tslib.es6-667f4605.js');
 var React = require('react');
@@ -51,12 +49,11 @@ var ChattingInput = LoadingSpinner.styled.input(templateObject_6 || (templateObj
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
 
 var index = {
-    SearchComponent: SearchComponent["default"],
+    SearchComponent: SearchComponent,
     ChattingComponent: ChattingComponent,
-    PickerComponent: PickerComponent["default"],
-    StoreComponent: StoreComponent["default"],
+    PickerComponent: PickerComponent,
+    StoreComponent: StoreComponent,
     Icon: Icon["default"],
 };
 
-exports["default"] = index;
-//# sourceMappingURL=index.js.map
+module.exports = index;

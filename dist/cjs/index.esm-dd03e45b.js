@@ -101,4 +101,3 @@ exports.FiChevronLeft = FiChevronLeft;
 exports.FiChevronRight = FiChevronRight;
 exports.FiSearch = FiSearch;
 exports.FiX = FiX;
-//# sourceMappingURL=index.esm-dd03e45b.js.map

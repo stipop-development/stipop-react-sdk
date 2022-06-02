@@ -1,7 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
 var tslib_es6 = require('./tslib.es6-667f4605.js');
 var React = require('react');
 var LoadingSpinner = require('./index-704b1ded.js');
@@ -176,5 +174,4 @@ var PreviewWrapper = LoadingSpinner.styled.div(templateObject_8 || (templateObje
 var ChatSticker = LoadingSpinner.styled.img(templateObject_9 || (templateObject_9 = tslib_es6.__makeTemplateObject(["\n  width: 100px;\n  height: 100px;\n  margin-bottom: 5px;\n"], ["\n  width: 100px;\n  height: 100px;\n  margin-bottom: 5px;\n"])));
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9;
 
-exports["default"] = SearchComponent;
-//# sourceMappingURL=SearchComponent.js.map
+module.exports = SearchComponent;

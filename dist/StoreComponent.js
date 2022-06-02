@@ -442,4 +442,3 @@ var Sticker = styled.img(templateObject_18 || (templateObject_18 = __makeTemplat
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10, templateObject_11, templateObject_12, templateObject_13, templateObject_14, templateObject_15, templateObject_16, templateObject_17, templateObject_18;
 
 export { StoreComponent as default };
-//# sourceMappingURL=StoreComponent.js.map

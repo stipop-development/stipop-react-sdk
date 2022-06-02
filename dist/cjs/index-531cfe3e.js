@@ -890,4 +890,3 @@ var Stipop$1 = /*@__PURE__*/getDefaultExportFromCjs(dist.exports);
 
 exports.Stipop = Stipop$1;
 exports.commonjsGlobal = commonjsGlobal;
-//# sourceMappingURL=index-531cfe3e.js.map

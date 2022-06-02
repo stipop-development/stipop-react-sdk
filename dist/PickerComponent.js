@@ -19235,14 +19235,14 @@ var PickerComponent = function (_a) {
                             clickPackage(pack.packageId);
                             setShowPackage(index);
                         }, show: showPackage === index },
-                        React__default.createElement(PackageImg, { src: "".concat(pack.packageImg, "?d=100x100"), show: showPackage === index })));
+                        React__default.createElement(PackageImg, { size: size, menu: menu, src: "".concat(pack.packageImg, "?d=100x100"), show: showPackage === index })));
                 })) : (React__default.createElement(React__default.Fragment, null,
                     myStickers.map(function (pack, index) {
                         return pack.packageId && (React__default.createElement(PackageImgWrapper, { menu: menu, size: size, key: index, onClick: function () {
                                 clickPackage(pack.packageId);
                                 setShowPackage(index);
                             }, show: showPackage === index },
-                            React__default.createElement(PackageImg, { src: "".concat(pack.packageImg, "?d=100x100"), show: showPackage === index })));
+                            React__default.createElement(PackageImg, { size: size, menu: menu, src: "".concat(pack.packageImg, "?d=100x100"), show: showPackage === index })));
                     }),
                     dummies.map(function (item, index) { return (React__default.createElement(PackageImgWrapper, { id: "dummies", menu: menu, size: size, key: index })); })))) : (dummies.map(function (item, index) { return (React__default.createElement(PackageImgWrapper, { id: "dummies", menu: menu, size: size, key: index })); }))),
             React__default.createElement(ArrowWrapper, { id: itemCnt - (menu && menu.listCnt ? menu.listCnt - 2 : 4) <= itemNum
@@ -19309,9 +19309,9 @@ var ArrowWrapper = styled.div(templateObject_3 || (templateObject_3 = __makeTemp
     return props.size && props.size.width
         ? props.menu && props.menu.listCnt
             ? "".concat(props.size.width / (props.menu.listCnt + 2), "px")
-            : "".concat(props.size.width / 6)
+            : "".concat(props.size.width / 8, "px")
         : props.menu && props.menu.listCnt
-            ? "".concat(360 / (props.menu.listCnt + 2))
+            ? "".concat(360 / (props.menu.listCnt + 2), "px")
             : '45px';
 }, function (props) {
     return props.menu && props.menu.height ? "".concat(props.menu.height, "px") : '45px';
@@ -19336,13 +19336,13 @@ var ArrowWrapper = styled.div(templateObject_3 || (templateObject_3 = __makeTemp
         ? "".concat(props.border.radius, "px")
         : '10px';
 });
-var IconWrapper = styled.div(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n\n  .stipop-icon {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    border-bottom: ", ";\n    box-sizing: border-box;\n  }\n"], ["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n\n  .stipop-icon {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    border-bottom: ", ";\n    box-sizing: border-box;\n  }\n"])), function (props) {
+var IconWrapper = styled.div(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n\n  .stipop-icon {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    border-bottom: ", ";\n    box-sizing: border-box;\n\n    svg {\n      transform: ", ";\n    }\n  }\n"], ["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n\n  .stipop-icon {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    border-bottom: ", ";\n    box-sizing: border-box;\n\n    svg {\n      transform: ", ";\n    }\n  }\n"])), function (props) {
     return props.size && props.size.width
         ? props.menu && props.menu.listCnt
             ? "".concat(props.size.width / (props.menu.listCnt + 2), "px")
-            : "".concat(props.size.width / 6)
+            : "".concat(props.size.width / 8, "px")
         : props.menu && props.menu.listCnt
-            ? "".concat(360 / (props.menu.listCnt + 2))
+            ? "".concat(360 / (props.menu.listCnt + 2), "px")
             : '45px';
 }, function (props) {
     return props.menu && props.menu.height ? "".concat(props.menu.height, "px") : '45px';
@@ -19358,6 +19358,10 @@ var IconWrapper = styled.div(templateObject_4 || (templateObject_4 = __makeTempl
         : props.menu && props.menu.bottomLine
             ? props.menu.bottomLine
             : '1px solid lightgray';
+}, function (props) {
+    return props.menu && props.menu.imgSize
+        ? "scale(calc(".concat(props.menu.imgSize, "/30))")
+        : 'scale(1)';
 });
 var PickerMenu = styled.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  width: ", ";\n  height: ", ";\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  overflow-x: auto;\n  -ms-overflow-style: none;\n  scrollbar-width: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
@@ -19374,9 +19378,9 @@ var PackageImgWrapper = styled.div(templateObject_6 || (templateObject_6 = __mak
     return props.size && props.size.width
         ? props.menu && props.menu.listCnt
             ? "".concat(props.size.width / (props.menu.listCnt + 2), "px")
-            : "".concat(props.size.width / 6)
+            : "".concat(props.size.width / 8, "px")
         : props.menu && props.menu.listCnt
-            ? "".concat(360 / (props.menu.listCnt + 2))
+            ? "".concat(360 / (props.menu.listCnt + 2), "px")
             : '45px';
 }, function (props) {
     return props.show
@@ -19387,7 +19391,17 @@ var PackageImgWrapper = styled.div(templateObject_6 || (templateObject_6 = __mak
             ? props.menu.bottomLine
             : '1px solid lightgray';
 });
-var PackageImg = styled.img(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  width: 60%;\n  filter: ", ";\n"], ["\n  width: 60%;\n  filter: ", ";\n"])), function (props) { return (props.show ? '' : 'saturate(0%)'); });
+var PackageImg = styled.img(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  /* width: ", "; */\n  width: ", ";\n  filter: ", ";\n"], ["\n  /* width: ", "; */\n  width: ", ";\n  filter: ", ";\n"])), function (props) {
+    return props.size && props.size.width
+        ? props.menu && props.menu.listCnt
+            ? "calc(".concat(props.size.width / (props.menu.listCnt + 2), "px * 0.6)")
+            : "calc(".concat(props.size.width / 8, "px * 0.6)")
+        : props.menu && props.menu.listCnt
+            ? "calc(".concat(360 / (props.menu.listCnt + 2), "px * 0.6)")
+            : 'calc(45px * 0.6)';
+}, function (props) {
+    return props.menu && props.menu.imgSize ? "".concat(props.menu.imgSize, "px") : '60%';
+}, function (props) { return (props.show ? '' : 'saturate(0%)'); });
 var StickerWrapper = styled.div(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  grid-template-rows: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: scroll;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    /* display: ", "; */\n    width: 8px;\n  }\n  &::-webkit-scrollbar-track {\n    /* background-color: ", ";\n    border-bottom-right-radius: ", "; */\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: ", ";\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  height: calc(100% - 45px);\n  padding: 15px;\n  display: ", ";\n  grid-template-columns: ", ";\n  grid-template-rows: ", ";\n  row-gap: 8%;\n  justify-items: center;\n  overflow-y: scroll;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    /* display: ", "; */\n    width: 8px;\n  }\n  &::-webkit-scrollbar-track {\n    /* background-color: ", ";\n    border-bottom-right-radius: ", "; */\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: ", ";\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) { return (props.isLoading ? 'block' : 'grid'); }, function (props) {
     return props.column ? "repeat(".concat(props.column, ", 1fr)") : 'repeat(4, 1fr)';
 }, function (props) {
@@ -19423,4 +19437,3 @@ var ChatSticker = styled.img(templateObject_11 || (templateObject_11 = __makeTem
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10, templateObject_11;
 
 export { PickerComponent as default };
-//# sourceMappingURL=PickerComponent.js.map

@@ -326,6 +326,8 @@ const PickerComponent: React.FC<StoreProps> = ({
                       show={showPackage === index}
                     >
                       <PackageImg
+                        size={size}
+                        menu={menu}
                         src={`${pack.packageImg}?d=100x100`}
                         show={showPackage === index}
                       />
@@ -348,6 +350,8 @@ const PickerComponent: React.FC<StoreProps> = ({
                         show={showPackage === index}
                       >
                         <PackageImg
+                          size={size}
+                          menu={menu}
                           src={`${pack.packageImg}?d=100x100`}
                           show={showPackage === index}
                         />
@@ -555,9 +559,9 @@ const ArrowWrapper = styled.div`
     props.size && props.size.width
       ? props.menu && props.menu.listCnt
         ? `${props.size.width / (props.menu.listCnt + 2)}px`
-        : `${props.size.width / 6}`
+        : `${props.size.width / 8}px`
       : props.menu && props.menu.listCnt
-      ? `${360 / (props.menu.listCnt + 2)}`
+      ? `${360 / (props.menu.listCnt + 2)}px`
       : '45px'};
   flex-shrink: 0;
   height: ${props =>
@@ -624,9 +628,9 @@ const IconWrapper = styled.div`
     props.size && props.size.width
       ? props.menu && props.menu.listCnt
         ? `${props.size.width / (props.menu.listCnt + 2)}px`
-        : `${props.size.width / 6}`
+        : `${props.size.width / 8}px`
       : props.menu && props.menu.listCnt
-      ? `${360 / (props.menu.listCnt + 2)}`
+      ? `${360 / (props.menu.listCnt + 2)}px`
       : '45px'};
   flex-shrink: 0;
   height: ${props =>
@@ -655,6 +659,13 @@ const IconWrapper = styled.div`
         ? props.menu.bottomLine
         : '1px solid lightgray'};
     box-sizing: border-box;
+
+    svg {
+      transform: ${props =>
+        props.menu && props.menu.imgSize
+          ? `scale(calc(${props.menu.imgSize}/30))`
+          : 'scale(1)'};
+    }
   }
 `
 const PickerMenu = styled.div`
@@ -687,9 +698,9 @@ const PackageImgWrapper = styled.div`
     props.size && props.size.width
       ? props.menu && props.menu.listCnt
         ? `${props.size.width / (props.menu.listCnt + 2)}px`
-        : `${props.size.width / 6}`
+        : `${props.size.width / 8}px`
       : props.menu && props.menu.listCnt
-      ? `${360 / (props.menu.listCnt + 2)}`
+      ? `${360 / (props.menu.listCnt + 2)}px`
       : '45px'};
   flex-shrink: 0;
   height: 100%;
@@ -713,7 +724,16 @@ const PackageImgWrapper = styled.div`
   }
 `
 const PackageImg = styled.img`
-  width: 60%;
+  /* width: ${props =>
+    props.size && props.size.width
+      ? props.menu && props.menu.listCnt
+        ? `calc(${props.size.width / (props.menu.listCnt + 2)}px * 0.6)`
+        : `calc(${props.size.width / 8}px * 0.6)`
+      : props.menu && props.menu.listCnt
+      ? `calc(${360 / (props.menu.listCnt + 2)}px * 0.6)`
+      : 'calc(45px * 0.6)'}; */
+  width: ${props =>
+    props.menu && props.menu.imgSize ? `${props.menu.imgSize}px` : '60%'};
   filter: ${props => (props.show ? '' : 'saturate(0%)')};
 `
 const StickerWrapper = styled.div`

@@ -1269,4 +1269,3 @@ var templateObject_1, templateObject_2;
 
 exports.LoadingSpinner = LoadingSpinner;
 exports.styled = styled;
-//# sourceMappingURL=index-704b1ded.js.map
