@@ -3,11 +3,12 @@ import ChattingComponent from './ChattingComponent'
 import Icon from './Icon'
 import PickerComponent from './PickerComponent'
 import StoreComponent from './StoreComponent'
+import UnifiedComponent from './UnifiedComponent'
 
 export {
   SearchComponent,
-  ChattingComponent,
   PickerComponent,
   StoreComponent,
+  UnifiedComponent,
   Icon,
 }

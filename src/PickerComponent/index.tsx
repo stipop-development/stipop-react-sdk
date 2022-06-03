@@ -547,7 +547,10 @@ const PickerWrapper = styled.div`
       : '10px'};
   display: flex;
   flex-direction: column;
-  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: ${props =>
+    props.border && props.border.shadow
+      ? '0 10px 20px 6px rgba(0, 0, 0, 0.1)'
+      : ''};
   position: relative;
 `
 const MenuBox = styled.div`

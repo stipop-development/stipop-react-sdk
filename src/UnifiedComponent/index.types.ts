@@ -1,23 +1,28 @@
-export interface StoreProps {
+export interface UnifiedProps {
   params: Params
   size?: Size
   border?: Border
-  backgroundColor?: string
+  input?: Input
   menu?: Menu
+  backgroundColor?: string
+  loadingColor?: string
   column?: number
   scroll?: boolean
   scrollHover?: string
+  preview?: boolean
   stickerClick?: Function
   storeClick?: Function
-  preview?: boolean
-  loadingColor?: string
 }
 
 interface Params {
   apikey: string
   userId: string
+  lang?: string
+  countryCode?: string
+  pageNumber?: number
+  limit?: number
 }
-
+  
 interface Size {
   width?: number
   height?: number
@@ -27,7 +32,17 @@ interface Size {
 interface Border {
   border?: string
   radius?: number
-  shadow?: boolean
+}
+
+interface Input {
+  border?: string
+  radius?: number
+  backgroundColor?: string
+  color?: string
+  width?: number
+  height?: number
+  focus?: string
+  search?: string
 }
 
 interface Menu {
