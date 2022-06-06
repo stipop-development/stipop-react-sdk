@@ -19291,7 +19291,7 @@ var PickerComponent = function (_a) {
                 } },
                 React__default.createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker", style: { width: '40%' } }))))));
 };
-var PickerWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  position: relative;\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  position: relative;\n"])), function (props) {
+var PickerWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: ", ";\n  position: relative;\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: ", ";\n  position: relative;\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
 }, function (props) {
     return props.size && props.size.height ? "".concat(props.size.height, "px") : '300px';
@@ -19303,6 +19303,10 @@ var PickerWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTem
     return props.border && (props.border.radius || props.border.radius == 0)
         ? "".concat(props.border.radius, "px")
         : '10px';
+}, function (props) {
+    return props.border && props.border.shadow
+        ? '0 10px 20px 6px rgba(0, 0, 0, 0.1)'
+        : '';
 });
 var MenuBox = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  width: 100%;\n  display: flex;\n"], ["\n  width: 100%;\n  display: flex;\n"])));
 var ArrowWrapper = styled.div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-bottom: ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n\n  .stipop-icon {\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  }\n\n  &#left {\n    padding-left: 10px;\n    cursor: initial;\n  }\n  &#left-black {\n    padding-left: 10px;\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n  &#right-black {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n  }\n  &#right {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n    cursor: initial;\n\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n"], ["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-bottom: ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n\n  .stipop-icon {\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  }\n\n  &#left {\n    padding-left: 10px;\n    cursor: initial;\n  }\n  &#left-black {\n    padding-left: 10px;\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n  &#right-black {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n  }\n  &#right {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n    cursor: initial;\n\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n"])), function (props) {

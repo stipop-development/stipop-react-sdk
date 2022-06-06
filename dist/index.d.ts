@@ -2,19 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 interface SearchProps {
-    params: Params$2;
-    size?: Size$2;
+    params: Params$3;
+    size?: Size$3;
     backgroundColor?: string;
     column?: number;
-    border?: Border$2;
-    input?: Input;
+    border?: Border$3;
+    input?: Input$1;
     scroll?: boolean;
     scrollHover?: string;
     stickerClick?: Function;
     preview?: boolean;
     loadingColor?: string;
 }
-interface Params$2 {
+interface Params$3 {
     apikey: string;
     userId: string;
     lang?: string;
@@ -23,16 +23,16 @@ interface Params$2 {
     limit?: number;
     default?: string;
 }
-interface Size$2 {
+interface Size$3 {
     width?: number;
     height?: number;
     imgSize?: number;
 }
-interface Border$2 {
+interface Border$3 {
     border?: string;
     radius?: number;
 }
-interface Input {
+interface Input$1 {
     border?: string;
     radius?: number;
     backgroundColor?: string;
@@ -44,14 +44,6 @@ interface Input {
 }
 
 declare const SearchComponent: React.FC<SearchProps>;
-
-interface ChattingProps {
-    width?: number;
-    height?: number;
-    sticker?: string;
-}
-
-declare const ChattingComponent: React.FC<ChattingProps>;
 
 declare function Icon({ className, type, onClick, children }: {
     className: any;
@@ -74,11 +66,11 @@ declare namespace Icon {
 }
 
 interface StoreProps$1 {
-    params: Params$1;
-    size?: Size$1;
-    border?: Border$1;
+    params: Params$2;
+    size?: Size$2;
+    border?: Border$2;
     backgroundColor?: string;
-    menu?: Menu;
+    menu?: Menu$1;
     column?: number;
     scroll?: boolean;
     scrollHover?: string;
@@ -87,20 +79,21 @@ interface StoreProps$1 {
     preview?: boolean;
     loadingColor?: string;
 }
-interface Params$1 {
+interface Params$2 {
     apikey: string;
     userId: string;
 }
-interface Size$1 {
+interface Size$2 {
     width?: number;
     height?: number;
     imgSize?: number;
 }
-interface Border$1 {
+interface Border$2 {
     border?: string;
     radius?: number;
+    shadow?: boolean;
 }
-interface Menu {
+interface Menu$1 {
     backgroundColor?: string;
     bottomLine?: string;
     selectedLine?: string;
@@ -113,13 +106,13 @@ interface Menu {
 declare const PickerComponent: React.FC<StoreProps$1>;
 
 interface StoreProps {
-    params: Params;
+    params: Params$1;
     downloadParams: DownloadParams;
     scroll?: boolean;
     color?: Color;
     onClose?: Function;
-    size?: Size;
-    border?: Border;
+    size?: Size$1;
+    border?: Border$1;
 }
 interface DownloadParams {
     isPurchase: string;
@@ -127,7 +120,7 @@ interface DownloadParams {
     lang?: string;
     countryCode?: string;
 }
-interface Params {
+interface Params$1 {
     apikey: string;
     userId: string;
     lang?: string;
@@ -149,7 +142,7 @@ interface Color {
     recoveryBtnHover?: string;
     loadingColor?: string;
 }
-interface Size {
+interface Size$1 {
     width?: number;
     height?: number;
     previewImg?: number;
@@ -157,11 +150,65 @@ interface Size {
     mainImg?: number;
     packageListHeight?: number;
 }
-interface Border {
+interface Border$1 {
     border?: string;
     radius?: number;
 }
 
 declare const StoreComponent: React.FC<StoreProps>;
 
-export { ChattingComponent, Icon, PickerComponent, SearchComponent, StoreComponent };
+interface UnifiedProps {
+    params: Params;
+    size?: Size;
+    border?: Border;
+    input?: Input;
+    menu?: Menu;
+    backgroundColor?: string;
+    loadingColor?: string;
+    column?: number;
+    scroll?: boolean;
+    scrollHover?: string;
+    preview?: boolean;
+    stickerClick?: Function;
+    storeClick?: Function;
+}
+interface Params {
+    apikey: string;
+    userId: string;
+    lang?: string;
+    countryCode?: string;
+    pageNumber?: number;
+    limit?: number;
+}
+interface Size {
+    width?: number;
+    height?: number;
+    imgSize?: number;
+}
+interface Border {
+    border?: string;
+    radius?: number;
+}
+interface Input {
+    border?: string;
+    radius?: number;
+    backgroundColor?: string;
+    color?: string;
+    width?: number;
+    height?: number;
+    focus?: string;
+    search?: string;
+}
+interface Menu {
+    backgroundColor?: string;
+    bottomLine?: string;
+    selectedLine?: string;
+    height?: number;
+    listCnt?: number;
+    arrowColor?: string;
+    imgSize?: number;
+}
+
+declare const UnifiedComponent: React.FC<UnifiedProps>;
+
+export { Icon, PickerComponent, SearchComponent, StoreComponent, UnifiedComponent };
