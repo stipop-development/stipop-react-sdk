@@ -1307,6 +1307,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [params](#params-3)                   | Object   |
 | [size](#size-3)                       | Object   |
 | [border](#border-3)                   | Object   |
+| [input](#input-1)                     | Object   |
 | [menu](#menu-1)                       | Object   |
 | [backgroundColor](#backgroundcolor-2) | String   |
 | [column](#column-2)                   | Number   |
@@ -1423,6 +1424,53 @@ You can get the api key by signing up and creating an application in Stipop Dash
   
   export default App
   ```
+
+
+
+- #### input
+
+  ##### Parameters
+
+  | Name            | Type   | Required | Default             |
+  | --------------- | ------ | -------- | ------------------- |
+  | width           | number | optional | 100                 |
+  | height          | number | optional | 32                  |
+  | border          | string | optional | 2px solid lightgray |
+  | radius          | number | optional | 50                  |
+  | backgroundColor | string | optional | #fff                |
+  | color           | string | optional | #000                |
+  | focus           | string | optional | lightgray           |
+  | search          | string | optional | #d5d5d5             |
+
+  ##### Example
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        input={{
+          width: 100,
+          height: 32,
+          border: '2px solid lightgray',
+          radius: 50,
+          backgroundColor: '#fff',
+          color: '#000',
+          focus: 'lightgray',
+          search: '#d5d5d5',
+        }}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
 
 
 
