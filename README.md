@@ -103,12 +103,12 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
   | Name        | Type   | Required             | Default      |
   | ----------- | ------ | -------------------- | ------------ |
-  | apikey      | String | required             |              |
-  | userId      | String | required             |              |
-  | lang        | String | strongly recommended | en           |
-  | countryCode | String | strongly recommended | US           |
+  | apikey      | string | required             |              |
+  | userId      | string | required             |              |
+  | lang        | string | strongly recommended | en           |
+  | countryCode | string | strongly recommended | US           |
   | pageNumber  | number | optional             | 1            |
-  | limit       | Number | optional             | 20 (max: 50) |
+  | limit       | number | optional             | 20 (max: 50) |
   | default     | string | optional             | hi           |
 
   ##### Example
@@ -1321,10 +1321,14 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
   ##### Parameters
 
-  | Name   | Type   | Required | Default |
-  | ------ | ------ | -------- | ------- |
-  | apikey | string | required |         |
-  | userId | string | required |         |
+  | Name        | Type   | Required             | Default      |
+  | ----------- | ------ | -------------------- | ------------ |
+  | apikey      | string | required             |              |
+  | userId      | string | required             |              |
+  | lang        | string | strongly recommended | en           |
+  | countryCode | string | strongly recommended | US           |
+  | pageNumber  | number | optional             | 1            |
+  | limit       | number | optional             | 20 (max: 50) |
 
   ##### Example
 
@@ -1337,6 +1341,10 @@ You can get the api key by signing up and creating an application in Stipop Dash
         params={{
           apikey: 'apikey',
           userId: 'userId',
+          lang: 'en',
+          countryCode: 'US',
+          pageNumber: 1,
+          limit: 20,
         }}
       />
     )
