@@ -18,11 +18,12 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 ## Get started
 
-| Component                           |
-| ----------------------------------- |
-| [SearchComponent](#searchcomponent) |
-| [PickerComponent](#pickercomponent) |
-| [StoreComponent](#storecomponent)   |
+| Component                            |
+| ------------------------------------ |
+| [SearchComponent](#searchcomponent)  |
+| [PickerComponent](#pickercomponent)  |
+| [StoreComponent](#storecomponent)    |
+| [UnifiedCompoent](#UnifiedComponent) |
 
 ------
 
