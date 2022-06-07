@@ -13,6 +13,7 @@ export default [
       SearchComponent: 'src/SearchComponent/index.tsx',
       PickerComponent: 'src/PickerComponent/index.tsx',
       StoreComponent: 'src/StoreComponent/index.tsx',
+      UnifiedComponent: 'src/UnifiedComponent/index.tsx',
       Icon: 'src/Icon/index.tsx',
       LoadingSpinner: 'src/LoadingSpinner/index.tsx',
     },
