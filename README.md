@@ -23,7 +23,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [SearchComponent](#searchcomponent)  |
 | [PickerComponent](#pickercomponent)  |
 | [StoreComponent](#storecomponent)    |
-| [UnifiedCompoent](#UnifiedComponent) |
+| [UnifiedCompoent](#unifiedcomponent) |
 
 ------
 
@@ -92,10 +92,10 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [backgroundColor](#backgroundcolor) | String   |
 | [column](#column)                   | Number   |
 | [scroll](#scroll)                   | Boolean  |
-| [scrollHover](#scrollHover)         | String   |
+| [scrollHover](#scrollhover)         | String   |
 | [stickerClick](#stickerclick)       | Function |
 | [preview](#preview)                 | Boolean  |
-| [loadingColor](#loadingColor)       | String   |
+| [loadingColor](#loadingcolor)       | String   |
 
 - #### params
 
@@ -518,11 +518,11 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [backgroundColor](#backgroundcolor-1) | String   |
 | [column](#column-1)                   | Number   |
 | [scroll](#scroll-1)                   | Boolean  |
-| [scrollHover](#scrollHover-1)         | String   |
-| [stickerClick](#stickerClick-1)       | Function |
-| [storeClick](#storeClick)             | Function |
+| [scrollHover](#scrollhover-1)         | String   |
+| [stickerClick](#stickerclick-1)       | Function |
+| [storeClick](#storeclick)             | Function |
 | [preview](#preview-1)                 | Boolean  |
-| [loadingColor](#loadingColor-1)       | String   |
+| [loadingColor](#loadingcolor-1)       | String   |
 
 - #### params
 
@@ -1307,15 +1307,15 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [params](#params-2)                   | Object   |
 | [size](#size-3)                       | Object   |
 | [border](#border-3)                   | Object   |
-| [backgroundColor](#backgroundColor-2) | String   |
+| [backgroundColor](#backgroundcolor-2) | String   |
 | [menu](#menu-1)                       | Object   |
 | [column](#column-2)                   | Number   |
 | [scroll](#scroll-3)                   | Boolean  |
-| [scrollHover](#scrollHover-2)         | Boolean  |
-| [stickerClick](#stickerClick-2)       | Function |
-| [storeClick](#storeClick-1)           | Function |
+| [scrollHover](#scrollhover-2)         | Boolean  |
+| [stickerClick](#stickerclick-2)       | Function |
+| [storeClick](#storeclick-1)           | Function |
 | [preview](#preview-2)                 | Boolean  |
-| [loadingColor](#loadingColor-2)       | String   |
+| [loadingColor](#loadingcolor-2)       | String   |
 
 - #### params
 
