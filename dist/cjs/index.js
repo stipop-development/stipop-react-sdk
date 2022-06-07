@@ -82,10 +82,7 @@ var UnifiedComponent = function (_a) {
                             : '#d5d5d5'
                         : input && input.search
                             ? input.search
-                            : '#d5d5d5' }),
-                React__default["default"].createElement("div", null,
-                    React__default["default"].createElement("span", null, "POWERED BY"),
-                    React__default["default"].createElement(Icon["default"], { type: "LOGO" })))),
+                            : '#d5d5d5' }))),
         !keyword ? (React__default["default"].createElement("div", { style: { height: '90%' } },
             React__default["default"].createElement(PickerComponent, { params: { apikey: params.apikey, userId: params.userId }, size: {
                     height: size && size.height ? (size.height - 30) * 0.9 : 270 * 0.9,

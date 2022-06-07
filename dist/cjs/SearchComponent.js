@@ -4,7 +4,6 @@ var tslib_es6 = require('./tslib.es6-667f4605.js');
 var React = require('react');
 var LoadingSpinner = require('./index-704b1ded.js');
 var index = require('./index-531cfe3e.js');
-var Icon = require('./Icon.js');
 var index_esm = require('./index.esm-dd03e45b.js');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
@@ -77,10 +76,7 @@ var SearchComponent = function (_a) {
                             : '#d5d5d5'
                         : input && input.search
                             ? input.search
-                            : '#d5d5d5' }),
-                React__default["default"].createElement("div", null,
-                    React__default["default"].createElement("span", null, "POWERED BY"),
-                    React__default["default"].createElement(Icon["default"], { type: "LOGO" })))),
+                            : '#d5d5d5' }))),
         !isLoading ? (stickerList.length > 0 ? (React__default["default"].createElement(StickerWrapper, { column: column, scroll: scroll, scrollHover: scrollHover, border: border, backgroundColor: backgroundColor, size: size }, stickerList.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { src: "".concat(sticker.stickerImg, "?d=100x100"), key: index, onClick: function () {
                 if (preview) {
                     stickerClick({

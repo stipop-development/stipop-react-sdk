@@ -1,5 +1,4 @@
 export { default as SearchComponent } from './SearchComponent.js';
-import Icon from './Icon.js';
 export { default as Icon } from './Icon.js';
 import PickerComponent from './PickerComponent.js';
 export { default as PickerComponent } from './PickerComponent.js';
@@ -76,10 +75,7 @@ var UnifiedComponent = function (_a) {
                             : '#d5d5d5'
                         : input && input.search
                             ? input.search
-                            : '#d5d5d5' }),
-                React__default.createElement("div", null,
-                    React__default.createElement("span", null, "POWERED BY"),
-                    React__default.createElement(Icon, { type: "LOGO" })))),
+                            : '#d5d5d5' }))),
         !keyword ? (React__default.createElement("div", { style: { height: '90%' } },
             React__default.createElement(PickerComponent, { params: { apikey: params.apikey, userId: params.userId }, size: {
                     height: size && size.height ? (size.height - 30) * 0.9 : 270 * 0.9,

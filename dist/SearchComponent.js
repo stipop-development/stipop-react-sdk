@@ -2,7 +2,6 @@ import { _ as __makeTemplateObject } from './tslib.es6-a827156a.js';
 import React__default, { useState, useEffect } from 'react';
 import { s as styled, L as LoadingSpinner } from './index-6a59c9f1.js';
 import { S as Stipop } from './index-e5177013.js';
-import Icon from './Icon.js';
 import { F as FiX, a as FiSearch } from './index.esm-3315737a.js';
 
 var SearchComponent = function (_a) {
@@ -71,10 +70,7 @@ var SearchComponent = function (_a) {
                             : '#d5d5d5'
                         : input && input.search
                             ? input.search
-                            : '#d5d5d5' }),
-                React__default.createElement("div", null,
-                    React__default.createElement("span", null, "POWERED BY"),
-                    React__default.createElement(Icon, { type: "LOGO" })))),
+                            : '#d5d5d5' }))),
         !isLoading ? (stickerList.length > 0 ? (React__default.createElement(StickerWrapper, { column: column, scroll: scroll, scrollHover: scrollHover, border: border, backgroundColor: backgroundColor, size: size }, stickerList.map(function (sticker, index) { return (React__default.createElement(StickerImg, { src: "".concat(sticker.stickerImg, "?d=100x100"), key: index, onClick: function () {
                 if (preview) {
                     stickerClick({

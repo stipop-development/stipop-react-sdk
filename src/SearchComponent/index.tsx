@@ -114,10 +114,10 @@ const SearchComponent: React.FC<SearchProps> = ({
                 : '#d5d5d5'
             }
           />
-          <div>
+          {/* <div>
             <span>POWERED BY</span>
             <Icon type="LOGO" />
-          </div>
+          </div> */}
         </InputHolder>
       </SearchForm>
       {!isLoading ? (

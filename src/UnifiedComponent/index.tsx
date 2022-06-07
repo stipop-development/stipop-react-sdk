@@ -118,10 +118,10 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
                 : '#d5d5d5'
             }
           />
-          <div>
+          {/* <div>
             <span>POWERED BY</span>
             <Icon type="LOGO" />
-          </div>
+          </div> */}
         </InputHolder>
       </SearchForm>
       {!keyword ? (
