@@ -96,7 +96,10 @@ var UnifiedComponent = function (_a) {
                         : border && border.border
                             ? 360 - Number(border.border.slice(0, 1)) * 2
                             : 358,
-                }, border: { border: 'none', radius: 0 }, menu: {
+                }, border: {
+                    border: 'none',
+                    radius: border && border.radius ? border.radius : 10,
+                }, menu: {
                     backgroundColor: menu && menu.backgroundColor ? menu.backgroundColor : '#fff',
                     bottomLine: menu && menu.bottomLine
                         ? menu.bottomLine
@@ -138,7 +141,7 @@ var SearchWrapper = LoadingSpinner.styled.div(templateObject_1 || (templateObjec
 }, function (props) {
     return props.border && (props.border.radius || props.border.radius == 0)
         ? "".concat(props.border.radius, "px")
-        : '6px';
+        : '10px';
 });
 var SearchForm = LoadingSpinner.styled.div(templateObject_2 || (templateObject_2 = tslib_es6.__makeTemplateObject(["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"], ["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"])));
 var SearchInput = LoadingSpinner.styled.input(templateObject_3 || (templateObject_3 = tslib_es6.__makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"])), function (props) {

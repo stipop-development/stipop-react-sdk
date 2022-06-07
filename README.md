@@ -94,19 +94,21 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [scrollHover](#scrollHover)         | String   |
 | [stickerClick](#stickerclick)       | Function |
 | [preview](#preview)                 | Boolean  |
+| [loadingColor](#loadingColor)       | String   |
 
 - #### params
 
   ##### Parameters
 
-  | Name       | Type   | Required             | Default      |
-  | ---------- | ------ | -------------------- | ------------ |
-  | apikey     | String | required             |              |
-  | userId     | String | required             |              |
-  | lang       | String | strongly recommended | en           |
-  | pageNumber | number | optional             | 1            |
-  | limit      | Number | optional             | 20 (max: 50) |
-  | default    | string | optional             | hi           |
+  | Name        | Type   | Required             | Default      |
+  | ----------- | ------ | -------------------- | ------------ |
+  | apikey      | String | required             |              |
+  | userId      | String | required             |              |
+  | lang        | String | strongly recommended | en           |
+  | countryCode | String | strongly recommended | US           |
+  | pageNumber  | number | optional             | 1            |
+  | limit       | Number | optional             | 20 (max: 50) |
+  | default     | string | optional             | hi           |
 
   ##### Example
 
@@ -120,6 +122,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
           apikey: 'apikey',
           userId: 'userId',
           lang: 'en',
+          countryCode: 'US',
           pageNumber: 1,
           limit: 20,
           default: 'hi',
@@ -154,7 +157,6 @@ You can get the api key by signing up and creating an application in Stipop Dash
         params={{
           apikey: 'apikey',
           userId: 'userId',
-          lang: 'en',
         }}
         size={{
           width: 360,
@@ -167,9 +169,9 @@ You can get the api key by signing up and creating an application in Stipop Dash
   
   export default App
   ```
-
   
-
+  
+  
 - #### border
 
   ##### Parameters
@@ -190,7 +192,6 @@ You can get the api key by signing up and creating an application in Stipop Dash
         params={{
           apikey: 'apikey',
           userId: 'userId',
-          lang: 'en',
         }}
         border={{
           border: '1px solid lightgray',
@@ -202,9 +203,9 @@ You can get the api key by signing up and creating an application in Stipop Dash
   
   export default App
   ```
-
   
-
+  
+  
 - #### input
 
   ##### Parameters
@@ -231,7 +232,6 @@ You can get the api key by signing up and creating an application in Stipop Dash
         params={{
           apikey: 'apikey',
           userId: 'userId',
-          lang: 'en',
         }}
         input={{
           width: 100,
@@ -249,9 +249,9 @@ You can get the api key by signing up and creating an application in Stipop Dash
   
   export default App
   ```
-
   
-
+  
+  
 - #### backgroundColor
 
   | Type   | Required | Default |
@@ -269,7 +269,6 @@ You can get the api key by signing up and creating an application in Stipop Dash
         params={{
           apikey: 'apikey',
           userId: 'userId',
-          lang: 'en',
         }}
         backgroundColor={'#fff'}
       />
@@ -278,9 +277,9 @@ You can get the api key by signing up and creating an application in Stipop Dash
   
   export default App
   ```
-
   
-
+  
+  
 - #### column
 
   | Type   | Required | Default |
@@ -298,7 +297,6 @@ You can get the api key by signing up and creating an application in Stipop Dash
         params={{
           apikey: 'apikey',
           userId: 'userId',
-          lang: 'en',
         }}
         column={4}
       />
@@ -307,9 +305,9 @@ You can get the api key by signing up and creating an application in Stipop Dash
   
   export default App
   ```
-
   
-
+  
+  
 - #### scroll
 
   | Type    | Required | Default |
@@ -327,7 +325,6 @@ You can get the api key by signing up and creating an application in Stipop Dash
         params={{
           apikey: 'apikey',
           userId: 'userId',
-          lang: 'en',
         }}
         scroll={true}
       />
@@ -357,7 +354,6 @@ You can get the api key by signing up and creating an application in Stipop Dash
         params={{
           apikey: 'apikey',
           userId: 'userId',
-          lang: 'en',
         }}
         scroll={true}
         scrollHover={'#6d7072'}
@@ -367,9 +363,9 @@ You can get the api key by signing up and creating an application in Stipop Dash
   
   export default App
   ```
-
   
-
+  
+  
 - #### stickerClick
 
   > Get Sticker URL Function
@@ -389,7 +385,6 @@ You can get the api key by signing up and creating an application in Stipop Dash
         params={{
           apikey: 'apikey',
           userId: 'userId',
-          lang: 'en',
         }}
         stickerClick={url => console.log(url)}
       />
@@ -418,7 +413,6 @@ You can get the api key by signing up and creating an application in Stipop Dash
         params={{
           apikey: 'apikey',
           userId: 'userId',
-          lang: 'en',
         }}
         preview={false}
       />
@@ -427,6 +421,36 @@ You can get the api key by signing up and creating an application in Stipop Dash
   
   export default App
   ```
+
+
+
+- #### loadingColor
+
+  | Type   | Required | Default |
+  | ------ | -------- | ------- |
+  | string | optional | #ff4500 |
+
+  ##### Example
+
+  ```react
+  import { SearchComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <SearchComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        loadingColor={'#ff4500'}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
 
 ------
 
@@ -493,9 +517,11 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [backgroundColor](#backgroundcolor-1) | String   |
 | [column](#column-1)                   | Number   |
 | [scroll](#scroll-1)                   | Boolean  |
-| [stickerClick](#stickerclick-1)       | Function |
-| [storeClick](#storeclick)             | Function |
+| [scrollHover](#scrollHover-1)         | String   |
+| [stickerClick](#stickerClick-1)       | Function |
+| [storeClick](#storeClick)             | Function |
 | [preview](#preview-1)                 | Boolean  |
+| [loadingColor](#loadingColor-1)       | String   |
 
 - #### params
 
@@ -609,6 +635,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
   | selectedLine    | string | optional | 2px solid black     |
   | listCnt         | number | optional | 6                   |
   | arrowColor      | string | optional | #000                |
+  | imgSize         | number | optional | 60                  |
 
   ##### Example
 
@@ -629,6 +656,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
           selectedLine: '2px solid black',
           listCnt: 6,
           arrowColor: '#000',
+          imgSize: 60,
         }}
       />
     )
@@ -721,7 +749,38 @@ You can get the api key by signing up and creating an application in Stipop Dash
   export default App
   ```
 
+
+
+
+- #### scrollHover
+
+  | Type   | Required | Default |
+  | ------ | -------- | ------- |
+  | string | optional | #6d7072 |
+
+  ##### Examples
+
+  ```react
+  import { PickerComponent } from 'stipop-react-sdk'
   
+  const App = () => {
+    return (
+      <PickerComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        scroll={true}
+        scrollHover={'#6d7072'}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
+
 
 - #### stickerClick
 
@@ -783,14 +842,12 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 
 
-- #### stickerClick
-
-  > Get Sticker URL Function
+- #### preview
 
   | Type    | Required | Default |
   | ------- | -------- | ------- |
   | boolean | optional | false   |
-
+  
   ##### Example
 
   ```react
@@ -804,6 +861,34 @@ You can get the api key by signing up and creating an application in Stipop Dash
           userId: 'userId',
         }}
         preview={false}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
+
+- #### loadingColor
+
+  | Type   | Required | Default |
+  | ------ | -------- | ------- |
+  | string | optional | #ff4500 |
+
+  ##### Example
+
+  ```react
+  import { PickerComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <PickerComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        loadingColor={'#ff4500'}
       />
     )
   }
@@ -1159,5 +1244,419 @@ You can get the api key by signing up and creating an application in Stipop Dash
   export default App
   ```
 
+
+------
+
+
+
+### Unified Component
+
+> Sticker Unified Component (Search + Picker Component)
+
+- React
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+- Next.js
+
+  ```react
+  import dynamic from 'next/dynamic'
+  
+  const App = () => {
+    const UnifiedComponent = dynamic(
+      () => import('stipop-react-sdk/dist/UnifiedComponent'),
+      {
+        ssr: false,
+      })
+    
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
   
 
+#### List of Params
+
+| Parameters                            | Type     |
+| ------------------------------------- | -------- |
+| [params](#params-2)                   | Object   |
+| [size](#size-3)                       | Object   |
+| [border](#border-3)                   | Object   |
+| [backgroundColor](#backgroundColor-2) | String   |
+| [menu](#menu-1)                       | Object   |
+| [column](#column-2)                   | Number   |
+| [scroll](#scroll-3)                   | Boolean  |
+| [scrollHover](#scrollHover-2)         | Boolean  |
+| [stickerClick](#stickerClick-2)       | Function |
+| [storeClick](#storeClick-1)           | Function |
+| [preview](#preview-2)                 | Boolean  |
+| [loadingColor](#loadingColor-2)       | String   |
+
+- #### params
+
+  ##### Parameters
+
+  | Name   | Type   | Required | Default |
+  | ------ | ------ | -------- | ------- |
+  | apikey | string | required |         |
+  | userId | string | required |         |
+
+  ##### Example
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+  
+
+- #### size
+
+  ##### Parameters
+
+  | Name    | Type   | Required | Default |
+  | ------- | ------ | -------- | ------- |
+  | width   | number | optional | 360     |
+  | height  | number | optional | 300     |
+  | imgSize | number | optional | 60      |
+
+  ##### Example
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        size={{
+          width: 360,
+          height: 300,
+          imgSize: 60,
+        }}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
+
+
+- #### border
+
+  ##### Parameters
+
+  | Name   | Type   | Required | Default             |
+  | ------ | ------ | -------- | ------------------- |
+  | border | string | optional | 1px solid lightgray |
+  | radius | string | optional | 10                  |
+
+  ##### Example
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        border={{
+          border: '1px solid lightgray',
+          radius: 10,
+        }}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
+
+
+- #### Menu
+
+  ##### Parameters
+
+  | Name            | Type   | Required | Default             |
+  | --------------- | ------ | -------- | ------------------- |
+  | backgroundColor | string | optional | #fff                |
+  | bottomLine      | string | optional | 1px solid lightgray |
+  | selectedLine    | string | optional | 2px solid black     |
+  | height          | number | optional | 45                  |
+  | listCnt         | number | optional | 6                   |
+  | arrowColor      | string | optional | #000                |
+  | imgSize         | number | optional | 60                  |
+
+  ##### Example
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        menu={{
+          backgroundColor: '#fff',
+          bottomLine: '1px solid lightgray',
+          selectedLine: '2px solid black',
+          height: 45,
+          listCnt: 6,
+          arrowColor: '#000',
+          imgSize: 60,
+        }}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+  
+
+- #### column
+
+  | Type   | Required | Default |
+  | ------ | -------- | ------- |
+  | number | optional | 4       |
+
+  ##### Example
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        column={4}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+  
+
+- #### scroll
+
+  | Type    | Required | Default |
+  | ------- | -------- | ------- |
+  | boolean | optional | true    |
+
+  ##### Example
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        scroll={true}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+  
+
+- #### scrollHover
+
+  | Type   | Required | Default |
+  | ------ | -------- | ------- |
+  | string | optional | #6d7072 |
+
+  ##### Example
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        scrollHover={'#6d7072'}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
+
+
+- #### stickerClick
+
+  > Get Sticker URL Function
+
+  | Type     | Required | Value       |
+  | -------- | -------- | ----------- |
+  | Function | optional | sticker URL |
+
+  ##### Example
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        stickerClick={(url) => console.log(url)} //sticker URL
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+  
+
+- #### storeClick
+
+  > Get Store Icon Click Status
+
+  | Type     | Required | Value |
+  | -------- | -------- | ----- |
+  | Function | optional | true  |
+
+  ##### Example
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        storeClick={(e) => console.log(e)} //true
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
+
+- #### preview
+
+  | Type    | Required | Default |
+  | ------- | -------- | ------- |
+  | boolean | optional | false   |
+
+  ##### Example
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        preview={false}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
+
+- #### loadingColor
+
+  | Type   | Required | Default |
+  | ------ | -------- | ------- |
+  | string | optional | #ff4500 |
+
+  ##### Example
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        loadingColor={'#ff4500'}
+      />
+    )
+  }
+  
+  export default App
+  ```

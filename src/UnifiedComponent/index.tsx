@@ -140,7 +140,10 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
                   ? 360 - Number(border.border.slice(0, 1)) * 2
                   : 358,
             }}
-            border={{ border: 'none', radius: 0 }}
+            border={{
+              border: 'none',
+              radius: border && border.radius ? border.radius : 10,
+            }}
             menu={{
               backgroundColor:
                 menu && menu.backgroundColor ? menu.backgroundColor : '#fff',
@@ -231,7 +234,7 @@ const SearchWrapper = styled.div`
   border-radius: ${props =>
     props.border && (props.border.radius || props.border.radius == 0)
       ? `${props.border.radius}px`
-      : '6px'};
+      : '10px'};
   display: flex;
   flex-direction: column;
   align-items: center;
