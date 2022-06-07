@@ -1250,7 +1250,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 
 
-### Unified Component
+### UnifiedComponent
 
 > Sticker Unified Component (Search + Picker Component)
 
@@ -1304,11 +1304,11 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 | Parameters                            | Type     |
 | ------------------------------------- | -------- |
-| [params](#params-2)                   | Object   |
+| [params](#params-3)                   | Object   |
 | [size](#size-3)                       | Object   |
 | [border](#border-3)                   | Object   |
-| [backgroundColor](#backgroundcolor-2) | String   |
 | [menu](#menu-1)                       | Object   |
+| [backgroundColor](#backgroundcolor-2) | String   |
 | [column](#column-2)                   | Number   |
 | [scroll](#scroll-3)                   | Boolean  |
 | [scrollHover](#scrollhover-2)         | Boolean  |
@@ -1419,7 +1419,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 
 
-- #### Menu
+- #### menu
 
   ##### Parameters
 
@@ -1461,7 +1461,37 @@ You can get the api key by signing up and creating an application in Stipop Dash
   export default App
   ```
 
+
+
+
+- #### backgroundColor
+
+  | Type   | Required | Default |
+  | ------ | -------- | ------- |
+  | string | optional | #fff    |
+
+  ##### Example
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
   
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        backgroundColor={'#fff'}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
+
 
 - #### column
 
