@@ -96,6 +96,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [stickerClick](#stickerclick)       | Function |
 | [preview](#preview)                 | Boolean  |
 | [loadingColor](#loadingcolor)       | String   |
+| [shadow](#shadow)                   | String   |
 
 - #### params
 
@@ -177,10 +178,10 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
   ##### Parameters
 
-  | Name   | Type   | Required | Default             |
-  | ------ | ------ | -------- | ------------------- |
-  | border | string | optional | 1px solid lightgray |
-  | radius | number | optional | 10                  |
+  | Name   | Type   | Required | Default                                                      |
+  | ------ | ------ | -------- | ------------------------------------------------------------ |
+  | border | string | optional | 1px solid lightgray                                          |
+  | radius | object | optional | { **leftTop**: 10, **rightTop**: 10, **leftBottom**: 10, **rightBottom**: 10 }<br />**all** : This parameter preferentially applies the same value to all of the corners at once. |
 
   ##### Example
 
@@ -196,7 +197,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
         }}
         border={{
           border: '1px solid lightgray',
-          radius: 10,
+          radius: {leftTop: 10, rightTop: 10, leftBottom: 10, rightBottom: 10},
         }}
       />
     )
@@ -453,6 +454,33 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 
 
+- #### shadow
+
+  | Type   | Required | Default                            |
+  | ------ | -------- | ---------------------------------- |
+  | string | optional | 0 10px 20px 6px rgba(0, 0, 0, 0.1) |
+
+  ##### Examples
+
+  ```react
+  import { SearchComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <SearchComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        shadow='0 10px 20px 6px rgba(0, 0, 0, 0.1)'
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
 ------
 
 
@@ -523,6 +551,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [storeClick](#storeclick)             | Function |
 | [preview](#preview-1)                 | Boolean  |
 | [loadingColor](#loadingcolor-1)       | String   |
+| [shadow](#shadow-1)                   | String   |
 
 - #### params
 
@@ -594,10 +623,10 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
   ##### Parameters
 
-  | Name   | Type   | Required | Default             |
-  | ------ | ------ | -------- | ------------------- |
-  | border | string | optional | 1px solid lightgray |
-  | radius | number | optional | 10                  |
+  | Name   | Type   | Required | Default                                                      |
+  | ------ | ------ | -------- | ------------------------------------------------------------ |
+  | border | string | optional | 1px solid lightgray                                          |
+  | radius | object | optional | { **leftTop**: 10, **rightTop**: 10, **leftBottom**: 10, **rightBottom**: 10 }<br />**all** : This parameter preferentially applies the same value to all of the corners at once. |
 
   ##### Example
 
@@ -613,7 +642,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
         }}
         border={{
           border: '1px solid lightgray',
-          radius: 10,
+          radius: {leftTop: 10, rightTop: 10, leftBottom: 10, rightBottom: 10},
         }}
       />
     )
@@ -897,7 +926,37 @@ You can get the api key by signing up and creating an application in Stipop Dash
   export default App
   ```
 
+
+
+- #### shadow
+
+  | Type   | Required | Default                            |
+  | ------ | -------- | ---------------------------------- |
+  | string | optional | 0 10px 20px 6px rgba(0, 0, 0, 0.1) |
+
+  ##### Example
+
+  ```react
+  import { PickerComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <PickerComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        shadow='0 10px 20px 6px rgba(0, 0, 0, 0.1)'
+      />
+    )
+  }
+  
+  export default App
+  ```
+
 -------
+
+
 
 
 
@@ -968,6 +1027,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [border](#border-2)               | Object   |
 | [scroll](#scroll-2)               | Boolean  |
 | [onClose](#onclose)               | Function |
+| [shadow](#shadow-2)               | String   |
 
 - #### params
 
@@ -1065,6 +1125,8 @@ You can get the api key by signing up and creating an application in Stipop Dash
   | deleteBtnHover       | string | optional | #b3b3b3 |
   | recoveryBtn          | string | optional | #ff4500 |
   | recoveryBtnHover     | string | optional | #ff4500 |
+  | loadingColor         | string | optional | #ff4500 |
+  | scrollHover          | string | optional | #6d7072 |
 
   ##### Example
 
@@ -1091,7 +1153,9 @@ You can get the api key by signing up and creating an application in Stipop Dash
           deleteBtn: '#b3b3b3',
           deleteBtnHover: '#b3b3b3',
           recoveryBtn: '#ff4500',
-          recoveryBtnHover: '#ff4500'
+          recoveryBtnHover: '#ff4500',
+          loadingColor: '#ff4500',
+          scrollHover: '#6d7072',
         }}
       />
     )
@@ -1136,6 +1200,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
           previewImg: 70,
           detailImg: 70,
           mainImg: 100,
+          packageListHeight: 33,
         }}
       />
     )
@@ -1150,10 +1215,10 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
   ##### Parameters
 
-  | Name   | Type   | Required | Default             |
-  | ------ | ------ | -------- | ------------------- |
-  | border | string | optional | 1px solid lightgray |
-  | radius | number | optional | 8                   |
+  | Name   | Type   | Required | Default                                                      |
+  | ------ | ------ | -------- | ------------------------------------------------------------ |
+  | border | string | optional | 1px solid lightgray                                          |
+  | radius | object | optional | { **leftTop**: 10, **rightTop**: 10, **leftBottom**: 10, **rightBottom**: 10 }<br />**all** : This parameter preferentially applies the same value to all of the corners at once. |
 
   ##### Example
 
@@ -1172,7 +1237,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
         }}
         border={{
           border: '1px solid lightgray',
-          radius: 8,
+          radius: {leftTop: 10, rightTop: 10, leftBottom: 10, rightBottom: 10},
         }}
       />
     )
@@ -1246,6 +1311,39 @@ You can get the api key by signing up and creating an application in Stipop Dash
   ```
 
 
+
+- #### shadow
+
+  | Type   | Required | Default                            |
+  | ------ | -------- | ---------------------------------- |
+  | string | optional | 0 10px 20px 6px rgba(0, 0, 0, 0.1) |
+
+  ##### Example
+
+  ```react
+  import { StoreComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <StoreComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        downloadParams={{
+          isPurchase: 'N'
+        }}
+        shadow='0 10px 20px 6px rgba(0, 0, 0, 0.1)'
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+  
+
+
 ------
 
 
@@ -1317,6 +1415,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [storeClick](#storeclick-1)           | Function |
 | [preview](#preview-2)                 | Boolean  |
 | [loadingColor](#loadingcolor-2)       | String   |
+| [shadow](#shadow-3)                   | String   |
 
 - #### params
 
@@ -1397,10 +1496,10 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
   ##### Parameters
 
-  | Name   | Type   | Required | Default             |
-  | ------ | ------ | -------- | ------------------- |
-  | border | string | optional | 1px solid lightgray |
-  | radius | string | optional | 10                  |
+  | Name   | Type   | Required | Default                                                      |
+  | ------ | ------ | -------- | ------------------------------------------------------------ |
+  | border | string | optional | 1px solid lightgray                                          |
+  | radius | object | optional | { **leftTop**: 10, **rightTop**: 10, **leftBottom**: 10, **rightBottom**: 10 }<br />**all** : This parameter preferentially applies the same value to all of the corners at once. |
 
   ##### Example
 
@@ -1416,7 +1515,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
         }}
         border={{
           border: '1px solid lightgray',
-          radius: 10,
+          radius: {leftTop: 10, rightTop: 10, leftBottom: 10, rightBottom: 10},
         }}
       />
     )
@@ -1741,6 +1840,34 @@ You can get the api key by signing up and creating an application in Stipop Dash
           userId: 'userId',
         }}
         loadingColor={'#ff4500'}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
+
+- #### shadow
+
+  | Type   | Required | Default                            |
+  | ------ | -------- | ---------------------------------- |
+  | string | optional | 0 10px 20px 6px rgba(0, 0, 0, 0.1) |
+
+  ##### Example
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        shadow='0 10px 20px 6px rgba(0, 0, 0, 0.1)'
       />
     )
   }
