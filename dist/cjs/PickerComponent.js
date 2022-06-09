@@ -19027,7 +19027,7 @@ var lodash = {exports: {}};
 var _ = lodash.exports;
 
 var PickerComponent = function (_a) {
-    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, storeClick = _a.storeClick, preview = _a.preview, loadingColor = _a.loadingColor;
+    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, storeClick = _a.storeClick, preview = _a.preview, loadingColor = _a.loadingColor, shadow = _a.shadow;
     var _b = React.useState([]), myStickers = _b[0], setMyStickers = _b[1];
     var _c = React.useState([]), stickers = _c[0], setStickers = _c[1];
     var _d = React.useState(0), showPackage = _d[0], setShowPackage = _d[1];
@@ -19199,7 +19199,7 @@ var PickerComponent = function (_a) {
             }
         }
     }, [stickers]);
-    return (React__default["default"].createElement(PickerWrapper, { size: size, border: border },
+    return (React__default["default"].createElement(PickerWrapper, { size: size, border: border, shadow: shadow },
         preview && tempSticker && (React__default["default"].createElement(PreviewWrapper, null,
             React__default["default"].createElement(index_esm.FiX, { size: 25, color: '#000', style: {
                     position: 'absolute',
@@ -19297,7 +19297,7 @@ var PickerComponent = function (_a) {
                 } },
                 React__default["default"].createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker", style: { width: '40%' } }))))));
 };
-var PickerWrapper = LoadingSpinner.styled.div(templateObject_1 || (templateObject_1 = tslib_es6.__makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: ", ";\n  position: relative;\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: ", ";\n  position: relative;\n"])), function (props) {
+var PickerWrapper = LoadingSpinner.styled.div(templateObject_1 || (templateObject_1 = tslib_es6.__makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: ", ";\n  position: relative;\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: ", ";\n  position: relative;\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
 }, function (props) {
     return props.size && props.size.height ? "".concat(props.size.height, "px") : '300px';
@@ -19306,16 +19306,39 @@ var PickerWrapper = LoadingSpinner.styled.div(templateObject_1 || (templateObjec
         ? props.border.border
         : '1px solid lightgray';
 }, function (props) {
-    return props.border && (props.border.radius || props.border.radius == 0)
-        ? "".concat(props.border.radius, "px")
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.leftTop || props.border.radius.leftTop === 0)
+        ? "".concat(props.border.radius.leftTop, "px")
         : '10px';
 }, function (props) {
-    return props.border && props.border.shadow
-        ? '0 10px 20px 6px rgba(0, 0, 0, 0.1)'
-        : '';
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.rightTop || props.border.radius.rightTop === 0)
+        ? "".concat(props.border.radius.rightTop, "px")
+        : '10px';
+}, function (props) {
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.leftBottom || props.border.radius.leftBottom === 0)
+        ? "".concat(props.border.radius.leftBottom, "px")
+        : '10px';
+}, function (props) {
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.rightBottom || props.border.radius.rightBottom === 0)
+        ? "".concat(props.border.radius.rightBottom, "px")
+        : '10px';
+}, function (props) {
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.all || props.border.radius.all === 0) &&
+        "".concat(props.border.radius.all, "px");
+}, function (props) {
+    return props.shadow ? props.shadow : '0 10px 20px 6px rgba(0, 0, 0, 0.1)';
 });
 var MenuBox = LoadingSpinner.styled.div(templateObject_2 || (templateObject_2 = tslib_es6.__makeTemplateObject(["\n  width: 100%;\n  display: flex;\n"], ["\n  width: 100%;\n  display: flex;\n"])));
-var ArrowWrapper = LoadingSpinner.styled.div(templateObject_3 || (templateObject_3 = tslib_es6.__makeTemplateObject(["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-bottom: ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n\n  .stipop-icon {\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  }\n\n  &#left {\n    padding-left: 10px;\n    cursor: initial;\n  }\n  &#left-black {\n    padding-left: 10px;\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n  &#right-black {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n  }\n  &#right {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n    cursor: initial;\n\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n"], ["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n  border-bottom: ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n\n  .stipop-icon {\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  }\n\n  &#left {\n    padding-left: 10px;\n    cursor: initial;\n  }\n  &#left-black {\n    padding-left: 10px;\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n  &#right-black {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n  }\n  &#right {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n    cursor: initial;\n\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n"])), function (props) {
+var ArrowWrapper = LoadingSpinner.styled.div(templateObject_3 || (templateObject_3 = tslib_es6.__makeTemplateObject(["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n\n  border-bottom: ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n\n  .stipop-icon {\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  }\n\n  &#left {\n    padding-left: 10px;\n    cursor: initial;\n  }\n  &#left-black {\n    padding-left: 10px;\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n  &#right-black {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n  }\n  &#right {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n    cursor: initial;\n\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n"], ["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n  border-top-left-radius: ", ";\n\n  border-bottom: ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n\n  .stipop-icon {\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  }\n\n  &#left {\n    padding-left: 10px;\n    cursor: initial;\n  }\n  &#left-black {\n    padding-left: 10px;\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n  &#right-black {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n  }\n  &#right {\n    padding-right: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: ", ";\n    cursor: initial;\n\n    .stipop-icon {\n      transform: rotateY(180deg);\n    }\n  }\n"])), function (props) {
     return props.size && props.size.width
         ? props.menu && props.menu.listCnt
             ? "".concat(props.size.width / (props.menu.listCnt + 2), "px")
@@ -19330,21 +19353,39 @@ var ArrowWrapper = LoadingSpinner.styled.div(templateObject_3 || (templateObject
         ? props.menu.backgroundColor
         : '#fff';
 }, function (props) {
-    return props.border && (props.border.radius || props.border.radius == 0)
-        ? "".concat(props.border.radius, "px")
-        : '10px';
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.all || props.border.radius.all === 0)
+        ? "".concat(props.border.radius.all, "px")
+        : props.border &&
+            props.border.radius &&
+            (props.border.radius.leftTop || props.border.radius.leftTop === 0)
+            ? "".concat(props.border.radius.leftTop, "px")
+            : '10px';
 }, function (props) {
     return props.menu && props.menu.bottomLine
         ? props.menu.bottomLine
         : '1px solid lightgray';
 }, function (props) {
-    return props.border && (props.border.radius || props.border.radius == 0)
-        ? "".concat(props.border.radius, "px")
-        : '10px';
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.all || props.border.radius.all === 0)
+        ? "".concat(props.border.radius.all, "px")
+        : props.border &&
+            props.border.radius &&
+            (props.border.radius.rightTop || props.border.radius.rightTop === 0)
+            ? "".concat(props.border.radius.rightTop, "px")
+            : '10px';
 }, function (props) {
-    return props.border && (props.border.radius || props.border.radius == 0)
-        ? "".concat(props.border.radius, "px")
-        : '10px';
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.all || props.border.radius.all === 0)
+        ? "".concat(props.border.radius.all, "px")
+        : props.border &&
+            props.border.radius &&
+            (props.border.radius.rightTop || props.border.radius.rightTop === 0)
+            ? "".concat(props.border.radius.rightTop, "px")
+            : '10px';
 });
 var IconWrapper = LoadingSpinner.styled.div(templateObject_4 || (templateObject_4 = tslib_es6.__makeTemplateObject(["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n\n  .stipop-icon {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    border-bottom: ", ";\n    box-sizing: border-box;\n\n    svg {\n      transform: ", ";\n    }\n  }\n"], ["\n  flex-basis: ", ";\n  flex-shrink: 0;\n  height: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n\n  .stipop-icon {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    border-bottom: ", ";\n    box-sizing: border-box;\n\n    svg {\n      transform: ", ";\n    }\n  }\n"])), function (props) {
     return props.size && props.size.width
@@ -19419,13 +19460,26 @@ var StickerWrapper = LoadingSpinner.styled.div(templateObject_8 || (templateObje
 }, function (props) {
     return props.backgroundColor ? props.backgroundColor : '#fff';
 }, function (props) {
-    return props.border && (props.border.radius || props.border.radius == 0)
-        ? "".concat(props.border.radius, "px")
-        : '10px';
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.all || props.border.radius.all === 0)
+        ? "".concat(props.border.radius.all, "px")
+        : props.border &&
+            props.border.radius &&
+            (props.border.radius.leftBottom || props.border.radius.leftBottom === 0)
+            ? "".concat(props.border.radius.leftBottom, "px")
+            : '10px';
 }, function (props) {
-    return props.border && (props.border.radius || props.border.radius == 0)
-        ? "".concat(props.border.radius, "px")
-        : '10px';
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.all || props.border.radius.all === 0)
+        ? "".concat(props.border.radius.all, "px")
+        : props.border &&
+            props.border.radius &&
+            (props.border.radius.rightBottom ||
+                props.border.radius.rightBottom === 0)
+            ? "".concat(props.border.radius.rightBottom, "px")
+            : '10px';
 }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) {
     return props.scroll === false ? 'none' : props.scrolling ? '' : 'none';
 }, function (props) {

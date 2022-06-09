@@ -12,6 +12,7 @@ export interface UnifiedProps {
   preview?: boolean
   stickerClick?: Function
   storeClick?: Function
+  shadow?: string
 }
 
 interface Params {
@@ -31,7 +32,15 @@ interface Size {
 
 interface Border {
   border?: string
-  radius?: number
+  radius?: Radius
+}
+
+interface Radius {
+  rightTop?: number
+  leftTop?: number
+  rightBottom?: number
+  leftBottom?: number
+  all?: number
 }
 
 interface Input {

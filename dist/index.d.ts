@@ -13,6 +13,7 @@ interface SearchProps {
     stickerClick?: Function;
     preview?: boolean;
     loadingColor?: string;
+    shadow?: string;
 }
 interface Params$3 {
     apikey: string;
@@ -30,7 +31,14 @@ interface Size$3 {
 }
 interface Border$3 {
     border?: string;
-    radius?: number;
+    radius?: Radius$3;
+}
+interface Radius$3 {
+    rightTop?: number;
+    leftTop?: number;
+    rightBottom?: number;
+    leftBottom?: number;
+    all?: number;
 }
 interface Input$1 {
     border?: string;
@@ -78,6 +86,7 @@ interface StoreProps$1 {
     storeClick?: Function;
     preview?: boolean;
     loadingColor?: string;
+    shadow?: string;
 }
 interface Params$2 {
     apikey: string;
@@ -90,8 +99,14 @@ interface Size$2 {
 }
 interface Border$2 {
     border?: string;
-    radius?: number;
-    shadow?: boolean;
+    radius?: Radius$2;
+}
+interface Radius$2 {
+    rightTop?: number;
+    leftTop?: number;
+    rightBottom?: number;
+    leftBottom?: number;
+    all?: number;
 }
 interface Menu$1 {
     backgroundColor?: string;
@@ -113,6 +128,7 @@ interface StoreProps {
     onClose?: Function;
     size?: Size$1;
     border?: Border$1;
+    shadow?: string;
 }
 interface DownloadParams {
     isPurchase: string;
@@ -141,6 +157,7 @@ interface Color {
     recoveryBtn?: string;
     recoveryBtnHover?: string;
     loadingColor?: string;
+    scrollHover?: string;
 }
 interface Size$1 {
     width?: number;
@@ -152,7 +169,14 @@ interface Size$1 {
 }
 interface Border$1 {
     border?: string;
-    radius?: number;
+    radius?: Radius$1;
+}
+interface Radius$1 {
+    rightTop?: number;
+    leftTop?: number;
+    rightBottom?: number;
+    leftBottom?: number;
+    all?: number;
 }
 
 declare const StoreComponent: React.FC<StoreProps>;
@@ -171,6 +195,7 @@ interface UnifiedProps {
     preview?: boolean;
     stickerClick?: Function;
     storeClick?: Function;
+    shadow?: string;
 }
 interface Params {
     apikey: string;
@@ -187,7 +212,14 @@ interface Size {
 }
 interface Border {
     border?: string;
-    radius?: number;
+    radius?: Radius;
+}
+interface Radius {
+    rightTop?: number;
+    leftTop?: number;
+    rightBottom?: number;
+    leftBottom?: number;
+    all?: number;
 }
 interface Input {
     border?: string;

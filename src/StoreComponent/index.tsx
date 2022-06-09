@@ -15,6 +15,7 @@ const StoreComponent: React.FC<StoreProps> = ({
   onClose,
   size,
   border,
+  shadow,
 }) => {
   const [packages, setPackages] = useState([])
   const [detail, setDetail] = useState(false)
@@ -223,13 +224,13 @@ const StoreComponent: React.FC<StoreProps> = ({
   return (
     <>
       {isLoading ? (
-        <StoreWrapper color={color} size={size} border={border}>
+        <StoreWrapper color={color} size={size} border={border} shadow={shadow}>
           <LoadingSpinner
             color={color && color.loadingColor ? color.loadingColor : '#ff4500'}
           />
         </StoreWrapper>
       ) : (
-        <StoreWrapper color={color} size={size} border={border}>
+        <StoreWrapper color={color} size={size} border={border} shadow={shadow}>
           <StoreTitle>
             {detail ? (
               <div className="title-text">
@@ -454,11 +455,37 @@ const StoreWrapper = styled.div`
     props.border && props.border.border
       ? props.border.border
       : '1px solid lightgray'};
-  border-radius: ${props =>
-    props.border && (props.border.radius || props.border.radius == 0)
-      ? `${props.border.radius}px`
+  border-top-left-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.leftTop || props.border.radius.leftTop === 0)
+      ? `${props.border.radius.leftTop}px`
       : '8px'};
-  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);
+  border-top-right-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.rightTop || props.border.radius.rightTop === 0)
+      ? `${props.border.radius.rightTop}px`
+      : '8px'};
+  border-bottom-left-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.leftBottom || props.border.radius.leftBottom === 0)
+      ? `${props.border.radius.leftBottom}px`
+      : '8px'};
+  border-bottom-right-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.rightBottom || props.border.radius.rightBottom === 0)
+      ? `${props.border.radius.rightBottom}px`
+      : '8px'};
+  border-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.all || props.border.radius.all === 0) &&
+    `${props.border.radius.all}px`};
+  box-shadow: ${props =>
+    props.shadow ? props.shadow : '0 10px 20px 6px rgba(0, 0, 0, 0.1)'};
   background-color: ${props =>
     props.color && props.color.backgroundColor
       ? props.color.backgroundColor
@@ -534,15 +561,37 @@ const PackageContainer = styled.div`
     props.color && props.color.backgroundColor
       ? props.color.backgroundColor
       : '#fff'};
-  border-bottom-left-radius: ${props =>
+  /* border-bottom-left-radius: ${props =>
     props.border && (props.border.radius || props.border.radius == 0)
       ? `${props.border.radius}px`
       : '8px'};
   border-bottom-right-radius: ${props =>
     props.border && (props.border.radius || props.border.radius == 0)
       ? `${props.border.radius}px`
+      : '8px'}; */
+  border-bottom-left-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.all || props.border.radius.all === 0)
+      ? `${props.border.radius.all}px`
+      : props.border &&
+        props.border.radius &&
+        (props.border.radius.leftBottom || props.border.radius.leftBottom === 0)
+      ? `${props.border.radius.leftBottom}px`
+      : '8px'};
+  border-bottom-right-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.all || props.border.radius.all === 0)
+      ? `${props.border.radius.all}px`
+      : props.border &&
+        props.border.radius &&
+        (props.border.radius.rightBottom ||
+          props.border.radius.rightBottom === 0)
+      ? `${props.border.radius.rightBottom}px`
       : '8px'};
 `
+
 const DetailWrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -603,7 +652,10 @@ const DetailStickerWrapper = styled.div`
     background: #bcc0c4;
     border-radius: 5px;
     &:hover {
-      background: #6d7072;
+      background: ${props =>
+        props.color && props.color.scrollHover
+          ? props.color.scrollHover
+          : '#6d7072'};
     }
   }
 
@@ -649,7 +701,10 @@ const PackageWrapper = styled.div`
     background: #bcc0c4;
     border-radius: 5px;
     &:hover {
-      background: #6d7072;
+      background: ${props =>
+        props.color && props.color.scrollHover
+          ? props.color.scrollHover
+          : '#6d7072'};
     }
   }
   -webkit-user-select: none;

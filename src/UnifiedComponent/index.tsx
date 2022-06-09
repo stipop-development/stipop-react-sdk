@@ -24,6 +24,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
   preview,
   stickerClick,
   storeClick,
+  shadow,
 }) => {
   const [keyword, setKeyword] = useState('')
   const [stickerList, setStickerList] = useState([])
@@ -77,6 +78,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
       size={size}
       backgroundColor={backgroundColor}
       border={border}
+      shadow={shadow}
     >
       {preview && tempSticker && (
         <PreviewWrapper>
@@ -142,7 +144,32 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
             }}
             border={{
               border: 'none',
-              radius: border && border.radius ? border.radius : 10,
+              radius: {
+                rightTop: 0,
+                leftTop: 0,
+                rightBottom:
+                  border &&
+                  border.radius &&
+                  (border.radius.all || border.radius.all === 0)
+                    ? border.radius.all
+                    : border &&
+                      border.radius &&
+                      (border.radius.rightBottom ||
+                        border.radius.rightBottom === 0)
+                    ? border.radius.rightBottom
+                    : 10,
+                leftBottom:
+                  border &&
+                  border.radius &&
+                  (border.radius.all || border.radius.all === 0)
+                    ? border.radius.all
+                    : border &&
+                      border.radius &&
+                      (border.radius.leftBottom ||
+                        border.radius.leftBottom === 0)
+                    ? border.radius.leftBottom
+                    : 10,
+              },
             }}
             menu={{
               backgroundColor:
@@ -165,6 +192,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
             scroll={scroll ? scroll : true}
             scrollHover={scrollHover ? scrollHover : '#6d7072'}
             loadingColor={loadingColor ? loadingColor : '#ff4500'}
+            shadow={'none'}
             preview={preview}
             stickerClick={url => stickerClick(url)}
             storeClick={click => storeClick(click)}
@@ -231,10 +259,35 @@ const SearchWrapper = styled.div`
     props.border && props.border.border
       ? props.border.border
       : '1px solid lightgray'};
+  border-top-left-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.leftTop || props.border.radius.leftTop === 0)
+      ? `${props.border.radius.leftTop}px`
+      : '8px'};
+  border-top-right-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.rightTop || props.border.radius.rightTop === 0)
+      ? `${props.border.radius.rightTop}px`
+      : '8px'};
+  border-bottom-left-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.leftBottom || props.border.radius.leftBottom === 0)
+      ? `${props.border.radius.leftBottom}px`
+      : '8px'};
+  border-bottom-right-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.rightBottom || props.border.radius.rightBottom === 0)
+      ? `${props.border.radius.rightBottom}px`
+      : '8px'};
   border-radius: ${props =>
-    props.border && (props.border.radius || props.border.radius == 0)
-      ? `${props.border.radius}px`
-      : '10px'};
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.all || props.border.radius.all === 0) &&
+    `${props.border.radius.all}px`};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -243,7 +296,8 @@ const SearchWrapper = styled.div`
   /* padding: 10px 0; */
   padding-top: 10px;
   box-sizing: border-box;
-  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: ${props =>
+    props.shadow ? props.shadow : '0 10px 20px 6px rgba(0, 0, 0, 0.1)'};
 `
 const SearchForm = styled.div`
   width: 100%;
@@ -419,210 +473,4 @@ const ChatSticker = styled.img`
   width: 100px;
   height: 100px;
   margin-bottom: 5px;
-`
-
-const PickerWrapper = styled.div`
-  width: ${props =>
-    props.size && props.size.width ? `${props.size.width}px` : '360px'};
-  height: ${props =>
-    props.size && props.size.height ? `${props.size.height}px` : '300px'};
-  border: ${props =>
-    props.border && props.border.border
-      ? props.border.border
-      : '1px solid lightgray'};
-  border-radius: ${props =>
-    props.border && (props.border.radius || props.border.radius == 0)
-      ? `${props.border.radius}px`
-      : '10px'};
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);
-  position: relative;
-`
-const MenuBox = styled.div`
-  width: 100%;
-  height: 40px;
-  display: flex;
-`
-const ArrowWrapper = styled.div`
-  flex-basis: ${props =>
-    props.size && props.size.width
-      ? props.menu && props.menu.listCnt
-        ? `${props.size.width / (props.menu.listCnt + 2)}px`
-        : `${props.size.width / 8}px`
-      : props.menu && props.menu.listCnt
-      ? `${360 / (props.menu.listCnt + 2)}px`
-      : '45px'};
-  flex-shrink: 0;
-  height: ${props =>
-    props.menu && props.menu.height ? `${props.menu.height}px` : '45px'};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${props =>
-    props.menu && props.menu.backgroundColor
-      ? props.menu.backgroundColor
-      : '#fff'};
-  border-top-left-radius: ${props =>
-    props.border && (props.border.radius || props.border.radius == 0)
-      ? `${props.border.radius}px`
-      : '10px'};
-  border-bottom: ${props =>
-    props.menu && props.menu.bottomLine
-      ? props.menu.bottomLine
-      : '1px solid lightgray'};
-  box-sizing: border-box;
-  cursor: pointer;
-
-  .stipop-icon {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &#left {
-    padding-left: 10px;
-    cursor: initial;
-  }
-  &#left-black {
-    padding-left: 10px;
-    .stipop-icon {
-      transform: rotateY(180deg);
-    }
-  }
-  &#right-black {
-    padding-right: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: ${props =>
-      props.border && (props.border.radius || props.border.radius == 0)
-        ? `${props.border.radius}px`
-        : '10px'};
-  }
-  &#right {
-    padding-right: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: ${props =>
-      props.border && (props.border.radius || props.border.radius == 0)
-        ? `${props.border.radius}px`
-        : '10px'};
-    cursor: initial;
-
-    .stipop-icon {
-      transform: rotateY(180deg);
-    }
-  }
-`
-const IconWrapper = styled.div`
-  flex-basis: ${props =>
-    props.size && props.size.width
-      ? props.menu && props.menu.listCnt
-        ? `${props.size.width / (props.menu.listCnt + 2)}px`
-        : `${props.size.width / 8}px`
-      : props.menu && props.menu.listCnt
-      ? `${360 / (props.menu.listCnt + 2)}px`
-      : '45px'};
-  flex-shrink: 0;
-  height: ${props =>
-    props.menu && props.menu.height ? `${props.menu.height}px` : '45px'};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${props =>
-    props.menu && props.menu.backgroundColor
-      ? props.menu.backgroundColor
-      : '#fff'};
-
-  .stipop-icon {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border-bottom: ${props =>
-      props.show
-        ? props.menu && props.menu.selectedLine
-          ? props.menu.selectedLine
-          : '2px solid black'
-        : props.menu && props.menu.bottomLine
-        ? props.menu.bottomLine
-        : '1px solid lightgray'};
-    box-sizing: border-box;
-
-    svg {
-      transform: ${props =>
-        props.menu && props.menu.imgSize
-          ? `scale(calc(${props.menu.imgSize}/30))`
-          : 'scale(1)'};
-    }
-  }
-`
-const PickerMenu = styled.div`
-  width: ${props =>
-    props.size && props.size.width ? `${props.size.width}px` : '360px'};
-  height: ${props =>
-    props.menu && props.menu.height ? `${props.menu.height}px` : '45px'};
-  display: flex;
-  align-items: center;
-  background-color: ${props =>
-    props.menu && props.menu.backgroundColor
-      ? props.menu.backgroundColor
-      : '#fff'};
-  overflow-x: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -ms-user-select: none;
-`
-const PackageImgWrapper = styled.div`
-  /* flex-basis: ${props =>
-    props.menu && props.menu.height ? `${props.menu.height}px` : '45px'}; */
-  flex-basis: ${props =>
-    props.size && props.size.width
-      ? props.menu && props.menu.listCnt
-        ? `${props.size.width / (props.menu.listCnt + 2)}px`
-        : `${props.size.width / 8}px`
-      : props.menu && props.menu.listCnt
-      ? `${360 / (props.menu.listCnt + 2)}px`
-      : '45px'};
-  flex-shrink: 0;
-  height: 100%;
-  /* padding: 0 10px; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: ${props =>
-    props.show
-      ? props.menu && props.menu.selectedLine
-        ? props.menu.selectedLine
-        : '2px solid black'
-      : props.menu && props.menu.bottomLine
-      ? props.menu.bottomLine
-      : '1px solid lightgray'};
-  box-sizing: border-box;
-  cursor: pointer;
-
-  &#dummies {
-    cursor: initial;
-  }
-`
-const PackageImg = styled.img`
-  /* width: ${props =>
-    props.size && props.size.width
-      ? props.menu && props.menu.listCnt
-        ? `calc(${props.size.width / (props.menu.listCnt + 2)}px * 0.6)`
-        : `calc(${props.size.width / 8}px * 0.6)`
-      : props.menu && props.menu.listCnt
-      ? `calc(${360 / (props.menu.listCnt + 2)}px * 0.6)`
-      : 'calc(45px * 0.6)'}; */
-  width: ${props =>
-    props.menu && props.menu.imgSize ? `${props.menu.imgSize}px` : '60%'};
-  filter: ${props => (props.show ? '' : 'saturate(0%)')};
 `

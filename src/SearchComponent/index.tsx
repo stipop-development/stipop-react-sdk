@@ -20,6 +20,7 @@ const SearchComponent: React.FC<SearchProps> = ({
   stickerClick,
   preview,
   loadingColor,
+  shadow,
 }) => {
   const [keyword, setKeyword] = useState(params.default ? params.default : 'hi')
   const [stickerList, setStickerList] = useState([])
@@ -73,6 +74,7 @@ const SearchComponent: React.FC<SearchProps> = ({
       size={size}
       backgroundColor={backgroundColor}
       border={border}
+      shadow={shadow}
     >
       {preview && tempSticker && (
         <PreviewWrapper>
@@ -179,10 +181,39 @@ const SearchWrapper = styled.div`
     props.border && props.border.border
       ? props.border.border
       : '1px solid lightgray'};
-  border-radius: ${props =>
+  /* border-radius: ${props =>
     props.border && (props.border.radius || props.border.radius == 0)
       ? `${props.border.radius}px`
+      : '6px'}; */
+  border-top-left-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.leftTop || props.border.radius.leftTop === 0)
+      ? `${props.border.radius.leftTop}px`
       : '6px'};
+  border-top-right-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.rightTop || props.border.radius.rightTop === 0)
+      ? `${props.border.radius.rightTop}px`
+      : '6px'};
+  border-bottom-left-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.leftBottom || props.border.radius.leftBottom === 0)
+      ? `${props.border.radius.leftBottom}px`
+      : '6px'};
+  border-bottom-right-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.rightBottom || props.border.radius.rightBottom === 0)
+      ? `${props.border.radius.rightBottom}px`
+      : '6px'};
+  border-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.all || props.border.radius.all === 0) &&
+    `${props.border.radius.all}px`};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -190,7 +221,8 @@ const SearchWrapper = styled.div`
   position: relative;
   padding: 10px 0;
   box-sizing: border-box;
-  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: ${props =>
+    props.shadow ? props.shadow : '0 10px 20px 6px rgba(0, 0, 0, 0.1)'};
 `
 const SearchForm = styled.div`
   width: 100%;

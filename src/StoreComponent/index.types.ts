@@ -6,6 +6,7 @@ export interface StoreProps {
     onClose?: Function
     size?: Size
     border?: Border
+    shadow?: string
 }
 
 interface DownloadParams {
@@ -37,6 +38,7 @@ interface Color {
     recoveryBtn?: string
     recoveryBtnHover?: string
     loadingColor?: string
+    scrollHover?: string
 }
 
 interface Size {
@@ -50,5 +52,13 @@ interface Size {
 
 interface Border {
     border?: string
-    radius?: number
+    radius?: Radius
+}
+
+interface Radius {
+    rightTop?: number
+    leftTop?: number
+    rightBottom?: number
+    leftBottom?: number
+    all?: number
 }

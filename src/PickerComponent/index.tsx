@@ -24,6 +24,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   storeClick,
   preview,
   loadingColor,
+  shadow,
 }) => {
   const [myStickers, setMyStickers] = useState([])
   const [stickers, setStickers] = useState([])
@@ -221,7 +222,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   }, [stickers])
 
   return (
-    <PickerWrapper size={size} border={border}>
+    <PickerWrapper size={size} border={border} shadow={shadow}>
       {preview && tempSticker && (
         <PreviewWrapper>
           <FiX
@@ -541,16 +542,39 @@ const PickerWrapper = styled.div`
     props.border && props.border.border
       ? props.border.border
       : '1px solid lightgray'};
-  border-radius: ${props =>
-    props.border && (props.border.radius || props.border.radius == 0)
-      ? `${props.border.radius}px`
+  border-top-left-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.leftTop || props.border.radius.leftTop === 0)
+      ? `${props.border.radius.leftTop}px`
       : '10px'};
+  border-top-right-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.rightTop || props.border.radius.rightTop === 0)
+      ? `${props.border.radius.rightTop}px`
+      : '10px'};
+  border-bottom-left-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.leftBottom || props.border.radius.leftBottom === 0)
+      ? `${props.border.radius.leftBottom}px`
+      : '10px'};
+  border-bottom-right-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.rightBottom || props.border.radius.rightBottom === 0)
+      ? `${props.border.radius.rightBottom}px`
+      : '10px'};
+  border-radius: ${props =>
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.all || props.border.radius.all === 0) &&
+    `${props.border.radius.all}px`};
   display: flex;
   flex-direction: column;
   box-shadow: ${props =>
-    props.border && props.border.shadow
-      ? '0 10px 20px 6px rgba(0, 0, 0, 0.1)'
-      : ''};
+    props.shadow ? props.shadow : '0 10px 20px 6px rgba(0, 0, 0, 0.1)'};
   position: relative;
 `
 const MenuBox = styled.div`
@@ -577,9 +601,16 @@ const ArrowWrapper = styled.div`
       ? props.menu.backgroundColor
       : '#fff'};
   border-top-left-radius: ${props =>
-    props.border && (props.border.radius || props.border.radius == 0)
-      ? `${props.border.radius}px`
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.all || props.border.radius.all === 0)
+      ? `${props.border.radius.all}px`
+      : props.border &&
+        props.border.radius &&
+        (props.border.radius.leftTop || props.border.radius.leftTop === 0)
+      ? `${props.border.radius.leftTop}px`
       : '10px'};
+
   border-bottom: ${props =>
     props.menu && props.menu.bottomLine
       ? props.menu.bottomLine
@@ -608,16 +639,28 @@ const ArrowWrapper = styled.div`
     padding-right: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: ${props =>
-      props.border && (props.border.radius || props.border.radius == 0)
-        ? `${props.border.radius}px`
+      props.border &&
+      props.border.radius &&
+      (props.border.radius.all || props.border.radius.all === 0)
+        ? `${props.border.radius.all}px`
+        : props.border &&
+          props.border.radius &&
+          (props.border.radius.rightTop || props.border.radius.rightTop === 0)
+        ? `${props.border.radius.rightTop}px`
         : '10px'};
   }
   &#right {
     padding-right: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: ${props =>
-      props.border && (props.border.radius || props.border.radius == 0)
-        ? `${props.border.radius}px`
+      props.border &&
+      props.border.radius &&
+      (props.border.radius.all || props.border.radius.all === 0)
+        ? `${props.border.radius.all}px`
+        : props.border &&
+          props.border.radius &&
+          (props.border.radius.rightTop || props.border.radius.rightTop === 0)
+        ? `${props.border.radius.rightTop}px`
         : '10px'};
     cursor: initial;
 
@@ -753,12 +796,25 @@ const StickerWrapper = styled.div`
   background-color: ${props =>
     props.backgroundColor ? props.backgroundColor : '#fff'};
   border-bottom-left-radius: ${props =>
-    props.border && (props.border.radius || props.border.radius == 0)
-      ? `${props.border.radius}px`
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.all || props.border.radius.all === 0)
+      ? `${props.border.radius.all}px`
+      : props.border &&
+        props.border.radius &&
+        (props.border.radius.leftBottom || props.border.radius.leftBottom === 0)
+      ? `${props.border.radius.leftBottom}px`
       : '10px'};
   border-bottom-right-radius: ${props =>
-    props.border && (props.border.radius || props.border.radius == 0)
-      ? `${props.border.radius}px`
+    props.border &&
+    props.border.radius &&
+    (props.border.radius.all || props.border.radius.all === 0)
+      ? `${props.border.radius.all}px`
+      : props.border &&
+        props.border.radius &&
+        (props.border.radius.rightBottom ||
+          props.border.radius.rightBottom === 0)
+      ? `${props.border.radius.rightBottom}px`
       : '10px'};
   -ms-overflow-style: ${props => (props.scroll === false ? 'none' : '')};
   scrollbar-width: ${props => (props.scroll === false ? 'none' : '')};

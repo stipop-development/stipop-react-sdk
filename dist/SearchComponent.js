@@ -5,7 +5,7 @@ import { S as Stipop } from './index-e5177013.js';
 import { F as FiX, a as FiSearch } from './index.esm-3315737a.js';
 
 var SearchComponent = function (_a) {
-    var params = _a.params, size = _a.size, backgroundColor = _a.backgroundColor, column = _a.column, border = _a.border, input = _a.input, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, preview = _a.preview, loadingColor = _a.loadingColor;
+    var params = _a.params, size = _a.size, backgroundColor = _a.backgroundColor, column = _a.column, border = _a.border, input = _a.input, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, preview = _a.preview, loadingColor = _a.loadingColor, shadow = _a.shadow;
     var _b = useState(params.default ? params.default : 'hi'), keyword = _b[0], setKeyword = _b[1];
     var _c = useState([]), stickerList = _c[0], setStickerList = _c[1];
     var _d = useState(false), isLoading = _d[0], setIsLoading = _d[1];
@@ -50,7 +50,7 @@ var SearchComponent = function (_a) {
             });
         }
     };
-    return (React__default.createElement(SearchWrapper, { size: size, backgroundColor: backgroundColor, border: border },
+    return (React__default.createElement(SearchWrapper, { size: size, backgroundColor: backgroundColor, border: border, shadow: shadow },
         preview && tempSticker && (React__default.createElement(PreviewWrapper, null,
             React__default.createElement(FiX, { size: 25, color: '#000', style: {
                     position: 'absolute',
@@ -87,7 +87,7 @@ var SearchComponent = function (_a) {
             React__default.createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker" }),
             React__default.createElement("span", { className: "no-sticker-text" }, "No Stickers to Show")))) : (React__default.createElement(LoadingSpinner, { color: loadingColor ? loadingColor : '#ff4500' }))));
 };
-var SearchWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 10px 0;\n  box-sizing: border-box;\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 10px 0;\n  box-sizing: border-box;\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n"])), function (props) {
+var SearchWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  /* border-radius: ", "; */\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 10px 0;\n  box-sizing: border-box;\n  box-shadow: ", ";\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  /* border-radius: ", "; */\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 10px 0;\n  box-sizing: border-box;\n  box-shadow: ", ";\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
 }, function (props) {
     return props.size && props.size.height ? "".concat(props.size.height, "px") : '300px';
@@ -101,6 +101,37 @@ var SearchWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTem
     return props.border && (props.border.radius || props.border.radius == 0)
         ? "".concat(props.border.radius, "px")
         : '6px';
+}, function (props) {
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.leftTop || props.border.radius.leftTop === 0)
+        ? "".concat(props.border.radius.leftTop, "px")
+        : '6px';
+}, function (props) {
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.rightTop || props.border.radius.rightTop === 0)
+        ? "".concat(props.border.radius.rightTop, "px")
+        : '6px';
+}, function (props) {
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.leftBottom || props.border.radius.leftBottom === 0)
+        ? "".concat(props.border.radius.leftBottom, "px")
+        : '6px';
+}, function (props) {
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.rightBottom || props.border.radius.rightBottom === 0)
+        ? "".concat(props.border.radius.rightBottom, "px")
+        : '6px';
+}, function (props) {
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.all || props.border.radius.all === 0) &&
+        "".concat(props.border.radius.all, "px");
+}, function (props) {
+    return props.shadow ? props.shadow : '0 10px 20px 6px rgba(0, 0, 0, 0.1)';
 });
 var SearchForm = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"], ["\n  width: 100%;\n  height: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 10px;\n"])));
 var SearchInput = styled.input(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-radius: ", ";\n  color: ", ";\n  padding: 0 140px 0 35px;\n  box-sizing: border-box;\n  background-color: rgba(0, 0, 0, 0);\n  z-index: 1;\n  position: absolute;\n\n  &::placeholder {\n    font-size: 13px;\n    color: lightgray;\n  }\n\n  &:focus {\n    outline: none;\n    border: ", ";\n    box-sizing: border-box;\n  }\n"])), function (props) {

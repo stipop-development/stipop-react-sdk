@@ -5,7 +5,7 @@ import { S as Stipop } from './index-e5177013.js';
 import Icon from './Icon.js';
 
 var StoreComponent = function (_a) {
-    var params = _a.params, downloadParams = _a.downloadParams, color = _a.color, scroll = _a.scroll, onClose = _a.onClose, size = _a.size, border = _a.border;
+    var params = _a.params, downloadParams = _a.downloadParams, color = _a.color, scroll = _a.scroll, onClose = _a.onClose, size = _a.size, border = _a.border, shadow = _a.shadow;
     var _b = useState([]), packages = _b[0], setPackages = _b[1];
     var _c = useState(false), detail = _c[0], setDetail = _c[1];
     var _d = useState([]), stickers = _d[0], setStickers = _d[1];
@@ -215,8 +215,8 @@ var StoreComponent = function (_a) {
             }
         });
     }); };
-    return (React__default.createElement(React__default.Fragment, null, isLoading ? (React__default.createElement(StoreWrapper, { color: color, size: size, border: border },
-        React__default.createElement(LoadingSpinner, { color: color && color.loadingColor ? color.loadingColor : '#ff4500' }))) : (React__default.createElement(StoreWrapper, { color: color, size: size, border: border },
+    return (React__default.createElement(React__default.Fragment, null, isLoading ? (React__default.createElement(StoreWrapper, { color: color, size: size, border: border, shadow: shadow },
+        React__default.createElement(LoadingSpinner, { color: color && color.loadingColor ? color.loadingColor : '#ff4500' }))) : (React__default.createElement(StoreWrapper, { color: color, size: size, border: border, shadow: shadow },
         React__default.createElement(StoreTitle, null,
             detail ? (React__default.createElement("div", { className: "title-text" },
                 React__default.createElement(PreviousBtn, null,
@@ -307,7 +307,7 @@ var StoreComponent = function (_a) {
                         : clickDownload(pack.packageId);
                 } }))); }))) : (React__default.createElement("div", null)))))));
 };
-var StoreWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: #fff;\n  border: ", ";\n  border-radius: ", ";\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  background-color: ", ";\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: #fff;\n  border: ", ";\n  border-radius: ", ";\n  box-shadow: 0 10px 20px 6px rgba(0, 0, 0, 0.1);\n  background-color: ", ";\n"])), function (props) {
+var StoreWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: #fff;\n  border: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  box-shadow: ", ";\n  background-color: ", ";\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: #fff;\n  border: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  box-shadow: ", ";\n  background-color: ", ";\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '600px';
 }, function (props) {
     return props.size && props.size.height ? "".concat(props.size.height, "px") : '600px';
@@ -316,9 +316,36 @@ var StoreWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemp
         ? props.border.border
         : '1px solid lightgray';
 }, function (props) {
-    return props.border && (props.border.radius || props.border.radius == 0)
-        ? "".concat(props.border.radius, "px")
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.leftTop || props.border.radius.leftTop === 0)
+        ? "".concat(props.border.radius.leftTop, "px")
         : '8px';
+}, function (props) {
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.rightTop || props.border.radius.rightTop === 0)
+        ? "".concat(props.border.radius.rightTop, "px")
+        : '8px';
+}, function (props) {
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.leftBottom || props.border.radius.leftBottom === 0)
+        ? "".concat(props.border.radius.leftBottom, "px")
+        : '8px';
+}, function (props) {
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.rightBottom || props.border.radius.rightBottom === 0)
+        ? "".concat(props.border.radius.rightBottom, "px")
+        : '8px';
+}, function (props) {
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.all || props.border.radius.all === 0) &&
+        "".concat(props.border.radius.all, "px");
+}, function (props) {
+    return props.shadow ? props.shadow : '0 10px 20px 6px rgba(0, 0, 0, 0.1)';
 }, function (props) {
     return props.color && props.color.backgroundColor
         ? props.color.backgroundColor
@@ -327,7 +354,7 @@ var StoreWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemp
 var StoreTitle = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  width: 100%;\n  height: 20%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 32px;\n  box-sizing: border-box;\n\n  .title-text {\n    display: flex;\n    align-items: center;\n    font-size: 24px;\n    font-weight: bold;\n    span {\n      margin-right: 10px;\n    }\n  }\n"], ["\n  width: 100%;\n  height: 20%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 32px;\n  box-sizing: border-box;\n\n  .title-text {\n    display: flex;\n    align-items: center;\n    font-size: 24px;\n    font-weight: bold;\n    span {\n      margin-right: 10px;\n    }\n  }\n"])));
 var CloseBtn = styled.div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  width: 34px;\n  height: 34px;\n  border-radius: 50%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n\n  .stipop-icon {\n    width: 34px;\n    height: 34px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n  &:hover {\n    cursor: pointer;\n    background-color: #f5f5f5;\n  }\n"], ["\n  width: 34px;\n  height: 34px;\n  border-radius: 50%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n\n  .stipop-icon {\n    width: 34px;\n    height: 34px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n  &:hover {\n    cursor: pointer;\n    background-color: #f5f5f5;\n  }\n"])));
 var PreviousBtn = styled.div(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  width: 34px;\n  height: 34px;\n  border-radius: 50%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-right: 10px;\n\n  .stipop-icon {\n    width: 34px;\n    height: 34px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n\n  &:hover {\n    cursor: pointer;\n    background-color: #f5f5f5;\n  }\n"], ["\n  width: 34px;\n  height: 34px;\n  border-radius: 50%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-right: 10px;\n\n  .stipop-icon {\n    width: 34px;\n    height: 34px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n\n  &:hover {\n    cursor: pointer;\n    background-color: #f5f5f5;\n  }\n"])));
-var PackageContainer = styled.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  width: 100%;\n  height: 80%;\n  display: flex;\n  flex-direction: column;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n"], ["\n  width: 100%;\n  height: 80%;\n  display: flex;\n  flex-direction: column;\n  background-color: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n"])), function (props) {
+var PackageContainer = styled.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  width: 100%;\n  height: 80%;\n  display: flex;\n  flex-direction: column;\n  background-color: ", ";\n  /* border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", "; */\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n"], ["\n  width: 100%;\n  height: 80%;\n  display: flex;\n  flex-direction: column;\n  background-color: ", ";\n  /* border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", "; */\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n"])), function (props) {
     return props.color && props.color.backgroundColor
         ? props.color.backgroundColor
         : '#fff';
@@ -339,6 +366,27 @@ var PackageContainer = styled.div(templateObject_5 || (templateObject_5 = __make
     return props.border && (props.border.radius || props.border.radius == 0)
         ? "".concat(props.border.radius, "px")
         : '8px';
+}, function (props) {
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.all || props.border.radius.all === 0)
+        ? "".concat(props.border.radius.all, "px")
+        : props.border &&
+            props.border.radius &&
+            (props.border.radius.leftBottom || props.border.radius.leftBottom === 0)
+            ? "".concat(props.border.radius.leftBottom, "px")
+            : '8px';
+}, function (props) {
+    return props.border &&
+        props.border.radius &&
+        (props.border.radius.all || props.border.radius.all === 0)
+        ? "".concat(props.border.radius.all, "px")
+        : props.border &&
+            props.border.radius &&
+            (props.border.radius.rightBottom ||
+                props.border.radius.rightBottom === 0)
+            ? "".concat(props.border.radius.rightBottom, "px")
+            : '8px';
 });
 var DetailWrapper = styled.div(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n"], ["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n"])));
 var DetailBox = styled.div(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  display: flex;\n  padding: 0 68px 0 45px;\n  align-items: center;\n  position: relative;\n  margin-bottom: 5%;\n"], ["\n  display: flex;\n  padding: 0 68px 0 45px;\n  align-items: center;\n  position: relative;\n  margin-bottom: 5%;\n"])));
@@ -346,7 +394,7 @@ var MainImg = styled.img(templateObject_8 || (templateObject_8 = __makeTemplateO
     return props.size && props.size.mainImg ? "".concat(props.size.mainImg, "px") : '100px';
 });
 var DetailName = styled.div(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n  .packageName {\n    font-size: 14px;\n    font-weight: bold;\n  }\n  .artistName {\n    font-size: 10px;\n    color: #a9a9a9;\n  }\n"], ["\n  .packageName {\n    font-size: 14px;\n    font-weight: bold;\n  }\n  .artistName {\n    font-size: 10px;\n    color: #a9a9a9;\n  }\n"])));
-var DetailStickerWrapper = styled.div(templateObject_10 || (templateObject_10 = __makeTemplateObject(["\n  height: 100%;\n  padding: 0 32px;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-auto-rows: 100px;\n  justify-items: center;\n  align-items: center;\n  row-gap: 2%;\n  overflow-y: auto;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    width: 9px;\n  }\n  &::-webkit-scrollbar-track {\n    /* background-color: ", ";\n    border-bottom-right-radius: ", "; */\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: #6d7072;\n    }\n  }\n\n  img {\n    width: ", ";\n    &:hover {\n      transform: scale(1.3);\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  height: 100%;\n  padding: 0 32px;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-auto-rows: 100px;\n  justify-items: center;\n  align-items: center;\n  row-gap: 2%;\n  overflow-y: auto;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    width: 9px;\n  }\n  &::-webkit-scrollbar-track {\n    /* background-color: ", ";\n    border-bottom-right-radius: ", "; */\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: #6d7072;\n    }\n  }\n\n  img {\n    width: ", ";\n    &:hover {\n      transform: scale(1.3);\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) {
+var DetailStickerWrapper = styled.div(templateObject_10 || (templateObject_10 = __makeTemplateObject(["\n  height: 100%;\n  padding: 0 32px;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-auto-rows: 100px;\n  justify-items: center;\n  align-items: center;\n  row-gap: 2%;\n  overflow-y: auto;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    width: 9px;\n  }\n  &::-webkit-scrollbar-track {\n    /* background-color: ", ";\n    border-bottom-right-radius: ", "; */\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: ", ";\n    }\n  }\n\n  img {\n    width: ", ";\n    &:hover {\n      transform: scale(1.3);\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  height: 100%;\n  padding: 0 32px;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-auto-rows: 100px;\n  justify-items: center;\n  align-items: center;\n  row-gap: 2%;\n  overflow-y: auto;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    width: 9px;\n  }\n  &::-webkit-scrollbar-track {\n    /* background-color: ", ";\n    border-bottom-right-radius: ", "; */\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: ", ";\n    }\n  }\n\n  img {\n    width: ", ";\n    &:hover {\n      transform: scale(1.3);\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) {
     return props.color && props.color.backgroundColor
         ? props.color.backgroundColor
         : '#fff';
@@ -355,9 +403,13 @@ var DetailStickerWrapper = styled.div(templateObject_10 || (templateObject_10 = 
         ? "".concat(props.border.radius, "px")
         : '8px';
 }, function (props) {
+    return props.color && props.color.scrollHover
+        ? props.color.scrollHover
+        : '#6d7072';
+}, function (props) {
     return props.size && props.size.detailImg ? "".concat(props.size.detailImg, "%") : '70%';
 });
-var PackageWrapper = styled.div(templateObject_11 || (templateObject_11 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  display: block;\n  overflow-y: scroll;\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    /* display: ", "; */\n    width: 9px;\n  }\n  &::-webkit-scrollbar-track {\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: #6d7072;\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  width: 100%;\n  height: 100%;\n  display: block;\n  overflow-y: scroll;\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    /* display: ", "; */\n    width: 9px;\n  }\n  &::-webkit-scrollbar-track {\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: #6d7072;\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) {
+var PackageWrapper = styled.div(templateObject_11 || (templateObject_11 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  display: block;\n  overflow-y: scroll;\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    /* display: ", "; */\n    width: 9px;\n  }\n  &::-webkit-scrollbar-track {\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: ", ";\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"], ["\n  width: 100%;\n  height: 100%;\n  display: block;\n  overflow-y: scroll;\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  box-sizing: border-box;\n  -ms-overflow-style: ", ";\n  scrollbar-width: ", ";\n\n  &::-webkit-scrollbar {\n    display: ", ";\n    /* display: ", "; */\n    width: 9px;\n  }\n  &::-webkit-scrollbar-track {\n    display: none;\n  }\n  &::-webkit-scrollbar-thumb {\n    background: #bcc0c4;\n    border-radius: 5px;\n    &:hover {\n      background: ", ";\n    }\n  }\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -khtml-user-select: none;\n  -ms-user-select: none;\n"])), function (props) {
     return props.border && (props.border.radius || props.border.radius == 0)
         ? "".concat(props.border.radius, "px")
         : '8px';
@@ -367,6 +419,10 @@ var PackageWrapper = styled.div(templateObject_11 || (templateObject_11 = __make
         : '8px';
 }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) { return (props.scroll === false ? 'none' : ''); }, function (props) {
     return props.scroll === false ? 'none' : props.scrolling ? '' : 'none';
+}, function (props) {
+    return props.color && props.color.scrollHover
+        ? props.color.scrollHover
+        : '#6d7072';
 });
 var PackageBox = styled.div(templateObject_12 || (templateObject_12 = __makeTemplateObject(["\n  width: calc(100% - 64px);\n  height: ", ";\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  margin: 0 23px 0 32px;\n  box-sizing: border-box;\n  background-color: ", ";\n  border-bottom: 0.5px solid #e6e6e6;\n  position: relative;\n\n  &:hover {\n    background-color: ", ";\n    cursor: pointer;\n  }\n"], ["\n  width: calc(100% - 64px);\n  height: ", ";\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  margin: 0 23px 0 32px;\n  box-sizing: border-box;\n  background-color: ", ";\n  border-bottom: 0.5px solid #e6e6e6;\n  position: relative;\n\n  &:hover {\n    background-color: ", ";\n    cursor: pointer;\n  }\n"])), function (props) {
     return props.size && props.size.packageListHeight

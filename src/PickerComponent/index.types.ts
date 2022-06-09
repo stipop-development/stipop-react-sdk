@@ -11,6 +11,7 @@ export interface StoreProps {
   storeClick?: Function
   preview?: boolean
   loadingColor?: string
+  shadow?: string
 }
 
 interface Params {
@@ -26,8 +27,15 @@ interface Size {
 
 interface Border {
   border?: string
-  radius?: number
-  shadow?: boolean
+  radius?: Radius
+}
+
+interface Radius {
+  rightTop?: number
+  leftTop?: number
+  rightBottom?: number
+  leftBottom?: number
+  all?: number
 }
 
 interface Menu {
