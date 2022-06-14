@@ -64,7 +64,7 @@ var UnifiedComponent = function (_a) {
                 } }),
             React__default.createElement(ChatSticker, { src: tempSticker }))),
         React__default.createElement(SearchForm, null,
-            React__default.createElement(SearchInput, { type: "text", onFocus: function () { return setInputFocus(true); }, onBlur: function () { return setInputFocus(false); }, onChange: function (e) { return setKeyword(e.target.value); }, placeholder: "Search sticker...", input: input }),
+            React__default.createElement(SearchInput, { type: "text", onFocus: function () { return setInputFocus(true); }, onBlur: function () { return setInputFocus(false); }, onChange: function (e) { return setKeyword(e.target.value); }, placeholder: params.lang ? params.lang === 'ko' ? '이모티콘 검색...' : "Search sticker..." : "Search sticker...", input: input }),
             React__default.createElement(InputHolder, { input: input },
                 React__default.createElement(FiSearch, { size: 18, color: inputFocus
                         ? input && input.focus
@@ -135,7 +135,7 @@ var UnifiedComponent = function (_a) {
                 setTempSticker(sticker.stickerImg);
             }, size: size })); }))) : (React__default.createElement(NoSticker, null,
             React__default.createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker" }),
-            React__default.createElement("span", { className: "no-sticker-text" }, "No Stickers to Show")))) : (React__default.createElement(NoSticker, null,
+            React__default.createElement("span", { className: "no-sticker-text" }, params.lang ? params.lang === 'ko' ? '검색 결과가 없습니다' : 'No Stickers to Show' : 'No Stickers to Show')))) : (React__default.createElement(NoSticker, null,
             React__default.createElement(LoadingSpinner, { color: loadingColor ? loadingColor : '#ff4500' })))));
 };
 var SearchWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  /* padding: 10px 0; */\n  padding-top: 10px;\n  box-sizing: border-box;\n  box-shadow: ", ";\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  /* padding: 10px 0; */\n  padding-top: 10px;\n  box-sizing: border-box;\n  box-shadow: ", ";\n"])), function (props) {

@@ -229,8 +229,8 @@ var StoreComponent = function (_a) {
                     React__default["default"].createElement(Icon["default"], { type: "PREVIOUS", onClick: function () {
                             clickPrevious();
                         } })),
-                React__default["default"].createElement("span", null, "Sticker Pack"))) : (React__default["default"].createElement("div", { className: "title-text" },
-                React__default["default"].createElement("span", null, "Sticker Store"),
+                React__default["default"].createElement("span", null, params.lang ? params.lang === 'ko' ? '이모티콘 팩' : 'Sticker Pack' : 'Sticker Pack'))) : (React__default["default"].createElement("div", { className: "title-text" },
+                React__default["default"].createElement("span", null, params.lang ? params.lang === 'ko' ? '이모티콘 스토어' : 'Sticker Store' : 'Sticker Store'),
                 React__default["default"].createElement(Icon["default"], { type: "STORE_BLACK" }))),
             React__default["default"].createElement(CloseBtn, { onClick: function () { return onClose(true); } },
                 React__default["default"].createElement(Icon["default"], { type: "CLOSE" }))),

@@ -104,7 +104,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
           onFocus={() => setInputFocus(true)}
           onBlur={() => setInputFocus(false)}
           onChange={e => setKeyword(e.target.value)}
-          placeholder="Search sticker..."
+          placeholder={params.lang ? params.lang === 'ko' ? '이모티콘 검색...' : "Search sticker..." : "Search sticker..."}
           input={input}
         />
         <InputHolder input={input}>
@@ -234,7 +234,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
               src="https://img.stipop.io/image/sdk/no-sticker.png"
               className="no-sticker"
             ></img>
-            <span className="no-sticker-text">No Stickers to Show</span>
+            <span className="no-sticker-text">{params.lang ? params.lang === 'ko' ? '검색 결과가 없습니다' : 'No Stickers to Show' : 'No Stickers to Show'}</span>
           </NoSticker>
         )
       ) : (

@@ -242,11 +242,11 @@ const StoreComponent: React.FC<StoreProps> = ({
                     }}
                   />
                 </PreviousBtn>
-                <span>Sticker Pack</span>
+                <span>{params.lang ? params.lang === 'ko' ? '이모티콘 팩' : 'Sticker Pack' : 'Sticker Pack'}</span>
               </div>
             ) : (
               <div className="title-text">
-                <span>Sticker Store</span>
+                <span>{params.lang ? params.lang === 'ko' ? '이모티콘 스토어' : 'Sticker Store' : 'Sticker Store'}</span>
                 <Icon type="STORE_BLACK" />
               </div>
             )}

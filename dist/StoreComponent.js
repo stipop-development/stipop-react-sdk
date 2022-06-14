@@ -223,8 +223,8 @@ var StoreComponent = function (_a) {
                     React__default.createElement(Icon, { type: "PREVIOUS", onClick: function () {
                             clickPrevious();
                         } })),
-                React__default.createElement("span", null, "Sticker Pack"))) : (React__default.createElement("div", { className: "title-text" },
-                React__default.createElement("span", null, "Sticker Store"),
+                React__default.createElement("span", null, params.lang ? params.lang === 'ko' ? '이모티콘 팩' : 'Sticker Pack' : 'Sticker Pack'))) : (React__default.createElement("div", { className: "title-text" },
+                React__default.createElement("span", null, params.lang ? params.lang === 'ko' ? '이모티콘 스토어' : 'Sticker Store' : 'Sticker Store'),
                 React__default.createElement(Icon, { type: "STORE_BLACK" }))),
             React__default.createElement(CloseBtn, { onClick: function () { return onClose(true); } },
                 React__default.createElement(Icon, { type: "CLOSE" }))),
