@@ -6,7 +6,13 @@ import { F as FiX, a as FiSearch } from './index.esm-3315737a.js';
 
 var SearchComponent = function (_a) {
     var params = _a.params, size = _a.size, backgroundColor = _a.backgroundColor, column = _a.column, border = _a.border, input = _a.input, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, preview = _a.preview, loadingColor = _a.loadingColor, shadow = _a.shadow;
-    var _b = useState(params.default ? params.default : params.lang ? params.lang === 'ko' ? '안녕' : 'hi' : 'hi'), keyword = _b[0], setKeyword = _b[1];
+    var _b = useState(params.default
+        ? params.default
+        : params.lang
+            ? params.lang === 'ko'
+                ? '안녕'
+                : 'hi'
+            : 'hi'), keyword = _b[0], setKeyword = _b[1];
     var _c = useState([]), stickerList = _c[0], setStickerList = _c[1];
     var _d = useState(false), isLoading = _d[0], setIsLoading = _d[1];
     var _e = useState(''), tempSticker = _e[0], setTempSticker = _e[1];
@@ -35,7 +41,13 @@ var SearchComponent = function (_a) {
             });
         }
         else {
-            setKeyword(params.default ? params.default : params.lang ? params.lang === 'ko' ? '안녕' : 'hi' : 'hi');
+            setKeyword(params.default
+                ? params.default
+                : params.lang
+                    ? params.lang === 'ko'
+                        ? '안녕'
+                        : 'hi'
+                    : 'hi');
         }
     }, [keyword, params.lang, params.pageNumber, params.limit]);
     var clickSticker = function (stickerId) {
@@ -62,7 +74,11 @@ var SearchComponent = function (_a) {
                 } }),
             React__default.createElement(ChatSticker, { src: tempSticker }))),
         React__default.createElement(SearchForm, null,
-            React__default.createElement(SearchInput, { type: "text", onFocus: function () { return setInputFocus(true); }, onBlur: function () { return setInputFocus(false); }, onChange: function (e) { return setKeyword(e.target.value); }, placeholder: params.lang ? params.lang === 'ko' ? '이모티콘 검색...' : "Search sticker..." : 'Search sticker...', input: input }),
+            React__default.createElement(SearchInput, { type: "text", onFocus: function () { return setInputFocus(true); }, onBlur: function () { return setInputFocus(false); }, onChange: function (e) { return setKeyword(e.target.value); }, placeholder: params.lang
+                    ? params.lang === 'ko'
+                        ? '이모티콘 검색...'
+                        : 'Search sticker...'
+                    : 'Search sticker...', input: input }),
             React__default.createElement(InputHolder, { input: input },
                 React__default.createElement(FiSearch, { size: 18, color: inputFocus
                         ? input && input.focus
@@ -72,20 +88,20 @@ var SearchComponent = function (_a) {
                             ? input.search
                             : '#d5d5d5' }))),
         !isLoading ? (stickerList.length > 0 ? (React__default.createElement(StickerWrapper, { column: column, scroll: scroll, scrollHover: scrollHover, border: border, backgroundColor: backgroundColor, size: size }, stickerList.map(function (sticker, index) { return (React__default.createElement(StickerImg, { src: "".concat(sticker.stickerImg, "?d=100x100"), key: index, onClick: function () {
-                if (preview) {
-                    stickerClick({
-                        url: sticker.stickerImg,
-                        id: sticker.stickerId,
-                    });
-                }
-                else {
-                    stickerClick(sticker.stickerImg);
-                }
+                stickerClick({
+                    url: sticker.stickerImg,
+                    stickerId: sticker.stickerId,
+                    packageId: sticker.packageId,
+                });
                 clickSticker(sticker.stickerId);
                 setTempSticker(sticker.stickerImg);
             }, size: size })); }))) : (React__default.createElement(NoSticker, null,
             React__default.createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker" }),
-            React__default.createElement("span", { className: "no-sticker-text" }, params.lang ? params.lang === 'ko' ? '검색 결과가 없습니다' : 'No Stickers to Show' : 'No Stickers to Show')))) : (React__default.createElement(LoadingSpinner, { color: loadingColor ? loadingColor : '#ff4500' }))));
+            React__default.createElement("span", { className: "no-sticker-text" }, params.lang
+                ? params.lang === 'ko'
+                    ? '검색 결과가 없습니다'
+                    : 'No Stickers to Show'
+                : 'No Stickers to Show')))) : (React__default.createElement(LoadingSpinner, { color: loadingColor ? loadingColor : '#ff4500' }))));
 };
 var SearchWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  /* border-radius: ", "; */\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 10px 0;\n  box-sizing: border-box;\n  box-shadow: ", ";\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  /* border-radius: ", "; */\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 10px 0;\n  box-sizing: border-box;\n  box-shadow: ", ";\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';

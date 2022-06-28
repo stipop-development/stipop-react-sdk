@@ -444,14 +444,11 @@ const PickerComponent: React.FC<StoreProps> = ({
                 alt=""
                 key={index}
                 onClick={() => {
-                  if (preview) {
-                    stickerClick({
-                      url: sticker.stickerImg,
-                      id: sticker.stickerId,
-                    })
-                  } else {
-                    stickerClick(sticker.stickerImg)
-                  }
+                  stickerClick({
+                    url: sticker.stickerImg,
+                    stickerId: sticker.stickerId,
+                    packageId: sticker.packageId,
+                  })
                   clickSticker(sticker.stickerId)
                   setTempSticker(sticker.stickerImg)
                 }}
@@ -488,14 +485,11 @@ const PickerComponent: React.FC<StoreProps> = ({
               alt=""
               key={index}
               onClick={() => {
-                if (preview) {
-                  stickerClick({
-                    url: sticker.stickerImg,
-                    id: sticker.stickerId,
-                  })
-                } else {
-                  stickerClick(sticker.stickerImg)
-                }
+                stickerClick({
+                  url: sticker.stickerImg,
+                  stickerId: sticker.stickerId,
+                  packageId: sticker.packageId,
+                })
                 setTempSticker(sticker.stickerImg)
               }}
             />

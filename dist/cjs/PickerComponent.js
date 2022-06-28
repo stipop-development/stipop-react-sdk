@@ -19264,28 +19264,20 @@ var PickerComponent = function (_a) {
             React__default["default"].createElement(LoadingSpinner.LoadingSpinner, { color: loadingColor ? loadingColor : '#ff4500' }))) : (React__default["default"].createElement(StickerWrapper, { id: "sticker-wrapper", backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, scrolling: scrolling, 
             // onScroll={e => setCurrentScrollTop(e.target.scrollTop)}
             onMouseEnter: function () { return setScrolling(1); }, onMouseLeave: function () { return setScrolling(0); } }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () {
-                if (preview) {
-                    stickerClick({
-                        url: sticker.stickerImg,
-                        id: sticker.stickerId,
-                    });
-                }
-                else {
-                    stickerClick(sticker.stickerImg);
-                }
+                stickerClick({
+                    url: sticker.stickerImg,
+                    stickerId: sticker.stickerId,
+                    packageId: sticker.packageId,
+                });
                 clickSticker(sticker.stickerId);
                 setTempSticker(sticker.stickerImg);
             } })); })))) : isLoading ? (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, isLoading: isLoading },
             React__default["default"].createElement(LoadingSpinner.LoadingSpinner, { color: loadingColor ? loadingColor : '#ff4500' }))) : stickers.length > 0 ? (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, isLoading: isLoading, onMouseEnter: function () { return setScrolling(1); }, onMouseLeave: function () { return setScrolling(0); } }, stickers.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { size: size, src: "".concat(sticker.stickerImg, "?d=100x100"), alt: "", key: index, onClick: function () {
-                if (preview) {
-                    stickerClick({
-                        url: sticker.stickerImg,
-                        id: sticker.stickerId,
-                    });
-                }
-                else {
-                    stickerClick(sticker.stickerImg);
-                }
+                stickerClick({
+                    url: sticker.stickerImg,
+                    stickerId: sticker.stickerId,
+                    packageId: sticker.packageId,
+                });
                 setTempSticker(sticker.stickerImg);
             } })); }))) : (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, isLoading: recentView },
             React__default["default"].createElement("div", { style: {

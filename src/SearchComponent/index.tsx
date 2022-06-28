@@ -22,7 +22,15 @@ const SearchComponent: React.FC<SearchProps> = ({
   loadingColor,
   shadow,
 }) => {
-  const [keyword, setKeyword] = useState(params.default ? params.default : params.lang ? params.lang === 'ko' ? '안녕' : 'hi' : 'hi')
+  const [keyword, setKeyword] = useState(
+    params.default
+      ? params.default
+      : params.lang
+      ? params.lang === 'ko'
+        ? '안녕'
+        : 'hi'
+      : 'hi'
+  )
   const [stickerList, setStickerList] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [tempSticker, setTempSticker] = useState('')
@@ -52,7 +60,15 @@ const SearchComponent: React.FC<SearchProps> = ({
         }, 500)
       })
     } else {
-      setKeyword(params.default ? params.default : params.lang ? params.lang === 'ko' ? '안녕' : 'hi' : 'hi')
+      setKeyword(
+        params.default
+          ? params.default
+          : params.lang
+          ? params.lang === 'ko'
+            ? '안녕'
+            : 'hi'
+          : 'hi'
+      )
     }
   }, [keyword, params.lang, params.pageNumber, params.limit])
 
@@ -100,7 +116,13 @@ const SearchComponent: React.FC<SearchProps> = ({
           onFocus={() => setInputFocus(true)}
           onBlur={() => setInputFocus(false)}
           onChange={e => setKeyword(e.target.value)}
-          placeholder={params.lang ? params.lang === 'ko' ? '이모티콘 검색...' : "Search sticker..." : 'Search sticker...'}
+          placeholder={
+            params.lang
+              ? params.lang === 'ko'
+                ? '이모티콘 검색...'
+                : 'Search sticker...'
+              : 'Search sticker...'
+          }
           input={input}
         />
         <InputHolder input={input}>
@@ -137,14 +159,11 @@ const SearchComponent: React.FC<SearchProps> = ({
                 src={`${sticker.stickerImg}?d=100x100`}
                 key={index}
                 onClick={() => {
-                  if (preview) {
-                    stickerClick({
-                      url: sticker.stickerImg,
-                      id: sticker.stickerId,
-                    })
-                  } else {
-                    stickerClick(sticker.stickerImg)
-                  }
+                  stickerClick({
+                    url: sticker.stickerImg,
+                    stickerId: sticker.stickerId,
+                    packageId: sticker.packageId,
+                  })
                   clickSticker(sticker.stickerId)
                   setTempSticker(sticker.stickerImg)
                 }}
@@ -158,7 +177,13 @@ const SearchComponent: React.FC<SearchProps> = ({
               src="https://img.stipop.io/image/sdk/no-sticker.png"
               className="no-sticker"
             ></img>
-            <span className="no-sticker-text">{params.lang ? params.lang === 'ko' ? '검색 결과가 없습니다' : 'No Stickers to Show' : 'No Stickers to Show'}</span>
+            <span className="no-sticker-text">
+              {params.lang
+                ? params.lang === 'ko'
+                  ? '검색 결과가 없습니다'
+                  : 'No Stickers to Show'
+                : 'No Stickers to Show'}
+            </span>
           </NoSticker>
         )
       ) : (
