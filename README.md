@@ -372,9 +372,9 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
   > Get Sticker URL Function
 
-  | Type     | Required | Value       |
-  | -------- | -------- | ----------- |
-  | Function | optional | sticker URL |
+  | Type     | Required | Value                     |
+  | -------- | -------- | ------------------------- |
+  | Function | optional | url, stickerId, packageId |
 
   ##### Example
 
@@ -388,7 +388,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
           apikey: 'apikey',
           userId: 'userId',
         }}
-        stickerClick={url => console.log(url)}
+        stickerClick={(info) => console.log(info)} // {url, stickerId, packageId}
       />
     )
   }
@@ -816,9 +816,9 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
   > Get Sticker URL Function
 
-  | Type     | Required | Value       |
-  | -------- | -------- | ----------- |
-  | Function | optional | sticker URL |
+  | Type     | Required | Value                     |
+  | -------- | -------- | ------------------------- |
+  | Function | optional | url, stickerId, packageId |
 
   ##### Example
 
@@ -832,7 +832,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
           apikey: 'apikey',
           userId: 'userId',
         }}
-        stickerClick={(url) => console.log(url)} //sticker URL
+        stickerClick={(info) => console.log(info)} // {url, stickerId, packageId}
       />
     )
   }
@@ -1737,9 +1737,9 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
   > Get Sticker URL Function
 
-  | Type     | Required | Value       |
-  | -------- | -------- | ----------- |
-  | Function | optional | sticker URL |
+  | Type     | Required | Value                     |
+  | -------- | -------- | ------------------------- |
+  | Function | optional | url, stickerId, packageId |
 
   ##### Example
 
@@ -1753,7 +1753,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
           apikey: 'apikey',
           userId: 'userId',
         }}
-        stickerClick={(url) => console.log(url)} //sticker URL
+        stickerClick={(info) => console.log(info)} // {url, stickerId, packageId}
       />
     )
   }
