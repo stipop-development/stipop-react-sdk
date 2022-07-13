@@ -19054,7 +19054,7 @@ var PickerComponent = function (_a) {
             var initData = client.init(initParams);
             initData.then(function () {
                 var pickerParams = {
-                    userId: params.userId,
+                    userId: encodeURIComponent(params.userId),
                 };
                 var data = client.mySticker(pickerParams);
                 data.then(function (_a) {
@@ -19066,7 +19066,7 @@ var PickerComponent = function (_a) {
                         if (body.packageList.filter(function (pack) { return pack.packageId !== null; }).length >
                             0) {
                             var packageParams = {
-                                userId: params.userId,
+                                userId: encodeURIComponent(params.userId),
                                 packId: body.packageList[0].packageId,
                             };
                             var packageData = client.getPackInfo(packageParams);
@@ -19086,7 +19086,7 @@ var PickerComponent = function (_a) {
     useEffect(function () {
         setIsLoading(true);
         var pickerParams = {
-            userId: params.userId,
+            userId: encodeURIComponent(params.userId),
         };
         var data = client.mySticker(pickerParams);
         data.then(function (_a) {
@@ -19097,7 +19097,7 @@ var PickerComponent = function (_a) {
                 setMyStickers(body.packageList.filter(function (pack) { return pack.packageId !== null; }));
                 if (body.packageList.filter(function (pack) { return pack.packageId !== null; }).length > 0) {
                     var packageParams = {
-                        userId: params.userId,
+                        userId: encodeURIComponent(params.userId),
                         packId: body.packageList[0].packageId,
                     };
                     var packageData = client.getPackInfo(packageParams);
@@ -19123,7 +19123,7 @@ var PickerComponent = function (_a) {
                 case 2:
                     _a.sent();
                     packageParams = {
-                        userId: params.userId,
+                        userId: encodeURIComponent(params.userId),
                         packId: packageId,
                     };
                     data = client.getPackInfo(packageParams);
@@ -19141,7 +19141,7 @@ var PickerComponent = function (_a) {
     }); };
     var clickSticker = function (stickerId) {
         if (!preview) {
-            var requestUrl = "https://messenger.stipop.io/v1/analytics/send/".concat(stickerId, "?userId=").concat(params.userId);
+            var requestUrl = "https://messenger.stipop.io/v1/analytics/send/".concat(stickerId, "?userId=").concat(encodeURIComponent(params.userId));
             fetch(requestUrl, {
                 method: 'POST',
                 headers: {
@@ -19163,7 +19163,7 @@ var PickerComponent = function (_a) {
     };
     var clickTime = function () {
         setIsLoading(true);
-        var requestUrl = "https://messenger.stipop.io/v1/package/send/".concat(params.userId, "?limit=28");
+        var requestUrl = "https://messenger.stipop.io/v1/package/send/".concat(encodeURIComponent(params.userId), "?limit=28");
         axios
             .get(requestUrl, {
             headers: {
@@ -19272,6 +19272,7 @@ var PickerComponent = function (_a) {
                     stickerId: sticker.stickerId,
                     packageId: sticker.packageId,
                 });
+                clickSticker(sticker.stickerId);
                 setTempSticker(sticker.stickerImg);
             } })); }))) : (React__default.createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, isLoading: recentView },
             React__default.createElement("div", { style: {

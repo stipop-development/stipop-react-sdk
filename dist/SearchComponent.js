@@ -22,7 +22,7 @@ var SearchComponent = function (_a) {
         setIsLoading(true);
         // console.log(keyword)
         var searchParams = {
-            userId: params.userId,
+            userId: encodeURIComponent(params.userId),
             q: keyword,
             lang: params.lang ? params.lang : 'en',
             countryCode: params.countryCode ? params.countryCode : 'US',
@@ -52,7 +52,7 @@ var SearchComponent = function (_a) {
     }, [keyword, params.lang, params.pageNumber, params.limit]);
     var clickSticker = function (stickerId) {
         if (!preview) {
-            var requestUrl = "https://messenger.stipop.io/v1/analytics/send/".concat(stickerId, "?userId=").concat(params.userId);
+            var requestUrl = "https://messenger.stipop.io/v1/analytics/send/".concat(stickerId, "?userId=").concat(encodeURIComponent(params.userId));
             fetch(requestUrl, {
                 method: 'POST',
                 headers: {

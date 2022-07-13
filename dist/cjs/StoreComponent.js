@@ -57,7 +57,7 @@ var StoreComponent = function (_a) {
             });
         });
         var hideParams = {
-            userId: params.userId,
+            userId: encodeURIComponent(params.userId),
             limit: 50,
         };
         var hideData = client.myStickerHideList(hideParams);
@@ -87,7 +87,7 @@ var StoreComponent = function (_a) {
         }
         else {
             var hideParams = {
-                userId: params.userId,
+                userId: encodeURIComponent(params.userId),
                 limit: 50,
             };
             var hideData = client.myStickerHideList(hideParams);
@@ -150,7 +150,7 @@ var StoreComponent = function (_a) {
     var clickHide = function (packageId) {
         setBtnLoading(packageId);
         var hideParams = {
-            userId: params.userId,
+            userId: encodeURIComponent(params.userId),
             packageId: packageId,
         };
         var data = client.myStickerHide(hideParams);
@@ -170,7 +170,7 @@ var StoreComponent = function (_a) {
                         var firstOrder = body && body.packageList && body.packageList[0].order;
                         var currentOrder = body.packageList.filter(function (pack) { return pack.packageId === packageId; })[0].order;
                         var orderParams = {
-                            userId: params.userId,
+                            userId: encodeURIComponent(params.userId),
                             currentOrder: currentOrder,
                             newOrder: firstOrder + 1,
                         };
@@ -229,8 +229,16 @@ var StoreComponent = function (_a) {
                     React__default["default"].createElement(Icon["default"], { type: "PREVIOUS", onClick: function () {
                             clickPrevious();
                         } })),
-                React__default["default"].createElement("span", null, params.lang ? params.lang === 'ko' ? '이모티콘 팩' : 'Sticker Pack' : 'Sticker Pack'))) : (React__default["default"].createElement("div", { className: "title-text" },
-                React__default["default"].createElement("span", null, params.lang ? params.lang === 'ko' ? '이모티콘 스토어' : 'Sticker Store' : 'Sticker Store'),
+                React__default["default"].createElement("span", null, params.lang
+                    ? params.lang === 'ko'
+                        ? '이모티콘 팩'
+                        : 'Sticker Pack'
+                    : 'Sticker Pack'))) : (React__default["default"].createElement("div", { className: "title-text" },
+                React__default["default"].createElement("span", null, params.lang
+                    ? params.lang === 'ko'
+                        ? '이모티콘 스토어'
+                        : 'Sticker Store'
+                    : 'Sticker Store'),
                 React__default["default"].createElement(Icon["default"], { type: "STORE_BLACK" }))),
             React__default["default"].createElement(CloseBtn, { onClick: function () { return onClose(true); } },
                 React__default["default"].createElement(Icon["default"], { type: "CLOSE" }))),

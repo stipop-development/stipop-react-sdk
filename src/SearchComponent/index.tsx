@@ -42,7 +42,7 @@ const SearchComponent: React.FC<SearchProps> = ({
     setIsLoading(true)
     // console.log(keyword)
     const searchParams = {
-      userId: params.userId,
+      userId: encodeURIComponent(params.userId),
       q: keyword,
       lang: params.lang ? params.lang : 'en',
       countryCode: params.countryCode ? params.countryCode : 'US',
@@ -74,7 +74,9 @@ const SearchComponent: React.FC<SearchProps> = ({
 
   const clickSticker = stickerId => {
     if (!preview) {
-      const requestUrl = `https://messenger.stipop.io/v1/analytics/send/${stickerId}?userId=${params.userId}`
+      const requestUrl = `https://messenger.stipop.io/v1/analytics/send/${stickerId}?userId=${encodeURIComponent(
+        params.userId
+      )}`
       fetch(requestUrl, {
         method: 'POST',
         headers: {

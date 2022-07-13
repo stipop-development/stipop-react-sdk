@@ -24,7 +24,7 @@ var UnifiedComponent = function (_a) {
         setIsLoading(true);
         // console.log(keyword)
         var searchParams = {
-            userId: params.userId,
+            userId: encodeURIComponent(params.userId),
             q: keyword,
             lang: params.lang ? params.lang : 'en',
             countryCode: params.countryCode ? params.countryCode : 'US',
@@ -48,7 +48,7 @@ var UnifiedComponent = function (_a) {
     }, [keyword, params.lang, params.pageNumber, params.limit]);
     var clickSticker = function (stickerId) {
         if (!preview) {
-            var requestUrl = "https://messenger.stipop.io/v1/analytics/send/".concat(stickerId, "?userId=").concat(params.userId);
+            var requestUrl = "https://messenger.stipop.io/v1/analytics/send/".concat(stickerId, "?userId=").concat(encodeURIComponent(params.userId));
             fetch(requestUrl, {
                 method: 'POST',
                 headers: {
@@ -84,7 +84,10 @@ var UnifiedComponent = function (_a) {
                             ? input.search
                             : '#d5d5d5' }))),
         !keyword ? (React__default["default"].createElement("div", { style: { height: '90%' } },
-            React__default["default"].createElement(PickerComponent, { params: { apikey: params.apikey, userId: params.userId }, size: {
+            React__default["default"].createElement(PickerComponent, { params: {
+                    apikey: params.apikey,
+                    userId: params.userId,
+                }, size: {
                     height: size && size.height ? (size.height - 30) * 0.9 : 270 * 0.9,
                     width: size && size.width
                         ? border && border.border

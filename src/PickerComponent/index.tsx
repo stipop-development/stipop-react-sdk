@@ -69,7 +69,7 @@ const PickerComponent: React.FC<StoreProps> = ({
 
       initData.then(() => {
         const pickerParams = {
-          userId: params.userId,
+          userId: encodeURIComponent(params.userId),
         }
 
         const data = client.mySticker(pickerParams)
@@ -89,7 +89,7 @@ const PickerComponent: React.FC<StoreProps> = ({
               0
             ) {
               const packageParams = {
-                userId: params.userId,
+                userId: encodeURIComponent(params.userId),
                 packId: body.packageList[0].packageId,
               }
 
@@ -112,7 +112,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   useEffect(() => {
     setIsLoading(true)
     const pickerParams = {
-      userId: params.userId,
+      userId: encodeURIComponent(params.userId),
     }
 
     const data = client.mySticker(pickerParams)
@@ -129,7 +129,7 @@ const PickerComponent: React.FC<StoreProps> = ({
           body.packageList.filter(pack => pack.packageId !== null).length > 0
         ) {
           const packageParams = {
-            userId: params.userId,
+            userId: encodeURIComponent(params.userId),
             packId: body.packageList[0].packageId,
           }
 
@@ -151,7 +151,7 @@ const PickerComponent: React.FC<StoreProps> = ({
     await setIsLoading(true)
     await setRecentView(false)
     const packageParams = {
-      userId: params.userId,
+      userId: encodeURIComponent(params.userId),
       packId: packageId,
     }
 
@@ -168,7 +168,9 @@ const PickerComponent: React.FC<StoreProps> = ({
 
   const clickSticker = stickerId => {
     if (!preview) {
-      const requestUrl = `https://messenger.stipop.io/v1/analytics/send/${stickerId}?userId=${params.userId}`
+      const requestUrl = `https://messenger.stipop.io/v1/analytics/send/${stickerId}?userId=${encodeURIComponent(
+        params.userId
+      )}`
       fetch(requestUrl, {
         method: 'POST',
         headers: {
@@ -190,7 +192,9 @@ const PickerComponent: React.FC<StoreProps> = ({
   }
   const clickTime = () => {
     setIsLoading(true)
-    const requestUrl = `https://messenger.stipop.io/v1/package/send/${params.userId}?limit=28`
+    const requestUrl = `https://messenger.stipop.io/v1/package/send/${encodeURIComponent(
+      params.userId
+    )}?limit=28`
     axios
       .get(requestUrl, {
         headers: {
@@ -490,6 +494,7 @@ const PickerComponent: React.FC<StoreProps> = ({
                   stickerId: sticker.stickerId,
                   packageId: sticker.packageId,
                 })
+                clickSticker(sticker.stickerId)
                 setTempSticker(sticker.stickerImg)
               }}
             />

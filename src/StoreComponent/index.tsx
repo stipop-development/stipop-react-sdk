@@ -68,7 +68,7 @@ const StoreComponent: React.FC<StoreProps> = ({
     })
 
     const hideParams = {
-      userId: params.userId,
+      userId: encodeURIComponent(params.userId),
       limit: 50,
     }
 
@@ -97,7 +97,7 @@ const StoreComponent: React.FC<StoreProps> = ({
       }
     } else {
       const hideParams = {
-        userId: params.userId,
+        userId: encodeURIComponent(params.userId),
         limit: 50,
       }
       const hideData = client.myStickerHideList(hideParams)
@@ -163,7 +163,7 @@ const StoreComponent: React.FC<StoreProps> = ({
   const clickHide = packageId => {
     setBtnLoading(packageId)
     const hideParams = {
-      userId: params.userId,
+      userId: encodeURIComponent(params.userId),
       packageId: packageId,
     }
 
@@ -186,7 +186,7 @@ const StoreComponent: React.FC<StoreProps> = ({
             )[0].order
 
             const orderParams = {
-              userId: params.userId,
+              userId: encodeURIComponent(params.userId),
               currentOrder: currentOrder,
               newOrder: firstOrder + 1,
             }
@@ -242,11 +242,23 @@ const StoreComponent: React.FC<StoreProps> = ({
                     }}
                   />
                 </PreviousBtn>
-                <span>{params.lang ? params.lang === 'ko' ? '이모티콘 팩' : 'Sticker Pack' : 'Sticker Pack'}</span>
+                <span>
+                  {params.lang
+                    ? params.lang === 'ko'
+                      ? '이모티콘 팩'
+                      : 'Sticker Pack'
+                    : 'Sticker Pack'}
+                </span>
               </div>
             ) : (
               <div className="title-text">
-                <span>{params.lang ? params.lang === 'ko' ? '이모티콘 스토어' : 'Sticker Store' : 'Sticker Store'}</span>
+                <span>
+                  {params.lang
+                    ? params.lang === 'ko'
+                      ? '이모티콘 스토어'
+                      : 'Sticker Store'
+                    : 'Sticker Store'}
+                </span>
                 <Icon type="STORE_BLACK" />
               </div>
             )}
