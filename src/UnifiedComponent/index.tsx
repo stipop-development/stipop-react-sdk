@@ -38,7 +38,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
     setIsLoading(true)
     // console.log(keyword)
     const searchParams = {
-      userId: params.userId,
+      userId: encodeURIComponent(params.userId),
       q: keyword,
       lang: params.lang ? params.lang : 'en',
       countryCode: params.countryCode ? params.countryCode : 'US',
@@ -62,7 +62,9 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
 
   const clickSticker = stickerId => {
     if (!preview) {
-      const requestUrl = `https://messenger.stipop.io/v1/analytics/send/${stickerId}?userId=${params.userId}`
+      const requestUrl = `https://messenger.stipop.io/v1/analytics/send/${stickerId}?userId=${encodeURIComponent(
+        params.userId
+      )}`
       fetch(requestUrl, {
         method: 'POST',
         headers: {
@@ -135,7 +137,10 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
       {!keyword ? (
         <div style={{ height: '90%' }}>
           <PickerComponent
-            params={{ apikey: params.apikey, userId: params.userId }}
+            params={{
+              apikey: params.apikey,
+              userId: params.userId,
+            }}
             size={{
               height:
                 size && size.height ? (size.height - 30) * 0.9 : 270 * 0.9,
