@@ -1,9 +1,9 @@
 'use strict';
 
-var tslib_es6 = require('./tslib.es6-667f4605.js');
+var tslib_es6 = require('./tslib.es6-fb247e4a.js');
 var React = require('react');
-var LoadingSpinner = require('./index-704b1ded.js');
-var index = require('./index-531cfe3e.js');
+var LoadingSpinner = require('./index-48c7d746.js');
+var index = require('./index-3704bd89.js');
 var index_esm = require('./index.esm-dd03e45b.js');
 var PickerComponent = require('./PickerComponent.js');
 require('./Icon.js');
@@ -13,18 +13,37 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
 var UnifiedComponent = function (_a) {
-    var params = _a.params, size = _a.size, border = _a.border, input = _a.input, menu = _a.menu, backgroundColor = _a.backgroundColor, loadingColor = _a.loadingColor, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, preview = _a.preview, stickerClick = _a.stickerClick, storeClick = _a.storeClick, shadow = _a.shadow;
+    var params = _a.params, size = _a.size, border = _a.border, input = _a.input, menu = _a.menu, backgroundColor = _a.backgroundColor, loadingColor = _a.loadingColor, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, preview = _a.preview, stickerClick = _a.stickerClick, storeClick = _a.storeClick, shadow = _a.shadow, useAuth = _a.useAuth, auth = _a.auth;
     var _b = React.useState(''), keyword = _b[0], setKeyword = _b[1];
     var _c = React.useState([]), stickerList = _c[0], setStickerList = _c[1];
     var _d = React.useState(false), isLoading = _d[0], setIsLoading = _d[1];
-    var _e = React.useState(''), tempSticker = _e[0], setTempSticker = _e[1];
+    var _e = React.useState({
+        url: '',
+        stickerId: '',
+        packageId: '',
+    }), tempSticker = _e[0], setTempSticker = _e[1];
     var _f = React.useState(false), inputFocus = _f[0], setInputFocus = _f[1];
+    var _g = React.useState(''), accessToken = _g[0], setAccessToken = _g[1];
     var client = new index.Stipop(params.apikey, 'v1');
+    var getAccessToken = function () {
+        index.axios
+            .post('https://sandbox.stipop.com/v1/access', tslib_es6.__assign(tslib_es6.__assign({}, auth), { userId: params.userId }))
+            .then(function (_a) {
+            var data = _a.data;
+            setAccessToken(data.body.accessToken);
+        });
+    };
+    React.useEffect(function () {
+        if (useAuth) {
+            if (!accessToken) {
+                getAccessToken();
+            }
+        }
+    }, []);
     React.useEffect(function () {
         setIsLoading(true);
-        // console.log(keyword)
         var searchParams = {
-            userId: encodeURIComponent(params.userId),
+            userId: useAuth ? params.userId : encodeURIComponent(params.userId),
             q: keyword,
             lang: params.lang ? params.lang : 'en',
             countryCode: params.countryCode ? params.countryCode : 'US',
@@ -32,43 +51,112 @@ var UnifiedComponent = function (_a) {
             limit: params.limit ? params.limit : 20,
         };
         if (keyword) {
-            var data = client.getSearch(searchParams);
-            data.then(function (_a) {
-                var body = _a.body;
-                // console.log(body)
-                setStickerList(body && body.stickerList ? body.stickerList : []);
-                setTimeout(function () {
-                    setIsLoading(false);
-                }, 500);
-            });
+            if (useAuth && accessToken) {
+                index.axios
+                    .get("https://sandbox.stipop.com/v1/search", {
+                    params: searchParams,
+                    headers: {
+                        apikey: params.apikey,
+                        Authorization: "Bearer ".concat(accessToken),
+                        platform: 'react-sdk',
+                        sdk_version: 'test-version',
+                    },
+                })
+                    .then(function (_a) {
+                    var data = _a.data;
+                    setStickerList(data.body && data.body.stickerList ? data.body.stickerList : []);
+                    setTimeout(function () {
+                        setIsLoading(false);
+                    }, 500);
+                })
+                    .catch(function () {
+                    getAccessToken();
+                });
+            }
+            else if (!useAuth) {
+                var data = client.getSearch(searchParams);
+                data.then(function (_a) {
+                    var body = _a.body;
+                    setStickerList(body && body.stickerList ? body.stickerList : []);
+                    setTimeout(function () {
+                        setIsLoading(false);
+                    }, 500);
+                });
+            }
         }
         else {
             setKeyword('');
         }
-    }, [keyword, params.lang, params.pageNumber, params.limit]);
-    var clickSticker = function (stickerId) {
-        if (!preview) {
-            var requestUrl = "https://messenger.stipop.io/v1/analytics/send/".concat(stickerId, "?userId=").concat(encodeURIComponent(params.userId));
-            fetch(requestUrl, {
-                method: 'POST',
+    }, [keyword, params.lang, params.pageNumber, params.limit, accessToken]);
+    var clickSticker = function (stickerId, stickerImg, packageId) {
+        if (useAuth && accessToken) {
+            index.axios
+                .post("https://sandbox.stipop.com/v1/analytics/send/".concat(stickerId), null, {
+                params: {
+                    userId: params.userId,
+                },
                 headers: {
                     apikey: params.apikey,
-                    'Content-Type': 'application/json',
+                    Authorization: "Bearer ".concat(accessToken),
+                    platform: 'react-sdk',
+                    sdk_version: 'test-version',
                 },
+            })
+                .then(function () {
+                stickerClick({
+                    url: stickerImg,
+                    stickerId: stickerId,
+                    packageId: packageId,
+                });
+                if (preview) {
+                    setTempSticker({
+                        url: stickerImg,
+                        stickerId: stickerId,
+                        packageId: packageId,
+                    });
+                }
+            })
+                .catch(function () {
+                getAccessToken();
+            });
+        }
+        else if (!useAuth) {
+            index.axios
+                .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
+                params: {
+                    userId: params.userId,
+                },
+                headers: {
+                    apikey: params.apikey,
+                },
+            })
+                .then(function () {
+                stickerClick({
+                    url: stickerImg,
+                    stickerId: stickerId,
+                    packageId: packageId,
+                });
+                if (preview) {
+                    setTempSticker({
+                        url: stickerImg,
+                        stickerId: stickerId,
+                        packageId: packageId,
+                    });
+                }
             });
         }
     };
     return (React__default["default"].createElement(SearchWrapper, { size: size, backgroundColor: backgroundColor, border: border, shadow: shadow },
-        preview && tempSticker && (React__default["default"].createElement(PreviewWrapper, null,
+        preview && tempSticker.url && (React__default["default"].createElement(PreviewWrapper, null,
             React__default["default"].createElement(index_esm.FiX, { size: 25, color: '#000', style: {
                     position: 'absolute',
                     right: '15px',
                     top: '15px',
                     cursor: 'pointer',
                 }, onClick: function () {
-                    setTempSticker('');
+                    setTempSticker({ url: '', stickerId: '', packageId: '' });
                 } }),
-            React__default["default"].createElement(ChatSticker, { src: tempSticker }))),
+            React__default["default"].createElement(ChatSticker, { src: tempSticker.url }))),
         React__default["default"].createElement(SearchForm, null,
             React__default["default"].createElement(SearchInput, { type: "text", onFocus: function () { return setInputFocus(true); }, onBlur: function () { return setInputFocus(false); }, onChange: function (e) { return setKeyword(e.target.value); }, placeholder: params.lang
                     ? params.lang === 'ko'
@@ -134,14 +222,14 @@ var UnifiedComponent = function (_a) {
                     listCnt: menu && menu.listCnt ? menu.listCnt : 6,
                     arrowColor: menu && menu.arrowColor ? menu.arrowColor : '#000',
                     imgSize: menu && menu.imgSize ? menu.imgSize : 25,
-                }, backgroundColor: backgroundColor ? backgroundColor : '#fff', column: column ? column : 4, scroll: scroll ? scroll : true, scrollHover: scrollHover ? scrollHover : '#6d7072', loadingColor: loadingColor ? loadingColor : '#ff4500', shadow: 'none', preview: preview, stickerClick: function (info) { return stickerClick(info); }, storeClick: function (click) { return storeClick(click); } }))) : !isLoading ? (stickerList.length > 0 ? (React__default["default"].createElement(StickerWrapper, { column: column, scroll: scroll, scrollHover: scrollHover, border: border, backgroundColor: backgroundColor, size: size }, stickerList.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { src: "".concat(sticker.stickerImg, "?d=100x100"), key: index, onClick: function () {
-                stickerClick({
-                    url: sticker.stickerImg,
-                    stickerId: sticker.stickerId,
-                    packageId: sticker.packageId,
-                });
-                clickSticker(sticker.stickerId);
-                setTempSticker(sticker.stickerImg);
+                }, backgroundColor: backgroundColor ? backgroundColor : '#fff', column: column ? column : 4, scroll: scroll ? scroll : true, scrollHover: scrollHover ? scrollHover : '#6d7072', loadingColor: loadingColor ? loadingColor : '#ff4500', shadow: 'none', preview: preview, stickerClick: function (info) { return stickerClick(info); }, storeClick: function (click) { return storeClick(click); }, useAuth: true, auth: auth }))) : !isLoading ? (stickerList.length > 0 ? (React__default["default"].createElement(StickerWrapper, { column: column, scroll: scroll, scrollHover: scrollHover, border: border, backgroundColor: backgroundColor, size: size }, stickerList.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { src: "".concat(sticker.stickerImg, "?d=100x100"), key: index, onClick: function () {
+                // stickerClick({
+                //   url: sticker.stickerImg,
+                //   stickerId: sticker.stickerId,
+                //   packageId: sticker.packageId,
+                // })
+                clickSticker(sticker.stickerId, sticker.stickerImg, sticker.packageId);
+                // setTempSticker(sticker.stickerImg)
             }, size: size })); }))) : (React__default["default"].createElement(NoSticker, null,
             React__default["default"].createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker" }),
             React__default["default"].createElement("span", { className: "no-sticker-text" }, params.lang
@@ -151,7 +239,7 @@ var UnifiedComponent = function (_a) {
                 : 'No Stickers to Show')))) : (React__default["default"].createElement(NoSticker, null,
             React__default["default"].createElement(LoadingSpinner.LoadingSpinner, { color: loadingColor ? loadingColor : '#ff4500' })))));
 };
-var SearchWrapper = LoadingSpinner.styled.div(templateObject_1 || (templateObject_1 = tslib_es6.__makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  /* padding: 10px 0; */\n  padding-top: 10px;\n  box-sizing: border-box;\n  box-shadow: ", ";\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  /* padding: 10px 0; */\n  padding-top: 10px;\n  box-sizing: border-box;\n  box-shadow: ", ";\n"])), function (props) {
+var SearchWrapper = LoadingSpinner.styled.div(templateObject_1 || (templateObject_1 = tslib_es6.__makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding-top: 10px;\n  box-sizing: border-box;\n  box-shadow: ", ";\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding-top: 10px;\n  box-sizing: border-box;\n  box-shadow: ", ";\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
 }, function (props) {
     return props.size && props.size.height ? "".concat(props.size.height, "px") : '300px';
