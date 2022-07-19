@@ -48,7 +48,7 @@ const SearchComponent: React.FC<SearchProps> = ({
 
   const getAccessToken = () => {
     axios
-      .post('https://sandbox.stipop.com/v1/access', {
+      .post('https://messenger.stipop.io/v1/access', {
         ...auth,
         userId: params.userId,
       })
@@ -79,7 +79,7 @@ const SearchComponent: React.FC<SearchProps> = ({
     if (keyword) {
       if (useAuth && accessToken) {
         axios
-          .get(`https://sandbox.stipop.com/v1/search`, {
+          .get(`https://messenger.stipop.io/v1/search`, {
             params: searchParams,
             headers: {
               apikey: params.apikey,
@@ -125,7 +125,7 @@ const SearchComponent: React.FC<SearchProps> = ({
     if (useAuth && accessToken) {
       axios
         .post(
-          `https://sandbox.stipop.com/v1/analytics/send/${stickerId}`,
+          `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
           null,
           {
             params: {
