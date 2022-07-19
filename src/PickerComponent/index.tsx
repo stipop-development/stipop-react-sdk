@@ -25,6 +25,8 @@ const PickerComponent: React.FC<StoreProps> = ({
   preview,
   loadingColor,
   shadow,
+  useAuth,
+  auth,
 }) => {
   const [myStickers, setMyStickers] = useState([])
   const [stickers, setStickers] = useState([])
@@ -38,8 +40,13 @@ const PickerComponent: React.FC<StoreProps> = ({
   const [scrollX, setScrollX] = useState(0)
   const menuList = document.getElementById('picker-menu')
   const [scrolling, setScrolling] = useState(0)
-  const [tempSticker, setTempSticker] = useState('')
+  const [tempSticker, setTempSticker] = useState({
+    url: '',
+    stickerId: '',
+    packageId: '',
+  })
   const [init, setInit] = useState(false)
+  const [accessToken, setAccessToken] = useState('')
 
   const client = new (Stipop as any)(params.apikey, 'v1')
 
@@ -58,11 +65,127 @@ const PickerComponent: React.FC<StoreProps> = ({
       ? 360 / (menu.listCnt + 2)
       : 45
 
+  const getAccessToken = () => {
+    axios
+      .post('https://sandbox.stipop.com/v1/access', {
+        ...auth,
+        userId: params.userId,
+      })
+      .then(({ data }) => {
+        setAccessToken(data.body.accessToken)
+      })
+  }
+
+  useEffect(() => {
+    if (useAuth) {
+      if (!accessToken) {
+        getAccessToken()
+      }
+    }
+  }, [])
+
   useEffect(() => {
     if (init) {
       setIsLoading(true)
+      if (useAuth && accessToken) {
+        axios
+          .post(
+            'https://sandbox.stipop.com/v1/init',
+            {
+              userId: params.userId,
+              lang: 'en',
+            },
+            {
+              headers: {
+                apikey: params.apikey,
+                Authorization: `Bearer ${accessToken}`,
+              },
+            }
+          )
+          .then(() => {
+            axios
+              .get(
+                `https://sandbox.stipop.com/v1/mysticker/${encodeURIComponent(
+                  params.userId
+                )}`,
+                {
+                  params: {
+                    userId: params.userId,
+                  },
+                  headers: {
+                    apikey: params.apikey,
+                    Authorization: `Bearer ${accessToken}`,
+                    platform: 'react-sdk',
+                    sdk_version: 'test-version',
+                  },
+                }
+              )
+              .then(({ data }) => {
+                setInit(
+                  data.body && data.body.packageList === null ? true : false
+                )
+                if (data.body && data.body.packageList) {
+                  setItemCnt(
+                    data.body.packageList.filter(
+                      pack => pack.packageId !== null
+                    ).length
+                  )
+                  setMyStickers(
+                    data.body.packageList.filter(
+                      pack => pack.packageId !== null
+                    )
+                  )
+                }
+
+                if (
+                  data.body.packageList.filter(pack => pack.packageId !== null)
+                    .length > 0
+                ) {
+                  axios
+                    .get(
+                      `https://sandbox.stipop.com/v1/package/${data.body.packageList[0].packageId}`,
+                      {
+                        params: {
+                          userId: params.userId,
+                        },
+                        headers: {
+                          apikey: params.apikey,
+                          Authorization: `Bearer ${accessToken}`,
+                          platform: 'react-sdk',
+                          sdk_version: 'test-version',
+                        },
+                      }
+                    )
+                    .then(({ data }) => {
+                      setStickers(
+                        data.body &&
+                          data.body.package &&
+                          data.body.package.stickers
+                          ? data.body.package.stickers
+                          : []
+                      )
+                    })
+                    .catch(() => {
+                      getAccessToken()
+                      setShowPackage(0)
+                    })
+                }
+                setIsLoading(false)
+              })
+              .catch(() => {
+                getAccessToken()
+                setShowPackage(0)
+              })
+          })
+          .catch(() => {
+            getAccessToken()
+            setShowPackage(0)
+          })
+      }
+    } else if (!useAuth) {
       const initParams = {
         userId: params.userId,
+        // userId: encodeURIComponent(params.userId),
         lang: 'en',
       }
       const initData = client.init(initParams)
@@ -109,108 +232,347 @@ const PickerComponent: React.FC<StoreProps> = ({
     }
   }, [init])
 
+  // useEffect(() => {
+  //   setIsLoading(true)
+  //   const pickerParams = {
+  //     // userId: params.userId,
+  //     userId: encodeURIComponent(params.userId),
+  //   }
+
+  //   const data = client.mySticker(pickerParams)
+
+  //   data.then(({ body }) => {
+  //     setInit(body && body.packageList === null ? true : false)
+  //     if (body && body.packageList) {
+  //       setItemCnt(
+  //         body.packageList.filter(pack => pack.packageId !== null).length
+  //       )
+  //       setMyStickers(body.packageList.filter(pack => pack.packageId !== null))
+
+  //       if (
+  //         body.packageList.filter(pack => pack.packageId !== null).length > 0
+  //       ) {
+  //         const packageParams = {
+  //           userId: encodeURIComponent(params.userId),
+  //           packId: body.packageList[0].packageId,
+  //         }
+
+  //         const packageData = client.getPackInfo(packageParams)
+  //         packageData.then(({ body }) => {
+  //           setStickers(
+  //             body && body.package && body.package.stickers
+  //               ? body.package.stickers
+  //               : []
+  //           )
+  //         })
+  //       }
+  //       setIsLoading(false)
+  //     }
+  //   })
+  // }, [])
+
   useEffect(() => {
     setIsLoading(true)
-    const pickerParams = {
-      userId: encodeURIComponent(params.userId),
-    }
 
-    const data = client.mySticker(pickerParams)
-
-    data.then(({ body }) => {
-      setInit(body && body.packageList === null ? true : false)
-      if (body && body.packageList) {
-        setItemCnt(
-          body.packageList.filter(pack => pack.packageId !== null).length
+    if (useAuth && accessToken) {
+      axios
+        .get(
+          `https://sandbox.stipop.com/v1/mysticker/${encodeURIComponent(
+            params.userId
+          )}`,
+          {
+            params: {
+              userId: params.userId,
+            },
+            headers: {
+              apikey: params.apikey,
+              Authorization: `Bearer ${accessToken}`,
+              platform: 'react-sdk',
+              sdk_version: 'test-version',
+            },
+          }
         )
-        setMyStickers(body.packageList.filter(pack => pack.packageId !== null))
-
-        if (
-          body.packageList.filter(pack => pack.packageId !== null).length > 0
-        ) {
-          const packageParams = {
-            userId: encodeURIComponent(params.userId),
-            packId: body.packageList[0].packageId,
+        .then(({ data }) => {
+          setInit(data.body && data.body.packageList === null ? true : false)
+          if (data.body && data.body.packageList) {
+            setItemCnt(
+              data.body.packageList.filter(pack => pack.packageId !== null)
+                .length
+            )
+            setMyStickers(
+              data.body.packageList.filter(pack => pack.packageId !== null)
+            )
           }
 
-          const packageData = client.getPackInfo(packageParams)
-          packageData.then(({ body }) => {
-            setStickers(
-              body && body.package && body.package.stickers
-                ? body.package.stickers
-                : []
-            )
-          })
-        }
-        setIsLoading(false)
+          if (
+            data.body.packageList.filter(pack => pack.packageId !== null)
+              .length > 0
+          ) {
+            if (recentView) {
+              axios
+                .get(
+                  `https://sandbox.stipop.com/v1/package/send/${encodeURIComponent(
+                    params.userId
+                  )}`,
+                  {
+                    params: {
+                      userId: params.userId,
+                      limit: 28,
+                    },
+                    headers: {
+                      apikey: params.apikey,
+                      Authorization: `Bearer ${accessToken}`,
+                    },
+                  }
+                )
+                .then(({ data }) => {
+                  setStickers(
+                    data && data.body && data.body.stickerList
+                      ? data.body.stickerList
+                      : []
+                  )
+                })
+                .catch(() => {
+                  getAccessToken()
+                })
+            } else {
+              axios
+                .get(
+                  `https://sandbox.stipop.com/v1/package/${data.body.packageList[showPackage].packageId}`,
+                  {
+                    params: {
+                      userId: params.userId,
+                    },
+                    headers: {
+                      apikey: params.apikey,
+                      Authorization: `Bearer ${accessToken}`,
+                      platform: 'react-sdk',
+                      sdk_version: 'test-version',
+                    },
+                  }
+                )
+                .then(({ data }) => {
+                  setStickers(
+                    data.body && data.body.package && data.body.package.stickers
+                      ? data.body.package.stickers
+                      : []
+                  )
+                })
+                .catch(() => {
+                  getAccessToken()
+                })
+            }
+          }
+          setTimeout(() => {
+            setIsLoading(false)
+          }, 500)
+        })
+        .catch(() => {
+          getAccessToken()
+        })
+    } else if (!useAuth) {
+      const pickerParams = {
+        // userId: params.userId,
+        userId: encodeURIComponent(params.userId),
       }
-    })
-  }, [])
+
+      const data = client.mySticker(pickerParams)
+
+      data.then(({ body }) => {
+        setInit(body && body.packageList === null ? true : false)
+        if (body && body.packageList) {
+          setItemCnt(
+            body.packageList.filter(pack => pack.packageId !== null).length
+          )
+          setMyStickers(
+            body.packageList.filter(pack => pack.packageId !== null)
+          )
+
+          if (
+            body.packageList.filter(pack => pack.packageId !== null).length > 0
+          ) {
+            const packageParams = {
+              userId: encodeURIComponent(params.userId),
+              packId: body.packageList[0].packageId,
+            }
+
+            const packageData = client.getPackInfo(packageParams)
+            packageData.then(({ body }) => {
+              setStickers(
+                body && body.package && body.package.stickers
+                  ? body.package.stickers
+                  : []
+              )
+            })
+          }
+          setIsLoading(false)
+        }
+      })
+    }
+  }, [accessToken])
 
   const clickPackage = async packageId => {
     await setIsLoading(true)
     await setRecentView(false)
-    const packageParams = {
-      userId: encodeURIComponent(params.userId),
-      packId: packageId,
-    }
+    if (useAuth && accessToken) {
+      axios
+        .get(`https://sandbox.stipop.com/v1/package/${packageId}`, {
+          params: {
+            userId: params.userId,
+          },
+          headers: {
+            apikey: params.apikey,
+            Authorization: `Bearer ${accessToken}`,
+            platform: 'react-sdk',
+            sdk_version: 'test-version',
+          },
+        })
+        .then(({ data }) => {
+          setStickers(
+            data.body && data.body.package && data.body.package.stickers
+              ? data.body.package.stickers
+              : []
+          )
+        })
+        .catch(() => {
+          getAccessToken()
+        })
+    } else if (!useAuth) {
+      const packageParams = {
+        userId: encodeURIComponent(params.userId),
+        packId: packageId,
+      }
 
-    const data = client.getPackInfo(packageParams)
+      const data = client.getPackInfo(packageParams)
 
-    await data.then(({ body }) => {
-      setStickers(
-        body && body.package && body.package.stickers
-          ? body.package.stickers
-          : []
-      )
-    })
-  }
-
-  const clickSticker = stickerId => {
-    if (!preview) {
-      const requestUrl = `https://messenger.stipop.io/v1/analytics/send/${stickerId}?userId=${encodeURIComponent(
-        params.userId
-      )}`
-      fetch(requestUrl, {
-        method: 'POST',
-        headers: {
-          apikey: params.apikey,
-          'Content-Type': 'application/json',
-        },
-      })
-    }
-    // axios
-    //   .post(requestUrl, {
-    //     headers: {
-    //       apikey: params.apikey,
-    //       'Content-Type': 'application/json',
-    //     },
-    //   })
-    //   .then(res => {
-    //     console.log(res.data.headers)
-    //   })
-  }
-  const clickTime = () => {
-    setIsLoading(true)
-    const requestUrl = `https://messenger.stipop.io/v1/package/send/${encodeURIComponent(
-      params.userId
-    )}?limit=28`
-    axios
-      .get(requestUrl, {
-        headers: {
-          apikey: params.apikey,
-          'Content-Type': 'application/json',
-        },
-      })
-      .then(({ data }) => {
-        // console.log(data.body.stickerList)
-        setRecentView(true)
+      await data.then(({ body }) => {
         setStickers(
-          data && data.body && data.body.stickerList
-            ? data.body.stickerList
+          body && body.package && body.package.stickers
+            ? body.package.stickers
             : []
         )
       })
+    }
+  }
+
+  const clickSticker = (stickerId, stickerImg, packageId) => {
+    if (useAuth && accessToken) {
+      axios
+        .post(
+          `https://sandbox.stipop.com/v1/analytics/send/${stickerId}`,
+          null,
+          {
+            params: {
+              // userId: encodeURIComponent(params.userId),
+              userId: params.userId,
+            },
+            headers: {
+              apikey: params.apikey,
+              Authorization: `Bearer ${accessToken}`,
+              platform: 'react-sdk',
+              sdk_version: 'test-version',
+            },
+          }
+        )
+        .then(() => {
+          stickerClick({
+            url: stickerImg,
+            stickerId: stickerId,
+            packageId: packageId,
+          })
+          if (preview) {
+            setTempSticker({
+              url: stickerImg,
+              stickerId: stickerId,
+              packageId: packageId,
+            })
+          }
+        })
+        .catch(() => {
+          getAccessToken()
+        })
+    } else if (!useAuth) {
+      axios
+        .post(
+          `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
+          null,
+          {
+            params: {
+              // userId: encodeURIComponent(params.userId),
+              userId: params.userId,
+            },
+            headers: {
+              apikey: params.apikey,
+            },
+          }
+        )
+        .then(() => {
+          stickerClick({
+            url: stickerImg,
+            stickerId: stickerId,
+            packageId: packageId,
+          })
+          if (preview) {
+            setTempSticker({
+              url: stickerImg,
+              stickerId: stickerId,
+              packageId: packageId,
+            })
+          }
+        })
+    }
+  }
+
+  const clickTime = () => {
+    setIsLoading(true)
+    setRecentView(true)
+    if (useAuth && accessToken) {
+      axios
+        .get(
+          `https://sandbox.stipop.com/v1/package/send/${encodeURIComponent(
+            params.userId
+          )}`,
+          {
+            params: {
+              userId: params.userId,
+              limit: 28,
+            },
+            headers: {
+              apikey: params.apikey,
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        )
+        .then(({ data }) => {
+          setStickers(
+            data && data.body && data.body.stickerList
+              ? data.body.stickerList
+              : []
+          )
+        })
+        .catch(() => {
+          getAccessToken()
+        })
+    } else if (!useAuth) {
+      const requestUrl = `https://messenger.stipop.io/v1/package/send/${encodeURIComponent(
+        params.userId
+      )}?limit=28`
+      axios
+        .get(requestUrl, {
+          headers: {
+            apikey: params.apikey,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(({ data }) => {
+          setRecentView(true)
+          setStickers(
+            data && data.body && data.body.stickerList
+              ? data.body.stickerList
+              : []
+          )
+        })
+    }
   }
 
   useEffect(() => {
@@ -227,7 +589,7 @@ const PickerComponent: React.FC<StoreProps> = ({
 
   return (
     <PickerWrapper size={size} border={border} shadow={shadow}>
-      {preview && tempSticker && (
+      {preview && tempSticker.url && (
         <PreviewWrapper>
           <FiX
             size={25}
@@ -239,10 +601,10 @@ const PickerComponent: React.FC<StoreProps> = ({
               cursor: 'pointer',
             }}
             onClick={() => {
-              setTempSticker('')
+              setTempSticker({ url: '', stickerId: '', packageId: '' })
             }}
           />
-          <ChatSticker src={tempSticker} />
+          <ChatSticker src={tempSticker.url} />
         </PreviewWrapper>
       )}
       <MenuBox>
@@ -448,13 +810,17 @@ const PickerComponent: React.FC<StoreProps> = ({
                 alt=""
                 key={index}
                 onClick={() => {
-                  stickerClick({
-                    url: sticker.stickerImg,
-                    stickerId: sticker.stickerId,
-                    packageId: sticker.packageId,
-                  })
-                  clickSticker(sticker.stickerId)
-                  setTempSticker(sticker.stickerImg)
+                  // stickerClick({
+                  //   url: sticker.stickerImg,
+                  //   stickerId: sticker.stickerId,
+                  //   packageId: sticker.packageId,
+                  // })
+                  clickSticker(
+                    sticker.stickerId,
+                    sticker.stickerImg,
+                    sticker.packageId
+                  )
+                  // setTempSticker(sticker.stickerImg)
                 }}
               />
             ))}
@@ -489,13 +855,17 @@ const PickerComponent: React.FC<StoreProps> = ({
               alt=""
               key={index}
               onClick={() => {
-                stickerClick({
-                  url: sticker.stickerImg,
-                  stickerId: sticker.stickerId,
-                  packageId: sticker.packageId,
-                })
-                clickSticker(sticker.stickerId)
-                setTempSticker(sticker.stickerImg)
+                // stickerClick({
+                //   url: sticker.stickerImg,
+                //   stickerId: sticker.stickerId,
+                //   packageId: sticker.packageId,
+                // })
+                clickSticker(
+                  sticker.stickerId,
+                  sticker.stickerImg,
+                  sticker.packageId
+                )
+                // setTempSticker(sticker.stickerImg)
               }}
             />
           ))}

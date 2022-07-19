@@ -13,6 +13,8 @@ export interface UnifiedProps {
   stickerClick?: Function
   storeClick?: Function
   shadow?: string
+  useAuth?: boolean
+  auth?: Auth
 }
 
 interface Params {
@@ -62,4 +64,12 @@ interface Menu {
   listCnt?: number
   arrowColor?: string
   imgSize?: number
+}
+
+interface Auth {
+  appId: string
+  clientId: string
+  clientSecret: string
+  refreshToken: string
+  expiryTime: number
 }

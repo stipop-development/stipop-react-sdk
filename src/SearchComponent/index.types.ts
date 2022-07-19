@@ -11,6 +11,8 @@ export interface SearchProps {
   preview?: boolean
   loadingColor?: string
   shadow?: string
+  useAuth?: boolean
+  auth?: Auth
 }
 
 interface Params {
@@ -51,4 +53,12 @@ interface Input {
   height?: number
   focus?: string
   search?: string
+}
+
+interface Auth {
+  appId: string
+  clientId: string
+  clientSecret: string
+  refreshToken: string
+  expiryTime: number
 }
