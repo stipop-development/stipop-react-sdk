@@ -39,7 +39,7 @@ const StoreComponent: React.FC<StoreProps> = ({
 
   const getAccessToken = () => {
     axios
-      .post('https://sandbox.stipop.com/v1/access', {
+      .post('https://messenger.stipop.io/v1/access', {
         ...auth,
         userId: params.userId,
       })
@@ -60,7 +60,7 @@ const StoreComponent: React.FC<StoreProps> = ({
     setIsLoading(true)
     if (useAuth && accessToken) {
       axios
-        .get(`https://sandbox.stipop.com/v1/package`, {
+        .get(`https://messenger.stipop.io/v1/package`, {
           params: {
             userId: params.userId,
             lang: params.lang,
@@ -82,7 +82,7 @@ const StoreComponent: React.FC<StoreProps> = ({
           // body.packageList.map(pack => {
           PackageIds.map(pack => {
             axios
-              .get(`https://sandbox.stipop.com/v1/package/${pack}`, {
+              .get(`https://messenger.stipop.io/v1/package/${pack}`, {
                 params: {
                   userId: params.userId,
                 },
@@ -110,7 +110,7 @@ const StoreComponent: React.FC<StoreProps> = ({
         })
       axios
         .get(
-          `https://sandbox.stipop.com/v1/mysticker/hide/${encodeURIComponent(
+          `https://messenger.stipop.io/v1/mysticker/hide/${encodeURIComponent(
             params.userId
           )}`,
           {
@@ -179,7 +179,7 @@ const StoreComponent: React.FC<StoreProps> = ({
         if (useAuth && accessToken) {
           axios
             .get(
-              `https://sandbox.stipop.com/v1/mysticker/hide/${encodeURIComponent(
+              `https://messenger.stipop.io/v1/mysticker/hide/${encodeURIComponent(
                 params.userId
               )}`,
               {
@@ -220,7 +220,7 @@ const StoreComponent: React.FC<StoreProps> = ({
       if (useAuth && accessToken) {
         axios
           .get(
-            `https://sandbox.stipop.com/v1/mysticker/hide/${encodeURIComponent(
+            `https://messenger.stipop.io/v1/mysticker/hide/${encodeURIComponent(
               params.userId
             )}`,
             {
@@ -277,7 +277,7 @@ const StoreComponent: React.FC<StoreProps> = ({
     setBtnLoading(packageId)
     if (useAuth && accessToken) {
       axios
-        .post(`https://sandbox.stipop.com/v1/download/${packageId}`, null, {
+        .post(`https://messenger.stipop.io/v1/download/${packageId}`, null, {
           params: {
             userId: params.userId,
             packageId: packageId,
@@ -359,7 +359,7 @@ const StoreComponent: React.FC<StoreProps> = ({
     if (useAuth && accessToken) {
       axios
         .put(
-          `https://sandbox.stipop.com/v1/mysticker/hide/${encodeURIComponent(
+          `https://messenger.stipop.io/v1/mysticker/hide/${encodeURIComponent(
             params.userId
           )}/${packageId}`,
           null,
@@ -381,7 +381,7 @@ const StoreComponent: React.FC<StoreProps> = ({
               setHideList(hideList.filter(item => item !== packageId))
               axios
                 .get(
-                  `https://sandbox.stipop.com/v1/mysticker/${encodeURIComponent(
+                  `https://messenger.stipop.io/v1/mysticker/${encodeURIComponent(
                     params.userId
                   )}`,
                   {
@@ -407,7 +407,7 @@ const StoreComponent: React.FC<StoreProps> = ({
 
                   axios
                     .put(
-                      `https://sandbox.stipop.com/v1/mysticker/order/${encodeURIComponent(
+                      `https://messenger.stipop.io/v1/mysticker/order/${encodeURIComponent(
                         params.userId
                       )}`,
                       {

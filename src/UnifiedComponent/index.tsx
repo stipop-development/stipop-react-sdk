@@ -42,7 +42,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
 
   const getAccessToken = () => {
     axios
-      .post('https://sandbox.stipop.com/v1/access', {
+      .post('https://messenger.stipop.io/v1/access', {
         ...auth,
         userId: params.userId,
       })
@@ -73,7 +73,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
     if (keyword) {
       if (useAuth && accessToken) {
         axios
-          .get(`https://sandbox.stipop.com/v1/search`, {
+          .get(`https://messenger.stipop.io/v1/search`, {
             params: searchParams,
             headers: {
               apikey: params.apikey,
@@ -111,7 +111,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
     if (useAuth && accessToken) {
       axios
         .post(
-          `https://sandbox.stipop.com/v1/analytics/send/${stickerId}`,
+          `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
           null,
           {
             params: {
