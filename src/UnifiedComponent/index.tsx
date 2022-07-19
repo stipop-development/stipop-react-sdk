@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 import Stipop from 'stipop-js-sdk'
-import Icon from '../Icon/index'
 import { FiX, FiSearch } from 'react-icons/fi'
 import LoadingSpinner from '../LoadingSpinner'
 
@@ -25,20 +24,45 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
   stickerClick,
   storeClick,
   shadow,
+  useAuth,
+  auth,
 }) => {
   const [keyword, setKeyword] = useState('')
   const [stickerList, setStickerList] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-  const [tempSticker, setTempSticker] = useState('')
+  const [tempSticker, setTempSticker] = useState({
+    url: '',
+    stickerId: '',
+    packageId: '',
+  })
   const [inputFocus, setInputFocus] = useState(false)
+  const [accessToken, setAccessToken] = useState('')
 
   const client = new (Stipop as any)(params.apikey, 'v1')
 
+  const getAccessToken = () => {
+    axios
+      .post('https://sandbox.stipop.com/v1/access', {
+        ...auth,
+        userId: params.userId,
+      })
+      .then(({ data }) => {
+        setAccessToken(data.body.accessToken)
+      })
+  }
+
+  useEffect(() => {
+    if (useAuth) {
+      if (!accessToken) {
+        getAccessToken()
+      }
+    }
+  }, [])
+
   useEffect(() => {
     setIsLoading(true)
-    // console.log(keyword)
     const searchParams = {
-      userId: encodeURIComponent(params.userId),
+      userId: useAuth ? params.userId : encodeURIComponent(params.userId),
       q: keyword,
       lang: params.lang ? params.lang : 'en',
       countryCode: params.countryCode ? params.countryCode : 'US',
@@ -47,31 +71,105 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
     }
 
     if (keyword) {
-      const data = client.getSearch(searchParams)
-      data.then(({ body }) => {
-        // console.log(body)
-        setStickerList(body && body.stickerList ? body.stickerList : [])
-        setTimeout(() => {
-          setIsLoading(false)
-        }, 500)
-      })
+      if (useAuth && accessToken) {
+        axios
+          .get(`https://sandbox.stipop.com/v1/search`, {
+            params: searchParams,
+            headers: {
+              apikey: params.apikey,
+              Authorization: `Bearer ${accessToken}`,
+              platform: 'react-sdk',
+              sdk_version: 'test-version',
+            },
+          })
+          .then(({ data }) => {
+            setStickerList(
+              data.body && data.body.stickerList ? data.body.stickerList : []
+            )
+            setTimeout(() => {
+              setIsLoading(false)
+            }, 500)
+          })
+          .catch(() => {
+            getAccessToken()
+          })
+      } else if (!useAuth) {
+        const data = client.getSearch(searchParams)
+        data.then(({ body }) => {
+          setStickerList(body && body.stickerList ? body.stickerList : [])
+          setTimeout(() => {
+            setIsLoading(false)
+          }, 500)
+        })
+      }
     } else {
       setKeyword('')
     }
-  }, [keyword, params.lang, params.pageNumber, params.limit])
+  }, [keyword, params.lang, params.pageNumber, params.limit, accessToken])
 
-  const clickSticker = stickerId => {
-    if (!preview) {
-      const requestUrl = `https://messenger.stipop.io/v1/analytics/send/${stickerId}?userId=${encodeURIComponent(
-        params.userId
-      )}`
-      fetch(requestUrl, {
-        method: 'POST',
-        headers: {
-          apikey: params.apikey,
-          'Content-Type': 'application/json',
-        },
-      })
+  const clickSticker = (stickerId, stickerImg, packageId) => {
+    if (useAuth && accessToken) {
+      axios
+        .post(
+          `https://sandbox.stipop.com/v1/analytics/send/${stickerId}`,
+          null,
+          {
+            params: {
+              userId: params.userId,
+            },
+            headers: {
+              apikey: params.apikey,
+              Authorization: `Bearer ${accessToken}`,
+              platform: 'react-sdk',
+              sdk_version: 'test-version',
+            },
+          }
+        )
+        .then(() => {
+          stickerClick({
+            url: stickerImg,
+            stickerId: stickerId,
+            packageId: packageId,
+          })
+          if (preview) {
+            setTempSticker({
+              url: stickerImg,
+              stickerId: stickerId,
+              packageId: packageId,
+            })
+          }
+        })
+        .catch(() => {
+          getAccessToken()
+        })
+    } else if (!useAuth) {
+      axios
+        .post(
+          `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
+          null,
+          {
+            params: {
+              userId: params.userId,
+            },
+            headers: {
+              apikey: params.apikey,
+            },
+          }
+        )
+        .then(() => {
+          stickerClick({
+            url: stickerImg,
+            stickerId: stickerId,
+            packageId: packageId,
+          })
+          if (preview) {
+            setTempSticker({
+              url: stickerImg,
+              stickerId: stickerId,
+              packageId: packageId,
+            })
+          }
+        })
     }
   }
 
@@ -82,7 +180,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
       border={border}
       shadow={shadow}
     >
-      {preview && tempSticker && (
+      {preview && tempSticker.url && (
         <PreviewWrapper>
           <FiX
             size={25}
@@ -94,10 +192,10 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
               cursor: 'pointer',
             }}
             onClick={() => {
-              setTempSticker('')
+              setTempSticker({ url: '', stickerId: '', packageId: '' })
             }}
           />
-          <ChatSticker src={tempSticker} />
+          <ChatSticker src={tempSticker.url} />
         </PreviewWrapper>
       )}
       <SearchForm>
@@ -128,10 +226,6 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
                 : '#d5d5d5'
             }
           />
-          {/* <div>
-            <span>POWERED BY</span>
-            <Icon type="LOGO" />
-          </div> */}
         </InputHolder>
       </SearchForm>
       {!keyword ? (
@@ -207,6 +301,8 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
             preview={preview}
             stickerClick={info => stickerClick(info)}
             storeClick={click => storeClick(click)}
+            useAuth={true}
+            auth={auth}
           />
         </div>
       ) : !isLoading ? (
@@ -224,13 +320,17 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
                 src={`${sticker.stickerImg}?d=100x100`}
                 key={index}
                 onClick={() => {
-                  stickerClick({
-                    url: sticker.stickerImg,
-                    stickerId: sticker.stickerId,
-                    packageId: sticker.packageId,
-                  })
-                  clickSticker(sticker.stickerId)
-                  setTempSticker(sticker.stickerImg)
+                  // stickerClick({
+                  //   url: sticker.stickerImg,
+                  //   stickerId: sticker.stickerId,
+                  //   packageId: sticker.packageId,
+                  // })
+                  clickSticker(
+                    sticker.stickerId,
+                    sticker.stickerImg,
+                    sticker.packageId
+                  )
+                  // setTempSticker(sticker.stickerImg)
                 }}
                 size={size}
               />
@@ -307,7 +407,6 @@ const SearchWrapper = styled.div`
   align-items: center;
   justify-content: space-around;
   position: relative;
-  /* padding: 10px 0; */
   padding-top: 10px;
   box-sizing: border-box;
   box-shadow: ${props =>

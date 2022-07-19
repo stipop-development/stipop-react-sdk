@@ -14,6 +14,8 @@ interface SearchProps {
     preview?: boolean;
     loadingColor?: string;
     shadow?: string;
+    useAuth?: boolean;
+    auth?: Auth$3;
 }
 interface Params$3 {
     apikey: string;
@@ -49,6 +51,13 @@ interface Input$1 {
     height?: number;
     focus?: string;
     search?: string;
+}
+interface Auth$3 {
+    appId: string;
+    clientId: string;
+    clientSecret: string;
+    refreshToken: string;
+    expiryTime: number;
 }
 
 declare const SearchComponent: React.FC<SearchProps>;
@@ -87,6 +96,8 @@ interface StoreProps$1 {
     preview?: boolean;
     loadingColor?: string;
     shadow?: string;
+    useAuth?: boolean;
+    auth?: Auth$2;
 }
 interface Params$2 {
     apikey: string;
@@ -117,6 +128,13 @@ interface Menu$1 {
     arrowColor?: string;
     imgSize?: number;
 }
+interface Auth$2 {
+    appId: string;
+    clientId: string;
+    clientSecret: string;
+    refreshToken: string;
+    expiryTime: number;
+}
 
 declare const PickerComponent: React.FC<StoreProps$1>;
 
@@ -129,6 +147,8 @@ interface StoreProps {
     size?: Size$1;
     border?: Border$1;
     shadow?: string;
+    useAuth?: boolean;
+    auth?: Auth$1;
 }
 interface DownloadParams {
     isPurchase: string;
@@ -178,6 +198,13 @@ interface Radius$1 {
     leftBottom?: number;
     all?: number;
 }
+interface Auth$1 {
+    appId: string;
+    clientId: string;
+    clientSecret: string;
+    refreshToken: string;
+    expiryTime: number;
+}
 
 declare const StoreComponent: React.FC<StoreProps>;
 
@@ -196,6 +223,8 @@ interface UnifiedProps {
     stickerClick?: Function;
     storeClick?: Function;
     shadow?: string;
+    useAuth?: boolean;
+    auth?: Auth;
 }
 interface Params {
     apikey: string;
@@ -239,6 +268,13 @@ interface Menu {
     listCnt?: number;
     arrowColor?: string;
     imgSize?: number;
+}
+interface Auth {
+    appId: string;
+    clientId: string;
+    clientSecret: string;
+    refreshToken: string;
+    expiryTime: number;
 }
 
 declare const UnifiedComponent: React.FC<UnifiedProps>;

@@ -6,6 +6,7 @@ import { StoreProps } from './index.types'
 
 import Icon from '../Icon/index'
 import LoadingSpinner from '../LoadingSpinner'
+import axios from 'axios'
 
 const StoreComponent: React.FC<StoreProps> = ({
   params,
@@ -16,6 +17,8 @@ const StoreComponent: React.FC<StoreProps> = ({
   size,
   border,
   shadow,
+  useAuth,
+  auth,
 }) => {
   const [packages, setPackages] = useState([])
   const [detail, setDetail] = useState(false)
@@ -29,62 +32,219 @@ const StoreComponent: React.FC<StoreProps> = ({
   const [endPage, setEndPage] = useState(1)
 
   const [scrolling, setScrolling] = useState(0)
+  const [accessToken, setAccessToken] = useState('')
 
   const client = new (Stipop as any)(params.apikey, 'v1')
   const packInfo = new Array()
 
+  const getAccessToken = () => {
+    axios
+      .post('https://sandbox.stipop.com/v1/access', {
+        ...auth,
+        userId: params.userId,
+      })
+      .then(({ data }) => {
+        setAccessToken(data.body.accessToken)
+      })
+  }
+
+  useEffect(() => {
+    if (useAuth) {
+      if (!accessToken) {
+        getAccessToken()
+      }
+    }
+  }, [])
+
   useEffect(() => {
     setIsLoading(true)
-    const trendingParams = {
-      userId: params.userId,
-      lang: params.lang,
-      countryCode: params.countryCode,
-      animated: params.animated,
-      pageNumber: params.pageNumber,
-      limit: params.limit ? params.limit : 20,
-    }
+    if (useAuth && accessToken) {
+      axios
+        .get(`https://sandbox.stipop.com/v1/package`, {
+          params: {
+            userId: params.userId,
+            lang: params.lang,
+            countryCode: params.countryCode,
+            animated: params.animated,
+            pageNumber: params.pageNumber,
+            limit: params.limit ? params.limit : 20,
+            platform: 'react-sdk',
+          },
+          headers: {
+            apikey: params.apikey,
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then(({ data }) => {
+          const PackageIds = data.body.packageList.map(pack => pack.packageId)
+          PackageIds.filter((item, index) => PackageIds.indexOf(item) === index)
 
-    const data = client.getPack(trendingParams)
-
-    data.then(({ body }) => {
-      const PackageIds = body.packageList.map(pack => pack.packageId)
-      PackageIds.filter((item, index) => PackageIds.indexOf(item) === index)
-
-      // body.packageList.map(pack => {
-      PackageIds.map(pack => {
-        const packageParams = {
-          userId: params.userId,
-          packId: pack,
-        }
-
-        const packageData = client.getPackInfo(packageParams)
-        packageData.then(({ body }) => {
-          packInfo.push(body.package)
-          if (packages.length === 0) {
-            setPackages(packages.concat(packInfo))
+          // body.packageList.map(pack => {
+          PackageIds.map(pack => {
+            axios
+              .get(`https://sandbox.stipop.com/v1/package/${pack}`, {
+                params: {
+                  userId: params.userId,
+                },
+                headers: {
+                  apikey: params.apikey,
+                  Authorization: `Bearer ${accessToken}`,
+                  platform: 'react-sdk',
+                  sdk_version: 'test-version',
+                },
+              })
+              .then(({ data }) => {
+                packInfo.push(data.body.package)
+                if (packages.length === 0) {
+                  setPackages(packages.concat(packInfo))
+                }
+              })
+              .catch(() => {
+                getAccessToken()
+              })
+          })
+          setIsLoading(false)
+        })
+        .catch(() => {
+          getAccessToken()
+        })
+      axios
+        .get(
+          `https://sandbox.stipop.com/v1/mysticker/hide/${encodeURIComponent(
+            params.userId
+          )}`,
+          {
+            params: { userId: params.userId, limit: 50 },
+            headers: {
+              apikey: params.apikey,
+              Authorization: `Bearer ${accessToken}`,
+            },
           }
+        )
+        .then(({ data }) => {
+          setEndPage(
+            data.body && data.body.pageMap ? data.body.pageMap.endPage : 1
+          )
+        })
+        .catch(() => {
+          getAccessToken()
+        })
+    } else if (!useAuth) {
+      const trendingParams = {
+        userId: params.userId,
+        lang: params.lang,
+        countryCode: params.countryCode,
+        animated: params.animated,
+        pageNumber: params.pageNumber,
+        limit: params.limit ? params.limit : 20,
+      }
+
+      const data = client.getPack(trendingParams)
+
+      data.then(({ body }) => {
+        const PackageIds = body.packageList.map(pack => pack.packageId)
+        PackageIds.filter((item, index) => PackageIds.indexOf(item) === index)
+
+        // body.packageList.map(pack => {
+        PackageIds.map(pack => {
+          const packageParams = {
+            userId: params.userId,
+            packId: pack,
+          }
+
+          const packageData = client.getPackInfo(packageParams)
+          packageData.then(({ body }) => {
+            packInfo.push(body.package)
+            if (packages.length === 0) {
+              setPackages(packages.concat(packInfo))
+            }
+          })
         })
       })
-    })
+      const hideParams = {
+        userId: encodeURIComponent(params.userId),
+        limit: 50,
+      }
 
-    const hideParams = {
-      userId: encodeURIComponent(params.userId),
-      limit: 50,
+      const hideData = client.myStickerHideList(hideParams)
+      hideData.then(({ body }) => {
+        setEndPage(body && body.pageMap ? body.pageMap.endPage : 1)
+      })
     }
-
-    const hideData = client.myStickerHideList(hideParams)
-    hideData.then(({ body }) => {
-      setEndPage(body && body.pageMap ? body.pageMap.endPage : 1)
-    })
-  }, [])
+  }, [accessToken])
 
   useEffect(() => {
     if (endPage > 1) {
       for (var i = 2; i <= endPage; i++) {
+        if (useAuth && accessToken) {
+          axios
+            .get(
+              `https://sandbox.stipop.com/v1/mysticker/hide/${encodeURIComponent(
+                params.userId
+              )}`,
+              {
+                params: { userId: params.userId, limit: 50, pageNumber: i },
+                headers: {
+                  apikey: params.apikey,
+                  Authorization: `Bearer ${accessToken}`,
+                },
+              }
+            )
+            .then(({ data }) => {
+              data.body && data.body.packageList
+                ? data.body.packageList.map(pack => {
+                    setHideList(hideList => hideList.concat(pack.packageId))
+                  })
+                : setHideList(hideList)
+            })
+            .catch(() => {
+              getAccessToken()
+            })
+        } else if (!useAuth) {
+          const hideParams = {
+            userId: encodeURIComponent(params.userId),
+            limit: 50,
+            pageNumber: i,
+          }
+          const hideData = client.myStickerHideList(hideParams)
+          hideData.then(({ body }) => {
+            body && body.packageList
+              ? body.packageList.map(pack => {
+                  setHideList(hideList => hideList.concat(pack.packageId))
+                })
+              : setHideList(hideList)
+          })
+        }
+      }
+    } else {
+      if (useAuth && accessToken) {
+        axios
+          .get(
+            `https://sandbox.stipop.com/v1/mysticker/hide/${encodeURIComponent(
+              params.userId
+            )}`,
+            {
+              params: { userId: params.userId, limit: 50 },
+              headers: {
+                apikey: params.apikey,
+                Authorization: `Bearer ${accessToken}`,
+              },
+            }
+          )
+          .then(({ data }) => {
+            data.body && data.body.packageList
+              ? data.body.packageList.map(pack => {
+                  setHideList(hideList => hideList.concat(pack.packageId))
+                })
+              : setHideList(hideList)
+          })
+          .catch(() => {
+            getAccessToken()
+          })
+      } else if (!useAuth) {
         const hideParams = {
-          userId: params.userId,
+          userId: encodeURIComponent(params.userId),
           limit: 50,
-          pageNumber: i,
         }
         const hideData = client.myStickerHideList(hideParams)
         hideData.then(({ body }) => {
@@ -95,108 +255,227 @@ const StoreComponent: React.FC<StoreProps> = ({
             : setHideList(hideList)
         })
       }
-    } else {
-      const hideParams = {
-        userId: encodeURIComponent(params.userId),
-        limit: 50,
-      }
-      const hideData = client.myStickerHideList(hideParams)
-      hideData.then(({ body }) => {
-        body && body.packageList
-          ? body.packageList.map(pack => {
-              setHideList(hideList => hideList.concat(pack.packageId))
-            })
-          : setHideList(hideList)
-      })
     }
   }, [endPage])
 
   useEffect(() => {
     if (packages && packages.length > 0) {
-      if (params.limit) {
-        if (packages.length >= params.limit) {
-          setIsLoading(false)
-        }
-      } else {
-        if (packages.length === 20) {
-          setIsLoading(false)
-        }
-      }
+      // if (params.limit) {
+      //   if (packages.length >= params.limit) {
+      //     setIsLoading(false)
+      //   }
+      // } else {
+      //   if (packages.length === 20) {
+      //     setIsLoading(false)
+      //   }
+      // }
+      setIsLoading(false)
     }
   }, [packages])
 
   const clickDownload = packageId => {
     setBtnLoading(packageId)
-    const dParams = {
-      userId: params.userId,
-      packageId: packageId,
-      isPurchase: downloadParams.isPurchase,
-      price: downloadParams.price,
-      lang: downloadParams.lang,
-      countryCode: downloadParams.countryCode,
-    }
-    const data = client.download(dParams)
-    data.then(() => {
-      setTimeout(() => {
-        setPackages(
-          packages.map(pack => {
-            if (pack.packageId === packageId) {
-              pack.isDownload = 'Y'
+    if (useAuth && accessToken) {
+      axios
+        .post(`https://sandbox.stipop.com/v1/download/${packageId}`, null, {
+          params: {
+            userId: params.userId,
+            packageId: packageId,
+            isPurchase: downloadParams.isPurchase,
+            price: downloadParams.price,
+            lang: downloadParams.lang,
+            countryCode: downloadParams.countryCode,
+          },
+          headers: {
+            apikey: params.apikey,
+            Authorization: `Bearer ${accessToken}`,
+            platform: 'react-sdk',
+            sdk_version: 'test-version',
+          },
+        })
+        .then(() => {
+          setTimeout(() => {
+            setPackages(
+              packages.map(pack => {
+                if (pack.packageId === packageId) {
+                  pack.isDownload = 'Y'
+                }
+                return pack
+              })
+            )
+            if (main) {
+              setMain({
+                packageId: main.packageId,
+                packageImg: main.packageImg,
+                packageName: main.packageName,
+                artistName: main.artistName,
+                isDownload: 'Y',
+              })
             }
-            return pack
-          })
-        )
-        if (main) {
-          setMain({
-            packageId: main.packageId,
-            packageImg: main.packageImg,
-            packageName: main.packageName,
-            artistName: main.artistName,
-            isDownload: 'Y',
-          })
-        }
-        setBtnLoading(0)
-      }, 500)
-    })
+            setBtnLoading(0)
+          }, 500)
+        })
+        .catch(() => {
+          getAccessToken()
+          setBtnLoading(0)
+        })
+    } else if (!useAuth) {
+      const dParams = {
+        userId: params.userId,
+        packageId: packageId,
+        isPurchase: downloadParams.isPurchase,
+        price: downloadParams.price,
+        lang: downloadParams.lang,
+        countryCode: downloadParams.countryCode,
+      }
+      const data = client.download(dParams)
+      data.then(() => {
+        setTimeout(() => {
+          setPackages(
+            packages.map(pack => {
+              if (pack.packageId === packageId) {
+                pack.isDownload = 'Y'
+              }
+              return pack
+            })
+          )
+          if (main) {
+            setMain({
+              packageId: main.packageId,
+              packageImg: main.packageImg,
+              packageName: main.packageName,
+              artistName: main.artistName,
+              isDownload: 'Y',
+            })
+          }
+          setBtnLoading(0)
+        }, 500)
+      })
+    }
   }
 
   const clickHide = packageId => {
     setBtnLoading(packageId)
-    const hideParams = {
-      userId: encodeURIComponent(params.userId),
-      packageId: packageId,
-    }
-
-    const data = client.myStickerHide(hideParams)
-    data.then(() => {
-      setTimeout(() => {
-        if (hideList.indexOf(packageId) < 0) {
-          setHideList(hideList.concat(packageId))
-        } else {
-          setHideList(hideList.filter(item => item !== packageId))
-          const myParams = {
-            userId: params.userId,
+    if (useAuth && accessToken) {
+      axios
+        .put(
+          `https://sandbox.stipop.com/v1/mysticker/hide/${encodeURIComponent(
+            params.userId
+          )}/${packageId}`,
+          null,
+          {
+            params: { userId: params.userId },
+            headers: {
+              apikey: params.apikey,
+              Authorization: `Bearer ${accessToken}`,
+              platform: 'react-sdk',
+              sdk_version: 'test-version',
+            },
           }
-          const myData = client.mySticker(myParams)
-          myData.then(({ body }) => {
-            const firstOrder =
-              body && body.packageList && body.packageList[0].order
-            const currentOrder = body.packageList.filter(
-              pack => pack.packageId === packageId
-            )[0].order
+        )
+        .then(() => {
+          setTimeout(() => {
+            if (hideList.indexOf(packageId) < 0) {
+              setHideList(hideList.concat(packageId))
+            } else {
+              setHideList(hideList.filter(item => item !== packageId))
+              axios
+                .get(
+                  `https://sandbox.stipop.com/v1/mysticker/${encodeURIComponent(
+                    params.userId
+                  )}`,
+                  {
+                    params: {
+                      userId: params.userId,
+                    },
+                    headers: {
+                      apikey: params.apikey,
+                      Authorization: `Bearer ${accessToken}`,
+                      platform: 'react-sdk',
+                      sdk_version: 'test-version',
+                    },
+                  }
+                )
+                .then(({ data }) => {
+                  const firstOrder =
+                    data.body &&
+                    data.body.packageList &&
+                    data.body.packageList[0].order
+                  const currentOrder = data.body.packageList.filter(
+                    pack => pack.packageId === packageId
+                  )[0].order
 
-            const orderParams = {
-              userId: encodeURIComponent(params.userId),
-              currentOrder: currentOrder,
-              newOrder: firstOrder + 1,
+                  axios
+                    .put(
+                      `https://sandbox.stipop.com/v1/mysticker/order/${encodeURIComponent(
+                        params.userId
+                      )}`,
+                      {
+                        currentOrder: currentOrder,
+                        newOrder: firstOrder + 1,
+                      },
+                      {
+                        params: {
+                          userId: params.userId,
+                        },
+                        headers: {
+                          apikey: params.apikey,
+                          Authorization: `Bearer ${accessToken}`,
+                          platform: 'react-sdk',
+                          sdk_version: 'test-version',
+                        },
+                      }
+                    )
+                    .then(() => {})
+                    .catch(() => {
+                      getAccessToken()
+                    })
+                })
             }
+            setBtnLoading(0)
+          }, 500)
+        })
+        .catch(() => {
+          getAccessToken()
+          setBtnLoading(0)
+        })
+    } else if (!useAuth) {
+      const hideParams = {
+        userId: encodeURIComponent(params.userId),
+        packageId: packageId,
+      }
 
-            client.myStickerOrder(orderParams)
-          })
-        }
-        setBtnLoading(0)
-      }, 500)
-    })
+      const data = client.myStickerHide(hideParams)
+      data.then(() => {
+        setTimeout(() => {
+          if (hideList.indexOf(packageId) < 0) {
+            setHideList(hideList.concat(packageId))
+          } else {
+            setHideList(hideList.filter(item => item !== packageId))
+            const myParams = {
+              userId: params.userId,
+            }
+            const myData = client.mySticker(myParams)
+            myData.then(({ body }) => {
+              const firstOrder =
+                body && body.packageList && body.packageList[0].order
+              const currentOrder = body.packageList.filter(
+                pack => pack.packageId === packageId
+              )[0].order
+
+              const orderParams = {
+                userId: encodeURIComponent(params.userId),
+                currentOrder: currentOrder,
+                newOrder: firstOrder + 1,
+              }
+
+              client.myStickerOrder(orderParams)
+            })
+          }
+          setBtnLoading(0)
+        }, 500)
+      })
+    }
   }
 
   useEffect(() => {

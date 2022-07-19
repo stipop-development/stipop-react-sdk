@@ -12,6 +12,8 @@ export interface StoreProps {
   preview?: boolean
   loadingColor?: string
   shadow?: string
+  useAuth?: boolean
+  auth?: Auth
 }
 
 interface Params {
@@ -47,3 +49,12 @@ interface Menu {
   arrowColor?: string
   imgSize?: number
 }
+
+interface Auth {
+  appId: string
+  clientId: string
+  clientSecret: string
+  refreshToken: string
+  expiryTime: number
+}
+
