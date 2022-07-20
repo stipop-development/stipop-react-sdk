@@ -5,7 +5,7 @@ import { S as Stipop, a as axios } from './index-62082b5d.js';
 import { F as FiX, a as FiSearch } from './index.esm-3315737a.js';
 
 var SearchComponent = function (_a) {
-    var params = _a.params, size = _a.size, backgroundColor = _a.backgroundColor, column = _a.column, border = _a.border, input = _a.input, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, preview = _a.preview, loadingColor = _a.loadingColor, shadow = _a.shadow, useAuth = _a.useAuth, authParams = _a.authParams, auth = _a.auth;
+    var params = _a.params, size = _a.size, backgroundColor = _a.backgroundColor, column = _a.column, border = _a.border, input = _a.input, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, preview = _a.preview, loadingColor = _a.loadingColor, shadow = _a.shadow, authParams = _a.authParams, auth = _a.auth;
     var _b = useState(params.default
         ? params.default
         : params.lang
@@ -32,7 +32,7 @@ var SearchComponent = function (_a) {
         });
     };
     useEffect(function () {
-        if (useAuth) {
+        if (authParams) {
             if (!accessToken) {
                 getAccessToken();
             }
@@ -41,7 +41,7 @@ var SearchComponent = function (_a) {
     useEffect(function () {
         setIsLoading(true);
         var searchParams = {
-            userId: useAuth
+            userId: authParams
                 ? params.userId
                 : auth
                     ? params.userId
@@ -53,7 +53,7 @@ var SearchComponent = function (_a) {
             limit: params.limit ? params.limit : 20,
         };
         if (keyword) {
-            if (useAuth && accessToken) {
+            if (authParams && accessToken) {
                 axios
                     .get("https://messenger.stipop.io/v1/search", {
                     params: searchParams,
@@ -73,7 +73,7 @@ var SearchComponent = function (_a) {
                     getAccessToken();
                 });
             }
-            else if (!useAuth && !auth) {
+            else if (!authParams && !auth) {
                 var data = client.getSearch(searchParams);
                 data.then(function (_a) {
                     var body = _a.body;
@@ -83,7 +83,7 @@ var SearchComponent = function (_a) {
                     }, 500);
                 });
             }
-            else if (!useAuth && auth) {
+            else if (!authParams && auth) {
                 axios
                     .get("https://messenger.stipop.io/v1/search", {
                     params: searchParams,
@@ -115,7 +115,7 @@ var SearchComponent = function (_a) {
         }
     }, [keyword, params.lang, params.pageNumber, params.limit, accessToken, auth]);
     var clickSticker = function (stickerId, stickerImg, packageId) {
-        if (useAuth && accessToken) {
+        if (authParams && accessToken) {
             axios
                 .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
                 params: {
@@ -145,7 +145,7 @@ var SearchComponent = function (_a) {
                 getAccessToken();
             });
         }
-        else if (!useAuth && !auth) {
+        else if (!authParams && !auth) {
             axios
                 .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
                 params: {
@@ -170,7 +170,7 @@ var SearchComponent = function (_a) {
                 }
             });
         }
-        else if (!useAuth && auth) {
+        else if (!authParams && auth) {
             axios
                 .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
                 params: {

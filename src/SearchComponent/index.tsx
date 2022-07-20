@@ -22,7 +22,6 @@ const SearchComponent: React.FC<SearchProps> = ({
   preview,
   loadingColor,
   shadow,
-  useAuth,
   authParams,
   auth,
 }) => {
@@ -59,7 +58,7 @@ const SearchComponent: React.FC<SearchProps> = ({
   }
 
   useEffect(() => {
-    if (useAuth) {
+    if (authParams) {
       if (!accessToken) {
         getAccessToken()
       }
@@ -69,7 +68,7 @@ const SearchComponent: React.FC<SearchProps> = ({
   useEffect(() => {
     setIsLoading(true)
     const searchParams = {
-      userId: useAuth
+      userId: authParams
         ? params.userId
         : auth
         ? params.userId
@@ -82,7 +81,7 @@ const SearchComponent: React.FC<SearchProps> = ({
     }
 
     if (keyword) {
-      if (useAuth && accessToken) {
+      if (authParams && accessToken) {
         axios
           .get(`https://messenger.stipop.io/v1/search`, {
             params: searchParams,
@@ -102,7 +101,7 @@ const SearchComponent: React.FC<SearchProps> = ({
           .catch(() => {
             getAccessToken()
           })
-      } else if (!useAuth && !auth) {
+      } else if (!authParams && !auth) {
         const data = client.getSearch(searchParams)
         data.then(({ body }) => {
           setStickerList(body && body.stickerList ? body.stickerList : [])
@@ -110,7 +109,7 @@ const SearchComponent: React.FC<SearchProps> = ({
             setIsLoading(false)
           }, 500)
         })
-      } else if (!useAuth && auth) {
+      } else if (!authParams && auth) {
         axios
           .get(`https://messenger.stipop.io/v1/search`, {
             params: searchParams,
@@ -145,7 +144,7 @@ const SearchComponent: React.FC<SearchProps> = ({
   }, [keyword, params.lang, params.pageNumber, params.limit, accessToken, auth])
 
   const clickSticker = (stickerId, stickerImg, packageId) => {
-    if (useAuth && accessToken) {
+    if (authParams && accessToken) {
       axios
         .post(
           `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
@@ -178,7 +177,7 @@ const SearchComponent: React.FC<SearchProps> = ({
         .catch(() => {
           getAccessToken()
         })
-    } else if (!useAuth && !auth) {
+    } else if (!authParams && !auth) {
       axios
         .post(
           `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
@@ -206,7 +205,7 @@ const SearchComponent: React.FC<SearchProps> = ({
             })
           }
         })
-    } else if (!useAuth && auth) {
+    } else if (!authParams && auth) {
       axios
         .post(
           `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,

@@ -25,7 +25,6 @@ const PickerComponent: React.FC<StoreProps> = ({
   preview,
   loadingColor,
   shadow,
-  useAuth,
   authParams,
   auth,
 }) => {
@@ -78,7 +77,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   }
 
   useEffect(() => {
-    if (useAuth) {
+    if (authParams) {
       if (!accessToken) {
         getAccessToken()
       }
@@ -88,7 +87,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   useEffect(() => {
     if (init) {
       setIsLoading(true)
-      if (useAuth && accessToken) {
+      if (authParams && accessToken) {
         axios
           .post(
             'https://messenger.stipop.io/v1/init',
@@ -116,8 +115,6 @@ const PickerComponent: React.FC<StoreProps> = ({
                   headers: {
                     apikey: params.apikey,
                     Authorization: `Bearer ${accessToken}`,
-                    platform: 'react-sdk',
-                    sdk_version: 'test-version',
                   },
                 }
               )
@@ -152,8 +149,6 @@ const PickerComponent: React.FC<StoreProps> = ({
                         headers: {
                           apikey: params.apikey,
                           Authorization: `Bearer ${accessToken}`,
-                          platform: 'react-sdk',
-                          sdk_version: 'test-version',
                         },
                       }
                     )
@@ -183,7 +178,7 @@ const PickerComponent: React.FC<StoreProps> = ({
             setShowPackage(0)
           })
       }
-    } else if (!useAuth && !auth) {
+    } else if (!authParams && !auth) {
       const initParams = {
         userId: params.userId,
         // userId: encodeURIComponent(params.userId),
@@ -230,7 +225,7 @@ const PickerComponent: React.FC<StoreProps> = ({
           }
         })
       })
-    } else if (!useAuth && auth) {
+    } else if (!authParams && auth) {
       axios
         .post(
           'https://messenger.stipop.io/v1/init',
@@ -258,8 +253,6 @@ const PickerComponent: React.FC<StoreProps> = ({
                 headers: {
                   apikey: params.apikey,
                   Authorization: `Bearer ${auth}`,
-                  platform: 'react-sdk',
-                  sdk_version: 'test-version',
                 },
               }
             )
@@ -291,8 +284,6 @@ const PickerComponent: React.FC<StoreProps> = ({
                       headers: {
                         apikey: params.apikey,
                         Authorization: `Bearer ${auth}`,
-                        platform: 'react-sdk',
-                        sdk_version: 'test-version',
                       },
                     }
                   )
@@ -326,7 +317,7 @@ const PickerComponent: React.FC<StoreProps> = ({
 
   useEffect(() => {
     setIsLoading(true)
-    if (useAuth && accessToken) {
+    if (authParams && accessToken) {
       axios
         .get(
           `https://messenger.stipop.io/v1/mysticker/${encodeURIComponent(
@@ -339,8 +330,6 @@ const PickerComponent: React.FC<StoreProps> = ({
             headers: {
               apikey: params.apikey,
               Authorization: `Bearer ${accessToken}`,
-              platform: 'react-sdk',
-              sdk_version: 'test-version',
             },
           }
         )
@@ -398,8 +387,6 @@ const PickerComponent: React.FC<StoreProps> = ({
                     headers: {
                       apikey: params.apikey,
                       Authorization: `Bearer ${accessToken}`,
-                      platform: 'react-sdk',
-                      sdk_version: 'test-version',
                     },
                   }
                 )
@@ -422,7 +409,7 @@ const PickerComponent: React.FC<StoreProps> = ({
         .catch(() => {
           getAccessToken()
         })
-    } else if (!useAuth && !auth) {
+    } else if (!authParams && !auth) {
       const pickerParams = {
         // userId: params.userId,
         userId: encodeURIComponent(params.userId),
@@ -460,7 +447,7 @@ const PickerComponent: React.FC<StoreProps> = ({
           setIsLoading(false)
         }
       })
-    } else if (!useAuth && auth) {
+    } else if (!authParams && auth) {
       axios
         .get(
           `https://messenger.stipop.io/v1/mysticker/${encodeURIComponent(
@@ -473,8 +460,6 @@ const PickerComponent: React.FC<StoreProps> = ({
             headers: {
               apikey: params.apikey,
               Authorization: `Bearer ${auth}`,
-              platform: 'react-sdk',
-              sdk_version: 'test-version',
             },
           }
         )
@@ -532,8 +517,6 @@ const PickerComponent: React.FC<StoreProps> = ({
                     headers: {
                       apikey: params.apikey,
                       Authorization: `Bearer ${auth}`,
-                      platform: 'react-sdk',
-                      sdk_version: 'test-version',
                     },
                   }
                 )
@@ -562,7 +545,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   const clickPackage = async packageId => {
     await setIsLoading(true)
     await setRecentView(false)
-    if (useAuth && accessToken) {
+    if (authParams && accessToken) {
       axios
         .get(`https://messenger.stipop.io/v1/package/${packageId}`, {
           params: {
@@ -571,8 +554,6 @@ const PickerComponent: React.FC<StoreProps> = ({
           headers: {
             apikey: params.apikey,
             Authorization: `Bearer ${accessToken}`,
-            platform: 'react-sdk',
-            sdk_version: 'test-version',
           },
         })
         .then(({ data }) => {
@@ -585,7 +566,7 @@ const PickerComponent: React.FC<StoreProps> = ({
         .catch(() => {
           getAccessToken()
         })
-    } else if (!useAuth && !auth) {
+    } else if (!authParams && !auth) {
       const packageParams = {
         userId: encodeURIComponent(params.userId),
         packId: packageId,
@@ -600,7 +581,7 @@ const PickerComponent: React.FC<StoreProps> = ({
             : []
         )
       })
-    } else if (!useAuth && auth) {
+    } else if (!authParams && auth) {
       axios
         .get(`https://messenger.stipop.io/v1/package/${packageId}`, {
           params: {
@@ -609,8 +590,6 @@ const PickerComponent: React.FC<StoreProps> = ({
           headers: {
             apikey: params.apikey,
             Authorization: `Bearer ${auth}`,
-            platform: 'react-sdk',
-            sdk_version: 'test-version',
           },
         })
         .then(({ data }) => {
@@ -627,7 +606,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   }
 
   const clickSticker = (stickerId, stickerImg, packageId) => {
-    if (useAuth && accessToken) {
+    if (authParams && accessToken) {
       axios
         .post(
           `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
@@ -640,8 +619,6 @@ const PickerComponent: React.FC<StoreProps> = ({
             headers: {
               apikey: params.apikey,
               Authorization: `Bearer ${accessToken}`,
-              platform: 'react-sdk',
-              sdk_version: 'test-version',
             },
           }
         )
@@ -662,7 +639,7 @@ const PickerComponent: React.FC<StoreProps> = ({
         .catch(() => {
           getAccessToken()
         })
-    } else if (!useAuth && !auth) {
+    } else if (!authParams && !auth) {
       axios
         .post(
           `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
@@ -691,7 +668,7 @@ const PickerComponent: React.FC<StoreProps> = ({
             })
           }
         })
-    } else if (!useAuth && auth) {
+    } else if (!authParams && auth) {
       axios
         .post(
           `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
@@ -704,8 +681,6 @@ const PickerComponent: React.FC<StoreProps> = ({
             headers: {
               apikey: params.apikey,
               Authorization: `Bearer ${auth}`,
-              platform: 'react-sdk',
-              sdk_version: 'test-version',
             },
           }
         )
@@ -732,7 +707,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   const clickTime = () => {
     setIsLoading(true)
     setRecentView(true)
-    if (useAuth && accessToken) {
+    if (authParams && accessToken) {
       axios
         .get(
           `https://messenger.stipop.io/v1/package/send/${encodeURIComponent(
@@ -759,7 +734,7 @@ const PickerComponent: React.FC<StoreProps> = ({
         .catch(() => {
           getAccessToken()
         })
-    } else if (!useAuth && !auth) {
+    } else if (!authParams && !auth) {
       const requestUrl = `https://messenger.stipop.io/v1/package/send/${encodeURIComponent(
         params.userId
       )}?limit=28`
@@ -778,7 +753,7 @@ const PickerComponent: React.FC<StoreProps> = ({
               : []
           )
         })
-    } else if (!useAuth && auth) {
+    } else if (!authParams && auth) {
       axios
         .get(
           `https://messenger.stipop.io/v1/package/send/${encodeURIComponent(

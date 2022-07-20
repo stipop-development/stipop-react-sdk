@@ -17,7 +17,6 @@ const StoreComponent: React.FC<StoreProps> = ({
   size,
   border,
   shadow,
-  useAuth,
   authParams,
   auth,
 }) => {
@@ -50,7 +49,7 @@ const StoreComponent: React.FC<StoreProps> = ({
   }
 
   useEffect(() => {
-    if (useAuth) {
+    if (authParams) {
       if (!accessToken) {
         getAccessToken()
       }
@@ -59,7 +58,7 @@ const StoreComponent: React.FC<StoreProps> = ({
 
   useEffect(() => {
     setIsLoading(true)
-    if (useAuth && accessToken) {
+    if (authParams && accessToken) {
       axios
         .get(`https://messenger.stipop.io/v1/package`, {
           params: {
@@ -69,7 +68,6 @@ const StoreComponent: React.FC<StoreProps> = ({
             animated: params.animated,
             pageNumber: params.pageNumber,
             limit: params.limit ? params.limit : 20,
-            platform: 'react-sdk',
           },
           headers: {
             apikey: params.apikey,
@@ -90,8 +88,6 @@ const StoreComponent: React.FC<StoreProps> = ({
                 headers: {
                   apikey: params.apikey,
                   Authorization: `Bearer ${accessToken}`,
-                  platform: 'react-sdk',
-                  sdk_version: 'test-version',
                 },
               })
               .then(({ data }) => {
@@ -130,7 +126,7 @@ const StoreComponent: React.FC<StoreProps> = ({
         .catch(() => {
           getAccessToken()
         })
-    } else if (!useAuth && !auth) {
+    } else if (!authParams && !auth) {
       const trendingParams = {
         userId: params.userId,
         lang: params.lang,
@@ -171,7 +167,7 @@ const StoreComponent: React.FC<StoreProps> = ({
       hideData.then(({ body }) => {
         setEndPage(body && body.pageMap ? body.pageMap.endPage : 1)
       })
-    } else if (!useAuth && auth) {
+    } else if (!authParams && auth) {
       axios
         .get(`https://messenger.stipop.io/v1/package`, {
           params: {
@@ -181,7 +177,6 @@ const StoreComponent: React.FC<StoreProps> = ({
             animated: params.animated,
             pageNumber: params.pageNumber,
             limit: params.limit ? params.limit : 20,
-            platform: 'react-sdk',
           },
           headers: {
             apikey: params.apikey,
@@ -202,8 +197,6 @@ const StoreComponent: React.FC<StoreProps> = ({
                 headers: {
                   apikey: params.apikey,
                   Authorization: `Bearer ${auth}`,
-                  platform: 'react-sdk',
-                  sdk_version: 'test-version',
                 },
               })
               .then(({ data }) => {
@@ -248,7 +241,7 @@ const StoreComponent: React.FC<StoreProps> = ({
   useEffect(() => {
     if (endPage > 1) {
       for (var i = 2; i <= endPage; i++) {
-        if (useAuth && accessToken) {
+        if (authParams && accessToken) {
           axios
             .get(
               `https://messenger.stipop.io/v1/mysticker/hide/${encodeURIComponent(
@@ -272,7 +265,7 @@ const StoreComponent: React.FC<StoreProps> = ({
             .catch(() => {
               getAccessToken()
             })
-        } else if (!useAuth && !auth) {
+        } else if (!authParams && !auth) {
           const hideParams = {
             userId: encodeURIComponent(params.userId),
             limit: 50,
@@ -286,7 +279,7 @@ const StoreComponent: React.FC<StoreProps> = ({
                 })
               : setHideList(hideList)
           })
-        } else if (!useAuth && auth) {
+        } else if (!authParams && auth) {
           axios
             .get(
               `https://messenger.stipop.io/v1/mysticker/hide/${encodeURIComponent(
@@ -313,7 +306,7 @@ const StoreComponent: React.FC<StoreProps> = ({
         }
       }
     } else {
-      if (useAuth && accessToken) {
+      if (authParams && accessToken) {
         axios
           .get(
             `https://messenger.stipop.io/v1/mysticker/hide/${encodeURIComponent(
@@ -337,7 +330,7 @@ const StoreComponent: React.FC<StoreProps> = ({
           .catch(() => {
             getAccessToken()
           })
-      } else if (!useAuth && !auth) {
+      } else if (!authParams && !auth) {
         const hideParams = {
           userId: encodeURIComponent(params.userId),
           limit: 50,
@@ -350,7 +343,7 @@ const StoreComponent: React.FC<StoreProps> = ({
               })
             : setHideList(hideList)
         })
-      } else if (!useAuth && auth) {
+      } else if (!authParams && auth) {
         axios
           .get(
             `https://messenger.stipop.io/v1/mysticker/hide/${encodeURIComponent(
@@ -395,7 +388,7 @@ const StoreComponent: React.FC<StoreProps> = ({
 
   const clickDownload = packageId => {
     setBtnLoading(packageId)
-    if (useAuth && accessToken) {
+    if (authParams && accessToken) {
       axios
         .post(`https://messenger.stipop.io/v1/download/${packageId}`, null, {
           params: {
@@ -409,8 +402,6 @@ const StoreComponent: React.FC<StoreProps> = ({
           headers: {
             apikey: params.apikey,
             Authorization: `Bearer ${accessToken}`,
-            platform: 'react-sdk',
-            sdk_version: 'test-version',
           },
         })
         .then(() => {
@@ -439,7 +430,7 @@ const StoreComponent: React.FC<StoreProps> = ({
           getAccessToken()
           setBtnLoading(0)
         })
-    } else if (!useAuth && !auth) {
+    } else if (!authParams && !auth) {
       const dParams = {
         userId: params.userId,
         packageId: packageId,
@@ -471,7 +462,7 @@ const StoreComponent: React.FC<StoreProps> = ({
           setBtnLoading(0)
         }, 500)
       })
-    } else if (!useAuth && auth) {
+    } else if (!authParams && auth) {
       axios
         .post(`https://messenger.stipop.io/v1/download/${packageId}`, null, {
           params: {
@@ -485,8 +476,6 @@ const StoreComponent: React.FC<StoreProps> = ({
           headers: {
             apikey: params.apikey,
             Authorization: `Bearer ${auth}`,
-            platform: 'react-sdk',
-            sdk_version: 'test-version',
           },
         })
         .then(() => {
@@ -520,7 +509,7 @@ const StoreComponent: React.FC<StoreProps> = ({
 
   const clickHide = packageId => {
     setBtnLoading(packageId)
-    if (useAuth && accessToken) {
+    if (authParams && accessToken) {
       axios
         .put(
           `https://messenger.stipop.io/v1/mysticker/hide/${encodeURIComponent(
@@ -532,8 +521,6 @@ const StoreComponent: React.FC<StoreProps> = ({
             headers: {
               apikey: params.apikey,
               Authorization: `Bearer ${accessToken}`,
-              platform: 'react-sdk',
-              sdk_version: 'test-version',
             },
           }
         )
@@ -555,8 +542,6 @@ const StoreComponent: React.FC<StoreProps> = ({
                     headers: {
                       apikey: params.apikey,
                       Authorization: `Bearer ${accessToken}`,
-                      platform: 'react-sdk',
-                      sdk_version: 'test-version',
                     },
                   }
                 )
@@ -585,8 +570,6 @@ const StoreComponent: React.FC<StoreProps> = ({
                         headers: {
                           apikey: params.apikey,
                           Authorization: `Bearer ${accessToken}`,
-                          platform: 'react-sdk',
-                          sdk_version: 'test-version',
                         },
                       }
                     )
@@ -603,7 +586,7 @@ const StoreComponent: React.FC<StoreProps> = ({
           getAccessToken()
           setBtnLoading(0)
         })
-    } else if (!useAuth && !auth) {
+    } else if (!authParams && !auth) {
       const hideParams = {
         userId: encodeURIComponent(params.userId),
         packageId: packageId,
@@ -639,7 +622,7 @@ const StoreComponent: React.FC<StoreProps> = ({
           setBtnLoading(0)
         }, 500)
       })
-    } else if (!useAuth && auth) {
+    } else if (!authParams && auth) {
       axios
         .put(
           `https://messenger.stipop.io/v1/mysticker/hide/${encodeURIComponent(
@@ -651,8 +634,6 @@ const StoreComponent: React.FC<StoreProps> = ({
             headers: {
               apikey: params.apikey,
               Authorization: `Bearer ${auth}`,
-              platform: 'react-sdk',
-              sdk_version: 'test-version',
             },
           }
         )
@@ -674,8 +655,6 @@ const StoreComponent: React.FC<StoreProps> = ({
                     headers: {
                       apikey: params.apikey,
                       Authorization: `Bearer ${auth}`,
-                      platform: 'react-sdk',
-                      sdk_version: 'test-version',
                     },
                   }
                 )
@@ -704,8 +683,6 @@ const StoreComponent: React.FC<StoreProps> = ({
                         headers: {
                           apikey: params.apikey,
                           Authorization: `Bearer ${auth}`,
-                          platform: 'react-sdk',
-                          sdk_version: 'test-version',
                         },
                       }
                     )

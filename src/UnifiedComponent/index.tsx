@@ -24,7 +24,6 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
   stickerClick,
   storeClick,
   shadow,
-  useAuth,
   authParams,
   auth,
 }) => {
@@ -53,7 +52,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
   }
 
   useEffect(() => {
-    if (useAuth) {
+    if (authParams) {
       if (!accessToken) {
         getAccessToken()
       }
@@ -63,7 +62,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
   useEffect(() => {
     setIsLoading(true)
     const searchParams = {
-      userId: useAuth
+      userId: authParams
         ? params.userId
         : auth
         ? params.userId
@@ -76,15 +75,13 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
     }
 
     if (keyword) {
-      if (useAuth && accessToken) {
+      if (authParams && accessToken) {
         axios
           .get(`https://messenger.stipop.io/v1/search`, {
             params: searchParams,
             headers: {
               apikey: params.apikey,
               Authorization: `Bearer ${accessToken}`,
-              platform: 'react-sdk',
-              sdk_version: 'test-version',
             },
           })
           .then(({ data }) => {
@@ -98,7 +95,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
           .catch(() => {
             getAccessToken()
           })
-      } else if (!useAuth && !auth) {
+      } else if (!authParams && !auth) {
         const data = client.getSearch(searchParams)
         data.then(({ body }) => {
           setStickerList(body && body.stickerList ? body.stickerList : [])
@@ -106,15 +103,13 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
             setIsLoading(false)
           }, 500)
         })
-      } else if (!useAuth && auth) {
+      } else if (!authParams && auth) {
         axios
           .get(`https://messenger.stipop.io/v1/search`, {
             params: searchParams,
             headers: {
               apikey: params.apikey,
               Authorization: `Bearer ${auth}`,
-              platform: 'react-sdk',
-              sdk_version: 'test-version',
             },
           })
           .then(({ data }) => {
@@ -135,7 +130,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
   }, [keyword, params.lang, params.pageNumber, params.limit, accessToken, auth])
 
   const clickSticker = (stickerId, stickerImg, packageId) => {
-    if (useAuth && accessToken) {
+    if (authParams && accessToken) {
       axios
         .post(
           `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
@@ -147,8 +142,6 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
             headers: {
               apikey: params.apikey,
               Authorization: `Bearer ${accessToken}`,
-              platform: 'react-sdk',
-              sdk_version: 'test-version',
             },
           }
         )
@@ -169,7 +162,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
         .catch(() => {
           getAccessToken()
         })
-    } else if (!useAuth && !auth) {
+    } else if (!authParams && !auth) {
       axios
         .post(
           `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
@@ -197,7 +190,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
             })
           }
         })
-    } else if (!useAuth && auth) {
+    } else if (!authParams && auth) {
       axios
         .post(
           `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
@@ -209,8 +202,6 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
             headers: {
               apikey: params.apikey,
               Authorization: `Bearer ${auth}`,
-              platform: 'react-sdk',
-              sdk_version: 'test-version',
             },
           }
         )
@@ -362,7 +353,6 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
             preview={preview}
             stickerClick={info => stickerClick(info)}
             storeClick={click => storeClick(click)}
-            useAuth={useAuth}
             authParams={authParams}
             auth={auth}
           />

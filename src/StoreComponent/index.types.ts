@@ -7,7 +7,6 @@ export interface StoreProps {
   size?: Size
   border?: Border
   shadow?: string
-  useAuth?: boolean
   authParams?: Auth
   auth?: string
 }

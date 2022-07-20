@@ -12,7 +12,6 @@ export interface StoreProps {
   preview?: boolean
   loadingColor?: string
   shadow?: string
-  useAuth?: boolean
   authParams?: Auth
   auth?: string
 }

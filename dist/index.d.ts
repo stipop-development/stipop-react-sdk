@@ -14,7 +14,6 @@ interface SearchProps {
     preview?: boolean;
     loadingColor?: string;
     shadow?: string;
-    useAuth?: boolean;
     authParams?: Auth$3;
     auth?: string;
 }
@@ -97,7 +96,6 @@ interface StoreProps$1 {
     preview?: boolean;
     loadingColor?: string;
     shadow?: string;
-    useAuth?: boolean;
     authParams?: Auth$2;
     auth?: string;
 }
@@ -149,7 +147,6 @@ interface StoreProps {
     size?: Size$1;
     border?: Border$1;
     shadow?: string;
-    useAuth?: boolean;
     authParams?: Auth$1;
     auth?: string;
 }
@@ -226,7 +223,6 @@ interface UnifiedProps {
     stickerClick?: Function;
     storeClick?: Function;
     shadow?: string;
-    useAuth?: boolean;
     authParams?: Auth;
     auth?: string;
 }

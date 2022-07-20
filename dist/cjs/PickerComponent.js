@@ -17215,7 +17215,7 @@ var lodash = {exports: {}};
 var _ = lodash.exports;
 
 var PickerComponent = function (_a) {
-    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, storeClick = _a.storeClick, preview = _a.preview, loadingColor = _a.loadingColor, shadow = _a.shadow, useAuth = _a.useAuth, authParams = _a.authParams, auth = _a.auth;
+    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, storeClick = _a.storeClick, preview = _a.preview, loadingColor = _a.loadingColor, shadow = _a.shadow, authParams = _a.authParams, auth = _a.auth;
     var _b = React.useState([]), myStickers = _b[0], setMyStickers = _b[1];
     var _c = React.useState([]), stickers = _c[0], setStickers = _c[1];
     var _d = React.useState(0), showPackage = _d[0], setShowPackage = _d[1];
@@ -17252,7 +17252,7 @@ var PickerComponent = function (_a) {
         });
     };
     React.useEffect(function () {
-        if (useAuth) {
+        if (authParams) {
             if (!accessToken) {
                 getAccessToken();
             }
@@ -17261,7 +17261,7 @@ var PickerComponent = function (_a) {
     React.useEffect(function () {
         if (init) {
             setIsLoading(true);
-            if (useAuth && accessToken) {
+            if (authParams && accessToken) {
                 index.axios
                     .post('https://messenger.stipop.io/v1/init', {
                     userId: params.userId,
@@ -17281,8 +17281,6 @@ var PickerComponent = function (_a) {
                         headers: {
                             apikey: params.apikey,
                             Authorization: "Bearer ".concat(accessToken),
-                            platform: 'react-sdk',
-                            sdk_version: 'test-version',
                         },
                     })
                         .then(function (_a) {
@@ -17302,8 +17300,6 @@ var PickerComponent = function (_a) {
                                 headers: {
                                     apikey: params.apikey,
                                     Authorization: "Bearer ".concat(accessToken),
-                                    platform: 'react-sdk',
-                                    sdk_version: 'test-version',
                                 },
                             })
                                 .then(function (_a) {
@@ -17332,7 +17328,7 @@ var PickerComponent = function (_a) {
                 });
             }
         }
-        else if (!useAuth && !auth) {
+        else if (!authParams && !auth) {
             var initParams = {
                 userId: params.userId,
                 // userId: encodeURIComponent(params.userId),
@@ -17369,7 +17365,7 @@ var PickerComponent = function (_a) {
                 });
             });
         }
-        else if (!useAuth && auth) {
+        else if (!authParams && auth) {
             index.axios
                 .post('https://messenger.stipop.io/v1/init', {
                 userId: params.userId,
@@ -17389,8 +17385,6 @@ var PickerComponent = function (_a) {
                     headers: {
                         apikey: params.apikey,
                         Authorization: "Bearer ".concat(auth),
-                        platform: 'react-sdk',
-                        sdk_version: 'test-version',
                     },
                 })
                     .then(function (_a) {
@@ -17411,8 +17405,6 @@ var PickerComponent = function (_a) {
                             headers: {
                                 apikey: params.apikey,
                                 Authorization: "Bearer ".concat(auth),
-                                platform: 'react-sdk',
-                                sdk_version: 'test-version',
                             },
                         })
                             .then(function (_a) {
@@ -17443,7 +17435,7 @@ var PickerComponent = function (_a) {
     }, [init]);
     React.useEffect(function () {
         setIsLoading(true);
-        if (useAuth && accessToken) {
+        if (authParams && accessToken) {
             index.axios
                 .get("https://messenger.stipop.io/v1/mysticker/".concat(encodeURIComponent(params.userId)), {
                 params: {
@@ -17452,8 +17444,6 @@ var PickerComponent = function (_a) {
                 headers: {
                     apikey: params.apikey,
                     Authorization: "Bearer ".concat(accessToken),
-                    platform: 'react-sdk',
-                    sdk_version: 'test-version',
                 },
             })
                 .then(function (_a) {
@@ -17497,8 +17487,6 @@ var PickerComponent = function (_a) {
                             headers: {
                                 apikey: params.apikey,
                                 Authorization: "Bearer ".concat(accessToken),
-                                platform: 'react-sdk',
-                                sdk_version: 'test-version',
                             },
                         })
                             .then(function (_a) {
@@ -17520,7 +17508,7 @@ var PickerComponent = function (_a) {
                 getAccessToken();
             });
         }
-        else if (!useAuth && !auth) {
+        else if (!authParams && !auth) {
             var pickerParams = {
                 // userId: params.userId,
                 userId: encodeURIComponent(params.userId),
@@ -17549,7 +17537,7 @@ var PickerComponent = function (_a) {
                 }
             });
         }
-        else if (!useAuth && auth) {
+        else if (!authParams && auth) {
             index.axios
                 .get("https://messenger.stipop.io/v1/mysticker/".concat(encodeURIComponent(params.userId)), {
                 params: {
@@ -17558,8 +17546,6 @@ var PickerComponent = function (_a) {
                 headers: {
                     apikey: params.apikey,
                     Authorization: "Bearer ".concat(auth),
-                    platform: 'react-sdk',
-                    sdk_version: 'test-version',
                 },
             })
                 .then(function (_a) {
@@ -17603,8 +17589,6 @@ var PickerComponent = function (_a) {
                             headers: {
                                 apikey: params.apikey,
                                 Authorization: "Bearer ".concat(auth),
-                                platform: 'react-sdk',
-                                sdk_version: 'test-version',
                             },
                         })
                             .then(function (_a) {
@@ -17637,7 +17621,7 @@ var PickerComponent = function (_a) {
                     return [4 /*yield*/, setRecentView(false)];
                 case 2:
                     _a.sent();
-                    if (!(useAuth && accessToken)) return [3 /*break*/, 3];
+                    if (!(authParams && accessToken)) return [3 /*break*/, 3];
                     index.axios
                         .get("https://messenger.stipop.io/v1/package/".concat(packageId), {
                         params: {
@@ -17646,8 +17630,6 @@ var PickerComponent = function (_a) {
                         headers: {
                             apikey: params.apikey,
                             Authorization: "Bearer ".concat(accessToken),
-                            platform: 'react-sdk',
-                            sdk_version: 'test-version',
                         },
                     })
                         .then(function (_a) {
@@ -17661,7 +17643,7 @@ var PickerComponent = function (_a) {
                     });
                     return [3 /*break*/, 6];
                 case 3:
-                    if (!(!useAuth && !auth)) return [3 /*break*/, 5];
+                    if (!(!authParams && !auth)) return [3 /*break*/, 5];
                     packageParams = {
                         userId: encodeURIComponent(params.userId),
                         packId: packageId,
@@ -17677,7 +17659,7 @@ var PickerComponent = function (_a) {
                     _a.sent();
                     return [3 /*break*/, 6];
                 case 5:
-                    if (!useAuth && auth) {
+                    if (!authParams && auth) {
                         index.axios
                             .get("https://messenger.stipop.io/v1/package/".concat(packageId), {
                             params: {
@@ -17686,8 +17668,6 @@ var PickerComponent = function (_a) {
                             headers: {
                                 apikey: params.apikey,
                                 Authorization: "Bearer ".concat(auth),
-                                platform: 'react-sdk',
-                                sdk_version: 'test-version',
                             },
                         })
                             .then(function (_a) {
@@ -17706,7 +17686,7 @@ var PickerComponent = function (_a) {
         });
     }); };
     var clickSticker = function (stickerId, stickerImg, packageId) {
-        if (useAuth && accessToken) {
+        if (authParams && accessToken) {
             index.axios
                 .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
                 params: {
@@ -17716,8 +17696,6 @@ var PickerComponent = function (_a) {
                 headers: {
                     apikey: params.apikey,
                     Authorization: "Bearer ".concat(accessToken),
-                    platform: 'react-sdk',
-                    sdk_version: 'test-version',
                 },
             })
                 .then(function () {
@@ -17738,7 +17716,7 @@ var PickerComponent = function (_a) {
                 getAccessToken();
             });
         }
-        else if (!useAuth && !auth) {
+        else if (!authParams && !auth) {
             index.axios
                 .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
                 params: {
@@ -17764,7 +17742,7 @@ var PickerComponent = function (_a) {
                 }
             });
         }
-        else if (!useAuth && auth) {
+        else if (!authParams && auth) {
             index.axios
                 .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
                 params: {
@@ -17774,8 +17752,6 @@ var PickerComponent = function (_a) {
                 headers: {
                     apikey: params.apikey,
                     Authorization: "Bearer ".concat(auth),
-                    platform: 'react-sdk',
-                    sdk_version: 'test-version',
                 },
             })
                 .then(function () {
@@ -17800,7 +17776,7 @@ var PickerComponent = function (_a) {
     var clickTime = function () {
         setIsLoading(true);
         setRecentView(true);
-        if (useAuth && accessToken) {
+        if (authParams && accessToken) {
             index.axios
                 .get("https://messenger.stipop.io/v1/package/send/".concat(encodeURIComponent(params.userId)), {
                 params: {
@@ -17822,7 +17798,7 @@ var PickerComponent = function (_a) {
                 getAccessToken();
             });
         }
-        else if (!useAuth && !auth) {
+        else if (!authParams && !auth) {
             var requestUrl = "https://messenger.stipop.io/v1/package/send/".concat(encodeURIComponent(params.userId), "?limit=28");
             index.axios
                 .get(requestUrl, {
@@ -17839,7 +17815,7 @@ var PickerComponent = function (_a) {
                     : []);
             });
         }
-        else if (!useAuth && auth) {
+        else if (!authParams && auth) {
             index.axios
                 .get("https://messenger.stipop.io/v1/package/send/".concat(encodeURIComponent(params.userId)), {
                 params: {
