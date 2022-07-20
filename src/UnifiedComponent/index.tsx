@@ -25,6 +25,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
   storeClick,
   shadow,
   useAuth,
+  authParams,
   auth,
 }) => {
   const [keyword, setKeyword] = useState('')
@@ -43,7 +44,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
   const getAccessToken = () => {
     axios
       .post('https://messenger.stipop.io/v1/access', {
-        ...auth,
+        ...authParams,
         userId: params.userId,
       })
       .then(({ data }) => {
@@ -62,7 +63,11 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
   useEffect(() => {
     setIsLoading(true)
     const searchParams = {
-      userId: useAuth ? params.userId : encodeURIComponent(params.userId),
+      userId: useAuth
+        ? params.userId
+        : auth
+        ? params.userId
+        : encodeURIComponent(params.userId),
       q: keyword,
       lang: params.lang ? params.lang : 'en',
       countryCode: params.countryCode ? params.countryCode : 'US',
@@ -93,7 +98,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
           .catch(() => {
             getAccessToken()
           })
-      } else if (!useAuth) {
+      } else if (!useAuth && !auth) {
         const data = client.getSearch(searchParams)
         data.then(({ body }) => {
           setStickerList(body && body.stickerList ? body.stickerList : [])
@@ -101,11 +106,33 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
             setIsLoading(false)
           }, 500)
         })
+      } else if (!useAuth && auth) {
+        axios
+          .get(`https://messenger.stipop.io/v1/search`, {
+            params: searchParams,
+            headers: {
+              apikey: params.apikey,
+              Authorization: `Bearer ${auth}`,
+              platform: 'react-sdk',
+              sdk_version: 'test-version',
+            },
+          })
+          .then(({ data }) => {
+            setStickerList(
+              data.body && data.body.stickerList ? data.body.stickerList : []
+            )
+            setTimeout(() => {
+              setIsLoading(false)
+            }, 500)
+          })
+          .catch(error => {
+            throw new Error(error.message)
+          })
       }
     } else {
       setKeyword('')
     }
-  }, [keyword, params.lang, params.pageNumber, params.limit, accessToken])
+  }, [keyword, params.lang, params.pageNumber, params.limit, accessToken, auth])
 
   const clickSticker = (stickerId, stickerImg, packageId) => {
     if (useAuth && accessToken) {
@@ -142,7 +169,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
         .catch(() => {
           getAccessToken()
         })
-    } else if (!useAuth) {
+    } else if (!useAuth && !auth) {
       axios
         .post(
           `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
@@ -169,6 +196,40 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
               packageId: packageId,
             })
           }
+        })
+    } else if (!useAuth && auth) {
+      axios
+        .post(
+          `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
+          null,
+          {
+            params: {
+              userId: params.userId,
+            },
+            headers: {
+              apikey: params.apikey,
+              Authorization: `Bearer ${auth}`,
+              platform: 'react-sdk',
+              sdk_version: 'test-version',
+            },
+          }
+        )
+        .then(() => {
+          stickerClick({
+            url: stickerImg,
+            stickerId: stickerId,
+            packageId: packageId,
+          })
+          if (preview) {
+            setTempSticker({
+              url: stickerImg,
+              stickerId: stickerId,
+              packageId: packageId,
+            })
+          }
+        })
+        .catch(error => {
+          throw new Error(error.message)
         })
     }
   }
@@ -301,7 +362,8 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
             preview={preview}
             stickerClick={info => stickerClick(info)}
             storeClick={click => storeClick(click)}
-            useAuth={true}
+            useAuth={useAuth}
+            authParams={authParams}
             auth={auth}
           />
         </div>

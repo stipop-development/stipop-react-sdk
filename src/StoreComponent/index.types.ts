@@ -8,7 +8,8 @@ export interface StoreProps {
   border?: Border
   shadow?: string
   useAuth?: boolean
-  auth?: Auth
+  authParams?: Auth
+  auth?: string
 }
 
 interface DownloadParams {

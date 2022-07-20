@@ -104,7 +104,8 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [loadingColor](#loadingcolor)       | String   |
 | [shadow](#shadow)                   | String   |
 | [useAuth](#useauth)                 | Boolean  |
-| [auth](#auth)                       | Object   |
+| [authParams](#authparams)           | Object   |
+| [auth](#auth)                       | String   |
 
 
 
@@ -520,7 +521,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 
 
-- #### auth
+- #### authParams
 
   ##### Parameters
 
@@ -545,13 +546,41 @@ You can get the api key by signing up and creating an application in Stipop Dash
           userId: 'userId',
         }}
         useAuth={true}
-        auth={{
+        authParams={{
           appId: 'appId',
           clientId: 'clientId',
           clientSecret: 'clientSecret',
           refreshToken: 'refreshToken',
           expiryTime: 86400,
         }}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
+
+- #### auth
+
+  | Type   | Required | Default             |
+  | ------ | -------- | ------------------- |
+  | string | optional | Stipop accessToken. |
+
+  ##### Example
+
+  ```react
+  import { SearchComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <SearchComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        auth='accessToken'
       />
     )
   }
@@ -634,7 +663,8 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [loadingColor](#loadingcolor-1)       | String   |
 | [shadow](#shadow-1)                   | String   |
 | [useAuth](#useauth-1)                 | Boolean  |
-| [auth](#auth-1)                       | Object   |
+| [authParmas](#authparpams-1)          | Object   |
+| [auth](#auth-1)                       | String   |
 
 
 
@@ -1069,7 +1099,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 
 
-- #### auth
+- #### authParams
 
   ##### Parameters
 
@@ -1094,13 +1124,41 @@ You can get the api key by signing up and creating an application in Stipop Dash
           userId: 'userId',
         }}
         useAuth={true}
-        auth={{
+        authParams={{
           appId: 'appId',
           clientId: 'clientId',
           clientSecret: 'clientSecret',
           refreshToken: 'refreshToken',
           expiryTime: 86400,
         }}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
+
+- #### auth
+
+  | Type   | Required | Default             |
+  | ------ | -------- | ------------------- |
+  | string | optional | Stipop accessToken. |
+
+  ##### Example
+
+  ```react
+  import { PickerComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <PickerComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        auth='accessToken'
       />
     )
   }
@@ -1183,7 +1241,8 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [onClose](#onclose)               | Function |
 | [shadow](#shadow-2)               | String   |
 | [useAuth](#useauth-2)             | Boolean  |
-| [auth](#auth-2)                   | Object   |
+| [authParams](#authparams-2)       | Object   |
+| [auth](#auth-2)                   | String   |
 
 
 
@@ -1533,7 +1592,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 
 
-- #### auth
+- #### authParams
 
   ##### Parameters
 
@@ -1561,13 +1620,44 @@ You can get the api key by signing up and creating an application in Stipop Dash
           isPurchase: 'N'
         }}
         useAuth={true}
-        auth={{
+        authParams={{
           appId: 'appId',
           clientId: 'clientId',
           clientSecret: 'clientSecret',
           refreshToken: 'refreshToken',
           expiryTime: 86400,
         }}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
+
+- #### auth
+
+  | Type   | Required | Default             |
+  | ------ | -------- | ------------------- |
+  | string | optional | Stipop accessToken. |
+
+  ##### Example
+
+  ```react
+  import { StoreComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <StoreComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        downloadParmas={{
+          isPurchase: 'N'
+        }}
+        auth='accessToken'
       />
     )
   }
@@ -1651,7 +1741,8 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [loadingColor](#loadingcolor-2)       | String   |
 | [shadow](#shadow-3)                   | String   |
 | [useAuth](#useauth-3)                 | Boolean  |
-| [auth](#auth-3)                       | Object   |
+| [authParams](#authparams-3)           | Object   |
+| [auth](#auth-3)                       | String   |
 
 - #### params
 
@@ -2141,7 +2232,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 
 
-- #### auth
+- #### authParams
 
   ##### Parameters
 
@@ -2166,7 +2257,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
           userId: 'userId',
         }}
         useAuth={true}
-        auth={{
+        authParams={{
           appId: 'appId',
           clientId: 'clientId',
           clientSecret: 'clientSecret',
@@ -2181,3 +2272,29 @@ You can get the api key by signing up and creating an application in Stipop Dash
   ```
 
   
+
+- #### auth
+
+  | Type   | Required | Default             |
+  | ------ | -------- | ------------------- |
+  | string | optional | Stipop accessToken. |
+
+  ##### Example
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        auth='accessToken'
+      />
+    )
+  }
+  
+  export default App
+  ```

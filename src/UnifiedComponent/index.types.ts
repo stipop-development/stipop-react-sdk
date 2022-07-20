@@ -14,7 +14,8 @@ export interface UnifiedProps {
   storeClick?: Function
   shadow?: string
   useAuth?: boolean
-  auth?: Auth
+  authParams?: Auth
+  auth?: string
 }
 
 interface Params {

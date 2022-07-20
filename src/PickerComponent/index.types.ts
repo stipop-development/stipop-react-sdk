@@ -13,7 +13,8 @@ export interface StoreProps {
   loadingColor?: string
   shadow?: string
   useAuth?: boolean
-  auth?: Auth
+  authParams?: Auth
+  auth?: string
 }
 
 interface Params {

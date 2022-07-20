@@ -23,6 +23,7 @@ const SearchComponent: React.FC<SearchProps> = ({
   loadingColor,
   shadow,
   useAuth,
+  authParams,
   auth,
 }) => {
   const [keyword, setKeyword] = useState(
@@ -49,7 +50,7 @@ const SearchComponent: React.FC<SearchProps> = ({
   const getAccessToken = () => {
     axios
       .post('https://messenger.stipop.io/v1/access', {
-        ...auth,
+        ...authParams,
         userId: params.userId,
       })
       .then(({ data }) => {
@@ -68,7 +69,11 @@ const SearchComponent: React.FC<SearchProps> = ({
   useEffect(() => {
     setIsLoading(true)
     const searchParams = {
-      userId: useAuth ? params.userId : encodeURIComponent(params.userId),
+      userId: useAuth
+        ? params.userId
+        : auth
+        ? params.userId
+        : encodeURIComponent(params.userId),
       q: keyword,
       lang: params.lang ? params.lang : 'en',
       countryCode: params.countryCode ? params.countryCode : 'US',
@@ -84,8 +89,6 @@ const SearchComponent: React.FC<SearchProps> = ({
             headers: {
               apikey: params.apikey,
               Authorization: `Bearer ${accessToken}`,
-              platform: 'react-sdk',
-              sdk_version: 'test-version',
             },
           })
           .then(({ data }) => {
@@ -99,7 +102,7 @@ const SearchComponent: React.FC<SearchProps> = ({
           .catch(() => {
             getAccessToken()
           })
-      } else if (!useAuth) {
+      } else if (!useAuth && !auth) {
         const data = client.getSearch(searchParams)
         data.then(({ body }) => {
           setStickerList(body && body.stickerList ? body.stickerList : [])
@@ -107,6 +110,26 @@ const SearchComponent: React.FC<SearchProps> = ({
             setIsLoading(false)
           }, 500)
         })
+      } else if (!useAuth && auth) {
+        axios
+          .get(`https://messenger.stipop.io/v1/search`, {
+            params: searchParams,
+            headers: {
+              apikey: params.apikey,
+              Authorization: `Bearer ${auth}`,
+            },
+          })
+          .then(({ data }) => {
+            setStickerList(
+              data && data.body.stickerList ? data.body.stickerList : []
+            )
+            setTimeout(() => {
+              setIsLoading(false)
+            }, 500)
+          })
+          .catch(error => {
+            throw new Error(error.message)
+          })
       }
     } else {
       setKeyword(
@@ -119,7 +142,7 @@ const SearchComponent: React.FC<SearchProps> = ({
           : 'hi'
       )
     }
-  }, [keyword, params.lang, params.pageNumber, params.limit, accessToken])
+  }, [keyword, params.lang, params.pageNumber, params.limit, accessToken, auth])
 
   const clickSticker = (stickerId, stickerImg, packageId) => {
     if (useAuth && accessToken) {
@@ -135,8 +158,6 @@ const SearchComponent: React.FC<SearchProps> = ({
             headers: {
               apikey: params.apikey,
               Authorization: `Bearer ${accessToken}`,
-              platform: 'react-sdk',
-              sdk_version: 'test-version',
             },
           }
         )
@@ -157,7 +178,7 @@ const SearchComponent: React.FC<SearchProps> = ({
         .catch(() => {
           getAccessToken()
         })
-    } else if (!useAuth) {
+    } else if (!useAuth && !auth) {
       axios
         .post(
           `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
@@ -184,6 +205,38 @@ const SearchComponent: React.FC<SearchProps> = ({
               packageId: packageId,
             })
           }
+        })
+    } else if (!useAuth && auth) {
+      axios
+        .post(
+          `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
+          null,
+          {
+            params: {
+              userId: params.userId,
+            },
+            headers: {
+              apikey: params.apikey,
+              Authorization: `Bearer ${auth}`,
+            },
+          }
+        )
+        .then(() => {
+          stickerClick({
+            url: stickerImg,
+            stickerId: stickerId,
+            packageId: packageId,
+          })
+          if (preview) {
+            setTempSticker({
+              url: stickerImg,
+              stickerId: stickerId,
+              packageId: packageId,
+            })
+          }
+        })
+        .catch(error => {
+          throw new Error(error.message)
         })
     }
     // }

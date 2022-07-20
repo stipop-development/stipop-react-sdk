@@ -15,7 +15,8 @@ interface SearchProps {
     loadingColor?: string;
     shadow?: string;
     useAuth?: boolean;
-    auth?: Auth$3;
+    authParams?: Auth$3;
+    auth?: string;
 }
 interface Params$3 {
     apikey: string;
@@ -97,7 +98,8 @@ interface StoreProps$1 {
     loadingColor?: string;
     shadow?: string;
     useAuth?: boolean;
-    auth?: Auth$2;
+    authParams?: Auth$2;
+    auth?: string;
 }
 interface Params$2 {
     apikey: string;
@@ -148,7 +150,8 @@ interface StoreProps {
     border?: Border$1;
     shadow?: string;
     useAuth?: boolean;
-    auth?: Auth$1;
+    authParams?: Auth$1;
+    auth?: string;
 }
 interface DownloadParams {
     isPurchase: string;
@@ -224,7 +227,8 @@ interface UnifiedProps {
     storeClick?: Function;
     shadow?: string;
     useAuth?: boolean;
-    auth?: Auth;
+    authParams?: Auth;
+    auth?: string;
 }
 interface Params {
     apikey: string;

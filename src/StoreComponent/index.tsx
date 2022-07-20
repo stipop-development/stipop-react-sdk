@@ -18,6 +18,7 @@ const StoreComponent: React.FC<StoreProps> = ({
   border,
   shadow,
   useAuth,
+  authParams,
   auth,
 }) => {
   const [packages, setPackages] = useState([])
@@ -40,7 +41,7 @@ const StoreComponent: React.FC<StoreProps> = ({
   const getAccessToken = () => {
     axios
       .post('https://messenger.stipop.io/v1/access', {
-        ...auth,
+        ...authParams,
         userId: params.userId,
       })
       .then(({ data }) => {
@@ -129,7 +130,7 @@ const StoreComponent: React.FC<StoreProps> = ({
         .catch(() => {
           getAccessToken()
         })
-    } else if (!useAuth) {
+    } else if (!useAuth && !auth) {
       const trendingParams = {
         userId: params.userId,
         lang: params.lang,
@@ -170,8 +171,79 @@ const StoreComponent: React.FC<StoreProps> = ({
       hideData.then(({ body }) => {
         setEndPage(body && body.pageMap ? body.pageMap.endPage : 1)
       })
+    } else if (!useAuth && auth) {
+      axios
+        .get(`https://messenger.stipop.io/v1/package`, {
+          params: {
+            userId: params.userId,
+            lang: params.lang,
+            countryCode: params.countryCode,
+            animated: params.animated,
+            pageNumber: params.pageNumber,
+            limit: params.limit ? params.limit : 20,
+            platform: 'react-sdk',
+          },
+          headers: {
+            apikey: params.apikey,
+            Authorization: `Bearer ${auth}`,
+          },
+        })
+        .then(({ data }) => {
+          const PackageIds = data.body.packageList.map(pack => pack.packageId)
+          PackageIds.filter((item, index) => PackageIds.indexOf(item) === index)
+
+          // body.packageList.map(pack => {
+          PackageIds.map(pack => {
+            axios
+              .get(`https://messenger.stipop.io/v1/package/${pack}`, {
+                params: {
+                  userId: params.userId,
+                },
+                headers: {
+                  apikey: params.apikey,
+                  Authorization: `Bearer ${auth}`,
+                  platform: 'react-sdk',
+                  sdk_version: 'test-version',
+                },
+              })
+              .then(({ data }) => {
+                packInfo.push(data.body.package)
+                if (packages.length === 0) {
+                  setPackages(packages.concat(packInfo))
+                }
+              })
+              .catch(error => {
+                throw new Error(error.message)
+              })
+          })
+          setIsLoading(false)
+        })
+        .catch(error => {
+          throw new Error(error.message)
+        })
+      axios
+        .get(
+          `https://messenger.stipop.io/v1/mysticker/hide/${encodeURIComponent(
+            params.userId
+          )}`,
+          {
+            params: { userId: params.userId, limit: 50 },
+            headers: {
+              apikey: params.apikey,
+              Authorization: `Bearer ${auth}`,
+            },
+          }
+        )
+        .then(({ data }) => {
+          setEndPage(
+            data.body && data.body.pageMap ? data.body.pageMap.endPage : 1
+          )
+        })
+        .catch(error => {
+          throw new Error(error.message)
+        })
     }
-  }, [accessToken])
+  }, [accessToken, auth])
 
   useEffect(() => {
     if (endPage > 1) {
@@ -200,7 +272,7 @@ const StoreComponent: React.FC<StoreProps> = ({
             .catch(() => {
               getAccessToken()
             })
-        } else if (!useAuth) {
+        } else if (!useAuth && !auth) {
           const hideParams = {
             userId: encodeURIComponent(params.userId),
             limit: 50,
@@ -214,6 +286,30 @@ const StoreComponent: React.FC<StoreProps> = ({
                 })
               : setHideList(hideList)
           })
+        } else if (!useAuth && auth) {
+          axios
+            .get(
+              `https://messenger.stipop.io/v1/mysticker/hide/${encodeURIComponent(
+                params.userId
+              )}`,
+              {
+                params: { userId: params.userId, limit: 50, pageNumber: i },
+                headers: {
+                  apikey: params.apikey,
+                  Authorization: `Bearer ${auth}`,
+                },
+              }
+            )
+            .then(({ data }) => {
+              data.body && data.body.packageList
+                ? data.body.packageList.map(pack => {
+                    setHideList(hideList => hideList.concat(pack.packageId))
+                  })
+                : setHideList(hideList)
+            })
+            .catch(error => {
+              throw new Error(error.message)
+            })
         }
       }
     } else {
@@ -241,7 +337,7 @@ const StoreComponent: React.FC<StoreProps> = ({
           .catch(() => {
             getAccessToken()
           })
-      } else if (!useAuth) {
+      } else if (!useAuth && !auth) {
         const hideParams = {
           userId: encodeURIComponent(params.userId),
           limit: 50,
@@ -254,6 +350,30 @@ const StoreComponent: React.FC<StoreProps> = ({
               })
             : setHideList(hideList)
         })
+      } else if (!useAuth && auth) {
+        axios
+          .get(
+            `https://messenger.stipop.io/v1/mysticker/hide/${encodeURIComponent(
+              params.userId
+            )}`,
+            {
+              params: { userId: params.userId, limit: 50 },
+              headers: {
+                apikey: params.apikey,
+                Authorization: `Bearer ${auth}`,
+              },
+            }
+          )
+          .then(({ data }) => {
+            data.body && data.body.packageList
+              ? data.body.packageList.map(pack => {
+                  setHideList(hideList => hideList.concat(pack.packageId))
+                })
+              : setHideList(hideList)
+          })
+          .catch(error => {
+            throw new Error(error.message)
+          })
       }
     }
   }, [endPage])
@@ -319,7 +439,7 @@ const StoreComponent: React.FC<StoreProps> = ({
           getAccessToken()
           setBtnLoading(0)
         })
-    } else if (!useAuth) {
+    } else if (!useAuth && !auth) {
       const dParams = {
         userId: params.userId,
         packageId: packageId,
@@ -351,6 +471,50 @@ const StoreComponent: React.FC<StoreProps> = ({
           setBtnLoading(0)
         }, 500)
       })
+    } else if (!useAuth && auth) {
+      axios
+        .post(`https://messenger.stipop.io/v1/download/${packageId}`, null, {
+          params: {
+            userId: params.userId,
+            packageId: packageId,
+            isPurchase: downloadParams.isPurchase,
+            price: downloadParams.price,
+            lang: downloadParams.lang,
+            countryCode: downloadParams.countryCode,
+          },
+          headers: {
+            apikey: params.apikey,
+            Authorization: `Bearer ${auth}`,
+            platform: 'react-sdk',
+            sdk_version: 'test-version',
+          },
+        })
+        .then(() => {
+          setTimeout(() => {
+            setPackages(
+              packages.map(pack => {
+                if (pack.packageId === packageId) {
+                  pack.isDownload = 'Y'
+                }
+                return pack
+              })
+            )
+            if (main) {
+              setMain({
+                packageId: main.packageId,
+                packageImg: main.packageImg,
+                packageName: main.packageName,
+                artistName: main.artistName,
+                isDownload: 'Y',
+              })
+            }
+            setBtnLoading(0)
+          }, 500)
+        })
+        .catch(error => {
+          setBtnLoading(0)
+          throw new Error(error.message)
+        })
     }
   }
 
@@ -439,7 +603,7 @@ const StoreComponent: React.FC<StoreProps> = ({
           getAccessToken()
           setBtnLoading(0)
         })
-    } else if (!useAuth) {
+    } else if (!useAuth && !auth) {
       const hideParams = {
         userId: encodeURIComponent(params.userId),
         packageId: packageId,
@@ -475,6 +639,89 @@ const StoreComponent: React.FC<StoreProps> = ({
           setBtnLoading(0)
         }, 500)
       })
+    } else if (!useAuth && auth) {
+      axios
+        .put(
+          `https://messenger.stipop.io/v1/mysticker/hide/${encodeURIComponent(
+            params.userId
+          )}/${packageId}`,
+          null,
+          {
+            params: { userId: params.userId },
+            headers: {
+              apikey: params.apikey,
+              Authorization: `Bearer ${auth}`,
+              platform: 'react-sdk',
+              sdk_version: 'test-version',
+            },
+          }
+        )
+        .then(() => {
+          setTimeout(() => {
+            if (hideList.indexOf(packageId) < 0) {
+              setHideList(hideList.concat(packageId))
+            } else {
+              setHideList(hideList.filter(item => item !== packageId))
+              axios
+                .get(
+                  `https://messenger.stipop.io/v1/mysticker/${encodeURIComponent(
+                    params.userId
+                  )}`,
+                  {
+                    params: {
+                      userId: params.userId,
+                    },
+                    headers: {
+                      apikey: params.apikey,
+                      Authorization: `Bearer ${auth}`,
+                      platform: 'react-sdk',
+                      sdk_version: 'test-version',
+                    },
+                  }
+                )
+                .then(({ data }) => {
+                  const firstOrder =
+                    data.body &&
+                    data.body.packageList &&
+                    data.body.packageList[0].order
+                  const currentOrder = data.body.packageList.filter(
+                    pack => pack.packageId === packageId
+                  )[0].order
+
+                  axios
+                    .put(
+                      `https://messenger.stipop.io/v1/mysticker/order/${encodeURIComponent(
+                        params.userId
+                      )}`,
+                      {
+                        currentOrder: currentOrder,
+                        newOrder: firstOrder + 1,
+                      },
+                      {
+                        params: {
+                          userId: params.userId,
+                        },
+                        headers: {
+                          apikey: params.apikey,
+                          Authorization: `Bearer ${auth}`,
+                          platform: 'react-sdk',
+                          sdk_version: 'test-version',
+                        },
+                      }
+                    )
+                    .then(() => {})
+                    .catch(error => {
+                      throw new Error(error.message)
+                    })
+                })
+            }
+            setBtnLoading(0)
+          }, 500)
+        })
+        .catch(error => {
+          setBtnLoading(0)
+          throw new Error(error.message)
+        })
     }
   }
 
