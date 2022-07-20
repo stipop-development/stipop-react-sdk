@@ -13,7 +13,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
 var UnifiedComponent = function (_a) {
-    var params = _a.params, size = _a.size, border = _a.border, input = _a.input, menu = _a.menu, backgroundColor = _a.backgroundColor, loadingColor = _a.loadingColor, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, preview = _a.preview, stickerClick = _a.stickerClick, storeClick = _a.storeClick, shadow = _a.shadow, useAuth = _a.useAuth, auth = _a.auth;
+    var params = _a.params, size = _a.size, border = _a.border, input = _a.input, menu = _a.menu, backgroundColor = _a.backgroundColor, loadingColor = _a.loadingColor, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, preview = _a.preview, stickerClick = _a.stickerClick, storeClick = _a.storeClick, shadow = _a.shadow, useAuth = _a.useAuth, authParams = _a.authParams, auth = _a.auth;
     var _b = React.useState(''), keyword = _b[0], setKeyword = _b[1];
     var _c = React.useState([]), stickerList = _c[0], setStickerList = _c[1];
     var _d = React.useState(false), isLoading = _d[0], setIsLoading = _d[1];
@@ -27,7 +27,7 @@ var UnifiedComponent = function (_a) {
     var client = new index.Stipop(params.apikey, 'v1');
     var getAccessToken = function () {
         index.axios
-            .post('https://sandbox.stipop.com/v1/access', tslib_es6.__assign(tslib_es6.__assign({}, auth), { userId: params.userId }))
+            .post('https://messenger.stipop.io/v1/access', tslib_es6.__assign(tslib_es6.__assign({}, authParams), { userId: params.userId }))
             .then(function (_a) {
             var data = _a.data;
             setAccessToken(data.body.accessToken);
@@ -43,7 +43,11 @@ var UnifiedComponent = function (_a) {
     React.useEffect(function () {
         setIsLoading(true);
         var searchParams = {
-            userId: useAuth ? params.userId : encodeURIComponent(params.userId),
+            userId: useAuth
+                ? params.userId
+                : auth
+                    ? params.userId
+                    : encodeURIComponent(params.userId),
             q: keyword,
             lang: params.lang ? params.lang : 'en',
             countryCode: params.countryCode ? params.countryCode : 'US',
@@ -53,7 +57,7 @@ var UnifiedComponent = function (_a) {
         if (keyword) {
             if (useAuth && accessToken) {
                 index.axios
-                    .get("https://sandbox.stipop.com/v1/search", {
+                    .get("https://messenger.stipop.io/v1/search", {
                     params: searchParams,
                     headers: {
                         apikey: params.apikey,
@@ -73,7 +77,7 @@ var UnifiedComponent = function (_a) {
                     getAccessToken();
                 });
             }
-            else if (!useAuth) {
+            else if (!useAuth && !auth) {
                 var data = client.getSearch(searchParams);
                 data.then(function (_a) {
                     var body = _a.body;
@@ -83,15 +87,37 @@ var UnifiedComponent = function (_a) {
                     }, 500);
                 });
             }
+            else if (!useAuth && auth) {
+                index.axios
+                    .get("https://messenger.stipop.io/v1/search", {
+                    params: searchParams,
+                    headers: {
+                        apikey: params.apikey,
+                        Authorization: "Bearer ".concat(auth),
+                        platform: 'react-sdk',
+                        sdk_version: 'test-version',
+                    },
+                })
+                    .then(function (_a) {
+                    var data = _a.data;
+                    setStickerList(data.body && data.body.stickerList ? data.body.stickerList : []);
+                    setTimeout(function () {
+                        setIsLoading(false);
+                    }, 500);
+                })
+                    .catch(function (error) {
+                    throw new Error(error.message);
+                });
+            }
         }
         else {
             setKeyword('');
         }
-    }, [keyword, params.lang, params.pageNumber, params.limit, accessToken]);
+    }, [keyword, params.lang, params.pageNumber, params.limit, accessToken, auth]);
     var clickSticker = function (stickerId, stickerImg, packageId) {
         if (useAuth && accessToken) {
             index.axios
-                .post("https://sandbox.stipop.com/v1/analytics/send/".concat(stickerId), null, {
+                .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
                 params: {
                     userId: params.userId,
                 },
@@ -120,7 +146,7 @@ var UnifiedComponent = function (_a) {
                 getAccessToken();
             });
         }
-        else if (!useAuth) {
+        else if (!useAuth && !auth) {
             index.axios
                 .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
                 params: {
@@ -143,6 +169,37 @@ var UnifiedComponent = function (_a) {
                         packageId: packageId,
                     });
                 }
+            });
+        }
+        else if (!useAuth && auth) {
+            index.axios
+                .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
+                params: {
+                    userId: params.userId,
+                },
+                headers: {
+                    apikey: params.apikey,
+                    Authorization: "Bearer ".concat(auth),
+                    platform: 'react-sdk',
+                    sdk_version: 'test-version',
+                },
+            })
+                .then(function () {
+                stickerClick({
+                    url: stickerImg,
+                    stickerId: stickerId,
+                    packageId: packageId,
+                });
+                if (preview) {
+                    setTempSticker({
+                        url: stickerImg,
+                        stickerId: stickerId,
+                        packageId: packageId,
+                    });
+                }
+            })
+                .catch(function (error) {
+                throw new Error(error.message);
             });
         }
     };
@@ -222,7 +279,7 @@ var UnifiedComponent = function (_a) {
                     listCnt: menu && menu.listCnt ? menu.listCnt : 6,
                     arrowColor: menu && menu.arrowColor ? menu.arrowColor : '#000',
                     imgSize: menu && menu.imgSize ? menu.imgSize : 25,
-                }, backgroundColor: backgroundColor ? backgroundColor : '#fff', column: column ? column : 4, scroll: scroll ? scroll : true, scrollHover: scrollHover ? scrollHover : '#6d7072', loadingColor: loadingColor ? loadingColor : '#ff4500', shadow: 'none', preview: preview, stickerClick: function (info) { return stickerClick(info); }, storeClick: function (click) { return storeClick(click); }, useAuth: true, auth: auth }))) : !isLoading ? (stickerList.length > 0 ? (React__default["default"].createElement(StickerWrapper, { column: column, scroll: scroll, scrollHover: scrollHover, border: border, backgroundColor: backgroundColor, size: size }, stickerList.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { src: "".concat(sticker.stickerImg, "?d=100x100"), key: index, onClick: function () {
+                }, backgroundColor: backgroundColor ? backgroundColor : '#fff', column: column ? column : 4, scroll: scroll ? scroll : true, scrollHover: scrollHover ? scrollHover : '#6d7072', loadingColor: loadingColor ? loadingColor : '#ff4500', shadow: 'none', preview: preview, stickerClick: function (info) { return stickerClick(info); }, storeClick: function (click) { return storeClick(click); }, useAuth: useAuth, authParams: authParams, auth: auth }))) : !isLoading ? (stickerList.length > 0 ? (React__default["default"].createElement(StickerWrapper, { column: column, scroll: scroll, scrollHover: scrollHover, border: border, backgroundColor: backgroundColor, size: size }, stickerList.map(function (sticker, index) { return (React__default["default"].createElement(StickerImg, { src: "".concat(sticker.stickerImg, "?d=100x100"), key: index, onClick: function () {
                 // stickerClick({
                 //   url: sticker.stickerImg,
                 //   stickerId: sticker.stickerId,

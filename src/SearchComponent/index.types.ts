@@ -12,7 +12,8 @@ export interface SearchProps {
   loadingColor?: string
   shadow?: string
   useAuth?: boolean
-  auth?: Auth
+  authParams?: Auth
+  auth?: string
 }
 
 interface Params {
@@ -61,4 +62,10 @@ interface Auth {
   clientSecret: string
   refreshToken: string
   expiryTime: number
+}
+
+interface Access {
+  apikey: string
+  userId: string
+  token: string
 }
