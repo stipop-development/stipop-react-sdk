@@ -13,7 +13,6 @@ export interface UnifiedProps {
   stickerClick?: Function
   storeClick?: Function
   shadow?: string
-  useAuth?: boolean
   authParams?: Auth
   auth?: string
 }

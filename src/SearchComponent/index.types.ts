@@ -11,7 +11,6 @@ export interface SearchProps {
   preview?: boolean
   loadingColor?: string
   shadow?: string
-  useAuth?: boolean
   authParams?: Auth
   auth?: string
 }
