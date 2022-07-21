@@ -103,7 +103,6 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [preview](#preview)                 | Boolean  |
 | [loadingColor](#loadingcolor)       | String   |
 | [shadow](#shadow)                   | String   |
-| [authParams](#authparams)           | Object   |
 | [auth](#auth)                       | String   |
 
 
@@ -492,46 +491,6 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 
 
-- #### authParams
-
-  ##### Parameters
-
-  | Name         | Type   | Required | Default                                                      |
-  | ------------ | ------ | -------- | ------------------------------------------------------------ |
-  | appId        | string | required | Stipop Application ID for your app.<br />Visit developer dashboard for new Application ID. |
-  | clientId     | string | required |                                                              |
-  | clientSecret | string | required |                                                              |
-  | refreshToken | string | required |                                                              |
-  | expiryTime   | number | required |                                                              |
-
-  ##### Example
-
-  ```react
-  import { SearchComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-      <SearchComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        authParams={{
-          appId: 'appId',
-          clientId: 'clientId',
-          clientSecret: 'clientSecret',
-          refreshToken: 'refreshToken',
-          expiryTime: 86400,
-        }}
-      />
-    )
-  }
-  
-  export default App
-  ```
-
-
-
 - #### auth
 
   | Type   | Required | Default             |
@@ -632,7 +591,6 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [preview](#preview-1)                 | Boolean  |
 | [loadingColor](#loadingcolor-1)       | String   |
 | [shadow](#shadow-1)                   | String   |
-| [authParmas](#authparpams-1)          | Object   |
 | [auth](#auth-1)                       | String   |
 
 
@@ -1040,46 +998,6 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 
 
-- #### authParams
-
-  ##### Parameters
-
-  | Name         | Type   | Required | Default                                                      |
-  | ------------ | ------ | -------- | ------------------------------------------------------------ |
-  | appId        | string | required | Stipop Application ID for your app.<br />Visit developer dashboard for new Application ID. |
-  | clientId     | string | required |                                                              |
-  | clientSecret | string | required |                                                              |
-  | refreshToken | string | required |                                                              |
-  | expiryTime   | number | required |                                                              |
-
-  ##### Example
-
-  ```react
-  import { PickerComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-      <PickerComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        authParams={{
-          appId: 'appId',
-          clientId: 'clientId',
-          clientSecret: 'clientSecret',
-          refreshToken: 'refreshToken',
-          expiryTime: 86400,
-        }}
-      />
-    )
-  }
-  
-  export default App
-  ```
-
-
-
 - #### auth
 
   | Type   | Required | Default             |
@@ -1180,7 +1098,6 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [scroll](#scroll-2)               | Boolean  |
 | [onClose](#onclose)               | Function |
 | [shadow](#shadow-2)               | String   |
-| [authParams](#authparams-2)       | Object   |
 | [auth](#auth-2)                   | String   |
 
 
@@ -1500,49 +1417,6 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 
 
-- #### authParams
-
-  ##### Parameters
-
-  | Name         | Type   | Required | Default                                                      |
-  | ------------ | ------ | -------- | ------------------------------------------------------------ |
-  | appId        | string | required | Stipop Application ID for your app.<br />Visit developer dashboard for new Application ID. |
-  | clientId     | string | required |                                                              |
-  | clientSecret | string | required |                                                              |
-  | refreshToken | string | required |                                                              |
-  | expiryTime   | number | required |                                                              |
-
-  ##### Example
-
-  ```react
-  import { StoreComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-      <StoreComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        downloadParams={{
-          isPurchase: 'N'
-        }}
-        authParams={{
-          appId: 'appId',
-          clientId: 'clientId',
-          clientSecret: 'clientSecret',
-          refreshToken: 'refreshToken',
-          expiryTime: 86400,
-        }}
-      />
-    )
-  }
-  
-  export default App
-  ```
-
-
-
 - #### auth
 
   | Type   | Required | Default             |
@@ -1647,7 +1521,6 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [preview](#preview-2)                 | Boolean  |
 | [loadingColor](#loadingcolor-2)       | String   |
 | [shadow](#shadow-3)                   | String   |
-| [authParams](#authparams-3)           | Object   |
 | [auth](#auth-3)                       | String   |
 
 - #### params
@@ -2109,46 +1982,6 @@ You can get the api key by signing up and creating an application in Stipop Dash
   ```
 
 
-
-- #### authParams
-
-  ##### Parameters
-
-  | Name         | Type   | Required | Default                                                      |
-  | ------------ | ------ | -------- | ------------------------------------------------------------ |
-  | appId        | string | required | Stipop Application ID for your app.<br />Visit developer dashboard for new Application ID. |
-  | clientId     | string | required |                                                              |
-  | clientSecret | string | required |                                                              |
-  | refreshToken | string | required |                                                              |
-  | expiryTime   | number | required |                                                              |
-
-  ##### Example
-
-  ```react
-  import { UnifiedComponent } from 'stipop-react-sdk'
-  
-  const App = () => {
-    return (
-      <UnifiedComponent 
-        params={{
-          apikey: 'apikey',
-          userId: 'userId',
-        }}
-        authParams={{
-          appId: 'appId',
-          clientId: 'clientId',
-          clientSecret: 'clientSecret',
-          refreshToken: 'refreshToken',
-          expiryTime: 86400,
-        }}
-      />
-    )
-  }
-  
-  export default App
-  ```
-
-  
 
 - #### auth
 
