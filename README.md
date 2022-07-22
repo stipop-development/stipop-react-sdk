@@ -493,6 +493,8 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 - #### auth
 
+  > If you need access token to use Service Authentication, please contact us through [tech-support@stipop.io](mailto: tech-support@stipop.io)
+
   | Type   | Required | Default             |
   | ------ | -------- | ------------------- |
   | string | optional | Stipop accessToken. |
@@ -1000,6 +1002,8 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 - #### auth
 
+  > If you need access token to use Service Authentication, please contact us through [tech-support@stipop.io](mailto: tech-support@stipop.io)
+
   | Type   | Required | Default             |
   | ------ | -------- | ------------------- |
   | string | optional | Stipop accessToken. |
@@ -1418,6 +1422,8 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 
 - #### auth
+
+  > If you need access token to use Service Authentication, please contact us through [tech-support@stipop.io](mailto: tech-support@stipop.io)
 
   | Type   | Required | Default             |
   | ------ | -------- | ------------------- |
@@ -1984,6 +1990,8 @@ You can get the api key by signing up and creating an application in Stipop Dash
 
 
 - #### auth
+
+  > If you need access token to use Service Authentication, please contact us through [tech-support@stipop.io](mailto: tech-support@stipop.io)
 
   | Type   | Required | Default             |
   | ------ | -------- | ------------------- |
