@@ -104,8 +104,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [loadingColor](#loadingcolor)       | String   |
 | [shadow](#shadow)                   | String   |
 | [auth](#auth)                       | String   |
-
-
+| [mainLanguage](#mainlanguage)       | String   |
 
 - #### params
 
@@ -519,7 +518,36 @@ You can get the api key by signing up and creating an application in Stipop Dash
   export default App
   ```
 
+
+
+
+- #### mainLanguage
+
+  | Type   | Required | Default |
+  | ------ | -------- | ------- |
+  | string | optional | en      |
+
+  ##### Example
+
+  ```react
+  import { SearchComponent } from 'stipop-react-sdk'
   
+  const App = () => {
+    return (
+      <SearchComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        mainLanguage={'en'}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
 
 
 ------
@@ -594,8 +622,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [loadingColor](#loadingcolor-1)       | String   |
 | [shadow](#shadow-1)                   | String   |
 | [auth](#auth-1)                       | String   |
-
-
+| [mainLanguage](#mainlanguage-1)       | String   |
 
 - #### params
 
@@ -1028,7 +1055,36 @@ You can get the api key by signing up and creating an application in Stipop Dash
   export default App
   ```
 
+
+
+
+- #### mainLanguage
+
+  | Type   | Required | Default |
+  | ------ | -------- | ------- |
+  | string | optional | en      |
+
+  ##### Example
+
+  ```react
+  import { PickerComponent } from 'stipop-react-sdk'
   
+  const App = () => {
+    return (
+      <PickerComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        mainLanguage={'en'}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
 
 -------
 
@@ -1103,8 +1159,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [onClose](#onclose)               | Function |
 | [shadow](#shadow-2)               | String   |
 | [auth](#auth-2)                   | String   |
-
-
+| [mainLangauge](#mainlanguage-2)   | String   |
 
 - #### params
 
@@ -1452,7 +1507,39 @@ You can get the api key by signing up and creating an application in Stipop Dash
   export default App
   ```
 
+
+
+
+- #### mainLanguage
+
+  | Type   | Required | Default |
+  | ------ | -------- | ------- |
+  | string | optional | en      |
+
+  ##### Example
+
+  ```react
+  import { StoreComponent } from 'stipop-react-sdk'
   
+  const App = () => {
+    return (
+      <StoreComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        downloadParmas={{
+          isPurchase: 'N'
+        }}
+        mainLanguage={'en'}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
 
 
 ------
@@ -1528,6 +1615,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [loadingColor](#loadingcolor-2)       | String   |
 | [shadow](#shadow-3)                   | String   |
 | [auth](#auth-3)                       | String   |
+| [mainLanguage](#mainlanguage-3)       | String   |
 
 - #### params
 
@@ -2016,3 +2104,32 @@ You can get the api key by signing up and creating an application in Stipop Dash
   
   export default App
   ```
+
+
+
+- #### mainLanguage
+
+  | Type   | Required | Default |
+  | ------ | -------- | ------- |
+  | string | optional | en      |
+
+  ##### Example
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        mainLanguage={'en'}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
