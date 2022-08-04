@@ -6,5 +6,5 @@ export { default as UnifiedComponent } from './UnifiedComponent.js';
 import './tslib.es6-32024edd.js';
 import 'react';
 import './index-1cdd6878.js';
-import './index-62082b5d.js';
+import './lang-2e47f32a.js';
 import './index.esm-3315737a.js';

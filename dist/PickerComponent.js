@@ -1,7 +1,7 @@
 import { _ as __makeTemplateObject, c as __awaiter, a as __assign, d as __generator } from './tslib.es6-32024edd.js';
 import React__default, { useState, useEffect } from 'react';
 import { s as styled, L as LoadingSpinner } from './index-1cdd6878.js';
-import { c as commonjsGlobal, S as Stipop, a as axios } from './index-62082b5d.js';
+import { c as commonjsGlobal, S as Stipop, a as axios, l as lang } from './lang-2e47f32a.js';
 import Icon from './Icon.js';
 import { F as FiX, b as FiChevronLeft, c as FiChevronRight } from './index.esm-3315737a.js';
 
@@ -17209,7 +17209,7 @@ var lodash = {exports: {}};
 var _ = lodash.exports;
 
 var PickerComponent = function (_a) {
-    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, storeClick = _a.storeClick, preview = _a.preview, loadingColor = _a.loadingColor, shadow = _a.shadow, authParams = _a.authParams, auth = _a.auth;
+    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, storeClick = _a.storeClick, preview = _a.preview, loadingColor = _a.loadingColor, shadow = _a.shadow, authParams = _a.authParams, auth = _a.auth, mainLanguage = _a.mainLanguage;
     var _b = useState([]), myStickers = _b[0], setMyStickers = _b[1];
     var _c = useState([]), stickers = _c[0], setStickers = _c[1];
     var _d = useState(0), showPackage = _d[0], setShowPackage = _d[1];
@@ -17927,14 +17927,9 @@ var PickerComponent = function (_a) {
                 clickSticker(sticker.stickerId, sticker.stickerImg, sticker.packageId);
                 // setTempSticker(sticker.stickerImg)
             } })); }))) : (React__default.createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, isLoading: recentView },
-            React__default.createElement("div", { style: {
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                } },
-                React__default.createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker", style: { width: '40%' } }))))));
+            React__default.createElement(NoSticker, null,
+                React__default.createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker", style: { width: '40%' } }),
+                React__default.createElement("span", { className: "no-sticker-text" }, mainLanguage ? lang[mainLanguage].noRecent : lang['en'].noRecent))))));
 };
 var PickerWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: ", ";\n  position: relative;\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: ", ";\n  position: relative;\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
@@ -18137,6 +18132,7 @@ var StickerImg = styled.img(templateObject_9 || (templateObject_9 = __makeTempla
 });
 var PreviewWrapper = styled.div(templateObject_10 || (templateObject_10 = __makeTemplateObject(["\n  width: 60%;\n  height: 150px;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 10px;\n  margin-left: 40%;\n  margin-bottom: 5px;\n  padding: 0 24px;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  bottom: 100%;\n"], ["\n  width: 60%;\n  height: 150px;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 10px;\n  margin-left: 40%;\n  margin-bottom: 5px;\n  padding: 0 24px;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  bottom: 100%;\n"])));
 var ChatSticker = styled.img(templateObject_11 || (templateObject_11 = __makeTemplateObject(["\n  width: 100px;\n  height: 100px;\n  margin-bottom: 5px;\n"], ["\n  width: 100px;\n  height: 100px;\n  margin-bottom: 5px;\n"])));
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10, templateObject_11;
+var NoSticker = styled.div(templateObject_12 || (templateObject_12 = __makeTemplateObject(["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"], ["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"])));
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10, templateObject_11, templateObject_12;
 
 export { PickerComponent as default };

@@ -3,7 +3,7 @@
 var tslib_es6 = require('./tslib.es6-fb247e4a.js');
 var React = require('react');
 var LoadingSpinner = require('./index-48c7d746.js');
-var index = require('./index-3704bd89.js');
+var lang = require('./lang-607c928f.js');
 var Icon = require('./Icon.js');
 var index_esm = require('./index.esm-dd03e45b.js');
 
@@ -444,7 +444,7 @@ var lodash = {exports: {}};
       freeParseInt = parseInt;
 
   /** Detect free variable `global` from Node.js. */
-  var freeGlobal = typeof index.commonjsGlobal == 'object' && index.commonjsGlobal && index.commonjsGlobal.Object === Object && index.commonjsGlobal;
+  var freeGlobal = typeof lang.commonjsGlobal == 'object' && lang.commonjsGlobal && lang.commonjsGlobal.Object === Object && lang.commonjsGlobal;
 
   /** Detect free variable `self`. */
   var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
@@ -17209,13 +17209,13 @@ var lodash = {exports: {}};
     // Export to the global object.
     root._ = _;
   }
-}.call(index.commonjsGlobal));
+}.call(lang.commonjsGlobal));
 }(lodash, lodash.exports));
 
 var _ = lodash.exports;
 
 var PickerComponent = function (_a) {
-    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, storeClick = _a.storeClick, preview = _a.preview, loadingColor = _a.loadingColor, shadow = _a.shadow, authParams = _a.authParams, auth = _a.auth;
+    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, storeClick = _a.storeClick, preview = _a.preview, loadingColor = _a.loadingColor, shadow = _a.shadow, authParams = _a.authParams, auth = _a.auth, mainLanguage = _a.mainLanguage;
     var _b = React.useState([]), myStickers = _b[0], setMyStickers = _b[1];
     var _c = React.useState([]), stickers = _c[0], setStickers = _c[1];
     var _d = React.useState(0), showPackage = _d[0], setShowPackage = _d[1];
@@ -17233,7 +17233,7 @@ var PickerComponent = function (_a) {
     }), tempSticker = _l[0], setTempSticker = _l[1];
     var _m = React.useState(false), init = _m[0], setInit = _m[1];
     var _o = React.useState(''), accessToken = _o[0], setAccessToken = _o[1];
-    var client = new index.Stipop(params.apikey, 'v1');
+    var client = new lang.Stipop(params.apikey, 'v1');
     var dummies = [];
     _.times(menu && menu.listCnt ? menu.listCnt - (2 + itemCnt) : 6 - (2 + itemCnt), function (n) { return dummies.push({ index: n.toString(36) }); });
     var itemWidth = size && size.width
@@ -17244,7 +17244,7 @@ var PickerComponent = function (_a) {
             ? 360 / (menu.listCnt + 2)
             : 45;
     var getAccessToken = function () {
-        index.axios
+        lang.axios
             .post('https://messenger.stipop.io/v1/access', tslib_es6.__assign(tslib_es6.__assign({}, authParams), { userId: params.userId }))
             .then(function (_a) {
             var data = _a.data;
@@ -17262,7 +17262,7 @@ var PickerComponent = function (_a) {
         if (init) {
             setIsLoading(true);
             if (authParams && accessToken) {
-                index.axios
+                lang.axios
                     .post('https://messenger.stipop.io/v1/init', {
                     userId: params.userId,
                     lang: 'en',
@@ -17273,7 +17273,7 @@ var PickerComponent = function (_a) {
                     },
                 })
                     .then(function () {
-                    index.axios
+                    lang.axios
                         .get("https://messenger.stipop.io/v1/mysticker/".concat(encodeURIComponent(params.userId)), {
                         params: {
                             userId: params.userId,
@@ -17292,7 +17292,7 @@ var PickerComponent = function (_a) {
                         }
                         if (data.body.packageList.filter(function (pack) { return pack.packageId !== null; })
                             .length > 0) {
-                            index.axios
+                            lang.axios
                                 .get("https://messenger.stipop.io/v1/package/".concat(data.body.packageList[0].packageId), {
                                 params: {
                                     userId: params.userId,
@@ -17366,7 +17366,7 @@ var PickerComponent = function (_a) {
             });
         }
         else if (!authParams && auth) {
-            index.axios
+            lang.axios
                 .post('https://messenger.stipop.io/v1/init', {
                 userId: params.userId,
                 lang: 'en',
@@ -17377,7 +17377,7 @@ var PickerComponent = function (_a) {
                 },
             })
                 .then(function () {
-                index.axios
+                lang.axios
                     .get("https://messenger.stipop.io/v1/mysticker/".concat(encodeURIComponent(params.userId)), {
                     params: {
                         userId: params.userId,
@@ -17397,7 +17397,7 @@ var PickerComponent = function (_a) {
                     }
                     if (data.body.packageList.filter(function (pack) { return pack.packageId !== null; })
                         .length > 0) {
-                        index.axios
+                        lang.axios
                             .get("https://messenger.stipop.io/v1/package/".concat(data.body.packageList[0].packageId), {
                             params: {
                                 userId: params.userId,
@@ -17436,7 +17436,7 @@ var PickerComponent = function (_a) {
     React.useEffect(function () {
         setIsLoading(true);
         if (authParams && accessToken) {
-            index.axios
+            lang.axios
                 .get("https://messenger.stipop.io/v1/mysticker/".concat(encodeURIComponent(params.userId)), {
                 params: {
                     userId: params.userId,
@@ -17457,7 +17457,7 @@ var PickerComponent = function (_a) {
                 if (data.body.packageList.filter(function (pack) { return pack.packageId !== null; })
                     .length > 0) {
                     if (recentView) {
-                        index.axios
+                        lang.axios
                             .get("https://messenger.stipop.io/v1/package/send/".concat(encodeURIComponent(params.userId)), {
                             params: {
                                 userId: params.userId,
@@ -17479,7 +17479,7 @@ var PickerComponent = function (_a) {
                         });
                     }
                     else {
-                        index.axios
+                        lang.axios
                             .get("https://messenger.stipop.io/v1/package/".concat(data.body.packageList[showPackage].packageId), {
                             params: {
                                 userId: params.userId,
@@ -17538,7 +17538,7 @@ var PickerComponent = function (_a) {
             });
         }
         else if (!authParams && auth) {
-            index.axios
+            lang.axios
                 .get("https://messenger.stipop.io/v1/mysticker/".concat(encodeURIComponent(params.userId)), {
                 params: {
                     userId: params.userId,
@@ -17559,7 +17559,7 @@ var PickerComponent = function (_a) {
                 if (data.body.packageList.filter(function (pack) { return pack.packageId !== null; })
                     .length > 0) {
                     if (recentView) {
-                        index.axios
+                        lang.axios
                             .get("https://messenger.stipop.io/v1/package/send/".concat(encodeURIComponent(params.userId)), {
                             params: {
                                 userId: params.userId,
@@ -17581,7 +17581,7 @@ var PickerComponent = function (_a) {
                         });
                     }
                     else {
-                        index.axios
+                        lang.axios
                             .get("https://messenger.stipop.io/v1/package/".concat(data.body.packageList[showPackage].packageId), {
                             params: {
                                 userId: params.userId,
@@ -17622,7 +17622,7 @@ var PickerComponent = function (_a) {
                 case 2:
                     _a.sent();
                     if (!(authParams && accessToken)) return [3 /*break*/, 3];
-                    index.axios
+                    lang.axios
                         .get("https://messenger.stipop.io/v1/package/".concat(packageId), {
                         params: {
                             userId: params.userId,
@@ -17660,7 +17660,7 @@ var PickerComponent = function (_a) {
                     return [3 /*break*/, 6];
                 case 5:
                     if (!authParams && auth) {
-                        index.axios
+                        lang.axios
                             .get("https://messenger.stipop.io/v1/package/".concat(packageId), {
                             params: {
                                 userId: params.userId,
@@ -17687,7 +17687,7 @@ var PickerComponent = function (_a) {
     }); };
     var clickSticker = function (stickerId, stickerImg, packageId) {
         if (authParams && accessToken) {
-            index.axios
+            lang.axios
                 .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
                 params: {
                     // userId: encodeURIComponent(params.userId),
@@ -17717,7 +17717,7 @@ var PickerComponent = function (_a) {
             });
         }
         else if (!authParams && !auth) {
-            index.axios
+            lang.axios
                 .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
                 params: {
                     // userId: encodeURIComponent(params.userId),
@@ -17743,7 +17743,7 @@ var PickerComponent = function (_a) {
             });
         }
         else if (!authParams && auth) {
-            index.axios
+            lang.axios
                 .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
                 params: {
                     // userId: encodeURIComponent(params.userId),
@@ -17777,7 +17777,7 @@ var PickerComponent = function (_a) {
         setIsLoading(true);
         setRecentView(true);
         if (authParams && accessToken) {
-            index.axios
+            lang.axios
                 .get("https://messenger.stipop.io/v1/package/send/".concat(encodeURIComponent(params.userId)), {
                 params: {
                     userId: params.userId,
@@ -17800,7 +17800,7 @@ var PickerComponent = function (_a) {
         }
         else if (!authParams && !auth) {
             var requestUrl = "https://messenger.stipop.io/v1/package/send/".concat(encodeURIComponent(params.userId), "?limit=28");
-            index.axios
+            lang.axios
                 .get(requestUrl, {
                 headers: {
                     apikey: params.apikey,
@@ -17816,7 +17816,7 @@ var PickerComponent = function (_a) {
             });
         }
         else if (!authParams && auth) {
-            index.axios
+            lang.axios
                 .get("https://messenger.stipop.io/v1/package/send/".concat(encodeURIComponent(params.userId)), {
                 params: {
                     userId: params.userId,
@@ -17933,14 +17933,9 @@ var PickerComponent = function (_a) {
                 clickSticker(sticker.stickerId, sticker.stickerImg, sticker.packageId);
                 // setTempSticker(sticker.stickerImg)
             } })); }))) : (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, isLoading: recentView },
-            React__default["default"].createElement("div", { style: {
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                } },
-                React__default["default"].createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker", style: { width: '40%' } }))))));
+            React__default["default"].createElement(NoSticker, null,
+                React__default["default"].createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker", style: { width: '40%' } }),
+                React__default["default"].createElement("span", { className: "no-sticker-text" }, mainLanguage ? lang.lang[mainLanguage].noRecent : lang.lang['en'].noRecent))))));
 };
 var PickerWrapper = LoadingSpinner.styled.div(templateObject_1 || (templateObject_1 = tslib_es6.__makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: ", ";\n  position: relative;\n"], ["\n  width: ", ";\n  height: ", ";\n  border: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  box-shadow: ", ";\n  position: relative;\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
@@ -18143,6 +18138,7 @@ var StickerImg = LoadingSpinner.styled.img(templateObject_9 || (templateObject_9
 });
 var PreviewWrapper = LoadingSpinner.styled.div(templateObject_10 || (templateObject_10 = tslib_es6.__makeTemplateObject(["\n  width: 60%;\n  height: 150px;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 10px;\n  margin-left: 40%;\n  margin-bottom: 5px;\n  padding: 0 24px;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  bottom: 100%;\n"], ["\n  width: 60%;\n  height: 150px;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 10px;\n  margin-left: 40%;\n  margin-bottom: 5px;\n  padding: 0 24px;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  bottom: 100%;\n"])));
 var ChatSticker = LoadingSpinner.styled.img(templateObject_11 || (templateObject_11 = tslib_es6.__makeTemplateObject(["\n  width: 100px;\n  height: 100px;\n  margin-bottom: 5px;\n"], ["\n  width: 100px;\n  height: 100px;\n  margin-bottom: 5px;\n"])));
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10, templateObject_11;
+var NoSticker = LoadingSpinner.styled.div(templateObject_12 || (templateObject_12 = tslib_es6.__makeTemplateObject(["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"], ["\n  width: 100%;\n  height: 90%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  .no-sticker {\n    width: 40%;\n  }\n  .no-sticker-text {\n    font-size: 14px;\n    color: #5f5f5f;\n  }\n"])));
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10, templateObject_11, templateObject_12;
 
 module.exports = PickerComponent;

@@ -16,6 +16,7 @@ interface SearchProps {
     shadow?: string;
     authParams?: Auth$3;
     auth?: string;
+    mainLanguage?: string;
 }
 interface Params$3 {
     apikey: string;
@@ -98,6 +99,7 @@ interface StoreProps$1 {
     shadow?: string;
     authParams?: Auth$2;
     auth?: string;
+    mainLanguage?: string;
 }
 interface Params$2 {
     apikey: string;
@@ -149,6 +151,7 @@ interface StoreProps {
     shadow?: string;
     authParams?: Auth$1;
     auth?: string;
+    mainLanguage?: string;
 }
 interface DownloadParams {
     isPurchase: string;
@@ -225,6 +228,7 @@ interface UnifiedProps {
     shadow?: string;
     authParams?: Auth;
     auth?: string;
+    mainLanguage?: string;
 }
 interface Params {
     apikey: string;

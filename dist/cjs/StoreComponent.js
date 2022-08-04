@@ -3,7 +3,7 @@
 var tslib_es6 = require('./tslib.es6-fb247e4a.js');
 var React = require('react');
 var LoadingSpinner = require('./index-48c7d746.js');
-var index = require('./index-3704bd89.js');
+var lang = require('./lang-607c928f.js');
 var Icon = require('./Icon.js');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
@@ -11,7 +11,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
 var StoreComponent = function (_a) {
-    var params = _a.params, downloadParams = _a.downloadParams, color = _a.color, scroll = _a.scroll, onClose = _a.onClose, size = _a.size, border = _a.border, shadow = _a.shadow, authParams = _a.authParams, auth = _a.auth;
+    var params = _a.params, downloadParams = _a.downloadParams, color = _a.color, scroll = _a.scroll, onClose = _a.onClose, size = _a.size, border = _a.border, shadow = _a.shadow, authParams = _a.authParams, auth = _a.auth, mainLanguage = _a.mainLanguage;
     var _b = React.useState([]), packages = _b[0], setPackages = _b[1];
     var _c = React.useState(false), detail = _c[0], setDetail = _c[1];
     var _d = React.useState([]), stickers = _d[0], setStickers = _d[1];
@@ -24,10 +24,10 @@ var StoreComponent = function (_a) {
     var _l = React.useState(1), endPage = _l[0], setEndPage = _l[1];
     var _m = React.useState(0), scrolling = _m[0], setScrolling = _m[1];
     var _o = React.useState(''), accessToken = _o[0], setAccessToken = _o[1];
-    var client = new index.Stipop(params.apikey, 'v1');
+    var client = new lang.Stipop(params.apikey, 'v1');
     var packInfo = new Array();
     var getAccessToken = function () {
-        index.axios
+        lang.axios
             .post('https://messenger.stipop.io/v1/access', tslib_es6.__assign(tslib_es6.__assign({}, authParams), { userId: params.userId }))
             .then(function (_a) {
             var data = _a.data;
@@ -44,7 +44,7 @@ var StoreComponent = function (_a) {
     React.useEffect(function () {
         setIsLoading(true);
         if (authParams && accessToken) {
-            index.axios
+            lang.axios
                 .get("https://messenger.stipop.io/v1/package", {
                 params: {
                     userId: params.userId,
@@ -65,7 +65,7 @@ var StoreComponent = function (_a) {
                 PackageIds.filter(function (item, index) { return PackageIds.indexOf(item) === index; });
                 // body.packageList.map(pack => {
                 PackageIds.map(function (pack) {
-                    index.axios
+                    lang.axios
                         .get("https://messenger.stipop.io/v1/package/".concat(pack), {
                         params: {
                             userId: params.userId,
@@ -91,7 +91,7 @@ var StoreComponent = function (_a) {
                 .catch(function () {
                 getAccessToken();
             });
-            index.axios
+            lang.axios
                 .get("https://messenger.stipop.io/v1/mysticker/hide/".concat(encodeURIComponent(params.userId)), {
                 params: { userId: params.userId, limit: 50 },
                 headers: {
@@ -148,7 +148,7 @@ var StoreComponent = function (_a) {
             });
         }
         else if (!authParams && auth) {
-            index.axios
+            lang.axios
                 .get("https://messenger.stipop.io/v1/package", {
                 params: {
                     userId: params.userId,
@@ -169,7 +169,7 @@ var StoreComponent = function (_a) {
                 PackageIds.filter(function (item, index) { return PackageIds.indexOf(item) === index; });
                 // body.packageList.map(pack => {
                 PackageIds.map(function (pack) {
-                    index.axios
+                    lang.axios
                         .get("https://messenger.stipop.io/v1/package/".concat(pack), {
                         params: {
                             userId: params.userId,
@@ -195,7 +195,7 @@ var StoreComponent = function (_a) {
                 .catch(function (error) {
                 throw new Error(error.message);
             });
-            index.axios
+            lang.axios
                 .get("https://messenger.stipop.io/v1/mysticker/hide/".concat(encodeURIComponent(params.userId)), {
                 params: { userId: params.userId, limit: 50 },
                 headers: {
@@ -216,7 +216,7 @@ var StoreComponent = function (_a) {
         if (endPage > 1) {
             for (var i = 2; i <= endPage; i++) {
                 if (authParams && accessToken) {
-                    index.axios
+                    lang.axios
                         .get("https://messenger.stipop.io/v1/mysticker/hide/".concat(encodeURIComponent(params.userId)), {
                         params: { userId: params.userId, limit: 50, pageNumber: i },
                         headers: {
@@ -253,7 +253,7 @@ var StoreComponent = function (_a) {
                     });
                 }
                 else if (!authParams && auth) {
-                    index.axios
+                    lang.axios
                         .get("https://messenger.stipop.io/v1/mysticker/hide/".concat(encodeURIComponent(params.userId)), {
                         params: { userId: params.userId, limit: 50, pageNumber: i },
                         headers: {
@@ -277,7 +277,7 @@ var StoreComponent = function (_a) {
         }
         else {
             if (authParams && accessToken) {
-                index.axios
+                lang.axios
                     .get("https://messenger.stipop.io/v1/mysticker/hide/".concat(encodeURIComponent(params.userId)), {
                     params: { userId: params.userId, limit: 50 },
                     headers: {
@@ -313,7 +313,7 @@ var StoreComponent = function (_a) {
                 });
             }
             else if (!authParams && auth) {
-                index.axios
+                lang.axios
                     .get("https://messenger.stipop.io/v1/mysticker/hide/".concat(encodeURIComponent(params.userId)), {
                     params: { userId: params.userId, limit: 50 },
                     headers: {
@@ -352,7 +352,7 @@ var StoreComponent = function (_a) {
     var clickDownload = function (packageId) {
         setBtnLoading(packageId);
         if (authParams && accessToken) {
-            index.axios
+            lang.axios
                 .post("https://messenger.stipop.io/v1/download/".concat(packageId), null, {
                 params: {
                     userId: params.userId,
@@ -424,7 +424,7 @@ var StoreComponent = function (_a) {
             });
         }
         else if (!authParams && auth) {
-            index.axios
+            lang.axios
                 .post("https://messenger.stipop.io/v1/download/".concat(packageId), null, {
                 params: {
                     userId: params.userId,
@@ -468,7 +468,7 @@ var StoreComponent = function (_a) {
     var clickHide = function (packageId) {
         setBtnLoading(packageId);
         if (authParams && accessToken) {
-            index.axios
+            lang.axios
                 .put("https://messenger.stipop.io/v1/mysticker/hide/".concat(encodeURIComponent(params.userId), "/").concat(packageId), null, {
                 params: { userId: params.userId },
                 headers: {
@@ -483,7 +483,7 @@ var StoreComponent = function (_a) {
                     }
                     else {
                         setHideList(hideList.filter(function (item) { return item !== packageId; }));
-                        index.axios
+                        lang.axios
                             .get("https://messenger.stipop.io/v1/mysticker/".concat(encodeURIComponent(params.userId)), {
                             params: {
                                 userId: params.userId,
@@ -499,7 +499,7 @@ var StoreComponent = function (_a) {
                                 data.body.packageList &&
                                 data.body.packageList[0].order;
                             var currentOrder = data.body.packageList.filter(function (pack) { return pack.packageId === packageId; })[0].order;
-                            index.axios
+                            lang.axios
                                 .put("https://messenger.stipop.io/v1/mysticker/order/".concat(encodeURIComponent(params.userId)), {
                                 currentOrder: currentOrder,
                                 newOrder: firstOrder + 1,
@@ -560,7 +560,7 @@ var StoreComponent = function (_a) {
             });
         }
         else if (!authParams && auth) {
-            index.axios
+            lang.axios
                 .put("https://messenger.stipop.io/v1/mysticker/hide/".concat(encodeURIComponent(params.userId), "/").concat(packageId), null, {
                 params: { userId: params.userId },
                 headers: {
@@ -575,7 +575,7 @@ var StoreComponent = function (_a) {
                     }
                     else {
                         setHideList(hideList.filter(function (item) { return item !== packageId; }));
-                        index.axios
+                        lang.axios
                             .get("https://messenger.stipop.io/v1/mysticker/".concat(encodeURIComponent(params.userId)), {
                             params: {
                                 userId: params.userId,
@@ -591,7 +591,7 @@ var StoreComponent = function (_a) {
                                 data.body.packageList &&
                                 data.body.packageList[0].order;
                             var currentOrder = data.body.packageList.filter(function (pack) { return pack.packageId === packageId; })[0].order;
-                            index.axios
+                            lang.axios
                                 .put("https://messenger.stipop.io/v1/mysticker/order/".concat(encodeURIComponent(params.userId)), {
                                 currentOrder: currentOrder,
                                 newOrder: firstOrder + 1,
@@ -667,16 +667,16 @@ var StoreComponent = function (_a) {
                     React__default["default"].createElement(Icon["default"], { type: "PREVIOUS", onClick: function () {
                             clickPrevious();
                         } })),
-                React__default["default"].createElement("span", null, params.lang
-                    ? params.lang === 'ko'
-                        ? '이모티콘 팩'
-                        : 'Sticker Pack'
-                    : 'Sticker Pack'))) : (React__default["default"].createElement("div", { className: "title-text" },
-                React__default["default"].createElement("span", null, params.lang
-                    ? params.lang === 'ko'
-                        ? '이모티콘 스토어'
-                        : 'Sticker Store'
-                    : 'Sticker Store'),
+                React__default["default"].createElement("span", null, mainLanguage
+                    ? lang.lang[mainLanguage].pack
+                    : params.lang
+                        ? lang.lang[params.lang].pack
+                        : lang.lang['en'].pack))) : (React__default["default"].createElement("div", { className: "title-text" },
+                React__default["default"].createElement("span", null, mainLanguage
+                    ? lang.lang[mainLanguage].store
+                    : params.lang
+                        ? lang.lang[params.lang].store
+                        : lang.lang['en'].store),
                 React__default["default"].createElement(Icon["default"], { type: "STORE_BLACK" }))),
             React__default["default"].createElement(CloseBtn, { onClick: function () { return onClose(true); } },
                 React__default["default"].createElement(Icon["default"], { type: "CLOSE" }))),

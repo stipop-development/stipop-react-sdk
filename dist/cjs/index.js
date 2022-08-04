@@ -10,7 +10,7 @@ var UnifiedComponent = require('./UnifiedComponent.js');
 require('./tslib.es6-fb247e4a.js');
 require('react');
 require('./index-48c7d746.js');
-require('./index-3704bd89.js');
+require('./lang-607c928f.js');
 require('./index.esm-dd03e45b.js');
 
 

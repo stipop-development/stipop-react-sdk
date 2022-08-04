@@ -10,6 +10,7 @@ import { StoreProps } from './index.types'
 import Icon from '../Icon'
 import LoadingSpinner from '../LoadingSpinner'
 import { FiX, FiChevronRight, FiChevronLeft } from 'react-icons/fi'
+import { lang } from '../lang'
 
 const PickerComponent: React.FC<StoreProps> = ({
   params,
@@ -27,6 +28,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   shadow,
   authParams,
   auth,
+  mainLanguage,
 }) => {
   const [myStickers, setMyStickers] = useState([])
   const [stickers, setStickers] = useState([])
@@ -1087,21 +1089,16 @@ const PickerComponent: React.FC<StoreProps> = ({
           scrollHover={scrollHover}
           isLoading={recentView}
         >
-          <div
-            style={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+          <NoSticker>
             <img
               src="https://img.stipop.io/image/sdk/no-sticker.png"
               className="no-sticker"
               style={{ width: '40%' }}
             ></img>
-          </div>
+            <span className="no-sticker-text">
+              {mainLanguage ? lang[mainLanguage].noRecent : lang['en'].noRecent}
+            </span>
+          </NoSticker>
         </StickerWrapper>
       )}
     </PickerWrapper>
@@ -1450,4 +1447,21 @@ const ChatSticker = styled.img`
   width: 100px;
   height: 100px;
   margin-bottom: 5px;
+`
+
+const NoSticker = styled.div`
+  width: 100%;
+  height: 90%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .no-sticker {
+    width: 40%;
+  }
+  .no-sticker-text {
+    font-size: 14px;
+    color: #5f5f5f;
+  }
 `

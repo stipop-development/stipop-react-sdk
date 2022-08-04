@@ -1,13 +1,13 @@
 import { _ as __makeTemplateObject, a as __assign } from './tslib.es6-32024edd.js';
 import React__default, { useState, useEffect } from 'react';
 import { s as styled, L as LoadingSpinner } from './index-1cdd6878.js';
-import { S as Stipop, a as axios } from './index-62082b5d.js';
+import { S as Stipop, a as axios, l as lang } from './lang-2e47f32a.js';
 import { F as FiX, a as FiSearch } from './index.esm-3315737a.js';
 import PickerComponent from './PickerComponent.js';
 import './Icon.js';
 
 var UnifiedComponent = function (_a) {
-    var params = _a.params, size = _a.size, border = _a.border, input = _a.input, menu = _a.menu, backgroundColor = _a.backgroundColor, loadingColor = _a.loadingColor, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, preview = _a.preview, stickerClick = _a.stickerClick, storeClick = _a.storeClick, shadow = _a.shadow, authParams = _a.authParams, auth = _a.auth;
+    var params = _a.params, size = _a.size, border = _a.border, input = _a.input, menu = _a.menu, backgroundColor = _a.backgroundColor, loadingColor = _a.loadingColor, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, preview = _a.preview, stickerClick = _a.stickerClick, storeClick = _a.storeClick, shadow = _a.shadow, authParams = _a.authParams, auth = _a.auth, mainLanguage = _a.mainLanguage;
     var _b = useState(''), keyword = _b[0], setKeyword = _b[1];
     var _c = useState([]), stickerList = _c[0], setStickerList = _c[1];
     var _d = useState(false), isLoading = _d[0], setIsLoading = _d[1];
@@ -201,11 +201,11 @@ var UnifiedComponent = function (_a) {
                 } }),
             React__default.createElement(ChatSticker, { src: tempSticker.url }))),
         React__default.createElement(SearchForm, null,
-            React__default.createElement(SearchInput, { type: "text", onFocus: function () { return setInputFocus(true); }, onBlur: function () { return setInputFocus(false); }, onChange: function (e) { return setKeyword(e.target.value); }, placeholder: params.lang
-                    ? params.lang === 'ko'
-                        ? '이모티콘 검색...'
-                        : 'Search sticker...'
-                    : 'Search sticker...', input: input }),
+            React__default.createElement(SearchInput, { type: "text", onFocus: function () { return setInputFocus(true); }, onBlur: function () { return setInputFocus(false); }, onChange: function (e) { return setKeyword(e.target.value); }, placeholder: mainLanguage
+                    ? lang[mainLanguage].search
+                    : params.lang
+                        ? lang[params.lang].search
+                        : lang['en'].search, input: input }),
             React__default.createElement(InputHolder, { input: input },
                 React__default.createElement(FiSearch, { size: 18, color: inputFocus
                         ? input && input.focus
@@ -265,7 +265,7 @@ var UnifiedComponent = function (_a) {
                     listCnt: menu && menu.listCnt ? menu.listCnt : 6,
                     arrowColor: menu && menu.arrowColor ? menu.arrowColor : '#000',
                     imgSize: menu && menu.imgSize ? menu.imgSize : 25,
-                }, backgroundColor: backgroundColor ? backgroundColor : '#fff', column: column ? column : 4, scroll: scroll ? scroll : true, scrollHover: scrollHover ? scrollHover : '#6d7072', loadingColor: loadingColor ? loadingColor : '#ff4500', shadow: 'none', preview: preview, stickerClick: function (info) { return stickerClick(info); }, storeClick: function (click) { return storeClick(click); }, authParams: authParams, auth: auth }))) : !isLoading ? (stickerList.length > 0 ? (React__default.createElement(StickerWrapper, { column: column, scroll: scroll, scrollHover: scrollHover, border: border, backgroundColor: backgroundColor, size: size }, stickerList.map(function (sticker, index) { return (React__default.createElement(StickerImg, { src: "".concat(sticker.stickerImg, "?d=100x100"), key: index, onClick: function () {
+                }, backgroundColor: backgroundColor ? backgroundColor : '#fff', column: column ? column : 4, scroll: scroll ? scroll : true, scrollHover: scrollHover ? scrollHover : '#6d7072', loadingColor: loadingColor ? loadingColor : '#ff4500', shadow: 'none', preview: preview, stickerClick: function (info) { return stickerClick(info); }, storeClick: function (click) { return storeClick(click); }, authParams: authParams, auth: auth, mainLanguage: mainLanguage }))) : !isLoading ? (stickerList.length > 0 ? (React__default.createElement(StickerWrapper, { column: column, scroll: scroll, scrollHover: scrollHover, border: border, backgroundColor: backgroundColor, size: size }, stickerList.map(function (sticker, index) { return (React__default.createElement(StickerImg, { src: "".concat(sticker.stickerImg, "?d=100x100"), key: index, onClick: function () {
                 // stickerClick({
                 //   url: sticker.stickerImg,
                 //   stickerId: sticker.stickerId,
@@ -275,11 +275,11 @@ var UnifiedComponent = function (_a) {
                 // setTempSticker(sticker.stickerImg)
             }, size: size })); }))) : (React__default.createElement(NoSticker, null,
             React__default.createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker" }),
-            React__default.createElement("span", { className: "no-sticker-text" }, params.lang
-                ? params.lang === 'ko'
-                    ? '검색 결과가 없습니다'
-                    : 'No Stickers to Show'
-                : 'No Stickers to Show')))) : (React__default.createElement(NoSticker, null,
+            React__default.createElement("span", { className: "no-sticker-text" }, mainLanguage
+                ? lang[mainLanguage].noShow
+                : params.lang
+                    ? lang[params.lang].noShow
+                    : lang['en'].noShow)))) : (React__default.createElement(NoSticker, null,
             React__default.createElement(LoadingSpinner, { color: loadingColor ? loadingColor : '#ff4500' })))));
 };
 var SearchWrapper = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding-top: 10px;\n  box-sizing: border-box;\n  box-shadow: ", ";\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding-top: 10px;\n  box-sizing: border-box;\n  box-shadow: ", ";\n"])), function (props) {

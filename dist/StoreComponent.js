@@ -1,11 +1,11 @@
 import { _ as __makeTemplateObject, c as __awaiter, d as __generator, a as __assign } from './tslib.es6-32024edd.js';
 import React__default, { useState, useEffect } from 'react';
 import { s as styled, L as LoadingSpinner } from './index-1cdd6878.js';
-import { S as Stipop, a as axios } from './index-62082b5d.js';
+import { S as Stipop, a as axios, l as lang } from './lang-2e47f32a.js';
 import Icon from './Icon.js';
 
 var StoreComponent = function (_a) {
-    var params = _a.params, downloadParams = _a.downloadParams, color = _a.color, scroll = _a.scroll, onClose = _a.onClose, size = _a.size, border = _a.border, shadow = _a.shadow, authParams = _a.authParams, auth = _a.auth;
+    var params = _a.params, downloadParams = _a.downloadParams, color = _a.color, scroll = _a.scroll, onClose = _a.onClose, size = _a.size, border = _a.border, shadow = _a.shadow, authParams = _a.authParams, auth = _a.auth, mainLanguage = _a.mainLanguage;
     var _b = useState([]), packages = _b[0], setPackages = _b[1];
     var _c = useState(false), detail = _c[0], setDetail = _c[1];
     var _d = useState([]), stickers = _d[0], setStickers = _d[1];
@@ -661,16 +661,16 @@ var StoreComponent = function (_a) {
                     React__default.createElement(Icon, { type: "PREVIOUS", onClick: function () {
                             clickPrevious();
                         } })),
-                React__default.createElement("span", null, params.lang
-                    ? params.lang === 'ko'
-                        ? '이모티콘 팩'
-                        : 'Sticker Pack'
-                    : 'Sticker Pack'))) : (React__default.createElement("div", { className: "title-text" },
-                React__default.createElement("span", null, params.lang
-                    ? params.lang === 'ko'
-                        ? '이모티콘 스토어'
-                        : 'Sticker Store'
-                    : 'Sticker Store'),
+                React__default.createElement("span", null, mainLanguage
+                    ? lang[mainLanguage].pack
+                    : params.lang
+                        ? lang[params.lang].pack
+                        : lang['en'].pack))) : (React__default.createElement("div", { className: "title-text" },
+                React__default.createElement("span", null, mainLanguage
+                    ? lang[mainLanguage].store
+                    : params.lang
+                        ? lang[params.lang].store
+                        : lang['en'].store),
                 React__default.createElement(Icon, { type: "STORE_BLACK" }))),
             React__default.createElement(CloseBtn, { onClick: function () { return onClose(true); } },
                 React__default.createElement(Icon, { type: "CLOSE" }))),
