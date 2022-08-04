@@ -8,6 +8,7 @@ import Icon from '../Icon/index'
 import { FiX, FiSearch } from 'react-icons/fi'
 import LoadingSpinner from '../LoadingSpinner'
 import axios from 'axios'
+import { lang } from '../lang'
 
 const SearchComponent: React.FC<SearchProps> = ({
   params,
@@ -24,6 +25,7 @@ const SearchComponent: React.FC<SearchProps> = ({
   shadow,
   authParams,
   auth,
+  mainLanguage,
 }) => {
   const [keyword, setKeyword] = useState(
     params.default
@@ -273,11 +275,11 @@ const SearchComponent: React.FC<SearchProps> = ({
           onBlur={() => setInputFocus(false)}
           onChange={e => setKeyword(e.target.value)}
           placeholder={
-            params.lang
-              ? params.lang === 'ko'
-                ? '이모티콘 검색...'
-                : 'Search sticker...'
-              : 'Search sticker...'
+            mainLanguage
+              ? lang[mainLanguage].search
+              : params.lang
+              ? lang[params.lang].search
+              : lang['en'].search
           }
           input={input}
         />
@@ -328,11 +330,11 @@ const SearchComponent: React.FC<SearchProps> = ({
               className="no-sticker"
             ></img>
             <span className="no-sticker-text">
-              {params.lang
-                ? params.lang === 'ko'
-                  ? '검색 결과가 없습니다'
-                  : 'No Stickers to Show'
-                : 'No Stickers to Show'}
+              {mainLanguage
+                ? lang[mainLanguage].noShow
+                : params.lang
+                ? lang[params.lang].noShow
+                : lang['en'].noShow}
             </span>
           </NoSticker>
         )

@@ -14,6 +14,7 @@ export interface StoreProps {
   shadow?: string
   authParams?: Auth
   auth?: string
+  mainLanguage?: string
 }
 
 interface Params {

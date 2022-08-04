@@ -7,6 +7,7 @@ import { StoreProps } from './index.types'
 import Icon from '../Icon/index'
 import LoadingSpinner from '../LoadingSpinner'
 import axios from 'axios'
+import { lang } from '../lang'
 
 const StoreComponent: React.FC<StoreProps> = ({
   params,
@@ -19,6 +20,7 @@ const StoreComponent: React.FC<StoreProps> = ({
   shadow,
   authParams,
   auth,
+  mainLanguage,
 }) => {
   const [packages, setPackages] = useState([])
   const [detail, setDetail] = useState(false)
@@ -746,21 +748,21 @@ const StoreComponent: React.FC<StoreProps> = ({
                   />
                 </PreviousBtn>
                 <span>
-                  {params.lang
-                    ? params.lang === 'ko'
-                      ? '이모티콘 팩'
-                      : 'Sticker Pack'
-                    : 'Sticker Pack'}
+                  {mainLanguage
+                    ? lang[mainLanguage].pack
+                    : params.lang
+                    ? lang[params.lang].pack
+                    : lang['en'].pack}
                 </span>
               </div>
             ) : (
               <div className="title-text">
                 <span>
-                  {params.lang
-                    ? params.lang === 'ko'
-                      ? '이모티콘 스토어'
-                      : 'Sticker Store'
-                    : 'Sticker Store'}
+                  {mainLanguage
+                    ? lang[mainLanguage].store
+                    : params.lang
+                    ? lang[params.lang].store
+                    : lang['en'].store}
                 </span>
                 <Icon type="STORE_BLACK" />
               </div>

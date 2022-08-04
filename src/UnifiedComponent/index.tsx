@@ -8,6 +8,7 @@ import LoadingSpinner from '../LoadingSpinner'
 import PickerComponent from '../PickerComponent'
 
 import { UnifiedProps } from './index.types'
+import { lang } from '../lang'
 
 const UnifiedComponent: React.FC<UnifiedProps> = ({
   params,
@@ -26,6 +27,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
   shadow,
   authParams,
   auth,
+  mainLanguage,
 }) => {
   const [keyword, setKeyword] = useState('')
   const [stickerList, setStickerList] = useState([])
@@ -257,11 +259,11 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
           onBlur={() => setInputFocus(false)}
           onChange={e => setKeyword(e.target.value)}
           placeholder={
-            params.lang
-              ? params.lang === 'ko'
-                ? '이모티콘 검색...'
-                : 'Search sticker...'
-              : 'Search sticker...'
+            mainLanguage
+              ? lang[mainLanguage].search
+              : params.lang
+              ? lang[params.lang].search
+              : lang['en'].search
           }
           input={input}
         />
@@ -355,6 +357,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
             storeClick={click => storeClick(click)}
             authParams={authParams}
             auth={auth}
+            mainLanguage={mainLanguage}
           />
         </div>
       ) : !isLoading ? (
@@ -395,11 +398,11 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
               className="no-sticker"
             ></img>
             <span className="no-sticker-text">
-              {params.lang
-                ? params.lang === 'ko'
-                  ? '검색 결과가 없습니다'
-                  : 'No Stickers to Show'
-                : 'No Stickers to Show'}
+              {mainLanguage
+                ? lang[mainLanguage].noShow
+                : params.lang
+                ? lang[params.lang].noShow
+                : lang['en'].noShow}
             </span>
           </NoSticker>
         )

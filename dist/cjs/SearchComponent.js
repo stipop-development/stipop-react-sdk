@@ -3,7 +3,7 @@
 var tslib_es6 = require('./tslib.es6-fb247e4a.js');
 var React = require('react');
 var LoadingSpinner = require('./index-48c7d746.js');
-var index = require('./index-3704bd89.js');
+var lang = require('./lang-607c928f.js');
 var index_esm = require('./index.esm-dd03e45b.js');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
@@ -11,7 +11,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
 var SearchComponent = function (_a) {
-    var params = _a.params, size = _a.size, backgroundColor = _a.backgroundColor, column = _a.column, border = _a.border, input = _a.input, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, preview = _a.preview, loadingColor = _a.loadingColor, shadow = _a.shadow, authParams = _a.authParams, auth = _a.auth;
+    var params = _a.params, size = _a.size, backgroundColor = _a.backgroundColor, column = _a.column, border = _a.border, input = _a.input, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, preview = _a.preview, loadingColor = _a.loadingColor, shadow = _a.shadow, authParams = _a.authParams, auth = _a.auth, mainLanguage = _a.mainLanguage;
     var _b = React.useState(params.default
         ? params.default
         : params.lang
@@ -28,9 +28,9 @@ var SearchComponent = function (_a) {
     }), tempSticker = _e[0], setTempSticker = _e[1];
     var _f = React.useState(false), inputFocus = _f[0], setInputFocus = _f[1];
     var _g = React.useState(''), accessToken = _g[0], setAccessToken = _g[1];
-    var client = new index.Stipop(params.apikey, 'v1');
+    var client = new lang.Stipop(params.apikey, 'v1');
     var getAccessToken = function () {
-        index.axios
+        lang.axios
             .post('https://messenger.stipop.io/v1/access', tslib_es6.__assign(tslib_es6.__assign({}, authParams), { userId: params.userId }))
             .then(function (_a) {
             var data = _a.data;
@@ -60,7 +60,7 @@ var SearchComponent = function (_a) {
         };
         if (keyword) {
             if (authParams && accessToken) {
-                index.axios
+                lang.axios
                     .get("https://messenger.stipop.io/v1/search", {
                     params: searchParams,
                     headers: {
@@ -90,7 +90,7 @@ var SearchComponent = function (_a) {
                 });
             }
             else if (!authParams && auth) {
-                index.axios
+                lang.axios
                     .get("https://messenger.stipop.io/v1/search", {
                     params: searchParams,
                     headers: {
@@ -122,7 +122,7 @@ var SearchComponent = function (_a) {
     }, [keyword, params.lang, params.pageNumber, params.limit, accessToken, auth]);
     var clickSticker = function (stickerId, stickerImg, packageId) {
         if (authParams && accessToken) {
-            index.axios
+            lang.axios
                 .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
                 params: {
                     // userId: encodeURIComponent(params.userId),
@@ -152,7 +152,7 @@ var SearchComponent = function (_a) {
             });
         }
         else if (!authParams && !auth) {
-            index.axios
+            lang.axios
                 .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
                 params: {
                     userId: params.userId,
@@ -177,7 +177,7 @@ var SearchComponent = function (_a) {
             });
         }
         else if (!authParams && auth) {
-            index.axios
+            lang.axios
                 .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
                 params: {
                     userId: params.userId,
@@ -219,11 +219,11 @@ var SearchComponent = function (_a) {
                 } }),
             React__default["default"].createElement(ChatSticker, { src: tempSticker.url }))),
         React__default["default"].createElement(SearchForm, null,
-            React__default["default"].createElement(SearchInput, { type: "text", onFocus: function () { return setInputFocus(true); }, onBlur: function () { return setInputFocus(false); }, onChange: function (e) { return setKeyword(e.target.value); }, placeholder: params.lang
-                    ? params.lang === 'ko'
-                        ? '이모티콘 검색...'
-                        : 'Search sticker...'
-                    : 'Search sticker...', input: input }),
+            React__default["default"].createElement(SearchInput, { type: "text", onFocus: function () { return setInputFocus(true); }, onBlur: function () { return setInputFocus(false); }, onChange: function (e) { return setKeyword(e.target.value); }, placeholder: mainLanguage
+                    ? lang.lang[mainLanguage].search
+                    : params.lang
+                        ? lang.lang[params.lang].search
+                        : lang.lang['en'].search, input: input }),
             React__default["default"].createElement(InputHolder, { input: input },
                 React__default["default"].createElement(index_esm.FiSearch, { size: 18, color: inputFocus
                         ? input && input.focus
@@ -236,11 +236,11 @@ var SearchComponent = function (_a) {
                 clickSticker(sticker.stickerId, sticker.stickerImg, sticker.packageId);
             }, size: size })); }))) : (React__default["default"].createElement(NoSticker, null,
             React__default["default"].createElement("img", { src: "https://img.stipop.io/image/sdk/no-sticker.png", className: "no-sticker" }),
-            React__default["default"].createElement("span", { className: "no-sticker-text" }, params.lang
-                ? params.lang === 'ko'
-                    ? '검색 결과가 없습니다'
-                    : 'No Stickers to Show'
-                : 'No Stickers to Show')))) : (React__default["default"].createElement(LoadingSpinner.LoadingSpinner, { color: loadingColor ? loadingColor : '#ff4500' }))));
+            React__default["default"].createElement("span", { className: "no-sticker-text" }, mainLanguage
+                ? lang.lang[mainLanguage].noShow
+                : params.lang
+                    ? lang.lang[params.lang].noShow
+                    : lang.lang['en'].noShow)))) : (React__default["default"].createElement(LoadingSpinner.LoadingSpinner, { color: loadingColor ? loadingColor : '#ff4500' }))));
 };
 var SearchWrapper = LoadingSpinner.styled.div(templateObject_1 || (templateObject_1 = tslib_es6.__makeTemplateObject(["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  /* border-radius: ", "; */\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 10px 0;\n  box-sizing: border-box;\n  box-shadow: ", ";\n"], ["\n  width: ", ";\n  height: ", ";\n  background-color: ", ";\n  border: ", ";\n  /* border-radius: ", "; */\n  border-top-left-radius: ", ";\n  border-top-right-radius: ", ";\n  border-bottom-left-radius: ", ";\n  border-bottom-right-radius: ", ";\n  border-radius: ", ";\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  position: relative;\n  padding: 10px 0;\n  box-sizing: border-box;\n  box-shadow: ", ";\n"])), function (props) {
     return props.size && props.size.width ? "".concat(props.size.width, "px") : '360px';
