@@ -1,11 +1,11 @@
-import { _ as __makeTemplateObject, c as __awaiter, d as __generator, a as __assign } from './tslib.es6-32024edd.js';
+import { _ as __makeTemplateObject, b as __awaiter, c as __generator } from './tslib.es6-a827156a.js';
 import React__default, { useState, useEffect } from 'react';
-import { s as styled, L as LoadingSpinner } from './index-1cdd6878.js';
-import { S as Stipop, a as axios, l as lang } from './lang-2e47f32a.js';
+import { s as styled, L as LoadingSpinner } from './index-6a59c9f1.js';
 import Icon from './Icon.js';
+import { a as axios, l as lang } from './lang-6ac6702e.js';
 
 var StoreComponent = function (_a) {
-    var params = _a.params, downloadParams = _a.downloadParams, color = _a.color, scroll = _a.scroll, onClose = _a.onClose, size = _a.size, border = _a.border, shadow = _a.shadow, authParams = _a.authParams, auth = _a.auth, mainLanguage = _a.mainLanguage;
+    var params = _a.params, downloadParams = _a.downloadParams, color = _a.color, scroll = _a.scroll, onClose = _a.onClose, size = _a.size, border = _a.border, shadow = _a.shadow, auth = _a.auth, mainLanguage = _a.mainLanguage;
     var _b = useState([]), packages = _b[0], setPackages = _b[1];
     var _c = useState(false), detail = _c[0], setDetail = _c[1];
     var _d = useState([]), stickers = _d[0], setStickers = _d[1];
@@ -17,27 +17,9 @@ var StoreComponent = function (_a) {
     var _k = useState(0), btnHover = _k[0], setBtnHover = _k[1];
     var _l = useState(1), endPage = _l[0], setEndPage = _l[1];
     var _m = useState(0), scrolling = _m[0], setScrolling = _m[1];
-    var _o = useState(''), accessToken = _o[0], setAccessToken = _o[1];
-    var client = new Stipop(params.apikey, 'v1');
     var packInfo = new Array();
-    var getAccessToken = function () {
-        axios
-            .post('https://messenger.stipop.io/v1/access', __assign(__assign({}, authParams), { userId: params.userId }))
-            .then(function (_a) {
-            var data = _a.data;
-            setAccessToken(data.body.accessToken);
-        });
-    };
     useEffect(function () {
-        if (authParams) {
-            if (!accessToken) {
-                getAccessToken();
-            }
-        }
-    }, []);
-    useEffect(function () {
-        setIsLoading(true);
-        if (authParams && accessToken) {
+        if (!auth) {
             axios
                 .get("https://messenger.stipop.io/v1/package", {
                 params: {
@@ -50,14 +32,12 @@ var StoreComponent = function (_a) {
                 },
                 headers: {
                     apikey: params.apikey,
-                    Authorization: "Bearer ".concat(accessToken),
                 },
             })
                 .then(function (_a) {
                 var data = _a.data;
                 var PackageIds = data.body.packageList.map(function (pack) { return pack.packageId; });
                 PackageIds.filter(function (item, index) { return PackageIds.indexOf(item) === index; });
-                // body.packageList.map(pack => {
                 PackageIds.map(function (pack) {
                     axios
                         .get("https://messenger.stipop.io/v1/package/".concat(pack), {
@@ -66,7 +46,6 @@ var StoreComponent = function (_a) {
                         },
                         headers: {
                             apikey: params.apikey,
-                            Authorization: "Bearer ".concat(accessToken),
                         },
                     })
                         .then(function (_a) {
@@ -76,72 +55,34 @@ var StoreComponent = function (_a) {
                             setPackages(packages.concat(packInfo));
                         }
                     })
-                        .catch(function () {
-                        getAccessToken();
+                        .catch(function (error) {
+                        throw new Error(error.message);
                     });
                 });
                 setIsLoading(false);
             })
-                .catch(function () {
-                getAccessToken();
+                .catch(function (error) {
+                throw new Error(error.message);
             });
             axios
                 .get("https://messenger.stipop.io/v1/mysticker/hide/".concat(encodeURIComponent(params.userId)), {
                 params: { userId: params.userId, limit: 50 },
                 headers: {
                     apikey: params.apikey,
-                    Authorization: "Bearer ".concat(accessToken),
                 },
             })
                 .then(function (_a) {
                 var data = _a.data;
                 setEndPage(data.body && data.body.pageMap ? data.body.pageMap.endPage : 1);
             })
-                .catch(function () {
-                getAccessToken();
+                .catch(function (error) {
+                throw new Error(error.message);
             });
         }
-        else if (!authParams && !auth) {
-            var trendingParams = {
-                userId: params.userId,
-                lang: params.lang,
-                countryCode: params.countryCode,
-                animated: params.animated,
-                pageNumber: params.pageNumber,
-                limit: params.limit ? params.limit : 20,
-            };
-            var data = client.getPack(trendingParams);
-            data.then(function (_a) {
-                var body = _a.body;
-                var PackageIds = body.packageList.map(function (pack) { return pack.packageId; });
-                PackageIds.filter(function (item, index) { return PackageIds.indexOf(item) === index; });
-                // body.packageList.map(pack => {
-                PackageIds.map(function (pack) {
-                    var packageParams = {
-                        userId: params.userId,
-                        packId: pack,
-                    };
-                    var packageData = client.getPackInfo(packageParams);
-                    packageData.then(function (_a) {
-                        var body = _a.body;
-                        packInfo.push(body.package);
-                        if (packages.length === 0) {
-                            setPackages(packages.concat(packInfo));
-                        }
-                    });
-                });
-            });
-            var hideParams = {
-                userId: encodeURIComponent(params.userId),
-                limit: 50,
-            };
-            var hideData = client.myStickerHideList(hideParams);
-            hideData.then(function (_a) {
-                var body = _a.body;
-                setEndPage(body && body.pageMap ? body.pageMap.endPage : 1);
-            });
-        }
-        else if (!authParams && auth) {
+    }, []);
+    useEffect(function () {
+        setIsLoading(true);
+        if (auth) {
             axios
                 .get("https://messenger.stipop.io/v1/package", {
                 params: {
@@ -205,17 +146,17 @@ var StoreComponent = function (_a) {
                 throw new Error(error.message);
             });
         }
-    }, [accessToken, auth]);
+    }, [auth]);
     useEffect(function () {
         if (endPage > 1) {
             for (var i = 2; i <= endPage; i++) {
-                if (authParams && accessToken) {
+                if (auth) {
                     axios
                         .get("https://messenger.stipop.io/v1/mysticker/hide/".concat(encodeURIComponent(params.userId)), {
                         params: { userId: params.userId, limit: 50, pageNumber: i },
                         headers: {
                             apikey: params.apikey,
-                            Authorization: "Bearer ".concat(accessToken),
+                            Authorization: "Bearer ".concat(auth),
                         },
                     })
                         .then(function (_a) {
@@ -226,33 +167,16 @@ var StoreComponent = function (_a) {
                             })
                             : setHideList(hideList);
                     })
-                        .catch(function () {
-                        getAccessToken();
+                        .catch(function (error) {
+                        throw new Error(error.message);
                     });
                 }
-                else if (!authParams && !auth) {
-                    var hideParams = {
-                        userId: encodeURIComponent(params.userId),
-                        limit: 50,
-                        pageNumber: i,
-                    };
-                    var hideData = client.myStickerHideList(hideParams);
-                    hideData.then(function (_a) {
-                        var body = _a.body;
-                        body && body.packageList
-                            ? body.packageList.map(function (pack) {
-                                setHideList(function (hideList) { return hideList.concat(pack.packageId); });
-                            })
-                            : setHideList(hideList);
-                    });
-                }
-                else if (!authParams && auth) {
+                else {
                     axios
                         .get("https://messenger.stipop.io/v1/mysticker/hide/".concat(encodeURIComponent(params.userId)), {
                         params: { userId: params.userId, limit: 50, pageNumber: i },
                         headers: {
                             apikey: params.apikey,
-                            Authorization: "Bearer ".concat(auth),
                         },
                     })
                         .then(function (_a) {
@@ -270,13 +194,13 @@ var StoreComponent = function (_a) {
             }
         }
         else {
-            if (authParams && accessToken) {
+            if (auth) {
                 axios
                     .get("https://messenger.stipop.io/v1/mysticker/hide/".concat(encodeURIComponent(params.userId)), {
                     params: { userId: params.userId, limit: 50 },
                     headers: {
                         apikey: params.apikey,
-                        Authorization: "Bearer ".concat(accessToken),
+                        Authorization: "Bearer ".concat(auth),
                     },
                 })
                     .then(function (_a) {
@@ -287,32 +211,16 @@ var StoreComponent = function (_a) {
                         })
                         : setHideList(hideList);
                 })
-                    .catch(function () {
-                    getAccessToken();
+                    .catch(function (error) {
+                    throw new Error(error.message);
                 });
             }
-            else if (!authParams && !auth) {
-                var hideParams = {
-                    userId: encodeURIComponent(params.userId),
-                    limit: 50,
-                };
-                var hideData = client.myStickerHideList(hideParams);
-                hideData.then(function (_a) {
-                    var body = _a.body;
-                    body && body.packageList
-                        ? body.packageList.map(function (pack) {
-                            setHideList(function (hideList) { return hideList.concat(pack.packageId); });
-                        })
-                        : setHideList(hideList);
-                });
-            }
-            else if (!authParams && auth) {
+            else {
                 axios
                     .get("https://messenger.stipop.io/v1/mysticker/hide/".concat(encodeURIComponent(params.userId)), {
                     params: { userId: params.userId, limit: 50 },
                     headers: {
                         apikey: params.apikey,
-                        Authorization: "Bearer ".concat(auth),
                     },
                 })
                     .then(function (_a) {
@@ -345,79 +253,7 @@ var StoreComponent = function (_a) {
     }, [packages]);
     var clickDownload = function (packageId) {
         setBtnLoading(packageId);
-        if (authParams && accessToken) {
-            axios
-                .post("https://messenger.stipop.io/v1/download/".concat(packageId), null, {
-                params: {
-                    userId: params.userId,
-                    packageId: packageId,
-                    isPurchase: downloadParams.isPurchase,
-                    price: downloadParams.price,
-                    lang: downloadParams.lang,
-                    countryCode: downloadParams.countryCode,
-                },
-                headers: {
-                    apikey: params.apikey,
-                    Authorization: "Bearer ".concat(accessToken),
-                },
-            })
-                .then(function () {
-                setTimeout(function () {
-                    setPackages(packages.map(function (pack) {
-                        if (pack.packageId === packageId) {
-                            pack.isDownload = 'Y';
-                        }
-                        return pack;
-                    }));
-                    if (main) {
-                        setMain({
-                            packageId: main.packageId,
-                            packageImg: main.packageImg,
-                            packageName: main.packageName,
-                            artistName: main.artistName,
-                            isDownload: 'Y',
-                        });
-                    }
-                    setBtnLoading(0);
-                }, 500);
-            })
-                .catch(function () {
-                getAccessToken();
-                setBtnLoading(0);
-            });
-        }
-        else if (!authParams && !auth) {
-            var dParams = {
-                userId: params.userId,
-                packageId: packageId,
-                isPurchase: downloadParams.isPurchase,
-                price: downloadParams.price,
-                lang: downloadParams.lang,
-                countryCode: downloadParams.countryCode,
-            };
-            var data = client.download(dParams);
-            data.then(function () {
-                setTimeout(function () {
-                    setPackages(packages.map(function (pack) {
-                        if (pack.packageId === packageId) {
-                            pack.isDownload = 'Y';
-                        }
-                        return pack;
-                    }));
-                    if (main) {
-                        setMain({
-                            packageId: main.packageId,
-                            packageImg: main.packageImg,
-                            packageName: main.packageName,
-                            artistName: main.artistName,
-                            isDownload: 'Y',
-                        });
-                    }
-                    setBtnLoading(0);
-                }, 500);
-            });
-        }
-        else if (!authParams && auth) {
+        if (auth) {
             axios
                 .post("https://messenger.stipop.io/v1/download/".concat(packageId), null, {
                 params: {
@@ -458,102 +294,50 @@ var StoreComponent = function (_a) {
                 throw new Error(error.message);
             });
         }
-    };
-    var clickHide = function (packageId) {
-        setBtnLoading(packageId);
-        if (authParams && accessToken) {
+        else {
             axios
-                .put("https://messenger.stipop.io/v1/mysticker/hide/".concat(encodeURIComponent(params.userId), "/").concat(packageId), null, {
-                params: { userId: params.userId },
+                .post("https://messenger.stipop.io/v1/download/".concat(packageId), null, {
+                params: {
+                    userId: params.userId,
+                    packageId: packageId,
+                    isPurchase: downloadParams.isPurchase,
+                    price: downloadParams.price,
+                    lang: downloadParams.lang,
+                    countryCode: downloadParams.countryCode,
+                },
                 headers: {
                     apikey: params.apikey,
-                    Authorization: "Bearer ".concat(accessToken),
                 },
             })
                 .then(function () {
                 setTimeout(function () {
-                    if (hideList.indexOf(packageId) < 0) {
-                        setHideList(hideList.concat(packageId));
-                    }
-                    else {
-                        setHideList(hideList.filter(function (item) { return item !== packageId; }));
-                        axios
-                            .get("https://messenger.stipop.io/v1/mysticker/".concat(encodeURIComponent(params.userId)), {
-                            params: {
-                                userId: params.userId,
-                            },
-                            headers: {
-                                apikey: params.apikey,
-                                Authorization: "Bearer ".concat(accessToken),
-                            },
-                        })
-                            .then(function (_a) {
-                            var data = _a.data;
-                            var firstOrder = data.body &&
-                                data.body.packageList &&
-                                data.body.packageList[0].order;
-                            var currentOrder = data.body.packageList.filter(function (pack) { return pack.packageId === packageId; })[0].order;
-                            axios
-                                .put("https://messenger.stipop.io/v1/mysticker/order/".concat(encodeURIComponent(params.userId)), {
-                                currentOrder: currentOrder,
-                                newOrder: firstOrder + 1,
-                            }, {
-                                params: {
-                                    userId: params.userId,
-                                },
-                                headers: {
-                                    apikey: params.apikey,
-                                    Authorization: "Bearer ".concat(accessToken),
-                                },
-                            })
-                                .then(function () { })
-                                .catch(function () {
-                                getAccessToken();
-                            });
+                    setPackages(packages.map(function (pack) {
+                        if (pack.packageId === packageId) {
+                            pack.isDownload = 'Y';
+                        }
+                        return pack;
+                    }));
+                    if (main) {
+                        setMain({
+                            packageId: main.packageId,
+                            packageImg: main.packageImg,
+                            packageName: main.packageName,
+                            artistName: main.artistName,
+                            isDownload: 'Y',
                         });
                     }
                     setBtnLoading(0);
                 }, 500);
             })
-                .catch(function () {
-                getAccessToken();
+                .catch(function (error) {
                 setBtnLoading(0);
+                throw new Error(error.message);
             });
         }
-        else if (!authParams && !auth) {
-            var hideParams = {
-                userId: encodeURIComponent(params.userId),
-                packageId: packageId,
-            };
-            var data = client.myStickerHide(hideParams);
-            data.then(function () {
-                setTimeout(function () {
-                    if (hideList.indexOf(packageId) < 0) {
-                        setHideList(hideList.concat(packageId));
-                    }
-                    else {
-                        setHideList(hideList.filter(function (item) { return item !== packageId; }));
-                        var myParams = {
-                            userId: params.userId,
-                        };
-                        var myData = client.mySticker(myParams);
-                        myData.then(function (_a) {
-                            var body = _a.body;
-                            var firstOrder = body && body.packageList && body.packageList[0].order;
-                            var currentOrder = body.packageList.filter(function (pack) { return pack.packageId === packageId; })[0].order;
-                            var orderParams = {
-                                userId: encodeURIComponent(params.userId),
-                                currentOrder: currentOrder,
-                                newOrder: firstOrder + 1,
-                            };
-                            client.myStickerOrder(orderParams);
-                        });
-                    }
-                    setBtnLoading(0);
-                }, 500);
-            });
-        }
-        else if (!authParams && auth) {
+    };
+    var clickHide = function (packageId) {
+        setBtnLoading(packageId);
+        if (auth) {
             axios
                 .put("https://messenger.stipop.io/v1/mysticker/hide/".concat(encodeURIComponent(params.userId), "/").concat(packageId), null, {
                 params: { userId: params.userId },
@@ -596,6 +380,62 @@ var StoreComponent = function (_a) {
                                 headers: {
                                     apikey: params.apikey,
                                     Authorization: "Bearer ".concat(auth),
+                                },
+                            })
+                                .then(function () { })
+                                .catch(function (error) {
+                                throw new Error(error.message);
+                            });
+                        });
+                    }
+                    setBtnLoading(0);
+                }, 500);
+            })
+                .catch(function (error) {
+                setBtnLoading(0);
+                throw new Error(error.message);
+            });
+        }
+        else {
+            axios
+                .put("https://messenger.stipop.io/v1/mysticker/hide/".concat(encodeURIComponent(params.userId), "/").concat(packageId), null, {
+                params: { userId: params.userId },
+                headers: {
+                    apikey: params.apikey,
+                },
+            })
+                .then(function () {
+                setTimeout(function () {
+                    if (hideList.indexOf(packageId) < 0) {
+                        setHideList(hideList.concat(packageId));
+                    }
+                    else {
+                        setHideList(hideList.filter(function (item) { return item !== packageId; }));
+                        axios
+                            .get("https://messenger.stipop.io/v1/mysticker/".concat(encodeURIComponent(params.userId)), {
+                            params: {
+                                userId: params.userId,
+                            },
+                            headers: {
+                                apikey: params.apikey,
+                            },
+                        })
+                            .then(function (_a) {
+                            var data = _a.data;
+                            var firstOrder = data.body &&
+                                data.body.packageList &&
+                                data.body.packageList[0].order;
+                            var currentOrder = data.body.packageList.filter(function (pack) { return pack.packageId === packageId; })[0].order;
+                            axios
+                                .put("https://messenger.stipop.io/v1/mysticker/order/".concat(encodeURIComponent(params.userId)), {
+                                currentOrder: currentOrder,
+                                newOrder: firstOrder + 1,
+                            }, {
+                                params: {
+                                    userId: params.userId,
+                                },
+                                headers: {
+                                    apikey: params.apikey,
                                 },
                             })
                                 .then(function () { })

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
-import Stipop from 'stipop-js-sdk'
 import { FiX, FiSearch } from 'react-icons/fi'
 import LoadingSpinner from '../LoadingSpinner'
 
@@ -25,7 +24,6 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
   stickerClick,
   storeClick,
   shadow,
-  authParams,
   auth,
   mainLanguage,
 }) => {
@@ -38,37 +36,11 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
     packageId: '',
   })
   const [inputFocus, setInputFocus] = useState(false)
-  const [accessToken, setAccessToken] = useState('')
-
-  const client = new (Stipop as any)(params.apikey, 'v1')
-
-  const getAccessToken = () => {
-    axios
-      .post('https://messenger.stipop.io/v1/access', {
-        ...authParams,
-        userId: params.userId,
-      })
-      .then(({ data }) => {
-        setAccessToken(data.body.accessToken)
-      })
-  }
-
-  useEffect(() => {
-    if (authParams) {
-      if (!accessToken) {
-        getAccessToken()
-      }
-    }
-  }, [])
 
   useEffect(() => {
     setIsLoading(true)
     const searchParams = {
-      userId: authParams
-        ? params.userId
-        : auth
-        ? params.userId
-        : encodeURIComponent(params.userId),
+      userId: params.userId,
       q: keyword,
       lang: params.lang ? params.lang : 'en',
       countryCode: params.countryCode ? params.countryCode : 'US',
@@ -77,35 +49,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
     }
 
     if (keyword) {
-      if (authParams && accessToken) {
-        axios
-          .get(`https://messenger.stipop.io/v1/search`, {
-            params: searchParams,
-            headers: {
-              apikey: params.apikey,
-              Authorization: `Bearer ${accessToken}`,
-            },
-          })
-          .then(({ data }) => {
-            setStickerList(
-              data.body && data.body.stickerList ? data.body.stickerList : []
-            )
-            setTimeout(() => {
-              setIsLoading(false)
-            }, 500)
-          })
-          .catch(() => {
-            getAccessToken()
-          })
-      } else if (!authParams && !auth) {
-        const data = client.getSearch(searchParams)
-        data.then(({ body }) => {
-          setStickerList(body && body.stickerList ? body.stickerList : [])
-          setTimeout(() => {
-            setIsLoading(false)
-          }, 500)
-        })
-      } else if (!authParams && auth) {
+      if (auth) {
         axios
           .get(`https://messenger.stipop.io/v1/search`, {
             params: searchParams,
@@ -125,74 +69,33 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
           .catch(error => {
             throw new Error(error.message)
           })
+      } else {
+        axios
+          .get(`https://messenger.stipop.io/v1/search`, {
+            params: searchParams,
+            headers: {
+              apikey: params.apikey,
+            },
+          })
+          .then(({ data }) => {
+            setStickerList(
+              data.body && data.body.stickerList ? data.body.stickerList : []
+            )
+            setTimeout(() => {
+              setIsLoading(false)
+            }, 500)
+          })
+          .catch(error => {
+            throw new Error(error.message)
+          })
       }
     } else {
       setKeyword('')
     }
-  }, [keyword, params.lang, params.pageNumber, params.limit, accessToken, auth])
+  }, [keyword, params.lang, params.pageNumber, params.limit, auth])
 
   const clickSticker = (stickerId, stickerImg, packageId) => {
-    if (authParams && accessToken) {
-      axios
-        .post(
-          `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
-          null,
-          {
-            params: {
-              userId: params.userId,
-            },
-            headers: {
-              apikey: params.apikey,
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        )
-        .then(() => {
-          stickerClick({
-            url: stickerImg,
-            stickerId: stickerId,
-            packageId: packageId,
-          })
-          if (preview) {
-            setTempSticker({
-              url: stickerImg,
-              stickerId: stickerId,
-              packageId: packageId,
-            })
-          }
-        })
-        .catch(() => {
-          getAccessToken()
-        })
-    } else if (!authParams && !auth) {
-      axios
-        .post(
-          `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
-          null,
-          {
-            params: {
-              userId: params.userId,
-            },
-            headers: {
-              apikey: params.apikey,
-            },
-          }
-        )
-        .then(() => {
-          stickerClick({
-            url: stickerImg,
-            stickerId: stickerId,
-            packageId: packageId,
-          })
-          if (preview) {
-            setTempSticker({
-              url: stickerImg,
-              stickerId: stickerId,
-              packageId: packageId,
-            })
-          }
-        })
-    } else if (!authParams && auth) {
+    if (auth) {
       axios
         .post(
           `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
@@ -223,6 +126,34 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
         })
         .catch(error => {
           throw new Error(error.message)
+        })
+    } else {
+      axios
+        .post(
+          `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
+          null,
+          {
+            params: {
+              userId: params.userId,
+            },
+            headers: {
+              apikey: params.apikey,
+            },
+          }
+        )
+        .then(() => {
+          stickerClick({
+            url: stickerImg,
+            stickerId: stickerId,
+            packageId: packageId,
+          })
+          if (preview) {
+            setTempSticker({
+              url: stickerImg,
+              stickerId: stickerId,
+              packageId: packageId,
+            })
+          }
         })
     }
   }
@@ -288,6 +219,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
             params={{
               apikey: params.apikey,
               userId: params.userId,
+              lang: params.lang,
             }}
             size={{
               height:
@@ -355,7 +287,6 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
             preview={preview}
             stickerClick={info => stickerClick(info)}
             storeClick={click => storeClick(click)}
-            authParams={authParams}
             auth={auth}
             mainLanguage={mainLanguage}
           />

@@ -11,7 +11,6 @@ export interface SearchProps {
   preview?: boolean
   loadingColor?: string
   shadow?: string
-  authParams?: Auth
   auth?: string
   mainLanguage?: string
 }
@@ -56,16 +55,3 @@ interface Input {
   search?: string
 }
 
-interface Auth {
-  appId: string
-  clientId: string
-  clientSecret: string
-  refreshToken: string
-  expiryTime: number
-}
-
-interface Access {
-  apikey: string
-  userId: string
-  token: string
-}

@@ -7,7 +7,6 @@ export interface StoreProps {
   size?: Size
   border?: Border
   shadow?: string
-  authParams?: Auth
   auth?: string
   mainLanguage?: string
 }
@@ -64,12 +63,4 @@ interface Radius {
   rightBottom?: number
   leftBottom?: number
   all?: number
-}
-
-interface Auth {
-  appId: string
-  clientId: string
-  clientSecret: string
-  refreshToken: string
-  expiryTime: number
 }

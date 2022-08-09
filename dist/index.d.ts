@@ -14,7 +14,6 @@ interface SearchProps {
     preview?: boolean;
     loadingColor?: string;
     shadow?: string;
-    authParams?: Auth$3;
     auth?: string;
     mainLanguage?: string;
 }
@@ -53,13 +52,6 @@ interface Input$1 {
     focus?: string;
     search?: string;
 }
-interface Auth$3 {
-    appId: string;
-    clientId: string;
-    clientSecret: string;
-    refreshToken: string;
-    expiryTime: number;
-}
 
 declare const SearchComponent: React.FC<SearchProps>;
 
@@ -83,7 +75,7 @@ declare namespace Icon {
     };
 }
 
-interface StoreProps$1 {
+interface PickerProps {
     params: Params$2;
     size?: Size$2;
     border?: Border$2;
@@ -97,13 +89,13 @@ interface StoreProps$1 {
     preview?: boolean;
     loadingColor?: string;
     shadow?: string;
-    authParams?: Auth$2;
     auth?: string;
     mainLanguage?: string;
 }
 interface Params$2 {
     apikey: string;
     userId: string;
+    lang?: string;
 }
 interface Size$2 {
     width?: number;
@@ -130,15 +122,8 @@ interface Menu$1 {
     arrowColor?: string;
     imgSize?: number;
 }
-interface Auth$2 {
-    appId: string;
-    clientId: string;
-    clientSecret: string;
-    refreshToken: string;
-    expiryTime: number;
-}
 
-declare const PickerComponent: React.FC<StoreProps$1>;
+declare const PickerComponent: React.FC<PickerProps>;
 
 interface StoreProps {
     params: Params$1;
@@ -149,7 +134,6 @@ interface StoreProps {
     size?: Size$1;
     border?: Border$1;
     shadow?: string;
-    authParams?: Auth$1;
     auth?: string;
     mainLanguage?: string;
 }
@@ -201,13 +185,6 @@ interface Radius$1 {
     leftBottom?: number;
     all?: number;
 }
-interface Auth$1 {
-    appId: string;
-    clientId: string;
-    clientSecret: string;
-    refreshToken: string;
-    expiryTime: number;
-}
 
 declare const StoreComponent: React.FC<StoreProps>;
 
@@ -226,7 +203,6 @@ interface UnifiedProps {
     stickerClick?: Function;
     storeClick?: Function;
     shadow?: string;
-    authParams?: Auth;
     auth?: string;
     mainLanguage?: string;
 }
@@ -272,13 +248,6 @@ interface Menu {
     listCnt?: number;
     arrowColor?: string;
     imgSize?: number;
-}
-interface Auth {
-    appId: string;
-    clientId: string;
-    clientSecret: string;
-    refreshToken: string;
-    expiryTime: number;
 }
 
 declare const UnifiedComponent: React.FC<UnifiedProps>;

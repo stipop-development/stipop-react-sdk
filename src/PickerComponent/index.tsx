@@ -2,17 +2,13 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 import _ from 'lodash'
-
-import Stipop from 'stipop-js-sdk'
-
-import { StoreProps } from './index.types'
-
+import { PickerProps } from './index.types'
 import Icon from '../Icon'
 import LoadingSpinner from '../LoadingSpinner'
 import { FiX, FiChevronRight, FiChevronLeft } from 'react-icons/fi'
 import { lang } from '../lang'
 
-const PickerComponent: React.FC<StoreProps> = ({
+const PickerComponent: React.FC<PickerProps> = ({
   params,
   size,
   border,
@@ -26,7 +22,6 @@ const PickerComponent: React.FC<StoreProps> = ({
   preview,
   loadingColor,
   shadow,
-  authParams,
   auth,
   mainLanguage,
 }) => {
@@ -48,9 +43,6 @@ const PickerComponent: React.FC<StoreProps> = ({
     packageId: '',
   })
   const [init, setInit] = useState(false)
-  const [accessToken, setAccessToken] = useState('')
-
-  const client = new (Stipop as any)(params.apikey, 'v1')
 
   const dummies = []
   _.times(
@@ -67,40 +59,178 @@ const PickerComponent: React.FC<StoreProps> = ({
       ? 360 / (menu.listCnt + 2)
       : 45
 
-  const getAccessToken = () => {
-    axios
-      .post('https://messenger.stipop.io/v1/access', {
-        ...authParams,
-        userId: params.userId,
-      })
-      .then(({ data }) => {
-        setAccessToken(data.body.accessToken)
-      })
-  }
-
   useEffect(() => {
-    if (authParams) {
-      if (!accessToken) {
-        getAccessToken()
-      }
+    setIsLoading(true)
+    if (!auth) {
+      axios
+        .get(
+          `https://messenger.stipop.io/v1/mysticker/${encodeURIComponent(
+            params.userId
+          )}`,
+          {
+            params: {
+              userId: params.userId,
+            },
+            headers: {
+              apikey: params.apikey,
+            },
+          }
+        )
+        .then(({ data }) => {
+          setInit(data.body && data.body.packageList === null ? true : false)
+          if (data.body && data.body.packageList) {
+            setItemCnt(
+              data.body.packageList.filter(pack => pack.packageId !== null)
+                .length
+            )
+            setMyStickers(
+              data.body.packageList.filter(pack => pack.packageId !== null)
+            )
+
+            if (
+              data.body.packageList.filter(pack => pack.packageId !== null)
+                .length > 0
+            ) {
+              axios
+                .get(
+                  `https://messenger.stipop.io/v1/package/${data.body.packageList[0].packageId}`,
+                  {
+                    params: {
+                      userId: params.userId,
+                    },
+                    headers: {
+                      apikey: params.apikey,
+                    },
+                  }
+                )
+                .then(({ data }) => {
+                  setStickers(
+                    data.body && data.body.package && data.body.package.stickers
+                      ? data.body.package.stickers
+                      : []
+                  )
+                })
+            }
+            setIsLoading(false)
+          }
+        })
+        .catch(error => {
+          throw new Error(error.message)
+        })
     }
   }, [])
 
   useEffect(() => {
+    if (auth) {
+      axios
+        .get(
+          `https://messenger.stipop.io/v1/mysticker/${encodeURIComponent(
+            params.userId
+          )}`,
+          {
+            params: {
+              userId: params.userId,
+            },
+            headers: {
+              apikey: params.apikey,
+              Authorization: `Bearer ${auth}`,
+            },
+          }
+        )
+        .then(({ data }) => {
+          setInit(data.body && data.body.packageList === null ? true : false)
+          if (data.body && data.body.packageList) {
+            setItemCnt(
+              data.body.packageList.filter(pack => pack.packageId !== null)
+                .length
+            )
+            setMyStickers(
+              data.body.packageList.filter(pack => pack.packageId !== null)
+            )
+          }
+
+          if (
+            data.body.packageList.filter(pack => pack.packageId !== null)
+              .length > 0
+          ) {
+            if (recentView) {
+              axios
+                .get(
+                  `https://messenger.stipop.io/v1/package/send/${encodeURIComponent(
+                    params.userId
+                  )}`,
+                  {
+                    params: {
+                      userId: params.userId,
+                      limit: 28,
+                    },
+                    headers: {
+                      apikey: params.apikey,
+                      Authorization: `Bearer ${auth}`,
+                    },
+                  }
+                )
+                .then(({ data }) => {
+                  setStickers(
+                    data && data.body && data.body.stickerList
+                      ? data.body.stickerList
+                      : []
+                  )
+                })
+                .catch(error => {
+                  throw new Error(error.message)
+                })
+            } else {
+              axios
+                .get(
+                  `https://messenger.stipop.io/v1/package/${data.body.packageList[showPackage].packageId}`,
+                  {
+                    params: {
+                      userId: params.userId,
+                    },
+                    headers: {
+                      apikey: params.apikey,
+                      Authorization: `Bearer ${auth}`,
+                    },
+                  }
+                )
+                .then(({ data }) => {
+                  setStickers(
+                    data.body && data.body.package && data.body.package.stickers
+                      ? data.body.package.stickers
+                      : []
+                  )
+                })
+                .catch(error => {
+                  throw new Error(error.message)
+                })
+            }
+          }
+          setTimeout(() => {
+            setIsLoading(false)
+          }, 500)
+        })
+        .catch(error => {
+          throw new Error(error.message)
+        })
+    }
+  }, [auth])
+
+  useEffect(() => {
     if (init) {
       setIsLoading(true)
-      if (authParams && accessToken) {
+      if (auth) {
         axios
           .post(
-            'https://messenger.stipop.io/v1/init',
+            `https://messenger.stipop.io/v1/init`,
             {
               userId: params.userId,
-              lang: 'en',
+              lang: params.lang ? params.lang : 'en',
             },
             {
               headers: {
                 apikey: params.apikey,
-                Authorization: `Bearer ${accessToken}`,
+                Authorization: `Bearer ${auth}`,
               },
             }
           )
@@ -116,7 +246,7 @@ const PickerComponent: React.FC<StoreProps> = ({
                   },
                   headers: {
                     apikey: params.apikey,
-                    Authorization: `Bearer ${accessToken}`,
+                    Authorization: `Bearer ${auth}`,
                   },
                 }
               )
@@ -150,7 +280,7 @@ const PickerComponent: React.FC<StoreProps> = ({
                         },
                         headers: {
                           apikey: params.apikey,
-                          Authorization: `Bearer ${accessToken}`,
+                          Authorization: `Bearer ${auth}`,
                         },
                       }
                     )
@@ -163,427 +293,115 @@ const PickerComponent: React.FC<StoreProps> = ({
                           : []
                       )
                     })
-                    .catch(() => {
-                      getAccessToken()
+                    .catch(error => {
                       setShowPackage(0)
+                      throw new Error(error.message)
                     })
+                  setIsLoading(false)
                 }
-                setIsLoading(false)
               })
-              .catch(() => {
-                getAccessToken()
+              .catch(error => {
                 setShowPackage(0)
+                throw new Error(error.message)
               })
           })
-          .catch(() => {
-            getAccessToken()
+          .catch(error => {
             setShowPackage(0)
+            throw new Error(error.message)
+          })
+      } else {
+        axios
+          .post(
+            `https://messenger.stipop.io/v1/init`,
+            {
+              userId: params.userId,
+              lang: params.lang ? params.lang : 'en',
+            },
+            {
+              headers: {
+                apikey: params.apikey,
+              },
+            }
+          )
+          .then(() => {
+            axios
+              .get(
+                `https://messenger.stipop.io/v1/mysticker/${encodeURIComponent(
+                  params.userId
+                )}`,
+                {
+                  params: {
+                    userId: params.userId,
+                  },
+                  headers: {
+                    apikey: params.apikey,
+                  },
+                }
+              )
+              .then(({ data }) => {
+                setInit(
+                  data.body && data.body.packageList === null ? true : false
+                )
+                if (data.body && data.body.packageList) {
+                  setItemCnt(
+                    data.body.packageList.filter(
+                      pack => pack.packageId !== null
+                    ).length
+                  )
+                  setMyStickers(
+                    data.body.packageList.filter(
+                      pack => pack.packageId !== null
+                    )
+                  )
+
+                  if (
+                    data.body.packageList.filter(
+                      pack => pack.packageId !== null
+                    ).length > 0
+                  ) {
+                    axios
+                      .get(
+                        `https://messenger.stipop.io/v1/package/${data.body.packageList[0].packageId}`,
+                        {
+                          params: {
+                            userId: params.userId,
+                          },
+                          headers: {
+                            apikey: params.apikey,
+                          },
+                        }
+                      )
+                      .then(({ data }) => {
+                        setStickers(
+                          data.body &&
+                            data.body.package &&
+                            data.body.package.stickers
+                            ? data.body.package.stickers
+                            : []
+                        )
+                      })
+                      .catch(error => {
+                        throw new Error(error.message)
+                      })
+                  }
+                  setIsLoading(false)
+                }
+              })
+              .catch(error => {
+                throw new Error(error.message)
+              })
+          })
+          .catch(error => {
+            throw new Error(error.message)
           })
       }
-    } else if (!authParams && !auth) {
-      const initParams = {
-        userId: params.userId,
-        // userId: encodeURIComponent(params.userId),
-        lang: 'en',
-      }
-      const initData = client.init(initParams)
-
-      initData.then(() => {
-        const pickerParams = {
-          userId: encodeURIComponent(params.userId),
-        }
-
-        const data = client.mySticker(pickerParams)
-
-        data.then(({ body }) => {
-          setInit(body && body.packageList === null ? true : false)
-          if (body && body.packageList) {
-            setItemCnt(
-              body.packageList.filter(pack => pack.packageId !== null).length
-            )
-            setMyStickers(
-              body.packageList.filter(pack => pack.packageId !== null)
-            )
-
-            if (
-              body.packageList.filter(pack => pack.packageId !== null).length >
-              0
-            ) {
-              const packageParams = {
-                userId: encodeURIComponent(params.userId),
-                packId: body.packageList[0].packageId,
-              }
-
-              const packageData = client.getPackInfo(packageParams)
-              packageData.then(({ body }) => {
-                setStickers(
-                  body && body.package && body.package.stickers
-                    ? body.package.stickers
-                    : []
-                )
-              })
-            }
-            setIsLoading(false)
-          }
-        })
-      })
-    } else if (!authParams && auth) {
-      axios
-        .post(
-          'https://messenger.stipop.io/v1/init',
-          {
-            userId: params.userId,
-            lang: 'en',
-          },
-          {
-            headers: {
-              apikey: params.apikey,
-              Authorization: `Bearer ${auth}`,
-            },
-          }
-        )
-        .then(() => {
-          axios
-            .get(
-              `https://messenger.stipop.io/v1/mysticker/${encodeURIComponent(
-                params.userId
-              )}`,
-              {
-                params: {
-                  userId: params.userId,
-                },
-                headers: {
-                  apikey: params.apikey,
-                  Authorization: `Bearer ${auth}`,
-                },
-              }
-            )
-            .then(({ data }) => {
-              setInit(
-                data.body && data.body.packageList === null ? true : false
-              )
-              if (data.body && data.body.packageList) {
-                setItemCnt(
-                  data.body.packageList.filter(pack => pack.packageId !== null)
-                    .length
-                )
-                setMyStickers(
-                  data.body.packageList.filter(pack => pack.packageId !== null)
-                )
-              }
-
-              if (
-                data.body.packageList.filter(pack => pack.packageId !== null)
-                  .length > 0
-              ) {
-                axios
-                  .get(
-                    `https://messenger.stipop.io/v1/package/${data.body.packageList[0].packageId}`,
-                    {
-                      params: {
-                        userId: params.userId,
-                      },
-                      headers: {
-                        apikey: params.apikey,
-                        Authorization: `Bearer ${auth}`,
-                      },
-                    }
-                  )
-                  .then(({ data }) => {
-                    setStickers(
-                      data.body &&
-                        data.body.package &&
-                        data.body.package.stickers
-                        ? data.body.package.stickers
-                        : []
-                    )
-                  })
-                  .catch(error => {
-                    setShowPackage(0)
-                    throw new Error(error.message)
-                  })
-              }
-              setIsLoading(false)
-            })
-            .catch(error => {
-              setShowPackage(0)
-              throw new Error(error.message)
-            })
-        })
-        .catch(error => {
-          setShowPackage(0)
-          throw new Error(error.message)
-        })
     }
   }, [init])
-
-  useEffect(() => {
-    setIsLoading(true)
-    if (authParams && accessToken) {
-      axios
-        .get(
-          `https://messenger.stipop.io/v1/mysticker/${encodeURIComponent(
-            params.userId
-          )}`,
-          {
-            params: {
-              userId: params.userId,
-            },
-            headers: {
-              apikey: params.apikey,
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        )
-        .then(({ data }) => {
-          setInit(data.body && data.body.packageList === null ? true : false)
-          if (data.body && data.body.packageList) {
-            setItemCnt(
-              data.body.packageList.filter(pack => pack.packageId !== null)
-                .length
-            )
-            setMyStickers(
-              data.body.packageList.filter(pack => pack.packageId !== null)
-            )
-          }
-
-          if (
-            data.body.packageList.filter(pack => pack.packageId !== null)
-              .length > 0
-          ) {
-            if (recentView) {
-              axios
-                .get(
-                  `https://messenger.stipop.io/v1/package/send/${encodeURIComponent(
-                    params.userId
-                  )}`,
-                  {
-                    params: {
-                      userId: params.userId,
-                      limit: 28,
-                    },
-                    headers: {
-                      apikey: params.apikey,
-                      Authorization: `Bearer ${accessToken}`,
-                    },
-                  }
-                )
-                .then(({ data }) => {
-                  setStickers(
-                    data && data.body && data.body.stickerList
-                      ? data.body.stickerList
-                      : []
-                  )
-                })
-                .catch(() => {
-                  getAccessToken()
-                })
-            } else {
-              axios
-                .get(
-                  `https://messenger.stipop.io/v1/package/${data.body.packageList[showPackage].packageId}`,
-                  {
-                    params: {
-                      userId: params.userId,
-                    },
-                    headers: {
-                      apikey: params.apikey,
-                      Authorization: `Bearer ${accessToken}`,
-                    },
-                  }
-                )
-                .then(({ data }) => {
-                  setStickers(
-                    data.body && data.body.package && data.body.package.stickers
-                      ? data.body.package.stickers
-                      : []
-                  )
-                })
-                .catch(() => {
-                  getAccessToken()
-                })
-            }
-          }
-          setTimeout(() => {
-            setIsLoading(false)
-          }, 500)
-        })
-        .catch(() => {
-          getAccessToken()
-        })
-    } else if (!authParams && !auth) {
-      const pickerParams = {
-        // userId: params.userId,
-        userId: encodeURIComponent(params.userId),
-      }
-
-      const data = client.mySticker(pickerParams)
-
-      data.then(({ body }) => {
-        setInit(body && body.packageList === null ? true : false)
-        if (body && body.packageList) {
-          setItemCnt(
-            body.packageList.filter(pack => pack.packageId !== null).length
-          )
-          setMyStickers(
-            body.packageList.filter(pack => pack.packageId !== null)
-          )
-
-          if (
-            body.packageList.filter(pack => pack.packageId !== null).length > 0
-          ) {
-            const packageParams = {
-              userId: encodeURIComponent(params.userId),
-              packId: body.packageList[0].packageId,
-            }
-
-            const packageData = client.getPackInfo(packageParams)
-            packageData.then(({ body }) => {
-              setStickers(
-                body && body.package && body.package.stickers
-                  ? body.package.stickers
-                  : []
-              )
-            })
-          }
-          setIsLoading(false)
-        }
-      })
-    } else if (!authParams && auth) {
-      axios
-        .get(
-          `https://messenger.stipop.io/v1/mysticker/${encodeURIComponent(
-            params.userId
-          )}`,
-          {
-            params: {
-              userId: params.userId,
-            },
-            headers: {
-              apikey: params.apikey,
-              Authorization: `Bearer ${auth}`,
-            },
-          }
-        )
-        .then(({ data }) => {
-          setInit(data.body && data.body.packageList === null ? true : false)
-          if (data.body && data.body.packageList) {
-            setItemCnt(
-              data.body.packageList.filter(pack => pack.packageId !== null)
-                .length
-            )
-            setMyStickers(
-              data.body.packageList.filter(pack => pack.packageId !== null)
-            )
-          }
-
-          if (
-            data.body.packageList.filter(pack => pack.packageId !== null)
-              .length > 0
-          ) {
-            if (recentView) {
-              axios
-                .get(
-                  `https://messenger.stipop.io/v1/package/send/${encodeURIComponent(
-                    params.userId
-                  )}`,
-                  {
-                    params: {
-                      userId: params.userId,
-                      limit: 28,
-                    },
-                    headers: {
-                      apikey: params.apikey,
-                      Authorization: `Bearer ${auth}`,
-                    },
-                  }
-                )
-                .then(({ data }) => {
-                  setStickers(
-                    data && data.body && data.body.stickerList
-                      ? data.body.stickerList
-                      : []
-                  )
-                })
-                .catch(error => {
-                  throw new Error(error.message)
-                })
-            } else {
-              axios
-                .get(
-                  `https://messenger.stipop.io/v1/package/${data.body.packageList[showPackage].packageId}`,
-                  {
-                    params: {
-                      userId: params.userId,
-                    },
-                    headers: {
-                      apikey: params.apikey,
-                      Authorization: `Bearer ${auth}`,
-                    },
-                  }
-                )
-                .then(({ data }) => {
-                  setStickers(
-                    data.body && data.body.package && data.body.package.stickers
-                      ? data.body.package.stickers
-                      : []
-                  )
-                })
-                .catch(error => {
-                  throw new Error(error.message)
-                })
-            }
-          }
-          setTimeout(() => {
-            setIsLoading(false)
-          }, 500)
-        })
-        .catch(error => {
-          throw new Error(error.message)
-        })
-    }
-  }, [accessToken, auth])
 
   const clickPackage = async packageId => {
     await setIsLoading(true)
     await setRecentView(false)
-    if (authParams && accessToken) {
-      axios
-        .get(`https://messenger.stipop.io/v1/package/${packageId}`, {
-          params: {
-            userId: params.userId,
-          },
-          headers: {
-            apikey: params.apikey,
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        .then(({ data }) => {
-          setStickers(
-            data.body && data.body.package && data.body.package.stickers
-              ? data.body.package.stickers
-              : []
-          )
-        })
-        .catch(() => {
-          getAccessToken()
-        })
-    } else if (!authParams && !auth) {
-      const packageParams = {
-        userId: encodeURIComponent(params.userId),
-        packId: packageId,
-      }
-
-      const data = client.getPackInfo(packageParams)
-
-      await data.then(({ body }) => {
-        setStickers(
-          body && body.package && body.package.stickers
-            ? body.package.stickers
-            : []
-        )
-      })
-    } else if (!authParams && auth) {
+    if (auth) {
       axios
         .get(`https://messenger.stipop.io/v1/package/${packageId}`, {
           params: {
@@ -604,85 +422,73 @@ const PickerComponent: React.FC<StoreProps> = ({
         .catch(error => {
           throw new Error(error.message)
         })
+    } else {
+      axios
+        .get(`https://messenger.stipop.io/v1/package/${packageId}`, {
+          params: {
+            userId: params.userId,
+          },
+          headers: {
+            apikey: params.apikey,
+          },
+        })
+        .then(({ data }) => {
+          setStickers(
+            data.body && data.body.package && data.body.package.stickers
+              ? data.body.package.stickers
+              : []
+          )
+        })
+        .catch(error => {
+          throw new Error(error.message)
+        })
     }
   }
 
   const clickSticker = (stickerId, stickerImg, packageId) => {
-    if (authParams && accessToken) {
+    if (auth) {
       axios
         .post(
           `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
           null,
           {
             params: {
-              // userId: encodeURIComponent(params.userId),
-              userId: params.userId,
-            },
-            headers: {
-              apikey: params.apikey,
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        )
-        .then(() => {
-          stickerClick({
-            url: stickerImg,
-            stickerId: stickerId,
-            packageId: packageId,
-          })
-          if (preview) {
-            setTempSticker({
-              url: stickerImg,
-              stickerId: stickerId,
-              packageId: packageId,
-            })
-          }
-        })
-        .catch(() => {
-          getAccessToken()
-        })
-    } else if (!authParams && !auth) {
-      axios
-        .post(
-          `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
-          null,
-          {
-            params: {
-              // userId: encodeURIComponent(params.userId),
-              userId: params.userId,
-            },
-            headers: {
-              apikey: params.apikey,
-            },
-          }
-        )
-        .then(() => {
-          stickerClick({
-            url: stickerImg,
-            stickerId: stickerId,
-            packageId: packageId,
-          })
-          if (preview) {
-            setTempSticker({
-              url: stickerImg,
-              stickerId: stickerId,
-              packageId: packageId,
-            })
-          }
-        })
-    } else if (!authParams && auth) {
-      axios
-        .post(
-          `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
-          null,
-          {
-            params: {
-              // userId: encodeURIComponent(params.userId),
               userId: params.userId,
             },
             headers: {
               apikey: params.apikey,
               Authorization: `Bearer ${auth}`,
+            },
+          }
+        )
+        .then(() => {
+          stickerClick({
+            url: stickerImg,
+            stickerId: stickerId,
+            packageId: packageId,
+          })
+          if (preview) {
+            setTempSticker({
+              url: stickerImg,
+              stickerId: stickerId,
+              packageId: packageId,
+            })
+          }
+        })
+        .catch(error => {
+          throw new Error(error.message)
+        })
+    } else {
+      axios
+        .post(
+          `https://messenger.stipop.io/v1/analytics/send/${stickerId}`,
+          null,
+          {
+            params: {
+              userId: params.userId,
+            },
+            headers: {
+              apikey: params.apikey,
             },
           }
         )
@@ -709,53 +515,7 @@ const PickerComponent: React.FC<StoreProps> = ({
   const clickTime = () => {
     setIsLoading(true)
     setRecentView(true)
-    if (authParams && accessToken) {
-      axios
-        .get(
-          `https://messenger.stipop.io/v1/package/send/${encodeURIComponent(
-            params.userId
-          )}`,
-          {
-            params: {
-              userId: params.userId,
-              limit: 28,
-            },
-            headers: {
-              apikey: params.apikey,
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        )
-        .then(({ data }) => {
-          setStickers(
-            data && data.body && data.body.stickerList
-              ? data.body.stickerList
-              : []
-          )
-        })
-        .catch(() => {
-          getAccessToken()
-        })
-    } else if (!authParams && !auth) {
-      const requestUrl = `https://messenger.stipop.io/v1/package/send/${encodeURIComponent(
-        params.userId
-      )}?limit=28`
-      axios
-        .get(requestUrl, {
-          headers: {
-            apikey: params.apikey,
-            'Content-Type': 'application/json',
-          },
-        })
-        .then(({ data }) => {
-          setRecentView(true)
-          setStickers(
-            data && data.body && data.body.stickerList
-              ? data.body.stickerList
-              : []
-          )
-        })
-    } else if (!authParams && auth) {
+    if (auth) {
       axios
         .get(
           `https://messenger.stipop.io/v1/package/send/${encodeURIComponent(
@@ -773,6 +533,34 @@ const PickerComponent: React.FC<StoreProps> = ({
           }
         )
         .then(({ data }) => {
+          setStickers(
+            data && data.body && data.body.stickerList
+              ? data.body.stickerList
+              : []
+          )
+        })
+        .catch(error => {
+          throw new Error(error.message)
+        })
+    } else {
+      axios
+        .get(
+          `https://messenger.stipop.io/v1/package/send/${encodeURIComponent(
+            params.userId
+          )}`,
+          {
+            params: {
+              userId: params.userId,
+              limit: 28,
+            },
+            headers: {
+              apikey: params.apikey,
+              Authorization: `Bearer ${auth}`,
+            },
+          }
+        )
+        .then(({ data }) => {
+          setRecentView(true)
           setStickers(
             data && data.body && data.body.stickerList
               ? data.body.stickerList

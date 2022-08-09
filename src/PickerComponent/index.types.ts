@@ -1,4 +1,4 @@
-export interface StoreProps {
+export interface PickerProps {
   params: Params
   size?: Size
   border?: Border
@@ -12,7 +12,6 @@ export interface StoreProps {
   preview?: boolean
   loadingColor?: string
   shadow?: string
-  authParams?: Auth
   auth?: string
   mainLanguage?: string
 }
@@ -20,6 +19,7 @@ export interface StoreProps {
 interface Params {
   apikey: string
   userId: string
+  lang?: string
 }
 
 interface Size {
@@ -49,13 +49,5 @@ interface Menu {
   listCnt?: number
   arrowColor?: string
   imgSize?: number
-}
-
-interface Auth {
-  appId: string
-  clientId: string
-  clientSecret: string
-  refreshToken: string
-  expiryTime: number
 }
 

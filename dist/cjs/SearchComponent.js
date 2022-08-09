@@ -1,17 +1,17 @@
 'use strict';
 
-var tslib_es6 = require('./tslib.es6-fb247e4a.js');
+var tslib_es6 = require('./tslib.es6-667f4605.js');
 var React = require('react');
-var LoadingSpinner = require('./index-48c7d746.js');
-var lang = require('./lang-607c928f.js');
+var LoadingSpinner = require('./index-704b1ded.js');
 var index_esm = require('./index.esm-dd03e45b.js');
+var lang = require('./lang-f9d0ff34.js');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
 var SearchComponent = function (_a) {
-    var params = _a.params, size = _a.size, backgroundColor = _a.backgroundColor, column = _a.column, border = _a.border, input = _a.input, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, preview = _a.preview, loadingColor = _a.loadingColor, shadow = _a.shadow, authParams = _a.authParams, auth = _a.auth, mainLanguage = _a.mainLanguage;
+    var params = _a.params, size = _a.size, backgroundColor = _a.backgroundColor, column = _a.column, border = _a.border, input = _a.input, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, preview = _a.preview, loadingColor = _a.loadingColor, shadow = _a.shadow, auth = _a.auth, mainLanguage = _a.mainLanguage;
     var _b = React.useState(params.default
         ? params.default
         : params.lang
@@ -27,31 +27,10 @@ var SearchComponent = function (_a) {
         packageId: '',
     }), tempSticker = _e[0], setTempSticker = _e[1];
     var _f = React.useState(false), inputFocus = _f[0], setInputFocus = _f[1];
-    var _g = React.useState(''), accessToken = _g[0], setAccessToken = _g[1];
-    var client = new lang.Stipop(params.apikey, 'v1');
-    var getAccessToken = function () {
-        lang.axios
-            .post('https://messenger.stipop.io/v1/access', tslib_es6.__assign(tslib_es6.__assign({}, authParams), { userId: params.userId }))
-            .then(function (_a) {
-            var data = _a.data;
-            setAccessToken(data.body.accessToken);
-        });
-    };
-    React.useEffect(function () {
-        if (authParams) {
-            if (!accessToken) {
-                getAccessToken();
-            }
-        }
-    }, []);
     React.useEffect(function () {
         setIsLoading(true);
         var searchParams = {
-            userId: authParams
-                ? params.userId
-                : auth
-                    ? params.userId
-                    : encodeURIComponent(params.userId),
+            userId: params.userId,
             q: keyword,
             lang: params.lang ? params.lang : 'en',
             countryCode: params.countryCode ? params.countryCode : 'US',
@@ -59,37 +38,7 @@ var SearchComponent = function (_a) {
             limit: params.limit ? params.limit : 20,
         };
         if (keyword) {
-            if (authParams && accessToken) {
-                lang.axios
-                    .get("https://messenger.stipop.io/v1/search", {
-                    params: searchParams,
-                    headers: {
-                        apikey: params.apikey,
-                        Authorization: "Bearer ".concat(accessToken),
-                    },
-                })
-                    .then(function (_a) {
-                    var data = _a.data;
-                    setStickerList(data.body && data.body.stickerList ? data.body.stickerList : []);
-                    setTimeout(function () {
-                        setIsLoading(false);
-                    }, 500);
-                })
-                    .catch(function () {
-                    getAccessToken();
-                });
-            }
-            else if (!authParams && !auth) {
-                var data = client.getSearch(searchParams);
-                data.then(function (_a) {
-                    var body = _a.body;
-                    setStickerList(body && body.stickerList ? body.stickerList : []);
-                    setTimeout(function () {
-                        setIsLoading(false);
-                    }, 500);
-                });
-            }
-            else if (!authParams && auth) {
+            if (auth) {
                 lang.axios
                     .get("https://messenger.stipop.io/v1/search", {
                     params: searchParams,
@@ -100,7 +49,26 @@ var SearchComponent = function (_a) {
                 })
                     .then(function (_a) {
                     var data = _a.data;
-                    setStickerList(data && data.body.stickerList ? data.body.stickerList : []);
+                    setStickerList(data.body && data.body.stickerList ? data.body.stickerList : []);
+                    setTimeout(function () {
+                        setIsLoading(false);
+                    }, 500);
+                })
+                    .catch(function (error) {
+                    throw new Error(error.message);
+                });
+            }
+            else {
+                lang.axios
+                    .get("https://messenger.stipop.io/v1/search", {
+                    params: searchParams,
+                    headers: {
+                        apikey: params.apikey,
+                    },
+                })
+                    .then(function (_a) {
+                    var data = _a.data;
+                    setStickerList(data.body && data.body.stickerList ? data.body.stickerList : []);
                     setTimeout(function () {
                         setIsLoading(false);
                     }, 500);
@@ -119,64 +87,9 @@ var SearchComponent = function (_a) {
                         : 'hi'
                     : 'hi');
         }
-    }, [keyword, params.lang, params.pageNumber, params.limit, accessToken, auth]);
+    }, [keyword, params.lang, params.pageNumber, params.limit, auth]);
     var clickSticker = function (stickerId, stickerImg, packageId) {
-        if (authParams && accessToken) {
-            lang.axios
-                .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
-                params: {
-                    // userId: encodeURIComponent(params.userId),
-                    userId: params.userId,
-                },
-                headers: {
-                    apikey: params.apikey,
-                    Authorization: "Bearer ".concat(accessToken),
-                },
-            })
-                .then(function () {
-                stickerClick({
-                    url: stickerImg,
-                    stickerId: stickerId,
-                    packageId: packageId,
-                });
-                if (preview) {
-                    setTempSticker({
-                        url: stickerImg,
-                        stickerId: stickerId,
-                        packageId: packageId,
-                    });
-                }
-            })
-                .catch(function () {
-                getAccessToken();
-            });
-        }
-        else if (!authParams && !auth) {
-            lang.axios
-                .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
-                params: {
-                    userId: params.userId,
-                },
-                headers: {
-                    apikey: params.apikey,
-                },
-            })
-                .then(function () {
-                stickerClick({
-                    url: stickerImg,
-                    stickerId: stickerId,
-                    packageId: packageId,
-                });
-                if (preview) {
-                    setTempSticker({
-                        url: stickerImg,
-                        stickerId: stickerId,
-                        packageId: packageId,
-                    });
-                }
-            });
-        }
-        else if (!authParams && auth) {
+        if (auth) {
             lang.axios
                 .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
                 params: {
@@ -205,7 +118,34 @@ var SearchComponent = function (_a) {
                 throw new Error(error.message);
             });
         }
-        // }
+        else {
+            lang.axios
+                .post("https://messenger.stipop.io/v1/analytics/send/".concat(stickerId), null, {
+                params: {
+                    userId: params.userId,
+                },
+                headers: {
+                    apikey: params.apikey,
+                },
+            })
+                .then(function () {
+                stickerClick({
+                    url: stickerImg,
+                    stickerId: stickerId,
+                    packageId: packageId,
+                });
+                if (preview) {
+                    setTempSticker({
+                        url: stickerImg,
+                        stickerId: stickerId,
+                        packageId: packageId,
+                    });
+                }
+            })
+                .catch(function (error) {
+                throw new Error(error.message);
+            });
+        }
     };
     return (React__default["default"].createElement(SearchWrapper, { size: size, backgroundColor: backgroundColor, border: border, shadow: shadow },
         preview && tempSticker.url && (React__default["default"].createElement(PreviewWrapper, null,
