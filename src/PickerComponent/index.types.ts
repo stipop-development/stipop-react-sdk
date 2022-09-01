@@ -14,6 +14,7 @@ export interface PickerProps {
   shadow?: string
   auth?: string
   mainLanguage?: string
+  store?: boolean
 }
 
 interface Params {

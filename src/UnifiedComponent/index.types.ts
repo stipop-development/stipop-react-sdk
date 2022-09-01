@@ -15,6 +15,7 @@ export interface UnifiedProps {
   shadow?: string
   auth?: string
   mainLanguage?: string
+  store?: boolean
 }
 
 interface Params {

@@ -26,6 +26,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
   shadow,
   auth,
   mainLanguage,
+  store,
 }) => {
   const [keyword, setKeyword] = useState('')
   const [stickerList, setStickerList] = useState([])
@@ -289,6 +290,7 @@ const UnifiedComponent: React.FC<UnifiedProps> = ({
             storeClick={click => storeClick(click)}
             auth={auth}
             mainLanguage={mainLanguage}
+            store={store}
           />
         </div>
       ) : !isLoading ? (

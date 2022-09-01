@@ -24,6 +24,7 @@ const PickerComponent: React.FC<PickerProps> = ({
   shadow,
   auth,
   mainLanguage,
+  store,
 }) => {
   const [myStickers, setMyStickers] = useState([])
   const [stickers, setStickers] = useState([])
@@ -46,7 +47,13 @@ const PickerComponent: React.FC<PickerProps> = ({
 
   const dummies = []
   _.times(
-    menu && menu.listCnt ? menu.listCnt - (2 + itemCnt) : 6 - (2 + itemCnt),
+    store !== false
+      ? menu && menu.listCnt
+        ? menu.listCnt - (2 + itemCnt)
+        : 6 - (2 + itemCnt)
+      : menu && menu.listCnt
+      ? menu.listCnt - (1 + itemCnt)
+      : 6 - (1 + itemCnt),
     n => dummies.push({ index: n.toString(36) })
   )
 
@@ -650,6 +657,7 @@ const PickerComponent: React.FC<PickerProps> = ({
                     : 45)
               )
             )
+            console.log(itemNum)
             setScrollX(e.target.scrollLeft)
           }}
         >
@@ -666,17 +674,25 @@ const PickerComponent: React.FC<PickerProps> = ({
           >
             <Icon type="TIME" />
           </IconWrapper>
-          <IconWrapper
-            backgroundColor={backgroundColor}
-            border={border}
-            menu={menu}
-            size={size}
-          >
-            <Icon type="STORE" onClick={() => storeClick(true)} />
-          </IconWrapper>
+          {store !== false && (
+            <IconWrapper
+              backgroundColor={backgroundColor}
+              border={border}
+              menu={menu}
+              size={size}
+            >
+              <Icon type="STORE" onClick={() => storeClick(true)} />
+            </IconWrapper>
+          )}
           {myStickers.length > 0 ? (
             myStickers.length >
-            (menu && menu.listCnt ? menu.listCnt - 2 : 4) ? (
+            (store !== false
+              ? menu && menu.listCnt
+                ? menu.listCnt - 2
+                : 4
+              : menu && menu.listCnt
+              ? menu.listCnt - 1
+              : 5) ? (
               myStickers.map(
                 (pack, index) =>
                   pack.packageId && (
@@ -746,7 +762,15 @@ const PickerComponent: React.FC<PickerProps> = ({
         </PickerMenu>
         <ArrowWrapper
           id={
-            itemCnt - (menu && menu.listCnt ? menu.listCnt - 2 : 4) <= itemNum
+            itemCnt -
+              (store !== false
+                ? menu && menu.listCnt
+                  ? menu.listCnt - 2
+                  : 4
+                : menu && menu.listCnt
+                ? menu.listCnt - 1
+                : 5) <=
+            itemNum
               ? 'right'
               : 'right-black'
           }
@@ -764,7 +788,14 @@ const PickerComponent: React.FC<PickerProps> = ({
             )
           }}
         >
-          {itemCnt - (menu && menu.listCnt ? menu.listCnt - 2 : 4) <=
+          {itemCnt -
+            (store !== false
+              ? menu && menu.listCnt
+                ? menu.listCnt - 2
+                : 4
+              : menu && menu.listCnt
+              ? menu.listCnt - 1
+              : 5) <=
           itemNum ? (
             <FiChevronRight size={30} color={'#c1c1c1'} />
           ) : (
