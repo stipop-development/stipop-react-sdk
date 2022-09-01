@@ -623,6 +623,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [shadow](#shadow-1)                   | String   |
 | [auth](#auth-1)                       | String   |
 | [mainLanguage](#mainlanguage-1)       | String   |
+| [store](#store)                       | Boolean  |
 
 - #### params
 
@@ -1077,6 +1078,34 @@ You can get the api key by signing up and creating an application in Stipop Dash
           userId: 'userId',
         }}
         mainLanguage={'en'}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
+
+- #### store
+
+  | Type    | Required | Default |
+  | ------- | -------- | ------- |
+  | boolean | optional | True    |
+
+  ##### Example
+
+  ```react
+  import { PickerComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <PickerComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        store={true}
       />
     )
   }
@@ -1616,6 +1645,7 @@ You can get the api key by signing up and creating an application in Stipop Dash
 | [shadow](#shadow-3)                   | String   |
 | [auth](#auth-3)                       | String   |
 | [mainLanguage](#mainlanguage-3)       | String   |
+| [store](#store-1)                     | Boolean  |
 
 - #### params
 
@@ -2126,6 +2156,34 @@ You can get the api key by signing up and creating an application in Stipop Dash
           userId: 'userId',
         }}
         mainLanguage={'en'}
+      />
+    )
+  }
+  
+  export default App
+  ```
+
+
+
+- #### store
+
+  | Type    | Required | Default |
+  | ------- | -------- | ------- |
+  | boolean | optional | True    |
+
+  ##### Example
+
+  ```react
+  import { UnifiedComponent } from 'stipop-react-sdk'
+  
+  const App = () => {
+    return (
+      <UnifiedComponent 
+        params={{
+          apikey: 'apikey',
+          userId: 'userId',
+        }}
+        store={true}
       />
     )
   }
