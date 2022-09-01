@@ -91,6 +91,7 @@ interface PickerProps {
     shadow?: string;
     auth?: string;
     mainLanguage?: string;
+    store?: boolean;
 }
 interface Params$2 {
     apikey: string;
@@ -205,6 +206,7 @@ interface UnifiedProps {
     shadow?: string;
     auth?: string;
     mainLanguage?: string;
+    store?: boolean;
 }
 interface Params {
     apikey: string;

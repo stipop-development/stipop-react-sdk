@@ -17217,7 +17217,7 @@ var lodash = {exports: {}};
 var _ = lodash.exports;
 
 var PickerComponent = function (_a) {
-    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, storeClick = _a.storeClick, preview = _a.preview, loadingColor = _a.loadingColor, shadow = _a.shadow, auth = _a.auth, mainLanguage = _a.mainLanguage;
+    var params = _a.params, size = _a.size, border = _a.border, backgroundColor = _a.backgroundColor, menu = _a.menu, column = _a.column, scroll = _a.scroll, scrollHover = _a.scrollHover, stickerClick = _a.stickerClick, storeClick = _a.storeClick, preview = _a.preview, loadingColor = _a.loadingColor, shadow = _a.shadow, auth = _a.auth, mainLanguage = _a.mainLanguage, store = _a.store;
     var _b = React.useState([]), myStickers = _b[0], setMyStickers = _b[1];
     var _c = React.useState([]), stickers = _c[0], setStickers = _c[1];
     var _d = React.useState(0), showPackage = _d[0], setShowPackage = _d[1];
@@ -17235,7 +17235,13 @@ var PickerComponent = function (_a) {
     }), tempSticker = _l[0], setTempSticker = _l[1];
     var _m = React.useState(false), init = _m[0], setInit = _m[1];
     var dummies = [];
-    _.times(menu && menu.listCnt ? menu.listCnt - (2 + itemCnt) : 6 - (2 + itemCnt), function (n) { return dummies.push({ index: n.toString(36) }); });
+    _.times(store !== false
+        ? menu && menu.listCnt
+            ? menu.listCnt - (2 + itemCnt)
+            : 6 - (2 + itemCnt)
+        : menu && menu.listCnt
+            ? menu.listCnt - (1 + itemCnt)
+            : 6 - (1 + itemCnt), function (n) { return dummies.push({ index: n.toString(36) }); });
     var itemWidth = size && size.width
         ? menu && menu.listCnt
             ? size.width / (menu.listCnt + 2)
@@ -17695,6 +17701,7 @@ var PickerComponent = function (_a) {
                             : menu && menu.listCnt
                                 ? 360 / (menu.listCnt + 2)
                                 : 45)));
+                    console.log(itemNum);
                     setScrollX(e.target.scrollLeft);
                 } },
                 React__default["default"].createElement(IconWrapper, { backgroundColor: backgroundColor, border: border, menu: menu, size: size, onClick: function () {
@@ -17702,10 +17709,16 @@ var PickerComponent = function (_a) {
                         setShowPackage(-1);
                     }, show: showPackage === -1 },
                     React__default["default"].createElement(Icon["default"], { type: "TIME" })),
-                React__default["default"].createElement(IconWrapper, { backgroundColor: backgroundColor, border: border, menu: menu, size: size },
-                    React__default["default"].createElement(Icon["default"], { type: "STORE", onClick: function () { return storeClick(true); } })),
+                store !== false && (React__default["default"].createElement(IconWrapper, { backgroundColor: backgroundColor, border: border, menu: menu, size: size },
+                    React__default["default"].createElement(Icon["default"], { type: "STORE", onClick: function () { return storeClick(true); } }))),
                 myStickers.length > 0 ? (myStickers.length >
-                    (menu && menu.listCnt ? menu.listCnt - 2 : 4) ? (myStickers.map(function (pack, index) {
+                    (store !== false
+                        ? menu && menu.listCnt
+                            ? menu.listCnt - 2
+                            : 4
+                        : menu && menu.listCnt
+                            ? menu.listCnt - 1
+                            : 5) ? (myStickers.map(function (pack, index) {
                     return pack.packageId && (React__default["default"].createElement(PackageImgWrapper, { menu: menu, size: size, key: index, onClick: function () {
                             clickPackage(pack.packageId);
                             setShowPackage(index);
@@ -17720,14 +17733,29 @@ var PickerComponent = function (_a) {
                             React__default["default"].createElement(PackageImg, { size: size, menu: menu, src: "".concat(pack.packageImg, "?d=100x100"), show: showPackage === index })));
                     }),
                     dummies.map(function (item, index) { return (React__default["default"].createElement(PackageImgWrapper, { id: "dummies", menu: menu, size: size, key: index })); })))) : (dummies.map(function (item, index) { return (React__default["default"].createElement(PackageImgWrapper, { id: "dummies", menu: menu, size: size, key: index })); }))),
-            React__default["default"].createElement(ArrowWrapper, { id: itemCnt - (menu && menu.listCnt ? menu.listCnt - 2 : 4) <= itemNum
+            React__default["default"].createElement(ArrowWrapper, { id: itemCnt -
+                    (store !== false
+                        ? menu && menu.listCnt
+                            ? menu.listCnt - 2
+                            : 4
+                        : menu && menu.listCnt
+                            ? menu.listCnt - 1
+                            : 5) <=
+                    itemNum
                     ? 'right'
                     : 'right-black', backgroundColor: backgroundColor, border: border, menu: menu, size: size, onClick: function () {
                     menuList.scrollTo(scrollX +
                         (menu && menu.listCnt
                             ? itemWidth * menu.listCnt
                             : itemWidth * 6), 0);
-                } }, itemCnt - (menu && menu.listCnt ? menu.listCnt - 2 : 4) <=
+                } }, itemCnt -
+                (store !== false
+                    ? menu && menu.listCnt
+                        ? menu.listCnt - 2
+                        : 4
+                    : menu && menu.listCnt
+                        ? menu.listCnt - 1
+                        : 5) <=
                 itemNum ? (React__default["default"].createElement(index_esm.FiChevronRight, { size: 30, color: '#c1c1c1' })) : (React__default["default"].createElement(index_esm.FiChevronRight, { size: 30, color: menu && menu.arrowColor ? menu.arrowColor : '#000' })))),
         !recentView ? (stickers && isLoading ? (React__default["default"].createElement(StickerWrapper, { backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, size: size, isLoading: isLoading },
             React__default["default"].createElement(LoadingSpinner.LoadingSpinner, { color: loadingColor ? loadingColor : '#ff4500' }))) : (React__default["default"].createElement(StickerWrapper, { id: "sticker-wrapper", backgroundColor: backgroundColor, border: border, column: column, scroll: scroll, scrollHover: scrollHover, scrolling: scrolling, 
